@@ -14,16 +14,13 @@ public class Clam_Walker : MonoBehaviour
     public NavMeshAgent clamNavAgent;
     public Transform navTarget;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        clamNavAgent.destination = navTarget.position;
+        if (isAggro) {
+            clamNavAgent.destination = navTarget.position;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
