@@ -1,6 +1,5 @@
 ﻿
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Main script for third-person movement of the character in the game.
@@ -24,11 +23,9 @@ public class CommentedThirdPersonController : MonoBehaviour
     [Space]
     [Tooltip("Force that pulls the player down. Changing this value causes all movement, jumping and falling to be changed as well.")]
     public float gravity = 9.8f;
-    public float IncreaseGravity = 4.9f; 
-
 
     // Checks the character's current state
-    public bool isJumping = false;
+    bool isJumping = false;
     bool isSprinting = false;
     bool isCrouching = false;
 
@@ -46,7 +43,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     CharacterController cc;
 
     // Variable controlling the time the player spent in the air. Explained further below.
-    public float jumpElapsedTime = 0;
+    float jumpElapsedTime = 0;
 
     private AudioSource audioSource;
     public AudioClip footStepClip;
@@ -143,17 +140,6 @@ public class CommentedThirdPersonController : MonoBehaviour
             isJumping = true;
             // Disable crounching when jumping? You decide, just uncomment:
             // isCrouching = false;
-
-            if (SceneManager.GetActiveScene().name == "") // input the name of the scene to activate the effect
-            {
-                gravity = IncreaseGravity;
-                isJumping = false;
-                jumpElapsedTime = 0;
-            }
-            else
-            {
-                gravity = 9.8f;
-            }
         }
 
         // It's at the end of the code. Leave it for later.
