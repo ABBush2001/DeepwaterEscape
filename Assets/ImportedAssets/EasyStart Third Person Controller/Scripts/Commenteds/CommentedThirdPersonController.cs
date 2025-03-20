@@ -1,6 +1,5 @@
 ﻿
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Main script for third-person movement of the character in the game.
@@ -24,11 +23,9 @@ public class CommentedThirdPersonController : MonoBehaviour
     [Space]
     [Tooltip("Force that pulls the player down. Changing this value causes all movement, jumping and falling to be changed as well.")]
     public float gravity = 9.8f;
-    public float IncreaseGravity = 4.9f; 
-
 
     // Checks the character's current state
-    public bool isJumping = false;
+    bool isJumping = false;
     bool isSprinting = false;
     bool isCrouching = false;
 
@@ -39,21 +36,29 @@ public class CommentedThirdPersonController : MonoBehaviour
     bool inputCrouch;
     bool inputSprint;
 
+
     // Get control of the character's animations
     Animator animator;
     // Gets the character's collision and movement controller component
     CharacterController cc;
 
     // Variable controlling the time the player spent in the air. Explained further below.
-    public float jumpElapsedTime = 0;
+    float jumpElapsedTime = 0;
 
-    
+    private AudioSource audioSource;
+    public AudioClip footStepClip;
+    private bool isFootstep = false;
+
+    // footStep
+    private float footStep = 0.5f;
+    private float lastFootstep = 0f;
 
     void Start()
     {
         // Starts any of the above variables when starting the game
         cc = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -135,17 +140,6 @@ public class CommentedThirdPersonController : MonoBehaviour
             isJumping = true;
             // Disable crounching when jumping? You decide, just uncomment:
             // isCrouching = false;
-
-            if (SceneManager.GetActiveScene().name == "") // input the name of the scene to activate the effect
-            {
-                gravity = IncreaseGravity;
-                isJumping = false;
-                jumpElapsedTime = 0;
-            }
-            else
-            {
-                gravity = 9.8f;
-            }
         }
 
         // It's at the end of the code. Leave it for later.
@@ -249,6 +243,16 @@ public class CommentedThirdPersonController : MonoBehaviour
         // Finally, we apply this movement to the character controller, which will move our player
         Vector3 moviment = verticalDirection + horizontalDirection;
         cc.Move( moviment );
+
+        // when player move they will make footstep
+        if(cc.isGrounded && (directionX != 0 || directionZ != 0))
+        {
+            if(Time.time - lastFootstep >= footStep)
+            {
+                audioSource.PlayOneShot(footStepClip);
+                lastFootstep = Time.time;
+            }
+        }
     }
 
 
@@ -272,93 +276,3 @@ public class CommentedThirdPersonController : MonoBehaviour
 
 }
 
-/*
- 
-    DETAILED EXPLANATIONS:
-
-    1 - What is GetAXIS e why "Vertical/Horizontal" instead get keys W, A, S and D?
-
-By using Input.GetAxis, you're abstracting player input to a single action regardless of the input device.
-This means that if a player is using a gamepad instead of a keyboard, the same action
-(moving forward, backward, sideways) can be mapped to the left and right analog sticks instead of specific keys.
-
-Learn more: https://learn.unity.com/tutorial/getaxis-o
-
-It's worth remembering that we have other options besides Axis.
-In 2019, Unity introduced a new input mapping system (which this pack does not use).
-You can learn about it here:
-https://gamedevbeginner.com/input-in-unity-made-easy-complete-guide-to-the-new-system/
- 
-
-    2 - Changing the player's collision size when crouching
-
-As mentioned earlier, the player's collision remains the same when standing or crouching.
-You can test this by crouching your character and opening the game scene to notice that the collider
-remains exactly the same size, as the only thing that changed was the animation, and nothing else.
-
-There are two simple ways to solve this that I recommend:
-1 - Changing the collider height through code. You can access it like this: cc.height = 1.3f;
-Replace the value with the size you want. But remember to return to the original size when standing up.
-2 - Adding a change in the collider's height through the animation itself.
-In the crouch animation, add a new Character Controller property and change its size.
-This is the best way to do it because the collider will only be reduced during this animation,
-and you don't have to worry about returning it to its original size afterward.
-
-
-    3 - Why use Time.deltaTime in FixedUpdate?
-
-FixedUpdate, unlike Update, does not require the use of Time.deltaTime to adjust frames equally in all environments
-(
-if you still have doubts about how Time.deltaTime works, check:
-https://medium.com/star-gazers/understanding-time-deltatime-6528a8c2b5c8
-)
-
-However, deltaTime remains a great option for number reduction. This means that,
-so that we don't have to write very small numbers, we can reduce them using deltaTime.
-In the example on line 160 where we use it, it's for the simple reason that, if we didn't use it,
-the speed could never be set to 5 or 10. We would have to use values like 0.015f or 0.0087f
-and that's very hard to define and interpret.
-
-
-    4 - Stairs
-
-Test the game's stairs. The Character Controller has a "step" option, which is how large an obstacle
-in the environment can be for the player to pass over it, like a step of a staircase or rough terrain.
-This works well, however, when descending the stairs, the player ends up executing 
-the "fall" animation because at some points he ends up leaving the ground.
-
-There are a few ways to solve this:
-- One is to define wider and longer steps
-- Another way is to add an "invisible ramp" as collision for the stairs
-- You also have the option to detect if the player is colliding with stairs and not execute the falling animation
- 
-
-    5 - Animations
-
-In order to provide a simple third-person movement script, the animations followed the same purpose.
-All animations were done using only booleans.
-For player movement, it's good to try using Blend Trees to interpolate between a frame
-of a short step and a long step. The same goes for jumps and other activities.
-You can learn more about how this can be done at the link below:
-https://www.youtube.com/watch?v=iFe_jCkMEV0
-
-
-    6 - Modularization
-
-If your game is going to contain more actions than this package, such as
-attacking, defending, dodging, picking up items, etc., can you imagine how big this code would get? 
-That's right. That's why it's important to modularize your game scripts.
-
-Modularizing means breaking down a large script into smaller parts that are responsible for only one thing,
-but all communicate with each other, like a system made up of several modules.
-You can do this simply using functions.
-
-- You can have a function called SetAnimationState() that encompasses all animation codes from Update
-- A function called JumpHandler() with all the code contained in the jump condition from line 166
-
-That's exactly what I did with the HeadHittingDetect() function.
-Try training your programming logic by modularizing the scripts in this package.
-
-Rate this asset in Unity Asset Store! It's free XD
- 
-*/
