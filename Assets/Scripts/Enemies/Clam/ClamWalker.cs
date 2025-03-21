@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,6 +34,10 @@ public class ClamWalker : MonoBehaviour
     [Header("Patrol Variables")]
     [Tooltip("Does the clam patrol? Enables below variables to work.")]
     public bool patrols;
+    public Transform waypointList;
+    private Transform[] waypoints;
+    private int waypointIndex = 0; // waypoint list WAHOO
+    private Vector3 target;
     
 
     private void Start()
@@ -39,33 +45,28 @@ public class ClamWalker : MonoBehaviour
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
         if (patrols) {
-
+            hasDeBurrowed = true; 
+            foreach (Transform t in waypointList)
+            {
+                waypoints[waypointIndex] = t;
+            }
+            UpdateClamPatrolDest();
         }
     }
 
     private void FixedUpdate()
     {
-        if (hasDeBurrowed) // Has clam deburrowed?
+        if (patrols)
         {
-            if (curJumpCooldown <= 0) { // Is the jump cooldown done? If so, call ClamJump()
-                ClamJump(); 
+            if (Vector3.Distance(clamTransform.position, target) < 1) { 
+                IterwateWaypointIndex();
+                UpdateClamPatrolDest();
             }
+        }
 
-            else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
-            {
-                //if (clamNavAgent.velocity.sqrMagnitude <= 0.1f)
-                if (clamNavAgent.remainingDistance <= 0.1f)
-                {
-                    isJumping = false;
-                    canHurt = false;
-                } 
-
-                if (!isJumping) // If not jumping, decrement jump cooldown counter and look at the player.
-                {
-                    curJumpCooldown -= Time.fixedDeltaTime;
-                    clamTransform.LookAt(playerPos);
-                }
-            }
+        if (hasDeBurrowed && hasSeenPlayer) // Has clam deburrowed?
+        {
+            ClamJumpThinklogic();
         }
 
         else if (hasSeenPlayer) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
@@ -80,15 +81,39 @@ public class ClamWalker : MonoBehaviour
     }
 
     // Don't use Update() since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player"))
         {
-            if (!hasSeenPlayer) {
+            if (!hasSeenPlayer)
+            {
                 clamNavAgent.baseOffset += 5; // Offset is just until animations get in
             }
             hasSeenPlayer = true;
+        }
+    }
+
+    protected void ClamJumpThinklogic()
+    {
+        if (curJumpCooldown <= 0) { // Is the jump cooldown done? If so, call ClamJump()
+            ClamJump();
+        }
+
+        else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
+        {
+            //if (clamNavAgent.velocity.sqrMagnitude <= 0.1f)
+            if (clamNavAgent.remainingDistance <= 0.1f)
+            {
+                isJumping = false;
+                canHurt = false;
+            }
+
+            if (!isJumping) // If not jumping, decrement jump cooldown counter and look at the player.
+            {
+                curJumpCooldown -= Time.fixedDeltaTime;
+                clamTransform.LookAt(playerPos);
+            }
         }
     }
 
@@ -108,8 +133,21 @@ public class ClamWalker : MonoBehaviour
         if (canHurt)
         {
             playerHealth.TakeDamage(damage);
-            canHurt = false; // Make sure they can't get hurt multiple times in one jump.
+            canHurt = false; // Make sure they can't get hurt multi ple times in one jump.
         }
     }
 
+    private void UpdateClamPatrolDest()
+    {
+        target = waypoints[waypointIndex].position;
+        clamNavAgent.SetDestination(target);
+    }
+
+    void IterwateWaypointIndex()
+    {
+        waypointIndex++;
+        if (waypointIndex == waypoints.Length) {
+            waypointIndex = 0;
+        }
+    }
 }
