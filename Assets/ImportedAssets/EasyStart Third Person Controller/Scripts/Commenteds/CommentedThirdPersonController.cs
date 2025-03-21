@@ -288,5 +288,9 @@ public class CommentedThirdPersonController : MonoBehaviour
         }
     }
 
+    public void SetMovement(bool canMove)
+    {
+        enabled = canMove;
+    }
 }
 
