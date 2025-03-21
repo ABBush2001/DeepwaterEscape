@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 
 public class Player_Health : MonoBehaviour
 {
@@ -9,9 +9,7 @@ public class Player_Health : MonoBehaviour
     public float currentHealth;
     public float autoHeal = 1f;
     public float autoTime = 1f;
-    
-
-    public TextMeshProUGUI Healtext;
+    public Image healthBar;
 
     [SerializeField]
     private string sceneToLoad;
@@ -21,7 +19,7 @@ public class Player_Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateText();
+        healthBar.fillAmount = currentHealth / 100f;
     }
 
     void Update()
@@ -46,7 +44,7 @@ public class Player_Health : MonoBehaviour
         {
             yield return new WaitForSeconds(autoTime);
             currentHealth = Mathf.Min(currentHealth + autoHeal, maxHealth);
-            UpdateText();
+            healthBar.fillAmount = currentHealth / 100f;
         }
 
         ishealing = false;
@@ -60,14 +58,8 @@ public class Player_Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        UpdateText();
+        healthBar.fillAmount = currentHealth / 100f;
+
     }
 
-    void UpdateText()
-    {
-        if (Healtext != null)
-        {
-            Healtext.text = "Health: " + currentHealth + " / " + maxHealth;
-        }
-    }
 }

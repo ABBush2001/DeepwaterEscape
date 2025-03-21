@@ -42,6 +42,7 @@ public class Shooting : MonoBehaviour
     {
         currentAmmo = maxAmmo;
         normalZoom = playerC.fieldOfView;
+        Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -114,6 +115,8 @@ public class Shooting : MonoBehaviour
             audioSource.PlayOneShot(shootSoundClip);
         }
 
+        Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
+
         // it the cooldown to shoot
         StartCoroutine(ShootingCooldown());
 
@@ -138,9 +141,11 @@ public class Shooting : MonoBehaviour
 
         isreload = true;
         Debug.Log("Reloading...");
+        Ammotext.text = "Reloading";
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         isreload = false;
+        Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
         Debug.Log("Reloaded");
         updateText();
     }
@@ -148,16 +153,6 @@ public class Shooting : MonoBehaviour
     // ui to show ammo and how to reload
     void updateText()
     {
-        Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
 
-        if (currentAmmo == 0)
-        {
-            Ammotext.text = "Press R to reload ";
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                Ammotext.text = "Reloading";
-            }
-        }
     }
 }
