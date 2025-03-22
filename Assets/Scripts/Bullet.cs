@@ -11,7 +11,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     // The life span of the bullet
-    public float BulletlifeSpan = 2;
+    public float BulletlifeSpan = 1.2f;
     public int Damage = 25;
 
     void Awake()

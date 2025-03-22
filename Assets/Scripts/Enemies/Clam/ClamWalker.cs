@@ -34,9 +34,10 @@ public class ClamWalker : MonoBehaviour
     [Header("Patrol Variables")]
     [Tooltip("Does the clam patrol? Enables below variables to work.")]
     public bool patrols;
+    [Tooltip("'Waypoints' goes here, but you probably shouldn't touch this.")]
     public Transform waypointList;
     private Transform[] waypoints;
-    private int waypointIndex = 0; // waypoint list WAHOO
+    private int waypointIndex = 0;
     private Vector3 target;
     
 
@@ -45,26 +46,29 @@ public class ClamWalker : MonoBehaviour
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
         if (patrols) {
-            hasDeBurrowed = true; 
+            hasDeBurrowed = true;
+            waypoints = new Transform[waypointList.childCount]; // actually intialize array with size of waypointlist
             foreach (Transform t in waypointList)
             {
                 waypoints[waypointIndex] = t;
+                waypointIndex++;
             }
+            waypointIndex = 0;
             UpdateClamPatrolDest();
         }
     }
 
     private void FixedUpdate()
     {
-        if (patrols)
+        if (patrols && !hasSeenPlayer)
         {
-            if (Vector3.Distance(clamTransform.position, target) < 1) { 
-                IterwateWaypointIndex();
+            if (Vector3.Distance(clamTransform.position, target) < 2f) {
                 UpdateClamPatrolDest();
+                IterwateWaypointIndex();
             }
         }
 
-        if (hasDeBurrowed && hasSeenPlayer) // Has clam deburrowed?
+        else if (hasDeBurrowed && hasSeenPlayer) // Has clam deburrowed?
         {
             ClamJumpThinklogic();
         }
@@ -72,10 +76,12 @@ public class ClamWalker : MonoBehaviour
         else if (hasSeenPlayer) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
         { 
             clamTransform.LookAt(playerPos);
-            deBurrowTime -= Time.fixedDeltaTime;
 
-            if (deBurrowTime <= 0) { 
-                hasDeBurrowed = true; 
+            if (deBurrowTime > 0) {
+                deBurrowTime -= Time.fixedDeltaTime;
+            }
+            else {
+                hasDeBurrowed = true;
             }
         }
     }
@@ -86,7 +92,7 @@ public class ClamWalker : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!hasSeenPlayer)
+            if (!hasSeenPlayer && !patrols)
             {
                 clamNavAgent.baseOffset += 5; // Offset is just until animations get in
             }
@@ -103,7 +109,7 @@ public class ClamWalker : MonoBehaviour
         else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
         {
             //if (clamNavAgent.velocity.sqrMagnitude <= 0.1f)
-            if (clamNavAgent.remainingDistance <= 0.1f)
+            if (clamNavAgent.remainingDistance <= 1f)
             {
                 isJumping = false;
                 canHurt = false;
