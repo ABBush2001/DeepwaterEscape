@@ -35,13 +35,10 @@ public class BossManager : MonoBehaviour
     public int[] attackQueue = new int[5];
     private bool attackInProcess;
 
-    // private Vector3 orgPos;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        // orgPos = enemy.transform.position;
 
         //initialize attackQueue to all 0's
         for (int i = 0; i < 5; i++)
@@ -59,37 +56,14 @@ public class BossManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.F))
-        //{
-        //    StartCoroutine(MoveEnemyAndStartWave(new Vector3(2254, (float)116.81, 1422))); // Set the target position here
-        //}
-    }
-
-
-    IEnumerator MoveEnemyAndStartWave(Vector3 targetPosition)
-    {
-        float speed = 15f; // Adjust speed as needed
-
-        while (Vector3.Distance(enemy.transform.position, targetPosition) > 0.1f)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
-            yield return null; 
+            StartCoroutine(MoveEnemyAndStartWave()); // Set the target position here
         }
-
-        StartWave();
-
-        GetComponent<FollowPath>().SetNode(2);
-        
-        yield return new WaitForSeconds(2.0f);
-
-        //while (Vector3.Distance(enemy.transform.position, orgPos) > 0.1f)
-        //{
-        //    enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPosition, speed * Time.deltaTime);
-        //    yield return null;
-
-        //}
     }
 
+
+    
 
 
     void WaveAround(GameObject wavePrefab, Vector3 rotationOffset)
@@ -131,8 +105,52 @@ public class BossManager : MonoBehaviour
         biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
         biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
         biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+    }
 
-        GetComponent<FollowPath>().resetNode();
+    IEnumerator MoveEnemyAndStartWave()
+    {
+        // Exit FollowPath by stopping its movement
+        FollowPath followPath = enemy.GetComponent<FollowPath>();
+        if (followPath != null)
+        {
+            followPath.moveSpeed = 0; // Stop the enemy from following the path
+        }
+        // Save the current position of the enemy
+        Vector3 originalPosition = enemy.transform.position;
+
+        // Move the enemy 10 units forward for 1 second
+        Vector3 targetPositionForward = originalPosition + new Vector3(60, 0, 0);
+        float elapsedTime = 0f;
+        float moveDuration = 1f;
+
+        while (elapsedTime < moveDuration)
+        {
+            enemy.transform.position = Vector3.Lerp(originalPosition, targetPositionForward, (elapsedTime / moveDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        enemy.transform.position = targetPositionForward; // Ensure it ends at the target position
+
+        // Start the wave after moving forward
+        StartWave();
+
+        // Move the enemy back to the original position (-10 units)
+        Vector3 targetPositionBack = originalPosition;
+        elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            enemy.transform.position = Vector3.Lerp(targetPositionForward, targetPositionBack, (elapsedTime / moveDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        enemy.transform.position = targetPositionBack; // Ensure it ends at the original position
+
+        // Re-enter FollowPath and resume movement
+        if (followPath != null)
+        {
+            followPath.moveSpeed = 1; // Resume the FollowPath movement
+        }
     }
 
     IEnumerator bossFight()
@@ -215,9 +233,9 @@ public class BossManager : MonoBehaviour
                     //    Debug.LogError("Wave prefab is missing the Wave_Script component!");
                     //}
 
-                    //StartWave();
-                    StartCoroutine(MoveEnemyAndStartWave(new Vector3(2254, (float)116.81, 1422)));
-                    yield return new WaitForSeconds(1);
+                    // StartWave();
+
+                    StartCoroutine(MoveEnemyAndStartWave());
 
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
@@ -228,3 +246,5 @@ public class BossManager : MonoBehaviour
         }
     }
 }
+
+
