@@ -51,6 +51,16 @@ public class FollowPath : MonoBehaviour
         currentNode = 0;
     }
 
+    // return after wave finish
+    public void SetNode(int nodeIndex)
+    {
+        if (nodeIndex >= 0 && nodeIndex < PathNode.Length)
+        {
+            currentNode = nodeIndex;
+            CheckNode();
+        }
+    }
+
     //set the current node based on the last path traveled
     public void setCurrentNode(int path)
     {
