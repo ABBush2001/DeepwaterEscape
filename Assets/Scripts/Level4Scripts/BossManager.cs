@@ -32,6 +32,8 @@ public class BossManager : MonoBehaviour
     public GameObject wave6;
     public GameObject wave7;
 
+    public GameObject waveNode;
+
     public int[] attackQueue = new int[5];
     private bool attackInProcess;
 
@@ -119,17 +121,18 @@ public class BossManager : MonoBehaviour
         Vector3 originalPosition = enemy.transform.position;
 
         // Move the enemy 10 units forward for 1 second
-        Vector3 targetPositionForward = originalPosition + new Vector3(60, 0, 0);
+        
+        //Vector3 targetPositionForward = originalPosition + new Vector3(60, 0, 0);
         float elapsedTime = 0f;
         float moveDuration = 1f;
 
         while (elapsedTime < moveDuration)
         {
-            enemy.transform.position = Vector3.Lerp(originalPosition, targetPositionForward, (elapsedTime / moveDuration));
+            enemy.transform.position = Vector3.Lerp(originalPosition, waveNode.transform.position, (elapsedTime / moveDuration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        enemy.transform.position = targetPositionForward; // Ensure it ends at the target position
+        enemy.transform.position = waveNode.transform.position; // Ensure it ends at the target position
 
         // Start the wave after moving forward
         StartWave();
@@ -140,7 +143,7 @@ public class BossManager : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            enemy.transform.position = Vector3.Lerp(targetPositionForward, targetPositionBack, (elapsedTime / moveDuration));
+            enemy.transform.position = Vector3.Lerp(waveNode.transform.position, targetPositionBack, (elapsedTime / moveDuration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
