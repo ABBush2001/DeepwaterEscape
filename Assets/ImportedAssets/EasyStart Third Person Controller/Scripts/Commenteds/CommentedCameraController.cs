@@ -80,8 +80,8 @@ public class CommentedCameraController : MonoBehaviour
         }
 
         // Get and calculates the current mouse position on the screen
-        //mouseX += Input.GetAxis("Mouse X") * sensitivity;
-        //mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+        mouseX += Input.GetAxis("Mouse X") * sensitivity;
+        mouseY += Input.GetAxis("Mouse Y") * sensitivity;
 
         // Attempts to make first person mouse input not "jump" as if the mouse has low DPI (mine is at 1200).
         mouseX += Input.GetAxisRaw("Mouse X");
