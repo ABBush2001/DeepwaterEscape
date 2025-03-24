@@ -6,8 +6,6 @@ using UnityEngine.UIElements;
 
 public class MainMenuEvents : MonoBehaviour
 {
-    public GameObject AsyncManager;
-
     private UIDocument _document;
     private Button _startButton;
     private Button _exitButton;
@@ -96,8 +94,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         _audioSource.Play();
         yield return new WaitForSeconds(_audioSource.clip.length); // Wait for the sound to finish
-        AsyncManager.GetComponent<ASyncLoader>().LoadLevelBtn("1.Submarine");
-        //SceneManager.LoadScene("1.Submarine"); // Load the "Main" scene after the sound finishes
+        SceneManager.LoadScene("1.Submarine"); // Load the "Main" scene after the sound finishes
     }
 
     private IEnumerator PlayHowto()
