@@ -31,6 +31,7 @@ public class CommentedCameraController : MonoBehaviour
     // Get the player position, rotation, scale, etc
     Transform player;
 
+    public GameObject playerModel;
 
     void Start()
     {
@@ -55,7 +56,14 @@ public class CommentedCameraController : MonoBehaviour
 
     void Update()
     {
-        player.SetPositionAndRotation(player.position, Camera.main.transform.rotation);
+        Vector3 playerRotation = player.rotation.eulerAngles;
+
+        float targetYRotation = Camera.main.transform.eulerAngles.y;
+
+        //player.SetPositionAndRotation(player.position, new Quaternion(player.rotation.x, Camera.main.transform.rotation.y, player.rotation.z, player.rotation.w));
+        player.rotation = Quaternion.Euler(playerRotation.x, targetYRotation, playerRotation.z);
+        //player.Rotate(new Vector3(player.rotation.x, Camera.main.transform.forward.y, player.rotation.z));
+
 
         // Makes the camera position the same as the player's with a defined offset setback
         // This way, the camera will follow you, but maintaining the minimum offset
