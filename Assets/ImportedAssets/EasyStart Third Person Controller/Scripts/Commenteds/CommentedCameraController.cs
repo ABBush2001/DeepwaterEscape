@@ -19,7 +19,7 @@ public class CommentedCameraController : MonoBehaviour
 
     // Defines the maximum that the camera can rotate on the Y axis. Explanation below.
     [Tooltip("Camera Y rotation limits. The X axis is the maximum it can go up and the Y axis is the maximum it can go down.")]
-    public Vector2 cameraLimit = new Vector2(-45, 40);
+    public Vector2 cameraLimit = new Vector2(-60, 60);
 
     // Mouse coordinates on the screen
     float mouseX;
@@ -55,6 +55,8 @@ public class CommentedCameraController : MonoBehaviour
 
     void Update()
     {
+        player.SetPositionAndRotation(player.position, Camera.main.transform.rotation);
+
         // Makes the camera position the same as the player's with a defined offset setback
         // This way, the camera will follow you, but maintaining the minimum offset
         transform.position = player.position + new Vector3(0, offsetDistanceY, 0);

@@ -52,8 +52,9 @@ public class Boss_health : MonoBehaviour
         // UpdateText();
         if (BossHealth <= 0)
         {
-            defeat();
             SceneManager.LoadScene(sceneToLoad);
+            defeat();
+            
         }
     }
 
@@ -72,6 +73,12 @@ public class Boss_health : MonoBehaviour
             {
                 playerHealth.TakeDamage(BossDmg);
             }
+        }
+
+        if(other.CompareTag("Bullet"))
+        {
+            DamageOnEnemy(25);
+            Destroy(other.gameObject);
         }
     }
 

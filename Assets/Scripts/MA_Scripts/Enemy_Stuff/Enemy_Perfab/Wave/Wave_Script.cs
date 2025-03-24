@@ -67,6 +67,11 @@ public class Wave_Script : MonoBehaviour
     }
 
 
+    public void startWave()
+    {
+        StartCoroutine(MoveAndScale());
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Boss"))

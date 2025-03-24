@@ -17,7 +17,10 @@ using UnityEngine;
 public class BossManager : MonoBehaviour
 {
     public GameObject biteSystem;
+    public GameObject mainPath;
     public GameObject enemy;
+    public GameObject wave;
+    public GameObject player;
 
     public int[] attackQueue = new int[5];
     private bool attackInProcess;
@@ -52,14 +55,20 @@ public class BossManager : MonoBehaviour
             //initialize queue
             for (int i = 0; i < 5; i++)
             {
+                //TESTING
+                //attackQueue[i] = 3;
                 int temp = Random.Range(1, 101);
                 if (temp <= 25)
                 {
                     attackQueue[i] = 2;
                 }
-                else
+                else if(temp > 25 && temp <= 75)
                 {
                     attackQueue[i] = 1;
+                }
+                else
+                {
+                    attackQueue[i] = 3;
                 }
             }
 
@@ -86,6 +95,25 @@ public class BossManager : MonoBehaviour
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     //flashbangSystem.SetActive(false);
+                }
+                else if(attackQueue[i] == 3)
+                {
+                    mainPath.GetComponent<FollowPath>().setCurrentNode(2);
+                    yield return new WaitForSeconds(0.5f);
+
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    yield return new WaitForSeconds(3);
+                    GameObject temp = Instantiate(wave);
+                    temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
+                    temp.transform.Rotate(new Vector3(0, 0, 90));
+                    temp.GetComponent<Wave_Script>().startWave();
+                    yield return new WaitForSeconds(1);
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
+                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                    Destroy(temp);
                 }
             }
         }

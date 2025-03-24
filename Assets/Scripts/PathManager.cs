@@ -47,7 +47,7 @@ public class PathManager : MonoBehaviour
                     if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
                     {
                         path2.SetActive(true);
-                        yield return new WaitForSeconds(2.5f);
+                        yield return new WaitForSeconds(1.5f);
                         path2.GetComponent<FollowPath>().resetNode();
                         path2.SetActive(false);
                         path1.SetActive(true);
@@ -56,7 +56,7 @@ public class PathManager : MonoBehaviour
                     else if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
                     {
                         path3.SetActive(true);
-                        yield return new WaitForSeconds(2.5f);
+                        yield return new WaitForSeconds(1.5f);
                         path3.GetComponent<FollowPath>().resetNode();
                         path3.SetActive(false);
                         path1.SetActive(true);

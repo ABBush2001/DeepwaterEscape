@@ -13,7 +13,7 @@ public class E_Health : MonoBehaviour
 
     private string sceneToLoad;
 
-    public TextMeshProUGUI Healtext;
+    //public TextMeshProUGUI Healtext;
 
 
     // Start is called before the first frame update
