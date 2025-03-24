@@ -19,10 +19,15 @@ public class FollowPath : MonoBehaviour
     static Vector3 currentPositionHolder;
     static Vector3 startPosition;
 
+
+    private Boss_health bHealth;
     // Initialize list of nodes
     void Start()
     {
         PathNode = GetComponentsInChildren<Node>();
+
+        bHealth = enemy.GetComponent<Boss_health>();
+
         CheckNode();
 
         for(int i = 0; i < PathNode.Length - 1; i++)
@@ -51,6 +56,16 @@ public class FollowPath : MonoBehaviour
         currentNode = 0;
     }
 
+    // return after wave finish
+    public void SetNode(int nodeIndex)
+    {
+        if (nodeIndex >= 0 && nodeIndex < PathNode.Length)
+        {
+            currentNode = nodeIndex;
+            CheckNode();
+        }
+    }
+
     //set the current node based on the last path traveled
     public void setCurrentNode(int path)
     {
@@ -69,6 +84,12 @@ public class FollowPath : MonoBehaviour
     {
         Debug.Log(currentNode);
         timer += Time.deltaTime * moveSpeed;
+
+        if(enemy == null || bHealth == null || bHealth.BossHealth < 0)
+        {
+            return;
+        }
+
         if (enemy.transform.position != currentPositionHolder)
         {
             enemy.transform.position = Vector3.Lerp(startPosition, currentPositionHolder, timer);
