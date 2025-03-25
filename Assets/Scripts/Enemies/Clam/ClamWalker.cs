@@ -31,6 +31,9 @@ public class ClamWalker : MonoBehaviour
     [Tooltip("The amount of damage the clam does.")]
     public int damage;
 
+    //[Tooltip("Whether or not to override the scripable object data and use custom values.")]
+    //public bool overrideScriptObjData;
+
     [Header("Patrol Variables")]
     [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
     public bool patrols;
@@ -39,6 +42,8 @@ public class ClamWalker : MonoBehaviour
     private Transform[] waypoints;
     private int waypointIndex = 0;
     private Vector3 target;
+
+    public ClamScriptableObj clamScriptObj;
     
 
     private void Start()
@@ -46,14 +51,13 @@ public class ClamWalker : MonoBehaviour
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
         if (patrols) {
-            hasDeBurrowed = true;
             waypoints = new Transform[waypointList.childCount]; // actually intialize array with size of waypointlist
-            foreach (Transform t in waypointList)
+            foreach (Transform t in waypointList) // Get each waypoint in waypointList automagically
             {
                 waypoints[waypointIndex] = t;
                 waypointIndex++;
             }
-            waypointIndex = 0;
+            waypointIndex = 0; // We're using this for later, keep it around at 0
             UpdateClamPatrolDest();
         }
     }
@@ -96,6 +100,7 @@ public class ClamWalker : MonoBehaviour
                 playerPos = other.transform;    
                 clamNavAgent.baseOffset += 1; // Offset is just until animations get in
                 clamNavAgent.destination = transform.position; // stop patrol when player is detected
+
             }
             hasSeenPlayer = true;
         }
@@ -158,3 +163,22 @@ public class ClamWalker : MonoBehaviour
         }
     }
 }
+
+struct Stinky { 
+
+}
+
+/*
+ * Clam patrol values;
+ * Base offset: 0
+ * Speed: 15
+ * Angular Speed: 360
+ * Acceleration: 20
+ * Stop Dist.: 0
+ * Auto Brake: False
+ * 
+ * Radius: 2.75
+ * Height: 2.85
+ * No Quality
+ * Priority: 50
+ */
