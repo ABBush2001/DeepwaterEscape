@@ -112,9 +112,12 @@ public class BossManager : MonoBehaviour
     }
 
 
+    void ChargeAttack()
+    {
 
+    }
 
-    IEnumerator MoveEnemyAndStartWave()
+        IEnumerator MoveEnemyAndStartWave()
     {
         if(enemy == null)
         {
@@ -201,7 +204,7 @@ public class BossManager : MonoBehaviour
             {
                 yield break;
             }
-            enemy.transform.position = Vector3.Lerp(originalPosition, waveNode.transform.position, (elapsedTime / moveDuration));
+            enemy.transform.position = Vector3.Lerp(originalPosition, player.transform.position, (elapsedTime / moveDuration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
