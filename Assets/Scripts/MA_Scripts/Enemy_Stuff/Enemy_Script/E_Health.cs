@@ -12,7 +12,7 @@ public class E_Health : MonoBehaviour
 
     [SerializeField] private Animator EnColl = null;
 
-    // private string sceneToLoad;
+    //private string sceneToLoad;
 
     //public TextMeshProUGUI Healtext;
 
