@@ -72,10 +72,12 @@ public class FollowPath : MonoBehaviour
         if(path == 3)
         {
             currentNode = GameObject.Find("ChargeEndNode1").GetComponent<Node>().NodeIndex;
+            //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
         }
         if(path == 2)
         {
             currentNode = GameObject.Find("ChargeEndNode2").GetComponent<Node>().NodeIndex;
+            //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
         }
     }
 
@@ -84,6 +86,11 @@ public class FollowPath : MonoBehaviour
     {
         Debug.Log(currentNode);
         timer += Time.deltaTime * moveSpeed;
+
+        if(PathNode[currentNode].GetComponent<Node>().isCornerNode)
+        {
+            enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
+        }
 
         if(enemy == null || bHealth == null || bHealth.BossHealth < 0)
         {
