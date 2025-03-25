@@ -43,7 +43,7 @@ public class ClamWalker : MonoBehaviour
     private int waypointIndex = 0;
     private Vector3 target;
 
-    public ClamScriptableObj clamScriptObj;
+    public ClamScriptableObjAmbush clamScriptObjData;
     
 
     private void Start()
