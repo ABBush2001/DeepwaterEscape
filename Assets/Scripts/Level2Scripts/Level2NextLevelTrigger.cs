@@ -17,6 +17,12 @@ public class Level2NextLevelTrigger : MonoBehaviour
         }
     }
 
+
+    public void GoToNextScene()
+    {
+        StartCoroutine(fadeToNextScene());
+    }
+
     IEnumerator fadeToNextScene()
     {
         mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
