@@ -67,6 +67,8 @@ public class PauseMenu2 : MonoBehaviour
     // Method to show the settings menu and hide the pause menu
     public void OpenSettings()
     {
+        Debug.Log("TESTING");
+
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(true);
     }
