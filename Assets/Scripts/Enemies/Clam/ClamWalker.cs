@@ -43,8 +43,8 @@ public class ClamWalker : MonoBehaviour
     private int waypointIndex = 0;
     private Vector3 target;
 
-    public ClamScriptableObjAmbush clamScriptObjData;
-    
+    public ClamScriptObj clamData;
+
 
     private void Start()
     {
@@ -104,6 +104,15 @@ public class ClamWalker : MonoBehaviour
             }
             hasSeenPlayer = true;
         }
+    }
+
+    public ClamWalker(float deBurrowTime, float jumpCooldown, float maxJumpDistance, int damage, bool patrols)
+    {
+        this.deBurrowTime = deBurrowTime;
+        this.jumpCooldown = jumpCooldown;
+        this.maxJumpDistance = maxJumpDistance;
+        this.damage = damage;
+        this.patrols = patrols;
     }
 
     protected void ClamJumpThinklogic()
