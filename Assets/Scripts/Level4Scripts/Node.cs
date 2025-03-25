@@ -12,6 +12,8 @@ public class Node : MonoBehaviour
 {
     public bool isChargeNode;
     public bool isChargeEndNode;
+    public bool isCornerNode;
+    public bool lookAtNode;
     public int NodeIndex;
 
 }
