@@ -32,7 +32,7 @@ public class ClamWalker : MonoBehaviour
     public int damage;
 
     [Header("Patrol Variables")]
-    [Tooltip("Does the clam patrol? Enables below variables to work.")]
+    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
     public bool patrols;
     [Tooltip("'Waypoints' goes here, but you probably shouldn't touch this.")]
     public Transform waypointList;
@@ -94,7 +94,7 @@ public class ClamWalker : MonoBehaviour
         {
             if (!hasSeenPlayer && !patrols)
             {
-                clamNavAgent.baseOffset += 5; // Offset is just until animations get in
+                clamNavAgent.baseOffset += 1; // Offset is just until animations get in
             }
             hasSeenPlayer = true;
         }
