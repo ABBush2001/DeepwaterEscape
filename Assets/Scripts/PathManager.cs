@@ -17,6 +17,7 @@ public class PathManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         StartCoroutine(switchPaths());
     }
 
@@ -58,14 +59,13 @@ public class PathManager : MonoBehaviour
                         path3.SetActive(true);
                         yield return new WaitForSeconds(1.5f);
                         path3.GetComponent<FollowPath>().resetNode();
+
                         path3.SetActive(false);
                         path1.SetActive(true);
                         path1.GetComponent<FollowPath>().setCurrentNode(2);
                     }
                 }
-
             }
-           
         }
     }
 }
