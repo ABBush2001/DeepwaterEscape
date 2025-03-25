@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
 
         // deal damage to Boss tag
 
@@ -58,6 +57,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    // Hit enemy trigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))

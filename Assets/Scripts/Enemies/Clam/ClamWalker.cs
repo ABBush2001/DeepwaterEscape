@@ -87,14 +87,15 @@ public class ClamWalker : MonoBehaviour
     }
 
     // Don't use Update() since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (!hasSeenPlayer && !patrols)
+            if (!hasSeenPlayer)
             {
+                playerPos = other.transform;    
                 clamNavAgent.baseOffset += 1; // Offset is just until animations get in
+                clamNavAgent.destination = transform.position; // stop patrol when player is detected
             }
             hasSeenPlayer = true;
         }
