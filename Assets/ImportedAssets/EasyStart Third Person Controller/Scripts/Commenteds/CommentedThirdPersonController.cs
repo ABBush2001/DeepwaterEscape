@@ -47,7 +47,7 @@ public class CommentedThirdPersonController : MonoBehaviour
 
     private AudioSource audioSource;
     public AudioClip footStepClip;
-    private bool isFootstep = false;
+    // private bool isFootstep = false;
 
     // footStep
     private float footStep = 0.5f;
@@ -274,5 +274,9 @@ public class CommentedThirdPersonController : MonoBehaviour
         }
     }
 
+    public void SetMovement(bool canMove)
+    {
+        enabled = canMove;
+    }
 }
 

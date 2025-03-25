@@ -16,6 +16,7 @@ public class VolumeManager : MonoBehaviour
         LoadVolume();
     }
 
+    // Set the master volume based on the slider's value
     public void SetMasterVolume()
     {
         float volume = masterSlider.value;
@@ -24,6 +25,7 @@ public class VolumeManager : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVolume", volume);
     }
 
+    // Set the background music volume based on the slider's value
     public void SetBGMVolume()
     {
         float volume = bgmSlider.value;
@@ -32,6 +34,7 @@ public class VolumeManager : MonoBehaviour
         PlayerPrefs.SetFloat("BGMVolume", volume);
     }
 
+    // Set the sound effects volume based on the slider's value
     public void SetSFXVolume()
     {
         float volume = sfxSlider.value;
@@ -40,24 +43,37 @@ public class VolumeManager : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 
+    // Load the saved volume values from PlayerPrefs
     private void LoadVolume()
     {
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
-            masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+            float savedMasterVolume = PlayerPrefs.GetFloat("MasterVolume");
+            masterSlider.value = savedMasterVolume;
             SetMasterVolume();
+            Debug.Log("Master Volume Loaded: " + savedMasterVolume);
         }
 
         if (PlayerPrefs.HasKey("BGMVolume"))
         {
-            bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+            float savedBGMVolume = PlayerPrefs.GetFloat("BGMVolume");
+            bgmSlider.value = savedBGMVolume;
             SetBGMVolume();
+            Debug.Log("BGM Volume Loaded: " + savedBGMVolume);
         }
 
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
-            sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+            float savedSFXVolume = PlayerPrefs.GetFloat("SFXVolume");
+            sfxSlider.value = savedSFXVolume;
             SetSFXVolume();
+            Debug.Log("SFX Volume Loaded: " + savedSFXVolume);
         }
+    }
+
+    // Ensure volume is saved when the application quits
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
     }
 }

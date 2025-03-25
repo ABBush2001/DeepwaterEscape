@@ -15,30 +15,17 @@ public class E_Health : MonoBehaviour
 
     //public TextMeshProUGUI Healtext;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void DamageOnEnemy(int damage)
     {
         EnemyHealth -= damage;
         if (EnemyHealth <= 0)
         {
-            defeat();
+            Defeat();
             // SceneManager.LoadScene(sceneToLoad);
         }
     }
 
-    public void defeat()
+    public void Defeat()
     {
         Destroy(gameObject);
     }
@@ -47,11 +34,9 @@ public class E_Health : MonoBehaviour
     {
         if (other.CompareTag("Player")) // More efficient tag comparison
         {
-            Player_Health playerHealth = other.GetComponent<Player_Health>();
-            if (playerHealth != null)
+            if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
                 playerHealth.TakeDamage(EnemyDmg);
-
             }
         }
     }

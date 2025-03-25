@@ -17,10 +17,16 @@ public class Level2NextLevelTrigger : MonoBehaviour
         }
     }
 
+
+    public void GoToNextScene()
+    {
+        StartCoroutine(fadeToNextScene());
+    }
+
     IEnumerator fadeToNextScene()
     {
         mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("DEMOOnRails");
+        SceneManager.LoadScene("4.Arena");
     }
 }
