@@ -107,7 +107,8 @@ public class Shooting : MonoBehaviour
         var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
 
         // This the firerate
-        bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
+        //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
 
         currentAmmo--;
 

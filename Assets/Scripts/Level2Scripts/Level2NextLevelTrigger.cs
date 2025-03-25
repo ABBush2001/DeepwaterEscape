@@ -21,6 +21,6 @@ public class Level2NextLevelTrigger : MonoBehaviour
     {
         mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("DEMOOnRails");
+        SceneManager.LoadScene("4.Arena");
     }
 }
