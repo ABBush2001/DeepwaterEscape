@@ -16,6 +16,9 @@ public class Resolutions : MonoBehaviour
 
     private void Start()
     {
+
+        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
+
         if (resolutionDropDown == null)
         {
             Debug.LogError("Resolution Dropdown is not assigned!");
@@ -38,20 +41,30 @@ public class Resolutions : MonoBehaviour
         }
 
         List<string> options = new List<string>();
+        int savedResolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", -1);
         for (int i = 0; i < filteredResolutions.Count; i++)
         {
             string resolutionOption = filteredResolutions[i].width + " x " + filteredResolutions[i].height;
             options.Add(resolutionOption);
 
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
+            // Match the current screen resolution
+            if (savedResolutionIndex == -1 &&
+                filteredResolutions[i].width == Screen.currentResolution.width &&
+                filteredResolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
+            else if (i == savedResolutionIndex)
             {
                 currentResolutionIndex = i;
             }
         }
-
         resolutionDropDown.AddOptions(options);
         resolutionDropDown.value = currentResolutionIndex;
         resolutionDropDown.RefreshShownValue();
+
+        // Apply the correct resolution at startup
+        SetResolution(currentResolutionIndex);
     }
 
     public void SetResolution(int resolutionIndex)
