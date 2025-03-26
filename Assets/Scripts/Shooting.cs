@@ -109,6 +109,7 @@ public class Shooting : MonoBehaviour
         // This the firerate
         //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
+        //bullet.GetComponent<Rigidbody>().interpolation = true;
 
         currentAmmo--;
 
