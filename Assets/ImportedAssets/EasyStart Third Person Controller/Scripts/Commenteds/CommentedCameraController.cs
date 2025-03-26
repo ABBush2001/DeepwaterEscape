@@ -31,7 +31,6 @@ public class CommentedCameraController : MonoBehaviour
     // Get the player position, rotation, scale, etc
     Transform player;
 
-    public GameObject playerModel;
 
     void Start()
     {
@@ -62,8 +61,6 @@ public class CommentedCameraController : MonoBehaviour
 
         //player.SetPositionAndRotation(player.position, new Quaternion(player.rotation.x, Camera.main.transform.rotation.y, player.rotation.z, player.rotation.w));
         player.rotation = Quaternion.Euler(playerRotation.x, targetYRotation, playerRotation.z);
-        //player.Rotate(new Vector3(player.rotation.x, Camera.main.transform.forward.y, player.rotation.z));
-
 
         // Makes the camera position the same as the player's with a defined offset setback
         // This way, the camera will follow you, but maintaining the minimum offset
@@ -88,8 +85,8 @@ public class CommentedCameraController : MonoBehaviour
         }
 
         // Get and calculates the current mouse position on the screen
-        mouseX += Input.GetAxis("Mouse X") * sensitivity;
-        mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+        //mouseX += Input.GetAxis("Mouse X") * sensitivity;
+        //mouseY += Input.GetAxis("Mouse Y") * sensitivity;
 
         // Attempts to make first person mouse input not "jump" as if the mouse has low DPI (mine is at 1200).
         mouseX += Input.GetAxisRaw("Mouse X");
