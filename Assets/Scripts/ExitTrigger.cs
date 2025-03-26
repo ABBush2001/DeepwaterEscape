@@ -54,7 +54,7 @@ public class ExitTrigger : MonoBehaviour
         Explosion4.GetComponent<ParticleSystem>().Play();
 
         yield return new WaitForSeconds(6);
-        SceneManager.LoadScene("2.Oceanfloor");
+        SceneManager.LoadScene("UpdatedOceanFloor");
     }
 
     IEnumerator cameraShake(float duration, float magnitude)

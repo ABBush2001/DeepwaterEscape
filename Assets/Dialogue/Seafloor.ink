@@ -1,0 +1,3 @@
+You: *groans* Everything hurts.......
+You: I wonder how long that explosion had me out for. 
+You: I must find a way back to the surface. 

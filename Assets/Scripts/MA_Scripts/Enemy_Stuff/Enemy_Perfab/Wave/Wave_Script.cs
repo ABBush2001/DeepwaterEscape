@@ -78,7 +78,7 @@ public class Wave_Script : MonoBehaviour
         {
             StartCoroutine(MoveAndScale());
         }
-        FirstPersonController playerController = other.GetComponent<FirstPersonController>();
+        CommentedThirdPersonController playerController = other.GetComponent<CommentedThirdPersonController>();
 
         if (playerController != null)
         {
@@ -98,7 +98,7 @@ public class Wave_Script : MonoBehaviour
         }
     }
 
-    private IEnumerator DisableMovemant(FirstPersonController pControl, float longTime)
+    private IEnumerator DisableMovemant(CommentedThirdPersonController pControl, float longTime)
     {
         pControl.SetMovement(false);
         Debug.Log("Player movement disable");
@@ -109,7 +109,4 @@ public class Wave_Script : MonoBehaviour
         Debug.Log("Player movement disabled!");
 
     }
-
-   
-
 }

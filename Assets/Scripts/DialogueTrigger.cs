@@ -33,9 +33,11 @@ public class DialogueTrigger : MonoBehaviour
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             visualCue.SetActive(true);
-            if(Input.GetKeyDown(KeyCode.F))
+            if(Input.GetKeyDown(KeyCode.E))
             {
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
+                Destroy(visualCue.gameObject);
+                Destroy(this.gameObject);
             }
         }
         else
