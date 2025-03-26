@@ -114,52 +114,13 @@ public class BossManager : MonoBehaviour
     }
 
 
-
-    //IEnumerator MoveEnemyAndStartWave()
-    //{
-    //    // Exit FollowPath by stopping its movement
-    //    FollowPath followPath = enemy.GetComponent<FollowPath>();
-    //    if (followPath != null)
-    //    {
-    //        followPath.moveSpeed = 0; // Stop the enemy from following the path
-    //    }
-    //    // Save the current position of the enemy
-    //    Vector3 originalPosition = enemy.transform.position;
-
-    //    float elapsedTime = 0f;
-    //    float moveDuration = 1f;
-
-    //    while (elapsedTime < moveDuration)
-    //    {
-    //        enemy.transform.position = Vector3.Lerp(originalPosition, waveNode.transform.position, (elapsedTime / moveDuration));
-    //        elapsedTime += Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    enemy.transform.position = waveNode.transform.position; // Ensure it ends at the target position
-
-    //    // Start the wave after moving forward
-    //    StartWave();
-
-    //    // Move the enemy back to the original position 
-    //    Vector3 targetPositionBack = originalPosition;
-    //    elapsedTime = 0f;
-
-    //    while (elapsedTime < moveDuration)
-    //    {
-    //        enemy.transform.position = Vector3.Lerp(waveNode.transform.position, targetPositionBack, (elapsedTime / moveDuration));
-    //        elapsedTime += Time.deltaTime;
-    //        yield return null;
-    //    }
-
-    //    // Ensure it ends at the original position
-    //    enemy.transform.position = targetPositionBack; 
-
-    //    // Re-enter FollowPath and resume movement
-    //    if (followPath != null)
-    //    {
-    //        followPath.moveSpeed = 1; 
-    //    }
-    //}
+    void ChargeAttack()
+    {
+        
+        transform.LookAt(player.transform);
+        enemy.transform.position =
+            new Vector3(player.transform.position.x, enemy.transform.position.y , enemy.transform.position.z);
+    }
 
 
     IEnumerator MoveEnemyAndStartWave()
@@ -211,6 +172,7 @@ public class BossManager : MonoBehaviour
                 yield return null;
             }
 
+
             if(enemy != null)
             {
                 enemy.transform.position = originalPosition;
@@ -227,47 +189,64 @@ public class BossManager : MonoBehaviour
     // This the charge attack where it will look at the player the charge
     IEnumerator MoveEnemyAndChargeAttack()
     {
-        // Exit FollowPath by stopping its movement
+        if (enemy == null)
+        {
+            yield break;
+        }
+
         FollowPath followPath = enemy.GetComponent<FollowPath>();
         if (followPath != null)
         {
-            followPath.moveSpeed = 0; // Stop the enemy from following the path
+            followPath.moveSpeed = 0;
         }
-        // Save the current position of the enemy
+
         Vector3 originalPosition = enemy.transform.position;
 
         float elapsedTime = 0f;
         float moveDuration = 1f;
+        float chaseDuration = 0.8f;
 
-        transform.LookAt(player.transform);
-
-        while (elapsedTime < moveDuration)
+        while (elapsedTime < chaseDuration)
         {
+            if (enemy == null)
+            {
+                yield break;
+            }
+
             enemy.transform.position = Vector3.Lerp(originalPosition, player.transform.position, (elapsedTime / moveDuration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-
-        enemy.transform.position = player.transform.position;
-
-        Vector3 targetPositionBack = originalPosition;
-        elapsedTime = 0f;
-
-        while (elapsedTime < moveDuration)
+        if (enemy != null)
         {
-            enemy.transform.position = Vector3.Lerp(digNode.transform.position, targetPositionBack, (elapsedTime / moveDuration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+            // enemy.transform.position = waveNode.transform.position;
 
-        // Ensure it ends at the original position
-        enemy.transform.position = targetPositionBack;
+            ChargeAttack();
 
-        // Re - enter FollowPath and resume movement
-        if (followPath != null)
-        {
-            followPath.moveSpeed = 1;
+            elapsedTime = 0f;
+
+            while (elapsedTime < moveDuration)
+            {
+                if (enemy == null)
+                {
+                    yield break;
+                }
+
+                enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            if (enemy != null)
+            {
+                enemy.transform.position = originalPosition;
+
+                if (followPath != null)
+                {
+                    followPath.moveSpeed = 1;
+                }
+            }
         }
     }
 
