@@ -31,29 +31,33 @@ public class ClamWalker : MonoBehaviour
     [Tooltip("The amount of damage the clam does.")]
     public int damage;
 
+    //[Tooltip("Whether or not to override the scripable object data and use custom values.")]
+    //public bool overrideScriptObjData;
+
     [Header("Patrol Variables")]
-    [Tooltip("Does the clam patrol? Enables below variables to work.")]
+    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
     public bool patrols;
     [Tooltip("'Waypoints' goes here, but you probably shouldn't touch this.")]
     public Transform waypointList;
     private Transform[] waypoints;
     private int waypointIndex = 0;
     private Vector3 target;
-    
+
+    public ClamScriptObj clamData;
+
 
     private void Start()
     {
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
         if (patrols) {
-            hasDeBurrowed = true;
             waypoints = new Transform[waypointList.childCount]; // actually intialize array with size of waypointlist
-            foreach (Transform t in waypointList)
+            foreach (Transform t in waypointList) // Get each waypoint in waypointList automagically
             {
                 waypoints[waypointIndex] = t;
                 waypointIndex++;
             }
-            waypointIndex = 0;
+            waypointIndex = 0; // We're using this for later, keep it around at 0
             UpdateClamPatrolDest();
         }
     }
@@ -87,17 +91,28 @@ public class ClamWalker : MonoBehaviour
     }
 
     // Don't use Update() since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (!hasSeenPlayer && !patrols)
+            if (!hasSeenPlayer)
             {
-                clamNavAgent.baseOffset += 5; // Offset is just until animations get in
+                playerPos = other.transform;    
+                clamNavAgent.baseOffset += 1; // Offset is just until animations get in
+                clamNavAgent.destination = transform.position; // stop patrol when player is detected
+
             }
             hasSeenPlayer = true;
         }
+    }
+
+    public ClamWalker(float deBurrowTime, float jumpCooldown, float maxJumpDistance, int damage, bool patrols)
+    {
+        this.deBurrowTime = deBurrowTime;
+        this.jumpCooldown = jumpCooldown;
+        this.maxJumpDistance = maxJumpDistance;
+        this.damage = damage;
+        this.patrols = patrols;
     }
 
     protected void ClamJumpThinklogic()
@@ -157,3 +172,22 @@ public class ClamWalker : MonoBehaviour
         }
     }
 }
+
+struct Stinky { 
+
+}
+
+/*
+ * Clam patrol values;
+ * Base offset: 0
+ * Speed: 15
+ * Angular Speed: 360
+ * Acceleration: 20
+ * Stop Dist.: 0
+ * Auto Brake: False
+ * 
+ * Radius: 2.75
+ * Height: 2.85
+ * No Quality
+ * Priority: 50
+ */

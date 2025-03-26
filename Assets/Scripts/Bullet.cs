@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
 
         // deal damage to Boss tag
 
@@ -48,12 +47,26 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Gun"))
+        if (collision.gameObject.CompareTag("Gun") || collision.gameObject.CompareTag("Player"))
         {
 
         }
         else
         {
+            Destroy(gameObject);
+        }
+    }
+
+    // Hit enemy trigger
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (other.gameObject.TryGetComponent<E_Health>(out var enemyHealth))
+            {
+                enemyHealth.DamageOnEnemy(Damage);
+            }
+
             Destroy(gameObject);
         }
     }
