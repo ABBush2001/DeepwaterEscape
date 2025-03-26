@@ -14,6 +14,8 @@ public class PathManager : MonoBehaviour
     [SerializeField] GameObject path2;
     [SerializeField] GameObject path3;
 
+    public GameObject enemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,7 @@ public class PathManager : MonoBehaviour
                 
                     if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
                     {
+                        enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
                         path2.SetActive(true);
                         yield return new WaitForSeconds(1.5f);
                         path2.GetComponent<FollowPath>().resetNode();
@@ -56,6 +59,7 @@ public class PathManager : MonoBehaviour
                     }
                     else if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
                     {
+                        enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
                         path3.SetActive(true);
                         yield return new WaitForSeconds(1.5f);
                         path3.GetComponent<FollowPath>().resetNode();

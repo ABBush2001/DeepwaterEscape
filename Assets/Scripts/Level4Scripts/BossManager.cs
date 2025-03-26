@@ -39,6 +39,8 @@ public class BossManager : MonoBehaviour
     public int[] attackQueue = new int[5];
     private bool attackInProcess;
 
+    public Animator queenAnimator;
+
     
     // Start is called before the first frame update
     void Start()
@@ -294,7 +296,9 @@ public class BossManager : MonoBehaviour
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                    queenAnimator.SetBool("IsFlashbang", true);
                     yield return new WaitForSeconds(6);
+                    queenAnimator.SetBool("IsFlashbang", false);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
@@ -304,13 +308,15 @@ public class BossManager : MonoBehaviour
                 {
 
                     mainPath.GetComponent<FollowPath>().setCurrentNode(2);
+
                     yield return new WaitForSeconds(0.5f);
 
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
 
-                    yield return new WaitForSeconds(3);
+                    queenAnimator.SetBool("IsShouting", true);
+                    yield return new WaitForSeconds(5);
 
                     //GameObject temp = Instantiate(wave);
                     //temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
@@ -334,6 +340,7 @@ public class BossManager : MonoBehaviour
 
                     StartCoroutine(MoveEnemyAndStartWave());
 
+                    queenAnimator.SetBool("IsShouting", false);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
