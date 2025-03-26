@@ -8,10 +8,11 @@ public class E_Health : MonoBehaviour
 {
     public int EnemyHealth = 100;
     public int EnemyDmg = 25;
+    public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
 
     [SerializeField] private Animator EnColl = null;
 
-    private string sceneToLoad;
+    //private string sceneToLoad;
 
     //public TextMeshProUGUI Healtext;
 
@@ -27,7 +28,13 @@ public class E_Health : MonoBehaviour
 
     public void Defeat()
     {
-        Destroy(gameObject);
+        if (parentObj != null) {
+            Destroy(parentObj); 
+        }
+        else {
+            Debug.LogWarning("Parent obj not assigned", this);
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
