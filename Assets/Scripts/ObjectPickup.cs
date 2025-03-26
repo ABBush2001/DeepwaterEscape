@@ -45,8 +45,10 @@ public class ObjectPickup : MonoBehaviour
                 {
                     alarm.SetActive(true);
                     alarmStart = true;
+                    levelManager.GetComponent<LevelOneManager>().alarmStart = true;
                     DialogueManager.GetInstance().EnterDialogueMode(inkJson);
                     levelManager.GetComponent<ChangeWaves>().updateMats();
+                    GameObject.Find("AlarmSFX").GetComponent<AudioSource>().Play();
                     //levelManager.GetComponent<TimerAlterDisplay>().timerRunning = true;
                     //StartCoroutine(countdownDialogue());
                     //levelManager.GetComponent<LevelOneManager>().turnOnObjects();

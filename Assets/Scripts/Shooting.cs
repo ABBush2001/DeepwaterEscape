@@ -31,16 +31,32 @@ public class Shooting : MonoBehaviour
     public Camera playerC;
     public float zoom = 10f;
     private float normalZoom;
+#pragma warning disable IDE0044 // Add readonly modifier
     private float duration = 0.5f;
+#pragma warning restore IDE0044 // Add readonly modifier
     private float lerp = 0f;
 
+    // Audio when shoot
+    public AudioClip shootSoundClip;
+    private AudioSource audioSource;
 
     void Start()
     {
         currentAmmo = maxAmmo;
         normalZoom = playerC.fieldOfView;
 
-        updateText();
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.LogError("No AudioSource was found on this GameObject");
+        }
+
+        if (shootSoundClip == null)
+        {
+            Debug.LogError("Shoot sound clip is not assigned");
+        }
+        UpdateText();
     }
     // Update is called once per frame
     void Update()
@@ -91,13 +107,21 @@ public class Shooting : MonoBehaviour
         var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
 
         // This the firerate
-        bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
+        //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
+        //bullet.GetComponent<Rigidbody>().interpolation = true;
 
         currentAmmo--;
+
+        if (shootSoundClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSoundClip);
+        }
+
         // it the cooldown to shoot
         StartCoroutine(ShootingCooldown());
 
-        updateText();
+        UpdateText();
     }
 
 
@@ -114,7 +138,7 @@ public class Shooting : MonoBehaviour
 
     IEnumerator Reload()
     {
-        updateText();
+        UpdateText();
 
         isreload = true;
         Debug.Log("Reloading...");
@@ -122,11 +146,11 @@ public class Shooting : MonoBehaviour
         currentAmmo = maxAmmo;
         isreload = false;
         Debug.Log("Reloaded");
-        updateText();
+        UpdateText();
     }
 
     // ui to show ammo and how to reload
-    void updateText()
+    void UpdateText()
     {
         Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
 
