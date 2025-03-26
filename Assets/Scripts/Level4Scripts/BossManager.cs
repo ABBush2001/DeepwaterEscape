@@ -114,10 +114,14 @@ public class BossManager : MonoBehaviour
 
     void ChargeAttack()
     {
-
+        
+        transform.LookAt(player.transform);
+        enemy.transform.position =
+            new Vector3(player.transform.position.x, enemy.transform.position.y , enemy.transform.position.z);
     }
 
-        IEnumerator MoveEnemyAndStartWave()
+
+    IEnumerator MoveEnemyAndStartWave()
     {
         if(enemy == null)
         {
@@ -166,6 +170,7 @@ public class BossManager : MonoBehaviour
                 yield return null;
             }
 
+
             if(enemy != null)
             {
                 enemy.transform.position = originalPosition;
@@ -197,13 +202,15 @@ public class BossManager : MonoBehaviour
 
         float elapsedTime = 0f;
         float moveDuration = 1f;
+        float chaseDuration = 0.8f;
 
-        while (elapsedTime < moveDuration)
+        while (elapsedTime < chaseDuration)
         {
             if (enemy == null)
             {
                 yield break;
             }
+
             enemy.transform.position = Vector3.Lerp(originalPosition, player.transform.position, (elapsedTime / moveDuration));
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -211,9 +218,9 @@ public class BossManager : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.transform.position = waveNode.transform.position;
+            // enemy.transform.position = waveNode.transform.position;
 
-
+            ChargeAttack();
 
             elapsedTime = 0f;
 
