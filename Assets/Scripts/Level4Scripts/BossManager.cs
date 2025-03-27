@@ -285,9 +285,14 @@ public class BossManager : MonoBehaviour
 
         enemy.transform.rotation = originalRotation;
 
-        if (followPath != null)
+        if (enemy != null)
         {
-            followPath.moveSpeed = originalSpeed;
+            enemy.transform.position = originalPosition;
+
+            if (followPath != null)
+            {
+                followPath.moveSpeed = originalSpeed;
+            }
         }
     }
 
