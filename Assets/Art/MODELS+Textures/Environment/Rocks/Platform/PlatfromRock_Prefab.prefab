@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &9064283831890836522
+--- !u!1001 &8065705445953596345
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,32 +11,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.383936
+      value: 3.0623112
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.6650095
+      value: 2.6533952
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 14.436859
+      value: 4.6455507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.33
+      value: 39.92
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33.42
+      value: 2.1211
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -460.24
+      value: 38.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
@@ -81,10 +81,41 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 01d73c7655b946142a09cea08a8c19d2,
         type: 3}
       propertyPath: m_Name
-      value: PlatfromRock
+      value: PlatfromRock_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01d73c7655b946142a09cea08a8c19d2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2463866026128691187}
   m_SourcePrefab: {fileID: 100100000, guid: 01d73c7655b946142a09cea08a8c19d2, type: 3}
+--- !u!1 &7146734936952821480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 01d73c7655b946142a09cea08a8c19d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8065705445953596345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2463866026128691187
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7146734936952821480}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.4435234, y: 3.8239646, z: 4.9176626}
+  m_Center: {x: -0.233432, y: 0.15674137, z: 0.072692774}
