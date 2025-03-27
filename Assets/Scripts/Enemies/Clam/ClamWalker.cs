@@ -16,12 +16,14 @@ public class ClamWalker : MonoBehaviour
     private Transform clamTransform;
     private Rigidbody rb;
     private Player_Health playerHealth;
+    public Transform looker;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
     private bool isJumping = false;
     private bool isRebounding = false;
     private bool canHurt = false;
+    private bool canLook = false;
 
     [Tooltip("Time it takes for clam to move out of the ground and do first jump. May be replaced with animation events")]
     protected float deBurrowTime;
@@ -47,6 +49,8 @@ public class ClamWalker : MonoBehaviour
     private Transform[] waypoints;
     private int waypointIndex = 0;
     private Vector3 target;
+    
+    private Vector3 lookTarget;
 
     // ############## END OF VARIABLES ##############
 
@@ -66,7 +70,6 @@ public class ClamWalker : MonoBehaviour
             waypointIndex = 0; // We're using this for later, keep it around at 0
             UpdateClamPatrolDest();
         }
-
     }
 
     private void FixedUpdate()
@@ -85,9 +88,8 @@ public class ClamWalker : MonoBehaviour
         }
 
         else if (hasSeenPlayer && curReboundJumpDelay <= 0) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
-        { 
-            clamTransform.LookAt(playerPos);
-
+        {
+            canLook = true;
             if (deBurrowTime > 0) {
                 deBurrowTime -= Time.fixedDeltaTime;
             }
@@ -97,7 +99,15 @@ public class ClamWalker : MonoBehaviour
         }
     }
 
-    // Don't use Update() since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
+    void Update()
+    {
+        if (canLook) {
+            looker.LookAt(playerPos);
+            transform.rotation = Quaternion.Lerp(transform.rotation, looker.rotation, Time.deltaTime * 10);
+        }
+    }
+
+    // Don't use Update() for AI logic since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -139,10 +149,11 @@ public class ClamWalker : MonoBehaviour
 
         else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
         {
-            if (clamNavAgent.remainingDistance <= 1f)
+            if (clamNavAgent.remainingDistance <= .1f && !isRebounding)
             {
                 isJumping = false;
                 canHurt = false;
+                clamNavAgent.ResetPath();
             }
 
             if (!isJumping) // If not jumping, check if rebounding
@@ -150,7 +161,7 @@ public class ClamWalker : MonoBehaviour
                 if (!isRebounding) // If not rebounding, decrement jump cooldown counter and look at the player.
                 {
                     curJumpCooldown -= Time.fixedDeltaTime;
-                    clamTransform.LookAt(playerPos);
+                    canLook = true;
                 }
                 else { // if rebounding, decrement rebound counter and
                     curReboundJumpDelay -= Time.fixedDeltaTime; // 50 ms 
@@ -171,6 +182,7 @@ public class ClamWalker : MonoBehaviour
         curJumpCooldown = jumpCooldown;
         isJumping = true; // isJumping only exists to make code relating to looking at the player easier to understand
         canHurt = true; // Clam only hurts player when jumping.
+        canLook = false;
     }
 
     public void AttemptHurt()
@@ -192,6 +204,7 @@ public class ClamWalker : MonoBehaviour
         rb.AddRelativeForce(new Vector3(0, 0, -clamData.hitReboundPushForce),ForceMode.Impulse);
         isJumping = false;
         isRebounding = true;
+        canLook = false;
     }
 
     private void UpdateClamPatrolDest()
