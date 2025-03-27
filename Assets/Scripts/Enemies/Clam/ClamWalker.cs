@@ -22,14 +22,14 @@ public class ClamWalker : MonoBehaviour
     private bool canHurt = false;
 
     [Tooltip("Time it takes for clam to move out of the ground and do first jump. May be replaced with animation events")]
-    public float deBurrowTime;
+    protected float deBurrowTime;
     [Tooltip("Cooldown between jumps")]
-    public float jumpCooldown;
+    protected float jumpCooldown;
     private float curJumpCooldown;
     [Tooltip("The maximum horizontal distance the clam can jump to.")]
-    public float maxJumpDistance;
+    protected float maxJumpDistance;
     [Tooltip("The amount of damage the clam does.")]
-    public int damage;
+    protected int damage;
 
     //[Tooltip("Whether or not to override the scripable object data and use custom values.")]
     //public bool overrideScriptObjData;
@@ -50,6 +50,7 @@ public class ClamWalker : MonoBehaviour
     {
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
+        InitBaseDataStats();
         if (patrols) {
             waypoints = new Transform[waypointList.childCount]; // actually intialize array with size of waypointlist
             foreach (Transform t in waypointList) // Get each waypoint in waypointList automagically
@@ -100,19 +101,27 @@ public class ClamWalker : MonoBehaviour
                 playerPos = other.transform;    
                 clamNavAgent.baseOffset += 1; // Offset is just until animations get in
                 clamNavAgent.destination = transform.position; // stop patrol when player is detected
-
+                if (patrols) {
+                    UpdateStats(); // update to alert stats
+                }
             }
             hasSeenPlayer = true;
         }
     }
 
-    public ClamWalker(float deBurrowTime, float jumpCooldown, float maxJumpDistance, int damage, bool patrols)
+    private void InitBaseDataStats() // constructors simply break w/ scriptable objects, so it has to be done this way
     {
-        this.deBurrowTime = deBurrowTime;
-        this.jumpCooldown = jumpCooldown;
-        this.maxJumpDistance = maxJumpDistance;
-        this.damage = damage;
-        this.patrols = patrols;
+        this.deBurrowTime = clamData.deBurrowTime;
+        this.jumpCooldown = clamData.jumpCooldown;
+        this.maxJumpDistance = clamData.maxJumpDistance;
+        this.damage = clamData.damage;
+    }
+
+    private void UpdateStats()
+    {
+        clamNavAgent.acceleration = clamData.alertNavAccel;
+        clamNavAgent.angularSpeed = clamData.alertNavAngleSpeed;
+        clamNavAgent.speed = clamData.alertNavSpeed;
     }
 
     protected void ClamJumpThinklogic()
@@ -171,10 +180,6 @@ public class ClamWalker : MonoBehaviour
             waypointIndex = 0;
         }
     }
-}
-
-struct Stinky { 
-
 }
 
 /*
