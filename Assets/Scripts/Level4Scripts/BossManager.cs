@@ -285,9 +285,14 @@ public class BossManager : MonoBehaviour
 
         enemy.transform.rotation = originalRotation;
 
-        if (followPath != null)
+        if (enemy != null)
         {
-            followPath.moveSpeed = originalSpeed;
+            enemy.transform.position = originalPosition;
+
+            if (followPath != null)
+            {
+                followPath.moveSpeed = originalSpeed;
+            }
         }
     }
 
@@ -348,7 +353,7 @@ public class BossManager : MonoBehaviour
                 else if(attackQueue[i] == 3)
                 {
 
-                    mainPath.GetComponent<FollowPath>().setCurrentNode(2);
+                    //mainPath.GetComponent<FollowPath>().setCurrentNode(2);
                     yield return new WaitForSeconds(0.5f);
 
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
