@@ -353,7 +353,7 @@ public class BossManager : MonoBehaviour
                 else if(attackQueue[i] == 3)
                 {
 
-                    mainPath.GetComponent<FollowPath>().setCurrentNode(2);
+                    //mainPath.GetComponent<FollowPath>().setCurrentNode(2);
                     yield return new WaitForSeconds(0.5f);
 
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
