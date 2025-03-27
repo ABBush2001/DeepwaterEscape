@@ -1,26 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script handles the behavior for bullets for the gun prefab.
+ * It creates a bullet lifespan, which ensures the bullet will
+ * despawn after traveling a given distance. It also will destroy the
+ * bullet when it collides with an object.
+*/
 public class Bullet : MonoBehaviour
 {
+    // The life span of the bullet
     public float BulletlifeSpan = 1.2f;
     public int Damage = 25;
-    private float timer = 0f;
-    private bool isPaused = false;
 
-    void Update()
+    void Awake()
     {
-        if (isPaused) return; // Stop bullets from updating when paused
-
-        timer += Time.deltaTime;
-        if (timer >= BulletlifeSpan)
-        {
-            Destroy(gameObject);
-        }
+        // This is to destroy the bullet if the life span end or hit a gameObject
+        Destroy(gameObject, BulletlifeSpan);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isPaused) return; // Stop collision effects while paused
+        // deal damage to enemy tag
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -28,8 +30,12 @@ public class Bullet : MonoBehaviour
             {
                 enemyHealth.DamageOnEnemy(Damage);
             }
+
             Destroy(gameObject);
         }
+
+
+        // deal damage to Boss tag
 
         if (collision.gameObject.CompareTag("Boss"))
         {
@@ -37,35 +43,31 @@ public class Bullet : MonoBehaviour
             {
                 Bh.DamageOnEnemy(Damage);
             }
+
             Destroy(gameObject);
         }
 
-        if (!collision.gameObject.CompareTag("Gun"))
+        if (collision.gameObject.CompareTag("Gun") || collision.gameObject.CompareTag("Player"))
+        {
+
+        }
+        else
         {
             Destroy(gameObject);
         }
     }
 
-    // Subscribe to PauseMenu2 Events
-    private void OnEnable()
+    // Hit enemy trigger
+    private void OnTriggerEnter(Collider other)
     {
-        PauseMenu2.OnPause += PauseGame;
-        PauseMenu2.OnResume += ResumeGame;
-    }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (other.gameObject.TryGetComponent<E_Health>(out var enemyHealth))
+            {
+                enemyHealth.DamageOnEnemy(Damage);
+            }
 
-    private void OnDisable()
-    {
-        PauseMenu2.OnPause -= PauseGame;
-        PauseMenu2.OnResume -= ResumeGame;
-    }
-
-    private void PauseGame()
-    {
-        isPaused = true;
-    }
-
-    private void ResumeGame()
-    {
-        isPaused = false;
+            Destroy(gameObject);
+        }
     }
 }
