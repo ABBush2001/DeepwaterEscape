@@ -1,28 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * This script handles the behavior for bullets for the gun prefab.
- * It creates a bullet lifespan, which ensures the bullet will
- * despawn after traveling a given distance. It also will destroy the
- * bullet when it collides with an object.
-*/
 public class Bullet : MonoBehaviour
 {
-    // The life span of the bullet
     public float BulletlifeSpan = 1.2f;
     public int Damage = 25;
+    private float timer = 0f;
+    private bool isPaused = false;
 
-    void Awake()
+    void Update()
     {
-        // This is to destroy the bullet if the life span end or hit a gameObject
-        Destroy(gameObject, BulletlifeSpan);
+        if (isPaused) return; // Stop bullets from updating when paused
+
+        timer += Time.deltaTime;
+        if (timer >= BulletlifeSpan)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        // deal damage to enemy tag
+        if (isPaused) return; // Stop collision effects while paused
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -30,13 +28,8 @@ public class Bullet : MonoBehaviour
             {
                 enemyHealth.DamageOnEnemy(Damage);
             }
-
             Destroy(gameObject);
         }
-
-        
-
-        // deal damage to Boss tag
 
         if (collision.gameObject.CompareTag("Boss"))
         {
@@ -44,17 +37,35 @@ public class Bullet : MonoBehaviour
             {
                 Bh.DamageOnEnemy(Damage);
             }
-
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Gun"))
-        {
-
-        }
-        else
+        if (!collision.gameObject.CompareTag("Gun"))
         {
             Destroy(gameObject);
         }
+    }
+
+    // Subscribe to PauseMenu2 Events
+    private void OnEnable()
+    {
+        PauseMenu2.OnPause += PauseGame;
+        PauseMenu2.OnResume += ResumeGame;
+    }
+
+    private void OnDisable()
+    {
+        PauseMenu2.OnPause -= PauseGame;
+        PauseMenu2.OnResume -= ResumeGame;
+    }
+
+    private void PauseGame()
+    {
+        isPaused = true;
+    }
+
+    private void ResumeGame()
+    {
+        isPaused = false;
     }
 }
