@@ -12,6 +12,10 @@ public class ClamScriptObj : ScriptableObject
     public float maxJumpDistance = 25f;
     [Tooltip("The amount of damage the clam does.")]
     public int damage = 20;
+    [Tooltip("How long to delay jumping after hitting the player and triggering a rebound")]
+    public float hitReboundJumpDelay = 0.6f;
+    [Tooltip("How hard clam gets pushed back after hitting player, should be atleast 10.")]
+    public float hitReboundPushForce = 50;
 
     [Header("Base Nav Values")]
     [Tooltip("Speed of clam")]

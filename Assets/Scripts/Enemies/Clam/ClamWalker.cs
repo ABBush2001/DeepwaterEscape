@@ -1,5 +1,5 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,15 +10,17 @@ using UnityEngine.AI;
 public class ClamWalker : MonoBehaviour
 {
     public NavMeshAgent clamNavAgent;
-    public Transform playerPos;
+    public ClamScriptObj clamData;
+    private Transform playerPos;
     private Vector3 clamJumpTarget;
     private Transform clamTransform;
-
+    private Rigidbody rb;
     private Player_Health playerHealth;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
     private bool isJumping = false;
+    private bool isRebounding = false;
     private bool canHurt = false;
 
     [Tooltip("Time it takes for clam to move out of the ground and do first jump. May be replaced with animation events")]
@@ -30,6 +32,9 @@ public class ClamWalker : MonoBehaviour
     protected float maxJumpDistance;
     [Tooltip("The amount of damage the clam does.")]
     protected int damage;
+    
+    protected float reboundJumpDelay;
+    private float curReboundJumpDelay = 0;
 
     //[Tooltip("Whether or not to override the scripable object data and use custom values.")]
     //public bool overrideScriptObjData;
@@ -43,11 +48,11 @@ public class ClamWalker : MonoBehaviour
     private int waypointIndex = 0;
     private Vector3 target;
 
-    public ClamScriptObj clamData;
-
+    // ############## END OF VARIABLES ##############
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
         InitBaseDataStats();
@@ -61,6 +66,7 @@ public class ClamWalker : MonoBehaviour
             waypointIndex = 0; // We're using this for later, keep it around at 0
             UpdateClamPatrolDest();
         }
+
     }
 
     private void FixedUpdate()
@@ -78,7 +84,7 @@ public class ClamWalker : MonoBehaviour
             ClamJumpThinklogic();
         }
 
-        else if (hasSeenPlayer) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
+        else if (hasSeenPlayer && curReboundJumpDelay <= 0) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
         { 
             clamTransform.LookAt(playerPos);
 
@@ -115,6 +121,7 @@ public class ClamWalker : MonoBehaviour
         this.jumpCooldown = clamData.jumpCooldown;
         this.maxJumpDistance = clamData.maxJumpDistance;
         this.damage = clamData.damage;
+        this.reboundJumpDelay = clamData.hitReboundJumpDelay;
     }
 
     private void UpdateStats()
@@ -126,23 +133,32 @@ public class ClamWalker : MonoBehaviour
 
     protected void ClamJumpThinklogic()
     {
-        if (curJumpCooldown <= 0) { // Is the jump cooldown done? If so, call ClamJump()
+        if (curJumpCooldown <= 0 && !isRebounding) { // Is the jump cooldown done? If so, call ClamJump()
             ClamJump();
         }
 
         else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
         {
-            //if (clamNavAgent.velocity.sqrMagnitude <= 0.1f)
             if (clamNavAgent.remainingDistance <= 1f)
             {
                 isJumping = false;
                 canHurt = false;
             }
 
-            if (!isJumping) // If not jumping, decrement jump cooldown counter and look at the player.
+            if (!isJumping) // If not jumping, check if rebounding
             {
-                curJumpCooldown -= Time.fixedDeltaTime;
-                clamTransform.LookAt(playerPos);
+                if (!isRebounding) // If not rebounding, decrement jump cooldown counter and look at the player.
+                {
+                    curJumpCooldown -= Time.fixedDeltaTime;
+                    clamTransform.LookAt(playerPos);
+                }
+                else { // if rebounding, decrement rebound counter and
+                    curReboundJumpDelay -= Time.fixedDeltaTime; // 50 ms 
+                    if (curReboundJumpDelay <= 0) {
+                        isRebounding = false;
+                        clamNavAgent.isStopped = false;
+                    }
+                }
             }
         }
     }
@@ -152,7 +168,6 @@ public class ClamWalker : MonoBehaviour
         clamJumpTarget = Vector3.MoveTowards(clamTransform.position, playerPos.position, maxJumpDistance);
         clamJumpTarget.y = 0;
         clamNavAgent.destination = clamJumpTarget;
-        //clamNavAgent.destination.Set(clamNavAgent.destination.x, 0, clamNavAgent.destination.z);
         curJumpCooldown = jumpCooldown;
         isJumping = true; // isJumping only exists to make code relating to looking at the player easier to understand
         canHurt = true; // Clam only hurts player when jumping.
@@ -163,8 +178,20 @@ public class ClamWalker : MonoBehaviour
         if (canHurt)
         {
             playerHealth.TakeDamage(damage);
-            canHurt = false; // Make sure they can't get hurt multi ple times in one jump.
+            canHurt = false; // Make sure they can't get hurt multiple times in one jump.
+            Rebound();
         }
+    }
+
+    private void Rebound()
+    {
+        clamNavAgent.ResetPath();
+        clamNavAgent.velocity = Vector3.zero;
+        clamNavAgent.isStopped = true;
+        curReboundJumpDelay = reboundJumpDelay;
+        rb.AddRelativeForce(new Vector3(0, 0, -clamData.hitReboundPushForce),ForceMode.Impulse);
+        isJumping = false;
+        isRebounding = true;
     }
 
     private void UpdateClamPatrolDest()
@@ -181,6 +208,7 @@ public class ClamWalker : MonoBehaviour
         }
     }
 }
+
 
 /*
  * Clam patrol values;
