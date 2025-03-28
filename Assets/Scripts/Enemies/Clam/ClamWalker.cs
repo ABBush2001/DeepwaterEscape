@@ -48,7 +48,7 @@ public class ClamWalker : MonoBehaviour
     public Transform waypointList;
     private Transform[] waypoints;
     private int waypointIndex = 0;
-    private Vector3 target;
+    private Vector3 waypointTarget;
     
     private Vector3 lookTarget;
 
@@ -76,7 +76,7 @@ public class ClamWalker : MonoBehaviour
     {
         if (patrols && !hasSeenPlayer)
         {
-            if (Vector3.Distance(clamTransform.position, target) < 2f) {
+            if (Vector3.Distance(clamTransform.position, waypointTarget) < 2f) {
                 UpdateClamPatrolDest();
                 IterwateWaypointIndex();
             }
@@ -201,7 +201,7 @@ public class ClamWalker : MonoBehaviour
         clamNavAgent.velocity = Vector3.zero;
         clamNavAgent.isStopped = true;
         curReboundJumpDelay = reboundJumpDelay;
-        rb.AddRelativeForce(new Vector3(0, 0, -clamData.hitReboundPushForce),ForceMode.Impulse);
+        rb.AddRelativeForce(new Vector3(0, 0, -clamData.hitReboundPushForce), ForceMode.Impulse);
         isJumping = false;
         isRebounding = true;
         canLook = false;
@@ -209,8 +209,8 @@ public class ClamWalker : MonoBehaviour
 
     private void UpdateClamPatrolDest()
     {
-        target = waypoints[waypointIndex].position;
-        clamNavAgent.SetDestination(target);
+        waypointTarget = waypoints[waypointIndex].position;
+        clamNavAgent.SetDestination(waypointTarget);
     }
 
     void IterwateWaypointIndex()
