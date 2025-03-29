@@ -17,6 +17,8 @@ public class ClamWalker : MonoBehaviour
     private Rigidbody rb;
     private Player_Health playerHealth;
     public Transform looker;
+    public GameObject gunshotListener;
+    public GameObject visionCone;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
@@ -122,6 +124,10 @@ public class ClamWalker : MonoBehaviour
                 }
             }
             hasSeenPlayer = true;
+        }
+        else if (other.CompareTag(""))
+        {
+
         }
     }
 
