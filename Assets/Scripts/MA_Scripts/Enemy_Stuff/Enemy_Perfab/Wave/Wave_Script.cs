@@ -106,7 +106,7 @@ public class Wave_Script : MonoBehaviour
         yield return new WaitForSeconds(longTime);
 
         pControl.SetMovement(true);
-        Debug.Log("Player movement disabled!");
+        Debug.Log("Player movement enable!");
 
     }
 }

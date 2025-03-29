@@ -113,7 +113,7 @@ public class BossManager : MonoBehaviour
 
 
 
-    IEnumerator MoveEnemyAndStartWave()
+    public IEnumerator MoveEnemyAndStartWave()
     {
         if(enemy == null)
         {
@@ -177,7 +177,7 @@ public class BossManager : MonoBehaviour
 
 
 
-    IEnumerator ChaseAttack()
+    public IEnumerator ChaseAttack()
     {
         if (enemy == null)
         {
