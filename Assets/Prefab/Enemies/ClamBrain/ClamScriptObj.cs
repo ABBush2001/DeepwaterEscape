@@ -12,25 +12,24 @@ public class ClamScriptObj : ScriptableObject
     public float maxJumpDistance = 25f;
     [Tooltip("The amount of damage the clam does.")]
     public int damage = 20;
+    [Tooltip("How long to delay jumping after hitting the player and triggering a rebound")]
+    public float hitReboundJumpDelay = 0.6f;
+    [Tooltip("How hard clam gets pushed back after hitting player, should be atleast 10.")]
+    public float hitReboundPushForce = 50;
 
-    [Header("Ambush Nav Values (Nerd Stuff)")]
+    [Header("Base Nav Values")]
+    [Tooltip("Speed of clam")]
     public float navSpeed;
+    [Tooltip("Rotation speed of clam")]
     public float navAngleSpeed;
+    [Tooltip("Acceleration speed of clam")]
     public float navAccel;
 
-    [Header("Patrol Nav Values (Nerd Stuff)")]
-    [Tooltip("Speed of clam when calm")]
-    public float patrolNavSpeed = 0;
-    [Tooltip("Rotation speed of clam when calm")]
-    public float patrolNavAngleSpeed = 0;
-    [Tooltip("Acceleration speed of clam when calm")]
-    public float patrolNavAccel = 0;
-
-    [Header("Patrol Alert Nav Values (Nerd Stuff)")]
+    [Header("Alert Nav Values")]
     [Tooltip("Speed of clam when angry")]
-    public float patrolAlertNavSpeed = 0;
+    public float alertNavSpeed = 0;
     [Tooltip("Rotation speed of clam when angry")]
-    public float patrolAlertNavAngleSpeed = 0;
+    public float alertNavAngleSpeed = 0;
     [Tooltip("Acceleration speed of clam when angry")]
-    public float patrolAlertNavAccel = 0;
+    public float alertNavAccel = 0;
 }

@@ -1,26 +1,23 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class TextEffect : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI tmpProText;  // Using TMP_Text here
-    string writer;
+    [SerializeField] private TextMeshProUGUI tmpProText;
+    private string writer;
     [SerializeField] private Coroutine coroutine;
 
-    [SerializeField] float delayBeforeStart = 0f;
-    [SerializeField] float timeBtwChars = 0.1f;
-    [SerializeField] string leadingChar = "";
-    [SerializeField] bool leadingCharBeforeDelay = false;
-    [Space(10)][SerializeField] private bool startOnEnable = false;
+    [SerializeField] private float delayBeforeStart = 0f;
+    [SerializeField] private float timeBtwChars = 0.1f;
+    [SerializeField] private string leadingChar = "";
+    [SerializeField] private bool leadingCharBeforeDelay = false;
+    [SerializeField] private bool startOnEnable = false;
 
-    [Header("Collision-Based")]
-    [SerializeField] private bool clearAtStart = false;
-    [SerializeField] private bool startOnCollision = false;
-    enum options { clear, complete }
-    [SerializeField] options collisionExitOptions;
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;  // Assign in Inspector
+    [SerializeField] private AudioClip typeSound;  // Assign in Inspector
+    [SerializeField] private bool randomPitch = true;  // Enable pitch variation
 
     void Awake()
     {
@@ -60,7 +57,6 @@ public class TextEffect : MonoBehaviour
     IEnumerator TypeWriterTMP()
     {
         tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
-
         yield return new WaitForSeconds(delayBeforeStart);
 
         foreach (char c in writer)
@@ -71,12 +67,28 @@ public class TextEffect : MonoBehaviour
             }
             tmpProText.text += c;
             tmpProText.text += leadingChar;
+
+            // Play typing sound
+            PlayTypeSound();
+
             yield return new WaitForSeconds(timeBtwChars);
         }
 
         if (leadingChar != "")
         {
             tmpProText.text = tmpProText.text.Substring(0, tmpProText.text.Length - leadingChar.Length);
+        }
+    }
+
+    private void PlayTypeSound()
+    {
+        if (audioSource && typeSound) // Ensure AudioSource & Clip are assigned
+        {
+            if (randomPitch)
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);  // Slight pitch variation
+            }
+            audioSource.PlayOneShot(typeSound);
         }
     }
 }
