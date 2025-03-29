@@ -9,6 +9,14 @@ using UnityEngine.AI;
 
 public class ClamWalker : MonoBehaviour
 {
+    [Header("Clam Type (Don't Touch)")]
+    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
+    public bool patrols;
+    [Tooltip("Is the clam a sleeper clam? Does not function with patrols, and you shouldn't touch it.")]
+    public bool sleeper;
+
+    [Space(10f)]
+
     public NavMeshAgent clamNavAgent;
     public ClamScriptObj clamData;
     private Transform playerPos;
@@ -17,8 +25,6 @@ public class ClamWalker : MonoBehaviour
     private Rigidbody rb;
     private Player_Health playerHealth;
     public Transform looker;
-    public GameObject gunshotListener;
-    public GameObject visionCone;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
@@ -44,20 +50,21 @@ public class ClamWalker : MonoBehaviour
     //public bool overrideScriptObjData;
 
     [Header("Patrol Variables")]
-    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
-    public bool patrols;
     [Tooltip("'Waypoints' goes here, but you probably shouldn't touch this.")]
     public Transform waypointList;
     private Transform[] waypoints;
     private int waypointIndex = 0;
     private Vector3 waypointTarget;
+
     
-    private Vector3 lookTarget;
 
     // ############## END OF VARIABLES ##############
 
     private void Start()
     {
+        if (sleeper && patrols) {
+            Debug.LogWarning("Clam is both a patroller and sleeper!", this);
+        }
         rb = GetComponent<Rigidbody>();
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
@@ -114,21 +121,26 @@ public class ClamWalker : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!hasSeenPlayer)
-            {
-                playerPos = other.transform;    
-                clamNavAgent.baseOffset += 1; // Offset is just until animations get in
-                clamNavAgent.destination = transform.position; // stop patrol when player is detected
-                if (patrols) {
-                    UpdateStats(); // update to alert stats
-                }
-            }
-            hasSeenPlayer = true;
+            Alert(other);
         }
-        else if (other.CompareTag(""))
-        {
+    }
 
+    public void Alert(Collider other)
+    {
+        if (!hasSeenPlayer)
+        {
+            playerPos = other.transform;
+            if (!sleeper)
+            {
+                clamNavAgent.baseOffset += 1; // Offset is just until animations get in
+            }
+            clamNavAgent.destination = transform.position; // stop patrol when player is detected
+            if (patrols)
+            {
+                UpdateStats(); // update to alert stats
+            }
         }
+        hasSeenPlayer = true;
     }
 
     private void InitBaseDataStats() // constructors simply break w/ scriptable objects, so it has to be done this way
@@ -204,8 +216,8 @@ public class ClamWalker : MonoBehaviour
     private void Rebound()
     {
         clamNavAgent.ResetPath();
-        clamNavAgent.velocity = Vector3.zero;
         clamNavAgent.isStopped = true;
+        clamNavAgent.velocity = Vector3.zero;
         curReboundJumpDelay = reboundJumpDelay;
         rb.AddRelativeForce(new Vector3(0, 0, -clamData.hitReboundPushForce), ForceMode.Impulse);
         isJumping = false;
