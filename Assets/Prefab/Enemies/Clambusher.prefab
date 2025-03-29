@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: Clambusher
   m_TagString: Enemy
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -45,9 +45,19 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1393519271106923375, guid: fe156584345dd174787f27b126985bcb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2942784512800490925, guid: fe156584345dd174787f27b126985bcb,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3241578252015658556, guid: fe156584345dd174787f27b126985bcb,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4898780094093949767, guid: fe156584345dd174787f27b126985bcb,
@@ -60,6 +70,11 @@ PrefabInstance:
       propertyPath: parentObj
       value: 
       objectReference: {fileID: 2213713168116630559}
+    - target: {fileID: 6227166975190914373, guid: fe156584345dd174787f27b126985bcb,
+        type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6227166975190914373, guid: fe156584345dd174787f27b126985bcb,
         type: 3}
       propertyPath: m_Enabled
@@ -120,13 +135,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8134626547945041642, guid: fe156584345dd174787f27b126985bcb,
+        type: 3}
+      propertyPath: m_ImplicitCom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8134626547945041642, guid: fe156584345dd174787f27b126985bcb,
+        type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8749070184042961601, guid: fe156584345dd174787f27b126985bcb,
         type: 3}
       propertyPath: m_Name
       value: ClamBrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2942784512800490925, guid: fe156584345dd174787f27b126985bcb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe156584345dd174787f27b126985bcb, type: 3}
