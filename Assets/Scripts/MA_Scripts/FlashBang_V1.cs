@@ -14,6 +14,8 @@ public class FlashBang_V1 : MonoBehaviour
     private bool isGlowing = true;
     private object glowMat;
 
+    public GameObject QAF;
+
     private AudioSource WhiteNoise;
 
     private void Start()
@@ -41,7 +43,7 @@ public class FlashBang_V1 : MonoBehaviour
 
 
         // to render the material
-        Renderer renderer = GetComponent<Renderer>();
+        Renderer renderer = QAF.GetComponent<Renderer>();
 
 
         // check if the material is in the object
@@ -55,12 +57,11 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-        if (objectmat.name != "emission_Glow (Instance)")
+        if (objectmat.name != "AnglerfishMat (Instance)")
         {
             Debug.LogError("Renderer or material is not emission_Glow");
             return;
         }
-
 
 
     }
