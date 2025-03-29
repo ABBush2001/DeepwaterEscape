@@ -47,11 +47,12 @@ public class PathManager : MonoBehaviour
                 //the charge end node
                 else
                 {
-                    path1.SetActive(false);
+                    //path1.SetActive(false);
                 
                     if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
                     {
-                        StopCoroutine(bossM.MoveEnemyAndStartWave());
+                        StartCoroutine(bossM.ChaseAttack());
+                        //StartCoroutine(bossM.MoveEnemyAndStartWave());
 
                         //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
                         //path2.SetActive(true);
@@ -63,7 +64,7 @@ public class PathManager : MonoBehaviour
                     }
                     else if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
                     {
-                        StopCoroutine(bossM.ChaseAttack());
+                        StartCoroutine(bossM.ChaseAttack());
 
                         //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
                         //path3.SetActive(true);
