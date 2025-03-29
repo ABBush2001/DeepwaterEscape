@@ -16,6 +16,8 @@ public class PathManager : MonoBehaviour
 
     public GameObject enemy;
 
+    [SerializeField] private BossManager bossM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,28 +47,33 @@ public class PathManager : MonoBehaviour
                 //the charge end node
                 else
                 {
-                    path1.SetActive(false);
+                    //path1.SetActive(false);
                 
                     if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
                     {
-                        /*enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
-                        path2.SetActive(true);
-                        yield return new WaitForSeconds(1.5f);
-                        path2.GetComponent<FollowPath>().resetNode();
-                        path2.SetActive(false);
-                        path1.SetActive(true);
-                        path1.GetComponent<FollowPath>().setCurrentNode(3);*/
+                        StartCoroutine(bossM.ChaseAttack());
+                        //StartCoroutine(bossM.MoveEnemyAndStartWave());
+
+                        //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
+                        //path2.SetActive(true);
+                        //yield return new WaitForSeconds(1.5f);
+                        //path2.GetComponent<FollowPath>().resetNode();
+                        //path2.SetActive(false);
+                        //path1.SetActive(true);
+                        //path1.GetComponent<FollowPath>().setCurrentNode(3);
                     }
                     else if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
                     {
-                        /*enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
-                        path3.SetActive(true);
-                        yield return new WaitForSeconds(1.5f);
-                        path3.GetComponent<FollowPath>().resetNode();
+                        StartCoroutine(bossM.ChaseAttack());
 
-                        path3.SetActive(false);
-                        path1.SetActive(true);
-                        path1.GetComponent<FollowPath>().setCurrentNode(2);*/
+                        //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
+                        //path3.SetActive(true);
+                        //yield return new WaitForSeconds(1.5f);
+                        //path3.GetComponent<FollowPath>().resetNode();
+
+                        //path3.SetActive(false);
+                        //path1.SetActive(true);
+                        //path1.GetComponent<FollowPath>().setCurrentNode(2);
                     }
                 }
             }
