@@ -1,5 +1,5 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,47 +9,66 @@ using UnityEngine.AI;
 
 public class ClamWalker : MonoBehaviour
 {
+    [Header("Clam Type (Don't Touch)")]
+    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
+    public bool patrols;
+    [Tooltip("Is the clam a sleeper clam? Does not function with patrols, and you shouldn't touch it.")]
+    public bool sleeper;
+
+    [Space(10f)]
+
     public NavMeshAgent clamNavAgent;
-    public Transform playerPos;
+    public ClamScriptObj clamData;
+    private Transform playerPos;
     private Vector3 clamJumpTarget;
     private Transform clamTransform;
-
+    private Rigidbody rb;
     private Player_Health playerHealth;
+    public Transform looker;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
     private bool isJumping = false;
+    private bool isRebounding = false;
     private bool canHurt = false;
+    private bool canLook = false;
 
     [Tooltip("Time it takes for clam to move out of the ground and do first jump. May be replaced with animation events")]
-    public float deBurrowTime;
+    protected float deBurrowTime;
     [Tooltip("Cooldown between jumps")]
-    public float jumpCooldown;
+    protected float jumpCooldown;
     private float curJumpCooldown;
     [Tooltip("The maximum horizontal distance the clam can jump to.")]
-    public float maxJumpDistance;
+    protected float maxJumpDistance;
     [Tooltip("The amount of damage the clam does.")]
-    public int damage;
+    protected int damage;
+    
+    protected float reboundJumpDelay;
+    private float curReboundJumpDelay = 0;
 
     //[Tooltip("Whether or not to override the scripable object data and use custom values.")]
     //public bool overrideScriptObjData;
 
     [Header("Patrol Variables")]
-    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
-    public bool patrols;
     [Tooltip("'Waypoints' goes here, but you probably shouldn't touch this.")]
     public Transform waypointList;
     private Transform[] waypoints;
     private int waypointIndex = 0;
-    private Vector3 target;
+    private Vector3 waypointTarget;
 
-    public ClamScriptObj clamData;
+    
 
+    // ############## END OF VARIABLES ##############
 
     private void Start()
     {
+        if (sleeper && patrols) {
+            Debug.LogWarning("Clam is both a patroller and sleeper!", this);
+        }
+        rb = GetComponent<Rigidbody>();
         clamTransform = this.GetComponent<Transform>();
         playerHealth = GetComponentInParent<ClamPlayerHealthRef>().GetPlayerHealth();
+        InitBaseDataStats();
         if (patrols) {
             waypoints = new Transform[waypointList.childCount]; // actually intialize array with size of waypointlist
             foreach (Transform t in waypointList) // Get each waypoint in waypointList automagically
@@ -66,7 +85,7 @@ public class ClamWalker : MonoBehaviour
     {
         if (patrols && !hasSeenPlayer)
         {
-            if (Vector3.Distance(clamTransform.position, target) < 2f) {
+            if (Vector3.Distance(clamTransform.position, waypointTarget) < 2f) {
                 UpdateClamPatrolDest();
                 IterwateWaypointIndex();
             }
@@ -77,10 +96,9 @@ public class ClamWalker : MonoBehaviour
             ClamJumpThinklogic();
         }
 
-        else if (hasSeenPlayer) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
-        { 
-            clamTransform.LookAt(playerPos);
-
+        else if (hasSeenPlayer && curReboundJumpDelay <= 0) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
+        {
+            canLook = true;
             if (deBurrowTime > 0) {
                 deBurrowTime -= Time.fixedDeltaTime;
             }
@@ -90,50 +108,86 @@ public class ClamWalker : MonoBehaviour
         }
     }
 
-    // Don't use Update() since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
+    void Update()
+    {
+        if (canLook) {
+            looker.LookAt(playerPos);
+            transform.rotation = Quaternion.Lerp(transform.rotation, looker.rotation, Time.deltaTime * 10);
+        }
+    }
+
+    // Don't use Update() for AI logic since we don't need to calculate AI stuff every single frame, especially for a mob enemy.
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (!hasSeenPlayer)
-            {
-                playerPos = other.transform;    
-                clamNavAgent.baseOffset += 1; // Offset is just until animations get in
-                clamNavAgent.destination = transform.position; // stop patrol when player is detected
-
-            }
-            hasSeenPlayer = true;
+            Alert(other);
         }
     }
 
-    public ClamWalker(float deBurrowTime, float jumpCooldown, float maxJumpDistance, int damage, bool patrols)
+    public void Alert(Collider other)
     {
-        this.deBurrowTime = deBurrowTime;
-        this.jumpCooldown = jumpCooldown;
-        this.maxJumpDistance = maxJumpDistance;
-        this.damage = damage;
-        this.patrols = patrols;
+        if (!hasSeenPlayer)
+        {
+            playerPos = other.transform;
+            if (!sleeper)
+            {
+                clamNavAgent.baseOffset += 1; // Offset is just until animations get in
+            }
+            clamNavAgent.destination = transform.position; // stop patrol when player is detected
+            if (patrols)
+            {
+                UpdateStats(); // update to alert stats
+            }
+        }
+        hasSeenPlayer = true;
+    }
+
+    private void InitBaseDataStats() // constructors simply break w/ scriptable objects, so it has to be done this way
+    {
+        this.deBurrowTime = clamData.deBurrowTime;
+        this.jumpCooldown = clamData.jumpCooldown;
+        this.maxJumpDistance = clamData.maxJumpDistance;
+        this.damage = clamData.damage;
+        this.reboundJumpDelay = clamData.hitReboundJumpDelay;
+    }
+
+    private void UpdateStats()
+    {
+        clamNavAgent.acceleration = clamData.alertNavAccel;
+        clamNavAgent.angularSpeed = clamData.alertNavAngleSpeed;
+        clamNavAgent.speed = clamData.alertNavSpeed;
     }
 
     protected void ClamJumpThinklogic()
     {
-        if (curJumpCooldown <= 0) { // Is the jump cooldown done? If so, call ClamJump()
+        if (curJumpCooldown <= 0 && !isRebounding) { // Is the jump cooldown done? If so, call ClamJump()
             ClamJump();
         }
 
         else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
         {
-            //if (clamNavAgent.velocity.sqrMagnitude <= 0.1f)
-            if (clamNavAgent.remainingDistance <= 1f)
+            if (clamNavAgent.remainingDistance <= .1f && !isRebounding)
             {
                 isJumping = false;
                 canHurt = false;
+                clamNavAgent.ResetPath();
             }
 
-            if (!isJumping) // If not jumping, decrement jump cooldown counter and look at the player.
+            if (!isJumping) // If not jumping, check if rebounding
             {
-                curJumpCooldown -= Time.fixedDeltaTime;
-                clamTransform.LookAt(playerPos);
+                if (!isRebounding) // If not rebounding, decrement jump cooldown counter and look at the player.
+                {
+                    curJumpCooldown -= Time.fixedDeltaTime;
+                    canLook = true;
+                }
+                else { // if rebounding, decrement rebound counter and
+                    curReboundJumpDelay -= Time.fixedDeltaTime; // 50 ms 
+                    if (curReboundJumpDelay <= 0) {
+                        isRebounding = false;
+                        clamNavAgent.isStopped = false;
+                    }
+                }
             }
         }
     }
@@ -143,10 +197,10 @@ public class ClamWalker : MonoBehaviour
         clamJumpTarget = Vector3.MoveTowards(clamTransform.position, playerPos.position, maxJumpDistance);
         clamJumpTarget.y = 0;
         clamNavAgent.destination = clamJumpTarget;
-        //clamNavAgent.destination.Set(clamNavAgent.destination.x, 0, clamNavAgent.destination.z);
         curJumpCooldown = jumpCooldown;
         isJumping = true; // isJumping only exists to make code relating to looking at the player easier to understand
         canHurt = true; // Clam only hurts player when jumping.
+        canLook = false;
     }
 
     public void AttemptHurt()
@@ -154,14 +208,27 @@ public class ClamWalker : MonoBehaviour
         if (canHurt)
         {
             playerHealth.TakeDamage(damage);
-            canHurt = false; // Make sure they can't get hurt multi ple times in one jump.
+            canHurt = false; // Make sure they can't get hurt multiple times in one jump.
+            Rebound();
         }
+    }
+
+    private void Rebound()
+    {
+        clamNavAgent.ResetPath();
+        clamNavAgent.isStopped = true;
+        clamNavAgent.velocity = Vector3.zero;
+        curReboundJumpDelay = reboundJumpDelay;
+        rb.AddRelativeForce(new Vector3(0, 0, -clamData.hitReboundPushForce), ForceMode.Impulse);
+        isJumping = false;
+        isRebounding = true;
+        canLook = false;
     }
 
     private void UpdateClamPatrolDest()
     {
-        target = waypoints[waypointIndex].position;
-        clamNavAgent.SetDestination(target);
+        waypointTarget = waypoints[waypointIndex].position;
+        clamNavAgent.SetDestination(waypointTarget);
     }
 
     void IterwateWaypointIndex()
@@ -173,9 +240,6 @@ public class ClamWalker : MonoBehaviour
     }
 }
 
-struct Stinky { 
-
-}
 
 /*
  * Clam patrol values;

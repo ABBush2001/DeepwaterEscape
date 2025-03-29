@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class Player_Health : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Player_Health : MonoBehaviour
     public float autoTime = 1f;
     
 
-    public TextMeshProUGUI Healtext;
+    public Image Healthbar;
 
     [SerializeField]
     private string sceneToLoad;
@@ -65,9 +66,9 @@ public class Player_Health : MonoBehaviour
 
     void UpdateText()
     {
-        if (Healtext != null)
+        if (Healthbar != null)
         {
-            Healtext.text = "Health: " + currentHealth + " / " + maxHealth;
+            Healthbar.fillAmount = currentHealth / 100f;
         }
     }
 }
