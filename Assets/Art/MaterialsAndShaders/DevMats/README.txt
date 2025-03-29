@@ -1,0 +1,1 @@
+This is for developer materials, AKA programmer art, used for things like differentiating trigger types in the editor.
