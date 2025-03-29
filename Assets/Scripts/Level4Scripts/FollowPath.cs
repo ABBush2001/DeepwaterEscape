@@ -87,11 +87,6 @@ public class FollowPath : MonoBehaviour
         Debug.Log(currentNode);
         timer += Time.deltaTime * moveSpeed;
 
-        if(PathNode[currentNode].GetComponent<Node>().isCornerNode)
-        {
-            enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
-        }
-
         if(enemy == null || bHealth == null || bHealth.BossHealth < 0)
         {
             return;
