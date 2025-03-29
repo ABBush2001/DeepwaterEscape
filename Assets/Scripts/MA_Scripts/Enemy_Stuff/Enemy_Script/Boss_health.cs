@@ -21,6 +21,7 @@ public class Boss_health : MonoBehaviour
     public Gradient gradirnt;
     public Image fill;
 
+    // public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class Boss_health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // transform.LookAt(player.transform);
     }
 
     // if health hit zero then it get destroy

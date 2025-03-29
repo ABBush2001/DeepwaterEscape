@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Wave_Script : MonoBehaviour
 {
+    public GameObject gun;
 
     public int waveDmg = 4;
 
@@ -22,6 +23,8 @@ public class Wave_Script : MonoBehaviour
         // to start in the position and scale they have 
         orignalPos = transform.position;
         orignalSca = transform.localScale;
+
+        gun = GameObject.FindWithTag("Gun");
     }
 
     // Update is called once per frame
@@ -78,7 +81,7 @@ public class Wave_Script : MonoBehaviour
         {
             StartCoroutine(MoveAndScale());
         }
-        FirstPersonController playerController = other.GetComponent<FirstPersonController>();
+        CommentedThirdPersonController playerController = other.GetComponent<CommentedThirdPersonController>();
 
         if (playerController != null)
         {
@@ -98,18 +101,18 @@ public class Wave_Script : MonoBehaviour
         }
     }
 
-    private IEnumerator DisableMovemant(FirstPersonController pControl, float longTime)
+    private IEnumerator DisableMovemant(CommentedThirdPersonController pControl, float longTime)
     {
+
+        gun.GetComponent<Shooting>().enabled = false;
         pControl.SetMovement(false);
         Debug.Log("Player movement disable");
 
         yield return new WaitForSeconds(longTime);
 
+        gun.GetComponent<Shooting>().enabled = true;
         pControl.SetMovement(true);
-        Debug.Log("Player movement disabled!");
+        Debug.Log("Player movement enable!");
 
     }
-
-   
-
 }

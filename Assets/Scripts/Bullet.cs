@@ -11,7 +11,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     // The life span of the bullet
-    public float BulletlifeSpan = 3;
+    public float BulletlifeSpan = 1.2f;
     public int Damage = 25;
 
     void Awake()
@@ -24,10 +24,9 @@ public class Bullet : MonoBehaviour
     {
         // deal damage to enemy tag
 
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            E_Health enemyHealth = collision.gameObject.GetComponent<E_Health>();
-            if (enemyHealth != null)
+            if (collision.gameObject.TryGetComponent<E_Health>(out var enemyHealth))
             {
                 enemyHealth.DamageOnEnemy(Damage);
             }
@@ -35,14 +34,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
 
         // deal damage to Boss tag
 
-        if (collision.gameObject.tag == "Boss")
+        if (collision.gameObject.CompareTag("Boss"))
         {
-            Boss_health Bh = collision.gameObject.GetComponent<Boss_health>();
-            if (Bh != null)
+            if (collision.gameObject.TryGetComponent<Boss_health>(out var Bh))
             {
                 Bh.DamageOnEnemy(Damage);
             }
@@ -50,6 +47,27 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+        if (collision.gameObject.CompareTag("Gun") || collision.gameObject.CompareTag("Player"))
+        {
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // Hit enemy trigger
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (other.gameObject.TryGetComponent<E_Health>(out var enemyHealth))
+            {
+                enemyHealth.DamageOnEnemy(Damage);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }

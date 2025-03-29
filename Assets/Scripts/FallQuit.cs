@@ -22,13 +22,16 @@ public class FallQuit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(fallTransition());
+        if (other.CompareTag("Player"))
+        {
+            StartCoroutine(fallTransition());
+        }
     }
 
     IEnumerator fallTransition()
     {
         mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("2.Oceanfloor");
+        SceneManager.LoadScene("UpdatedOceanfloor");
     }
 }
