@@ -64,7 +64,7 @@ public class BossManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            StartCoroutine(MoveEnemyAndChargeAttack()); // Set the target position here
+            StartCoroutine(ChaseAttack()); // Set the target position here
         }
     }
 
