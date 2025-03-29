@@ -15,6 +15,7 @@ public class Shooting : MonoBehaviour
     // Gun shoot and speed
     public Transform BulletSpawn;
     public GameObject BulletPrefab;
+    public GameObject noiseObj;
     public float bulletSpeed = 20;
     public float shootingDelay = 2f; // delay when firing
     private bool canShoot = true;
@@ -105,6 +106,7 @@ public class Shooting : MonoBehaviour
     {
         // it move to where the player is facing
         var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        noiseObj.SetActive(true); // Enable the noise. It won't be on for long!
 
         // This the firerate
         //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;

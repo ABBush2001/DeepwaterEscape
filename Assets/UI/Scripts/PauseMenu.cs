@@ -7,7 +7,10 @@ public class PauseMenu2 : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject otherUI;
     private bool isPaused = false;
-    private float timer = 0f;
+
+    // Define Events for Other Scripts (like Bullet)
+    public static event System.Action OnPause;
+    public static event System.Action OnResume;
 
     void Update()
     {
@@ -15,70 +18,69 @@ public class PauseMenu2 : MonoBehaviour
         {
             if (settingsMenuUI.activeSelf)
             {
-                ReturnToPauseMenu(); // Return to pause menu from settings
+                ReturnToPauseMenu();
             }
             else if (isPaused)
             {
-                ResumeGame(); // Resume game from pause menu
+                ResumeGame();
             }
             else
             {
-                PauseGame(); // Pause game from playing state
+                PauseGame();
             }
         }
     }
+
     public void PauseGame()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f; // Freeze the game
+        Time.timeScale = 0f;
         isPaused = true;
+        otherUI.SetActive(false);
 
-        otherUI.SetActive(false); // Hide the other UI (dialogue box or any other UI)
-
-        // Unlock the cursor and make it visible
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        OnPause?.Invoke(); // Broadcast pause event
     }
 
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f; // Unfreeze the game
+        Time.timeScale = 1f;
         isPaused = false;
-
-        otherUI.SetActive(true); // Show the other UI (dialogue box or any other UI) again
+        otherUI.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        OnResume?.Invoke(); // Broadcast resume event
     }
 
     public void QuitGame()
     {
-        Time.timeScale = 1f; // Ensure time resumes
+        Time.timeScale = 1f;
         Application.Quit();
     }
 
     public void GoToHome()
     {
-        Time.timeScale = 1f; // Ensure time resumes
-        SceneManager.LoadScene("Main"); // Change this to your main menu scene name
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main");
     }
 
-    // Method to show the settings menu and hide the pause menu
     public void OpenSettings()
     {
         Debug.Log("TESTING");
-
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(true);
     }
 
-    // Method to return to the pause menu from settings
     public void ReturnToPauseMenu()
     {
-        settingsMenuUI.SetActive(false); // Hide settings menu
-        pauseMenuUI.SetActive(true); // Show pause menu
-        Time.timeScale = 0f; // Pause the game (you might want to adjust this based on your needs)
-        isPaused = true; // Indicate that the game is paused
+        settingsMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
     }
 }
