@@ -6816,12 +6816,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -206.5757
+      value: -206.594
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.6395
+      value: 23.639
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
@@ -14823,7 +14823,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bc1258d350d8ded46a495dd2e0d1baed, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.70980394}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -15388,7 +15388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.34452084, y: 0.799}
   m_AnchorMax: {x: 0.65000004, y: 0.94400007}
-  m_AnchoredPosition: {x: -1.5, y: -1.1000061}
+  m_AnchoredPosition: {x: -1.5, y: -1.0999756}
   m_SizeDelta: {x: -0.8865967, y: -0.5753174}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &824759509
@@ -28098,62 +28098,6 @@ Transform:
   - {fileID: 90828403}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 84.951, z: 0}
---- !u!1 &1348805970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1348805972}
-  - component: {fileID: 1348805971}
-  m_Layer: 0
-  m_Name: Audio Reverb Zone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!167 &1348805971
-AudioReverbZone:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348805970}
-  m_Enabled: 1
-  m_MinDistance: 3.2519531
-  m_MaxDistance: 4.0600586
-  m_ReverbPreset: 9
-  m_Room: -1000
-  m_RoomHF: 0
-  m_DecayTime: 2.91
-  m_DecayHFRatio: 1.3
-  m_Reflections: -602
-  m_ReflectionsDelay: 0.015
-  m_Reverb: -302
-  m_ReverbDelay: 0.022
-  m_HFReference: 5000
-  m_Diffusion: 100
-  m_Density: 100
-  m_LFReference: 250
-  m_RoomLF: 0
---- !u!4 &1348805972
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348805970}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2195.01, y: 57.594, z: 1536.839}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1352495238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28839,7 +28783,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e5323522bf042441cb510e1f24c1375b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7647059}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -30989,13 +30933,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmpProText: {fileID: 1798615195}
   delayBeforeStart: 0
-  timeBtwChars: 0.01
+  timeBtwChars: 0.05
   leadingChar: 
   leadingCharBeforeDelay: 0
   startOnEnable: 0
-  clearAtStart: 0
-  startOnCollision: 0
-  collisionExitOptions: 0
+  audioSource: {fileID: 1888983410}
+  typeSound: {fileID: 8300000, guid: 4e84871679e33cb4d84da57219b09ec7, type: 3}
+  randomPitch: 0
 --- !u!1 &1810082278 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -445137649591765684, guid: 1f9bdfd45785100419da14feea361326,
@@ -32014,6 +31958,12 @@ MeshRenderer:
 --- !u!4 &1888983409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 858891695114901018, guid: 678c67b6156b843efb2704e675313777,
+    type: 3}
+  m_PrefabInstance: {fileID: 683867546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1888983410 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8826760244605866395, guid: 678c67b6156b843efb2704e675313777,
     type: 3}
   m_PrefabInstance: {fileID: 683867546}
   m_PrefabAsset: {fileID: 0}
@@ -33569,4 +33519,3 @@ SceneRoots:
   - {fileID: 1840629701}
   - {fileID: 724427269}
   - {fileID: 1474966212}
-  - {fileID: 1348805972}
