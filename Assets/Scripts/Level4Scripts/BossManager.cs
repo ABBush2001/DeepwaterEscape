@@ -108,9 +108,9 @@ public class BossManager : MonoBehaviour
         WaveAround(wave6, new Vector3(0, -45, 90));
         WaveAround(wave7, new Vector3(0, 45, 90));
 
-        biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
+        /*biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
         biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-        biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+        biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;*/
     }
 
 
@@ -123,7 +123,7 @@ public class BossManager : MonoBehaviour
     }
 
 
-    IEnumerator MoveEnemyAndStartWave()
+    public IEnumerator MoveEnemyAndStartWave()
     {
         if(enemy == null)
         {
@@ -186,8 +186,8 @@ public class BossManager : MonoBehaviour
     }
 
 
-    // This the charge attack where it will look at the player the charge
-    IEnumerator MoveEnemyAndChargeAttack()
+
+    public IEnumerator ChaseAttack()
     {
         if (enemy == null)
         {
@@ -222,7 +222,16 @@ public class BossManager : MonoBehaviour
         {
             // enemy.transform.position = waveNode.transform.position;
 
-            ChargeAttack();
+            Vector3 directionToPlayer = (player.transform.position - enemy.transform.position).normalized;
+            enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
+        }
+
+        //yield return new WaitForSeconds(0.5f); 
+
+        // dash at the player
+        if (player != null)
+        {
+            Vector3 dashTarget = player.transform.position;
 
             elapsedTime = 0f;
 
@@ -283,15 +292,17 @@ public class BossManager : MonoBehaviour
             {
                 Debug.Log("Item number: " + i);
 
+                //bite path
                 if (attackQueue[i] == 1)
                 {
 
                     yield return new WaitForSeconds(20);
 
                 }
+                //flashbang
                 else if (attackQueue[i] == 2)
                 {
-                    //flashbangSystem.SetActive(true);
+                    
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
@@ -302,49 +313,28 @@ public class BossManager : MonoBehaviour
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                    //flashbangSystem.SetActive(false);
                 }
+                //wave
                 else if(attackQueue[i] == 3)
                 {
-
-                    mainPath.GetComponent<FollowPath>().setCurrentNode(2);
-
                     yield return new WaitForSeconds(0.5f);
 
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
 
-                    queenAnimator.SetBool("IsShouting", true);
-                    yield return new WaitForSeconds(5);
-
-                    //GameObject temp = Instantiate(wave);
-                    //temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
-                    //temp.transform.Rotate(new Vector3(0, 0, 90));
-
-                    //GameObject temp2 = Instantiate(wave1);
-                    //temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
-                    //temp.transform.Rotate(new Vector3(0, -90, 90));
-                    //Wave_Script waveScript = temp.GetComponent<Wave_Script>();
-
-                    //if(waveScript != null)
-                    //{
-                    //    waveScript.startWave();
-                    //}
-                    //else
-                    //{
-                    //    Debug.LogError("Wave prefab is missing the Wave_Script component!");
-                    //}
-
-                    // StartWave();
 
                     StartCoroutine(MoveEnemyAndStartWave());
+                    yield return new WaitForSeconds(3);
 
-                    queenAnimator.SetBool("IsShouting", false);
+
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                    
+
+                    yield return new WaitForSeconds(0.5f);
+
+                    player.GetComponent<CommentedThirdPersonController>().SetMovement(true);
                 }
             }
         }
