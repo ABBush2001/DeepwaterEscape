@@ -213,6 +213,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 800265177447694303, guid: 0090731b51e488b43a6a7307adf4cfef,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 800265177447694303, guid: 0090731b51e488b43a6a7307adf4cfef,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800265177447694303, guid: 0090731b51e488b43a6a7307adf4cfef,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 800265177447694303, guid: 0090731b51e488b43a6a7307adf4cfef,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1011312494259777056, guid: 0090731b51e488b43a6a7307adf4cfef,
         type: 3}
       propertyPath: m_Name
@@ -653,11 +673,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 634941204}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &57439563
+CanvasRenderer:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_CullTransparentMesh: 1
 --- !u!1001 &64587024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2330,7 +2358,7 @@ MonoBehaviour:
   currentHealth: 0
   autoHeal: 1
   autoTime: 1
-  Healtext: {fileID: 1476970815}
+  Healthbar: {fileID: 0}
   sceneToLoad: 
 --- !u!114 &343683971
 MonoBehaviour:
@@ -6958,9 +6986,9 @@ MonoBehaviour:
   leadingChar: 
   leadingCharBeforeDelay: 0
   startOnEnable: 0
-  clearAtStart: 0
-  startOnCollision: 0
-  collisionExitOptions: 0
+  audioSource: {fileID: 0}
+  typeSound: {fileID: 0}
+  randomPitch: 1
 --- !u!114 &1273180541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7844,18 +7872,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e32957100b72294db4b5267e584c457, type: 3}
---- !u!114 &1476970815 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8980583000763562465, guid: b770ef18264786243ba200c36f55a930,
-    type: 3}
-  m_PrefabInstance: {fileID: 2003469749}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1476970817 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6392929369267712798, guid: b770ef18264786243ba200c36f55a930,
@@ -8872,6 +8888,7 @@ GameObject:
   - component: {fileID: 1856708684}
   - component: {fileID: 1856708683}
   - component: {fileID: 1856708687}
+  - component: {fileID: 1856708688}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -8979,6 +8996,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.01
+--- !u!114 &1856708688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856708682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f79dd3dbbc3444286b92a408922bb02d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMoveUp: 5
+  moveSpeed: 0.000001
 --- !u!1 &1859030405
 GameObject:
   m_ObjectHideFlags: 0
@@ -9858,12 +9889,12 @@ PrefabInstance:
     - target: {fileID: 6392929369267712798, guid: b770ef18264786243ba200c36f55a930,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 81.939575
+      value: 81.93945
       objectReference: {fileID: 0}
     - target: {fileID: 6392929369267712798, guid: b770ef18264786243ba200c36f55a930,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 14.686829
+      value: 14.686768
       objectReference: {fileID: 0}
     - target: {fileID: 6392929369267712798, guid: b770ef18264786243ba200c36f55a930,
         type: 3}
