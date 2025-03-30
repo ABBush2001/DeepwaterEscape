@@ -22,6 +22,12 @@ public class DebrisWarningCircle : MonoBehaviour
         StartCoroutine(flashingCircle());
     }
 
+    public void startWarningCircle()
+    {
+        warningComplete = false;
+        StartCoroutine(flashingCircle());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -40,7 +46,7 @@ public class DebrisWarningCircle : MonoBehaviour
                 yield return new WaitForSeconds(0.0001f);
             }
 
-            while(circleMat.color.a < 1)
+            while(circleMat.color.a < 0.5f)
             {
                 tempColor = circleMat.color;
                 tempColor.a += 0.008f;
@@ -49,6 +55,14 @@ public class DebrisWarningCircle : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.5f);
+        }
+
+        while (circleMat.color.a > 0)
+        {
+            tempColor = circleMat.color;
+            tempColor.a -= 0.008f;
+            circleMat.color = tempColor;
+            yield return new WaitForSeconds(0.0001f);
         }
 
         warningComplete = true;

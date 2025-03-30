@@ -13,7 +13,7 @@ public class FallingDebris : MonoBehaviour
     public GameObject warningCircle;
     public GameObject fallingDebris;
 
-    private bool isFalling = false;
+    public bool isFalling = false;
     private GameObject temp;
 
     private void Update()
@@ -38,9 +38,23 @@ public class FallingDebris : MonoBehaviour
 
         while(temp.transform.position.y > warningCircle.transform.position.y)
         {
+            if (temp == null)
+            {
+                break;
+            }
+
             temp.transform.SetPositionAndRotation(new Vector3(temp.transform.position.x, temp.transform.position.y - 0.1f, temp.transform.position.z), temp.transform.rotation);
             yield return new WaitForSeconds(0.05f);
+
+            if (temp == null)
+            {
+                break;
+            }
         }
+
+        yield return new WaitForSeconds(3f);
+
+        warningCircle.GetComponent<DebrisWarningCircle>().startWarningCircle();
     }
 
 }
