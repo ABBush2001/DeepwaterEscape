@@ -22,6 +22,7 @@ public class Cutscene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera.enabled = false;
         camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
         StartCoroutine(startMovingCamera());
     }
