@@ -34,8 +34,6 @@ public class BossManager : MonoBehaviour
 
     public GameObject waveNode;
 
-    public GameObject digNode;
-
     public int[] attackQueue = new int[5];
     private bool attackInProcess;
 
@@ -54,7 +52,7 @@ public class BossManager : MonoBehaviour
 
         attackInProcess = false;
 
-        
+
         //start coroutine
         StartCoroutine(bossFight());
     }
@@ -114,13 +112,13 @@ public class BossManager : MonoBehaviour
     }
 
 
-    void ChargeAttack()
-    {
+    //void ChargeAttack()
+    //{
         
-        transform.LookAt(player.transform);
-        enemy.transform.position =
-            new Vector3(player.transform.position.x, enemy.transform.position.y , enemy.transform.position.z);
-    }
+    //    enemy.transform.LookAt(player.transform);
+    //    enemy.transform.position =
+    //        new Vector3(player.transform.position.x, enemy.transform.position.y , enemy.transform.position.z);
+    //}
 
 
     public IEnumerator MoveEnemyAndStartWave()
@@ -156,31 +154,35 @@ public class BossManager : MonoBehaviour
         {
             enemy.transform.position = waveNode.transform.position;
 
+            enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
             StartWave();
+        }
 
-            elapsedTime = 0f;
+        // yield return new WaitForSeconds(3);
 
-            while (elapsedTime < moveDuration)
+        elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            if(enemy == null)
             {
-                if(enemy == null)
-                {
-                    yield break;
-                }
-
-                enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
-                elapsedTime += Time.deltaTime;
-                yield return null;
+                yield break;
             }
+            enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
 
-            if(enemy != null)
+
+        if(enemy != null)
+
+        {
+            enemy.transform.position = originalPosition;
+            if (followPath != null)
             {
-                enemy.transform.position = originalPosition;
-
-                if (followPath != null)
-                {
-                    followPath.moveSpeed = 1;
-                }
+                followPath.moveSpeed = 1;
             }
         }
     }
@@ -195,38 +197,46 @@ public class BossManager : MonoBehaviour
         }
 
         FollowPath followPath = enemy.GetComponent<FollowPath>();
+        float originalSpeed = 0;
         if (followPath != null)
         {
+            originalSpeed = followPath.moveSpeed;
             followPath.moveSpeed = 0;
         }
 
         Vector3 originalPosition = enemy.transform.position;
+        Vector3 wavePosition = waveNode.transform.position;
+
+        Quaternion originalRotation = enemy.transform.rotation;
 
         float elapsedTime = 0f;
         float moveDuration = 1f;
-        float chaseDuration = 0.8f;
 
-        while (elapsedTime < chaseDuration)
+
+        while (elapsedTime < moveDuration)
         {
             if (enemy == null)
             {
                 yield break;
             }
 
-            enemy.transform.position = Vector3.Lerp(originalPosition, player.transform.position, (elapsedTime / moveDuration));
+            enemy.transform.position = Vector3.Lerp(originalPosition, wavePosition, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        if (enemy != null)
+
+        enemy.transform.position = wavePosition;
+
+        // Look at the player 
+        if (player != null)
         {
-            // enemy.transform.position = waveNode.transform.position;
 
             Vector3 directionToPlayer = (player.transform.position - enemy.transform.position).normalized;
             enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
         }
 
-        //yield return new WaitForSeconds(0.5f); 
+        yield return new WaitForSeconds(0.5f);
 
         // dash at the player
         if (player != null)
@@ -234,32 +244,69 @@ public class BossManager : MonoBehaviour
             Vector3 dashTarget = player.transform.position;
 
             elapsedTime = 0f;
+            float dashDuration = 0.5f;
 
-            while (elapsedTime < moveDuration)
+            while (elapsedTime < dashDuration)
             {
                 if (enemy == null)
                 {
                     yield break;
                 }
 
-                enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
+                enemy.transform.position = Vector3.Lerp(wavePosition, dashTarget, elapsedTime / dashDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
-            if (enemy != null)
-            {
-                enemy.transform.position = originalPosition;
 
-                if (followPath != null)
-                {
-                    followPath.moveSpeed = 1;
-                }
+            enemy.transform.position = dashTarget;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            if (enemy == null)
+            {
+                yield break;
+            }
+
+            enemy.transform.position = Vector3.Lerp(enemy.transform.position, originalPosition, elapsedTime / moveDuration);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        enemy.transform.position = originalPosition;
+
+        float rotationDuration = 0.5f;
+
+        while (elapsedTime < rotationDuration)
+        {
+            if (enemy == null)
+            {
+                yield break;
+            }
+
+            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, originalRotation, elapsedTime / rotationDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        enemy.transform.rotation = originalRotation;
+
+        if (enemy != null)
+        {
+            enemy.transform.position = originalPosition;
+
+            if (followPath != null)
+            {
+                followPath.moveSpeed = originalSpeed;
             }
         }
     }
-
-
 
     IEnumerator bossFight()
     {

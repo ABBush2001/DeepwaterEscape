@@ -42,6 +42,15 @@ public class FollowPath : MonoBehaviour
         timer = 0;
         currentPositionHolder = PathNode[currentNode].transform.position;
         startPosition = enemy.transform.position;
+
+        if (currentNode < PathNode.Length - 1)
+        {
+            Vector3 directionNode = PathNode[currentNode + 1].transform.position - enemy.transform.position;
+            if (directionNode != Vector3.zero)
+            {
+                enemy.transform.rotation = Quaternion.LookRotation(directionNode);
+            }
+        }
     }
 
     //return the current node
