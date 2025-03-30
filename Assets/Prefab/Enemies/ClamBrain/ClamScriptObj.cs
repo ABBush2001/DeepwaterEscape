@@ -6,6 +6,8 @@ public class ClamScriptObj : ScriptableObject
     [Header("Basic Stats")]
     [Tooltip("Time it takes for clam to move out of the ground and do first jump. May be replaced with animation events")]
     public float deBurrowTime = 0.6f;
+    [Tooltip("How high the clam is after deBurrowing. Default is 0.4")]
+    public float deBurrowHeight = 1.7f;
     [Tooltip("Cooldown between jumps")]
     public float jumpCooldown = 1.5f;
     [Tooltip("The maximum horizontal distance the clam can jump to.")]
@@ -15,7 +17,7 @@ public class ClamScriptObj : ScriptableObject
     [Tooltip("How long to delay jumping after hitting the player and triggering a rebound")]
     public float hitReboundJumpDelay = 0.6f;
     [Tooltip("How hard clam gets pushed back after hitting player, should be atleast 10.")]
-    public float hitReboundPushForce = 50;
+    public float hitReboundPushForce = 70;
 
     [Header("Base Nav Values")]
     [Tooltip("Speed of clam")]

@@ -16,6 +16,7 @@ public class Shooting : MonoBehaviour
     public Transform BulletSpawn;
     public GameObject BulletPrefab;
     public GameObject noiseObj;
+    public Transform playerTrans; 
     public float bulletSpeed = 20;
     public float shootingDelay = 2f; // delay when firing
     private bool canShoot = true;
@@ -106,7 +107,9 @@ public class Shooting : MonoBehaviour
     {
         // it move to where the player is facing
         var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
-        noiseObj.SetActive(true); // Enable the noise. It won't be on for long!
+        var gunShot = Instantiate(noiseObj, BulletSpawn.position, BulletSpawn.rotation, playerTrans);
+        gunShot.transform.SetParent(playerTrans);
+        //noiseObj.SetActive(true); // Enable the noise. It won't be on for long!
 
         // This the firerate
         //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
