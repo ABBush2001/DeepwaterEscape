@@ -16,6 +16,8 @@ public class FallingDebris : MonoBehaviour
     public bool isFalling = false;
     private GameObject temp;
 
+    [SerializeField] private float fallSpeed = 0.05f;
+
     private void Update()
     {
         if (warningCircle.GetComponent<DebrisWarningCircle>().warningComplete)
@@ -44,7 +46,7 @@ public class FallingDebris : MonoBehaviour
             }
 
             temp.transform.SetPositionAndRotation(new Vector3(temp.transform.position.x, temp.transform.position.y - 0.1f, temp.transform.position.z), temp.transform.rotation);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(fallSpeed);
 
             if (temp == null)
             {

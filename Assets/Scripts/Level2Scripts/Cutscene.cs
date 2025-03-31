@@ -27,6 +27,8 @@ public class Cutscene : MonoBehaviour
 
     Coroutine lastCoroutine = null;
 
+    private bool levelStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +40,10 @@ public class Cutscene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (textBox && Input.GetKeyDown(KeyCode.E))
+        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted)
         {
+            levelStarted = true;
+
             textBox.SetActive(false);
             skipText.enabled = false;
             instructions.enabled = true;
@@ -87,5 +91,7 @@ public class Cutscene : MonoBehaviour
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
         instructions.enabled = true;
+
+        levelStarted = true;
     }
 }
