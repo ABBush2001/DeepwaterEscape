@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * This script handles an opening cutscene for the oceanfloor 
@@ -19,18 +20,34 @@ public class Cutscene : MonoBehaviour
     public GameObject camNode5;
     public GameObject camNode6;
 
+    public GameObject textBox;
+    public TextMeshProUGUI skipText;
+
+    Coroutine lastCoroutine = null;
+
     // Start is called before the first frame update
     void Start()
     {
         mainCamera.enabled = false;
         camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
-        StartCoroutine(startMovingCamera());
+        lastCoroutine = StartCoroutine(startMovingCamera());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (textBox && Input.GetKeyDown(KeyCode.E))
+        {
+            textBox.SetActive(false);
+            skipText.enabled = false;
+            StopCoroutine(lastCoroutine);
+            camera1.enabled = false;
+            camera2.enabled = false;
+            camera3.enabled = false;
+            mainCamera.enabled = true;
+
+            mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
+        }
     }
 
     IEnumerator startMovingCamera()
