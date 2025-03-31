@@ -23,6 +23,8 @@ public class Cutscene : MonoBehaviour
     public GameObject textBox;
     public TextMeshProUGUI skipText;
 
+    public TextMeshProUGUI instructions;
+
     Coroutine lastCoroutine = null;
 
     // Start is called before the first frame update
@@ -40,6 +42,7 @@ public class Cutscene : MonoBehaviour
         {
             textBox.SetActive(false);
             skipText.enabled = false;
+            instructions.enabled = true;
             StopCoroutine(lastCoroutine);
             camera1.enabled = false;
             camera2.enabled = false;
@@ -83,5 +86,6 @@ public class Cutscene : MonoBehaviour
         mainCamera.enabled = true;
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
+        instructions.enabled = true;
     }
 }

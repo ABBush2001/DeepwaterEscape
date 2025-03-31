@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -203,8 +204,17 @@ public class CommentedThirdPersonController : MonoBehaviour
         */
 
         // First, we need to locate which side is the player's front and right side.
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
+        Vector3 forward = Vector3.zero;
+        Vector3 right = Vector3.zero;
+
+        try
+        {
+            forward = Camera.main.transform.forward;
+            right = Camera.main.transform.right;
+        }catch(Exception e)
+        {
+            Debug.Log("Cutscene in progress");
+        }
 
         // We will not rotate the Y axis, as this would cause the player to hit the ground
         forward.y = 0;
