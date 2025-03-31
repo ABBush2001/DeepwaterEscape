@@ -15,6 +15,7 @@ public class Shooting : MonoBehaviour
     // Gun shoot and speed
     public Transform BulletSpawn;
     public GameObject BulletPrefab;
+    public GameObject noiseObj;
     public float bulletSpeed = 20;
     public float shootingDelay = 2f; // delay when firing
     private bool canShoot = true;
@@ -31,7 +32,9 @@ public class Shooting : MonoBehaviour
     public Camera playerC;
     public float zoom = 10f;
     private float normalZoom;
+#pragma warning disable IDE0044 // Add readonly modifier
     private float duration = 0.5f;
+#pragma warning restore IDE0044 // Add readonly modifier
     private float lerp = 0f;
 
     // Audio when shoot
@@ -54,7 +57,7 @@ public class Shooting : MonoBehaviour
         {
             Debug.LogError("Shoot sound clip is not assigned");
         }
-        updateText();
+        UpdateText();
     }
     // Update is called once per frame
     void Update()
@@ -103,9 +106,12 @@ public class Shooting : MonoBehaviour
     {
         // it move to where the player is facing
         var bullet = Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
+        noiseObj.SetActive(true); // Enable the noise. It won't be on for long!
 
         // This the firerate
-        bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
+        //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
+        //bullet.GetComponent<Rigidbody>().interpolation = true;
 
         currentAmmo--;
 
@@ -117,7 +123,7 @@ public class Shooting : MonoBehaviour
         // it the cooldown to shoot
         StartCoroutine(ShootingCooldown());
 
-        updateText();
+        UpdateText();
     }
 
 
@@ -134,7 +140,7 @@ public class Shooting : MonoBehaviour
 
     IEnumerator Reload()
     {
-        updateText();
+        UpdateText();
 
         isreload = true;
         Debug.Log("Reloading...");
@@ -142,11 +148,11 @@ public class Shooting : MonoBehaviour
         currentAmmo = maxAmmo;
         isreload = false;
         Debug.Log("Reloaded");
-        updateText();
+        UpdateText();
     }
 
     // ui to show ammo and how to reload
-    void updateText()
+    void UpdateText()
     {
         Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
 
