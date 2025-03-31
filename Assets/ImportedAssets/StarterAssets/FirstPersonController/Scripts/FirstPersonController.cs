@@ -11,6 +11,8 @@ namespace StarterAssets
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
+		public AudioSource footsteps;
+
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -169,6 +171,19 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			//play walking sound effect if moving, otherwise stop it
+			if(_input.move != Vector2.zero)
+            {
+				if (!footsteps.isPlaying)
+				{
+					footsteps.Play();
+				}
+            }
+			else
+            {
+				footsteps.Stop();
+            }
+
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 

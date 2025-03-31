@@ -34,12 +34,26 @@ public class Shooting : MonoBehaviour
     private float duration = 0.5f;
     private float lerp = 0f;
 
+    // Audio when shoot
+    public AudioClip shootSoundClip;
+    private AudioSource audioSource;
 
     void Start()
     {
         currentAmmo = maxAmmo;
         normalZoom = playerC.fieldOfView;
 
+        audioSource = GetComponent<AudioSource>();
+
+        if (audioSource == null)
+        {
+            Debug.LogError("No AudioSource was found on this GameObject");
+        }
+
+        if (shootSoundClip == null)
+        {
+            Debug.LogError("Shoot sound clip is not assigned");
+        }
         updateText();
     }
     // Update is called once per frame
@@ -94,6 +108,12 @@ public class Shooting : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
 
         currentAmmo--;
+
+        if (shootSoundClip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSoundClip);
+        }
+
         // it the cooldown to shoot
         StartCoroutine(ShootingCooldown());
 
