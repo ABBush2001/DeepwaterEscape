@@ -54,16 +54,17 @@ public class BossManager : MonoBehaviour
 
 
         //start coroutine
+
         StartCoroutine(bossFight());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(ChaseAttack()); // Set the target position here
-        }
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    StartCoroutine(ChaseAttack()); // Set the target position here
+        //}
     }
 
 
