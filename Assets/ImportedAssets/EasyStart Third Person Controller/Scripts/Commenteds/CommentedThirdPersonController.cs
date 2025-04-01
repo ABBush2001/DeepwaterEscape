@@ -47,14 +47,11 @@ public class CommentedThirdPersonController : MonoBehaviour
 
     private AudioSource audioSource;
     public AudioClip footStepClip;
-    public AudioClip jumpClip;
     // private bool isFootstep = false;
 
     // footStep
     private float footStep = 0.5f;
     private float lastFootstep = 0f;
-
-    private bool hasJumped = false;
 
     void Start()
     {
@@ -136,12 +133,13 @@ public class CommentedThirdPersonController : MonoBehaviour
         }
 
         // Check if input jump is pressed and if player is in the ground
-        if (inputJump && cc.isGrounded && !hasJumped)
+        if ( inputJump && cc.isGrounded )
         {
             Debug.Log("Jumping");
+
             isJumping = true;
-            hasJumped = true;  // Set flag to prevent sound from playing again during the jump
-            audioSource.PlayOneShot(jumpClip);
+            // Disable crounching when jumping? You decide, just uncomment:
+            // isCrouching = false;
         }
 
         // It's at the end of the code. Leave it for later.
