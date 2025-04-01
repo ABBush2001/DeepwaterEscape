@@ -33,7 +33,14 @@ public class SpikeTrigger : MonoBehaviour
     private void SpawnProjectiles(GameObject player)
     {
         projectiles.Play();
+        StartCoroutine(endAnimation());
         //StartCoroutine(pushPlayerBack(player));
+    }
+
+    IEnumerator endAnimation()
+    {
+        yield return new WaitForSeconds(2);
+        projectiles.Stop();
     }
 
     IEnumerator pushPlayerBack(GameObject player)

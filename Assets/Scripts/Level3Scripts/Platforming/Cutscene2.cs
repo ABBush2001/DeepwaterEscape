@@ -19,7 +19,6 @@ public class Cutscene2 : MonoBehaviour
     public GameObject textBox;
     public TextMeshProUGUI skipText;
 
-    public TextMeshProUGUI instructions;
 
     public float moveSpeed = 10;
 
@@ -44,7 +43,6 @@ public class Cutscene2 : MonoBehaviour
 
             textBox.SetActive(false);
             skipText.enabled = false;
-            instructions.enabled = true;
             StopCoroutine(lastCoroutine);
             camera1.enabled = false;
             camera2.enabled = false;
@@ -91,7 +89,6 @@ public class Cutscene2 : MonoBehaviour
         mainCamera.enabled = true;
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
-        instructions.enabled = true;
 
         levelStarted = true;
     }
