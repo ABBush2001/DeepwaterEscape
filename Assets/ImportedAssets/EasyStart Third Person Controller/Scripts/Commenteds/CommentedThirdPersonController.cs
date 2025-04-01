@@ -46,8 +46,9 @@ public class CommentedThirdPersonController : MonoBehaviour
     float jumpElapsedTime = 0;
 
     private AudioSource audioSource;
-    public AudioClip footStepClip;
-    // private bool isFootstep = false;
+    public AudioClip footStepClip; // private bool isFootstep = false;
+    public AudioClip jumpSound;
+    
 
     // footStep
     private float footStep = 0.5f;
@@ -140,6 +141,11 @@ public class CommentedThirdPersonController : MonoBehaviour
             isJumping = true;
             // Disable crounching when jumping? You decide, just uncomment:
             // isCrouching = false;
+            audioSource.Stop();
+            if (jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         // It's at the end of the code. Leave it for later.
@@ -245,9 +251,9 @@ public class CommentedThirdPersonController : MonoBehaviour
         cc.Move( moviment );
 
         // when player move they will make footstep
-        if(cc.isGrounded && (directionX != 0 || directionZ != 0))
+        if (cc.isGrounded && (directionX != 0 || directionZ != 0) && !isJumping)
         {
-            if(Time.time - lastFootstep >= footStep)
+            if (Time.time - lastFootstep >= footStep)
             {
                 audioSource.PlayOneShot(footStepClip);
                 lastFootstep = Time.time;
