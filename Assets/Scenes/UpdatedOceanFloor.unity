@@ -2072,6 +2072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 653506319}
+  player: {fileID: 934813072}
 --- !u!4 &132781932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 650932943124518713, guid: 0f876141f5cc362418423b0e659edd65,
@@ -20027,6 +20028,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1539357905}
   m_LocalEulerAnglesHint: {x: -82.545, y: 128.212, z: -153.419}
+--- !u!114 &885003002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8512034320197668559, guid: a0c409174bdebde4593dbb93405e5807,
+    type: 3}
+  m_PrefabInstance: {fileID: 2012071508905428392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &888173716
 GameObject:
   m_ObjectHideFlags: 0
@@ -42026,7 +42039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fab018f6e63ce4db089cc354142418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 934813072}
 --- !u!4 &1592564650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4530060978976579861, guid: 9a3a6b7a5c3bf2842a9f727829c166df,
@@ -46011,12 +46023,17 @@ PrefabInstance:
         type: 3}
       propertyPath: Ammotext
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 885003002}
     - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
         type: 3}
       propertyPath: bulletSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
+        type: 3}
+      propertyPath: playerTrans
+      value: 
+      objectReference: {fileID: 934813073}
     - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
         type: 3}
       propertyPath: BulletPrefab
@@ -58235,13 +58252,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2617153957163139645, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: sceneToLoad
+      value: UpdatedOceanFloor
+      objectReference: {fileID: 0}
     - target: {fileID: 6258159055057880874, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1686627920672226025, guid: a0c409174bdebde4593dbb93405e5807, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0c409174bdebde4593dbb93405e5807, type: 3}
