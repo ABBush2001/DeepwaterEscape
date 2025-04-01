@@ -1,50 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Ink.Runtime;
-
-/*
- * This script represents a dialogue manager system. It manages active dialogue
- * queues, allowing them to continue and end
-*/
+using Ink.Runtime;  // Make sure to include this for the Story class
 
 public class DialogueManager : MonoBehaviour
 {
-    //variables
-    [Header("Dialogue UI")]
+    // Variables
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI pressEText;  // "Press E to Continue" Text
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
-
     public bool dialogueComplete = false;
+
+    private TextEffect textEffect;
 
     private static DialogueManager instance;
 
-    // Reference to the TextEffect component
-    private TextEffect textEffect;
-
-    // Awake checks if a dialogue manager already exists in scene
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogWarning("Found more than one Dialogue manager in the scene!");
-        }
-        instance = this;
-
-        //audioSource = this.gameObject.AddComponent<AudioSource>();
-    }
-
-    // Returns if there is an active instance of the DialogueManager
+    // Singleton pattern - get the instance of DialogueManager
     public static DialogueManager GetInstance()
     {
         return instance;
     }
 
-    // Sets dialogue active to false on start
+    private void Awake()
+    {
+        // Make sure there's only one instance of DialogueManager
+        if (instance != null)
+        {
+            Debug.LogWarning("Found more than one DialogueManager in the scene!");
+        }
+        instance = this;
+    }
+
     private void Start()
     {
         dialogueIsPlaying = false;
@@ -52,10 +40,14 @@ public class DialogueManager : MonoBehaviour
 
         // Get the TextEffect component from the dialogueText object
         textEffect = dialogueText.GetComponent<TextEffect>();
+
+        // Set up the "Press E" text to be hidden initially
+        if (pressEText != null)
+        {
+            pressEText.alpha = 0;  // Hide it at the start
+        }
     }
 
-    // Checks if dialogue is playing. If player presses appropriate
-    // dialogue button, it continues the dialogue
     private void Update()
     {
         if (!dialogueIsPlaying)
@@ -64,26 +56,36 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        // Flicker the "Press E" prompt using LeanTween
+        if (pressEText != null && dialogueIsPlaying)
+        {
+            LeanTween.alphaText(pressEText.rectTransform, pressEText.alpha == 0 ? 1 : 0, 0.5f)
+                .setLoopPingPong();  // Ping-pong loop to fade in and out
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             ContinueStory();
         }
     }
 
-    // Enters the dialogue queue
     public void EnterDialogueMode(TextAsset inkJSON)
     {
-        currentStory = new Story(inkJSON.text);
+        currentStory = new Story(inkJSON.text);  // Use the Story class from Ink
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
         ContinueStory();
     }
 
-    // Exits the dialogue queue
     private void ExitDialogueMode()
     {
-        Debug.Log("Running");
+        // Stop flickering when dialogue ends
+        if (pressEText != null)
+        {
+            LeanTween.cancel(pressEText.rectTransform);  // Cancel any ongoing LeanTween animations
+            pressEText.alpha = 0;  // Hide the "Press E" text
+        }
 
         dialoguePanel.SetActive(false);
         dialogueIsPlaying = false;
@@ -91,14 +93,12 @@ public class DialogueManager : MonoBehaviour
         dialogueComplete = true;
     }
 
-    // Continues dialogue and uses typewriter effect to display text
     private void ContinueStory()
     {
         if (currentStory.canContinue)
         {
             string dialogue = currentStory.Continue();
 
-            // Trigger the typewriter effect with the dialogue text
             if (textEffect != null)
             {
                 textEffect.SetText(dialogue);  // Use the SetText method to update the text and start the effect
@@ -110,4 +110,3 @@ public class DialogueManager : MonoBehaviour
         }
     }
 }
-
