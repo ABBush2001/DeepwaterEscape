@@ -334,8 +334,6 @@ public class BossManager : MonoBehaviour
         {
             enemy.transform.position = waveNode.transform.position;
 
-            enemy.transform.position = wavePosition;
-
             // Look at the player 
             if (player != null)
             {
@@ -367,7 +365,7 @@ public class BossManager : MonoBehaviour
                 }
 
 
-                wavePosition = dashTarget;
+                enemy.transform.position = dashTarget;
             }
 
 

@@ -18,6 +18,8 @@ public class PathManager : MonoBehaviour
 
     [SerializeField] private BossManager bossM;
 
+    private bool attachTrigger = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,13 +53,15 @@ public class PathManager : MonoBehaviour
                     if (path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
                     { 
                         StartCoroutine(bossM.ChaseAttack());
-                        //path2.SetActive(false);
                     }
                     else if (path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
                     {
 
                         StartCoroutine(bossM.MoveEnemyAndStartWave());
                     }
+
+                    yield return new WaitForSeconds(5f);
+                    attachTrigger = false;
                 }
             }
         }
