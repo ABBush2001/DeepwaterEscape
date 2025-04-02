@@ -55,19 +55,19 @@ public class FollowPath : MonoBehaviour
             }
 
 
-            if (getNode().gameObject.name == "ChargeNode1" || getNode().gameObject.name == "ChargeNode2")
-            {
-                GameObject waveNode = GameObject.Find("WaveNode");
+            //if (getNode().gameObject.name == "ChargeNode1" || getNode().gameObject.name == "ChargeNode2")
+            //{
+            //    GameObject waveNode = GameObject.Find("WaveNode");
 
-                if (waveNode != null)
-                {
-                    Vector3 directionToWave = waveNode.transform.position - enemy.transform.position;
-                    if (directionToWave != Vector3.zero)
-                    {
-                        enemy.transform.rotation = Quaternion.LookRotation(directionToWave);
-                    }
-                }
-            }
+            //    if (waveNode != null)
+            //    {
+            //        Vector3 directionToWave = waveNode.transform.position - enemy.transform.position;
+            //        if (directionToWave != Vector3.zero)
+            //        {
+            //            enemy.transform.rotation = Quaternion.LookRotation(directionToWave);
+            //        }
+            //    }
+            //}
         }
     }
 

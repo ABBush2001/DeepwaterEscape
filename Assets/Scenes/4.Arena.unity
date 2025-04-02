@@ -2729,6 +2729,11 @@ PrefabInstance:
       propertyPath: Ammotext
       value: 
       objectReference: {fileID: 691542339}
+    - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: noiseObj
+      value: 
+      objectReference: {fileID: 1315966682}
     - target: {fileID: 4040660478949901043, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3369,6 +3374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1476229171}
   moveSpeed: 2
+  bossM: {fileID: 0}
 --- !u!4 &865164556
 Transform:
   m_ObjectHideFlags: 0
@@ -4570,6 +4576,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288214801}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1315966682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1543296701177306184, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+    type: 3}
+  m_PrefabInstance: {fileID: 716005004}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1327317606
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,6 +5876,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1476229171}
   moveSpeed: 1
+  bossM: {fileID: 0}
 --- !u!1 &1601144180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,6 +6578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1476229171}
   moveSpeed: 2
+  bossM: {fileID: 0}
 --- !u!4 &1722768313
 Transform:
   m_ObjectHideFlags: 0

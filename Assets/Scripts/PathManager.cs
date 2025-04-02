@@ -21,61 +21,42 @@ public class PathManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         StartCoroutine(switchPaths());
     }
 
-
-    //coroutine to cycle between paths
+    // Coroutine to cycle between paths
     IEnumerator switchPaths()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(1);
 
-            //if a charge node is hit, randomly decide to charge or continue
-            if(path1.GetComponent<FollowPath>().getNode().isChargeNode)
+            // If a charge node is hit, randomly decide to charge or continue
+            if (path1.GetComponent<FollowPath>().getNode().isChargeNode)
             {
                 int randPath = Random.Range(1, 3);
 
                 if (randPath == 1)
                 {
+                    // Continue the loop without interrupting the coroutine
                     continue;
                 }
 
-                //if charging, set charge path active, follow it, then
-                //reset the charge path and update the original path node to
-                //the charge end node
-
+                // If charging, set charge path active, follow it, then
+                // reset the charge path and update the original path node to
+                // the charge end node
                 else
                 {
-                    //path1.SetActive(false);
-                
-                    if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
-                    {
+                    
+                    if (path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
+                    { 
                         StartCoroutine(bossM.ChaseAttack());
-                        //StartCoroutine(bossM.MoveEnemyAndStartWave());
-
-                        //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
-                        //path2.SetActive(true);
-                        //yield return new WaitForSeconds(1.5f);
-                        //path2.GetComponent<FollowPath>().resetNode();
                         //path2.SetActive(false);
-                        //path1.SetActive(true);
-                        //path1.GetComponent<FollowPath>().setCurrentNode(3);
                     }
-                    else if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
+                    else if (path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
                     {
+
                         StartCoroutine(bossM.MoveEnemyAndStartWave());
-
-                        //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
-                        //path3.SetActive(true);
-                        //yield return new WaitForSeconds(1.5f);
-                        //path3.GetComponent<FollowPath>().resetNode();
-
-                        //path3.SetActive(false);
-                        //path1.SetActive(true);
-                        //path1.GetComponent<FollowPath>().setCurrentNode(2);
                     }
                 }
             }
