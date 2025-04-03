@@ -46,15 +46,15 @@ public class BossManager : MonoBehaviour
 
         //initialize attackQueue to all 0's
 
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    attackQueue[i] = 0;
-        //}
+        for (int i = 0; i < 5; i++)
+        {
+            attackQueue[i] = 0;
+        }
 
-        //attackInProcess = false;
+        attackInProcess = false;
 
 
-        //StartCoroutine(bossFight());
+        StartCoroutine(bossFight());
     }
 
     // Update is called once per frame
@@ -399,84 +399,77 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    //IEnumerator bossFight()
-    //{
-    //    //loop for boss fight
-    //    //NOTE - will later be updated to loop on boss health
-    //    while (true)
-    //    {
-    //        //initialize queue
-    //        for (int i = 0; i < 5; i++)
-    //        {
-    //            //TESTING
-    //            //attackQueue[i] = 3;
-    //            int temp = Random.Range(1, 101);
-    //            if (temp <= 25)
-    //            {
-    //                attackQueue[i] = 2;
-    //            }
-    //            else if (temp > 25 && temp <= 75)
-    //            {
-    //                attackQueue[i] = 3; // change it back to 1
-    //            }
-    //            else
-    //            {
-    //                attackQueue[i] = 1; // change it back to 3
-    //            }
-    //        }
+    IEnumerator bossFight()
+    {
+        //loop for boss fight
+        //NOTE - will later be updated to loop on boss health
+        while (true)
+        {
+            //initialize queue
+            for (int i = 0; i < 5; i++)
+            {
+                //TESTING
+                //attackQueue[i] = 3;
+                int temp = Random.Range(1, 101);
+                if (temp <= 25)
+                {
+                    attackQueue[i] = 2;
+                }
+                else if (temp > 25 && temp <= 75)
+                {
+                    attackQueue[i] = 3; // change it back to 1
+                }
+                else
+                {
+                    attackQueue[i] = 1; // change it back to 3
+                }
+            }
 
-    //        //begin looping through queue
-    //        for (int i = 0; i < 5; i++)
-    //        {
-    //            Debug.Log("Item number: " + i);
+            //begin looping through queue
+            for (int i = 0; i < 5; i++)
+            {
+                Debug.Log("Item number: " + i);
 
-    //            //bite path
-    //            if (attackQueue[i] == 1)
-    //            {
+                //bite path
+                if (attackQueue[i] == 1)
+                {
 
-    //                yield return new WaitForSeconds(20);
+                    yield return new WaitForSeconds(20);
 
-    //            }
-    //            //flashbang
-    //            else if (attackQueue[i] == 2)
-    //            {
+                }
+                //flashbang
+                else if (attackQueue[i] == 2)
+                {
 
-    //                biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-    //                biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-    //                biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-    //                enemy.GetComponent<FlashBang_V1>().startFlashbang();
-    //                queenAnimator.SetBool("IsFlashbang", true);
-    //                yield return new WaitForSeconds(6);
-    //                queenAnimator.SetBool("IsFlashbang", false);
-    //                biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-    //                biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-    //                biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-    //            }
-    //            //wave
-    //            else if (attackQueue[i] == 3)
-    //            {
-    //                yield return new WaitForSeconds(0.5f);
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                    queenAnimator.SetBool("IsFlashbang", true);
+                    yield return new WaitForSeconds(6);
+                    queenAnimator.SetBool("IsFlashbang", false);
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
+                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                }
+                //wave
+                else if (attackQueue[i] == 3)
+                {
 
-    //                biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-    //                biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-    //                biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-
-
-    //                StartCoroutine(MoveEnemyAndStartWave());
-    //                yield return new WaitForSeconds(3);
-
-
-    //                biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-    //                biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-    //                biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-
-    //                yield return new WaitForSeconds(0.5f);
-
-    //                player.GetComponent<CommentedThirdPersonController>().SetMovement(true);
-    //            }
-    //        }
-    //    }
-    //}
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                    queenAnimator.SetBool("IsFlashbang", true);
+                    yield return new WaitForSeconds(6);
+                    queenAnimator.SetBool("IsFlashbang", false);
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
+                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                }
+            }
+        }
+    }
 }
 
 

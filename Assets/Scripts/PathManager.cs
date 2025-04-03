@@ -60,6 +60,15 @@ public class PathManager : MonoBehaviour
                         StartCoroutine(bossM.MoveEnemyAndStartWave());
                     }
 
+                    //else if (path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2" || path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
+                    //{
+
+                    //    enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                    //    bossM.queenAnimator.SetBool("IsFlashbang", true);
+                    //    yield return new WaitForSeconds(6);
+                    //    bossM.queenAnimator.SetBool("IsFlashbang", false);
+
+                    //}
                     yield return new WaitForSeconds(5f);
                     attachTrigger = false;
                 }
