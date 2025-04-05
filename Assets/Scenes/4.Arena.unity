@@ -2804,11 +2804,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Prefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6945263260116173475, guid: 9148c6cd325d64a6bbefa41c31cb2755, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6654042507496306698, guid: 9148c6cd325d64a6bbefa41c31cb2755, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 139668524560958798, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1165809385}
   m_SourcePrefab: {fileID: 100100000, guid: 9148c6cd325d64a6bbefa41c31cb2755, type: 3}
 --- !u!1 &738553915
 GameObject:
@@ -4153,6 +4158,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 716005004}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1165809385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165809378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0678ef866ba9a7f41aa2b54d05618c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 10
+  sprintAdittion: 5
+  jumpForce: 50
+  jumpTime: 0.85
+  gravity: 25
+  footStepClip: {fileID: 8300000, guid: 6c7656185c9526242bb63ac984b9a1cc, type: 3}
 --- !u!1 &1174034373
 GameObject:
   m_ObjectHideFlags: 0

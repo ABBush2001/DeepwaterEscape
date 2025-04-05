@@ -62,7 +62,7 @@ public class BossManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            StartCoroutine(ChaseAttack()); // Set the target position here
+            StartCoroutine(MoveEnemyAndStartWave()); // Set the target position here
         }
     }
 
@@ -452,21 +452,21 @@ public class BossManager : MonoBehaviour
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                 }
-                //wave
-                else if (attackQueue[i] == 3)
-                {
+                ////wave
+                //else if (attackQueue[i] == 3)
+                //{
 
-                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    enemy.GetComponent<FlashBang_V1>().startFlashbang();
-                    queenAnimator.SetBool("IsFlashbang", true);
-                    yield return new WaitForSeconds(6);
-                    queenAnimator.SetBool("IsFlashbang", false);
-                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                }
+                //    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                //    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                //    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                //    enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                //    queenAnimator.SetBool("IsFlashbang", true);
+                //    yield return new WaitForSeconds(6);
+                //    queenAnimator.SetBool("IsFlashbang", false);
+                //    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
+                //    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                //    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                //}
             }
         }
     }
