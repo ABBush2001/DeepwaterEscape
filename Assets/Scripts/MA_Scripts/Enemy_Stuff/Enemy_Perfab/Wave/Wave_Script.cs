@@ -88,7 +88,6 @@ public class Wave_Script : MonoBehaviour
             // Disable the player's movement
             StartCoroutine(DisableMovemant(playerController, 1f));
             Debug.Log("Player movement disable by Wave");
-
         }
 
 
@@ -114,8 +113,6 @@ public class Wave_Script : MonoBehaviour
         gun.GetComponent<Shooting>().enabled = true;
         pControl.SetMovement(true);
         Debug.Log("Player movement enable!");
-
-        
 
     }
 }

@@ -21,8 +21,6 @@ public class FollowPath : MonoBehaviour
 
 
     private Boss_health bHealth;
-
-    [SerializeField] private BossManager bossM;
     // Initialize list of nodes
     void Start()
     {
@@ -45,7 +43,6 @@ public class FollowPath : MonoBehaviour
         currentPositionHolder = PathNode[currentNode].transform.position;
         startPosition = enemy.transform.position;
 
-        // look at node then look at next on
         if (currentNode < PathNode.Length - 1)
         {
             Vector3 directionNode = PathNode[currentNode + 1].transform.position - enemy.transform.position;
@@ -53,21 +50,6 @@ public class FollowPath : MonoBehaviour
             {
                 enemy.transform.rotation = Quaternion.LookRotation(directionNode);
             }
-
-
-            //if (getNode().gameObject.name == "ChargeNode1" || getNode().gameObject.name == "ChargeNode2")
-            //{
-            //    GameObject waveNode = GameObject.Find("WaveNode");
-
-            //    if (waveNode != null)
-            //    {
-            //        Vector3 directionToWave = waveNode.transform.position - enemy.transform.position;
-            //        if (directionToWave != Vector3.zero)
-            //        {
-            //            enemy.transform.rotation = Quaternion.LookRotation(directionToWave);
-            //        }
-            //    }
-            //}
         }
     }
 
