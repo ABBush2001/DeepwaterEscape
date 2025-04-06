@@ -150,14 +150,14 @@ public class BossManager : MonoBehaviour
             yield return null;
         }
 
-        if (enemy != null)
-        {
-            enemy.transform.position = waveNode.transform.position;
+        //if (enemy != null)
+        //{
+        //    enemy.transform.position = waveNode.transform.position;
 
-            enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //    enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-            StartWave();
-        }
+        //    StartWave();
+        //}
 
         // yield return new WaitForSeconds(3);
 
@@ -228,41 +228,41 @@ public class BossManager : MonoBehaviour
 
         enemy.transform.position = wavePosition;
 
-        // Look at the player 
-        if (player != null)
-        {
+        //// Look at the player 
+        //if (player != null)
+        //{
 
-            Vector3 directionToPlayer = (player.transform.position - enemy.transform.position).normalized;
-            enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
-        }
+        //    Vector3 directionToPlayer = (player.transform.position - enemy.transform.position).normalized;
+        //    enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
+        //}
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
-        // dash at the player
-        if (player != null)
-        {
-            Vector3 dashTarget = player.transform.position;
+        //// dash at the player
+        //if (player != null)
+        //{
+        //    Vector3 dashTarget = player.transform.position;
 
-            elapsedTime = 0f;
-            float dashDuration = 0.5f;
+        //    elapsedTime = 0f;
+        //    float dashDuration = 0.5f;
 
-            while (elapsedTime < dashDuration)
-            {
-                if (enemy == null)
-                {
-                    yield break;
-                }
+        //    while (elapsedTime < dashDuration)
+        //    {
+        //        if (enemy == null)
+        //        {
+        //            yield break;
+        //        }
 
-                enemy.transform.position = Vector3.Lerp(wavePosition, dashTarget, elapsedTime / dashDuration);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+        //        enemy.transform.position = Vector3.Lerp(wavePosition, dashTarget, elapsedTime / dashDuration);
+        //        elapsedTime += Time.deltaTime;
+        //        yield return null;
+        //    }
 
 
-            enemy.transform.position = dashTarget;
-        }
+        //    enemy.transform.position = dashTarget;
+        //}
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
         elapsedTime = 0f;
 
