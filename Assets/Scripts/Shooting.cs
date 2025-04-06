@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 /*
  * This script handles the shooting mechanic used for the gun prefab.
@@ -113,7 +114,13 @@ public class Shooting : MonoBehaviour
 
         // This the firerate
         //bullet.GetComponent<Rigidbody>().velocity = BulletSpawn.forward * bulletSpeed;
-        bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
+        try
+        {
+            bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
+        }catch(Exception e)
+        {
+            Debug.Log("In Cutscene");
+        }
         //bullet.GetComponent<Rigidbody>().interpolation = true;
 
         currentAmmo--;
