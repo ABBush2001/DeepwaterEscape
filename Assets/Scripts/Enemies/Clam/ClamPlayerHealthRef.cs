@@ -9,6 +9,7 @@ using UnityEngine;
 public class ClamPlayerHealthRef : MonoBehaviour
 {
     public Player_Health playerHealth;
+    public GameObject player;
     private void Start()
     {
         playerHealth = GameObject.FindGameObjectWithTag("UI").GetComponent<Player_Health>();
@@ -17,5 +18,10 @@ public class ClamPlayerHealthRef : MonoBehaviour
     public Player_Health GetPlayerHealth()
     {
         return playerHealth;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 }
