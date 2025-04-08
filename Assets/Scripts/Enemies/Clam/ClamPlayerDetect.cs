@@ -16,14 +16,14 @@ public class ClamPlayerDetect : MonoBehaviour
         if (detectPlayer) {
             if (other.CompareTag("Player"))
             {
-                walkScript.Alert(other);
+                walkScript.Alert(other, false);
             }
         }
         if (detectPlayerNoise)
         {
             if (other.CompareTag("PlayerNoise"))
             {
-                walkScript.Alert(other);
+                walkScript.Alert(other, true);
             }
         }
 
