@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -57,7 +58,16 @@ public class CommentedCameraController : MonoBehaviour
     {
         Vector3 playerRotation = player.rotation.eulerAngles;
 
-        float targetYRotation = Camera.main.transform.eulerAngles.y;
+        float targetYRotation = 0;
+
+        try
+        {
+            targetYRotation = Camera.main.transform.eulerAngles.y;
+        }catch(Exception e)
+        {
+            Debug.Log("Cutscene in Progress");
+        }
+
 
         //player.SetPositionAndRotation(player.position, new Quaternion(player.rotation.x, Camera.main.transform.rotation.y, player.rotation.z, player.rotation.w));
         player.rotation = Quaternion.Euler(playerRotation.x, targetYRotation, playerRotation.z);

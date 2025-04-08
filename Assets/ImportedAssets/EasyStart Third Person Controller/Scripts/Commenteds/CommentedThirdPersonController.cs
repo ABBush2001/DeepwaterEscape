@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -38,7 +39,7 @@ public class CommentedThirdPersonController : MonoBehaviour
 
 
     // Get control of the character's animations
-    Animator animator;
+    public Animator animator;
     // Gets the character's collision and movement controller component
     CharacterController cc;
 
@@ -57,7 +58,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     {
         // Starts any of the above variables when starting the game
         cc = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -74,6 +75,16 @@ public class CommentedThirdPersonController : MonoBehaviour
         inputSprint = Input.GetAxis("Fire3") == 1f;
         // Unfortunately GetAxis does not work with GetKeyDown, so inputs must be taken individually
         inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+
+        //check movement for animations
+        if(inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0 || inputVertical < 0)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
         // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
         // Note: It is possible to make changes to keep player crouched only while the key is pressed
@@ -203,8 +214,17 @@ public class CommentedThirdPersonController : MonoBehaviour
         */
 
         // First, we need to locate which side is the player's front and right side.
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
+        Vector3 forward = Vector3.zero;
+        Vector3 right = Vector3.zero;
+
+        try
+        {
+            forward = Camera.main.transform.forward;
+            right = Camera.main.transform.right;
+        }catch(Exception e)
+        {
+            Debug.Log("Cutscene in progress");
+        }
 
         // We will not rotate the Y axis, as this would cause the player to hit the ground
         forward.y = 0;

@@ -34,16 +34,18 @@ public class LavaLevel : MonoBehaviour
             while (transform.position.y < initialPosition + maxMoveUp)
             {
 
-                transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z), transform.rotation);
-                yield return new WaitForSeconds(moveSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition + maxMoveUp, transform.position.z), Time.deltaTime * moveSpeed);
+                //transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z), transform.rotation);
+                yield return new WaitForSeconds(0.01f);
             }
 
             yield return new WaitForSeconds(3f);
 
             while (transform.position.y > initialPosition)
             {
-                transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z), transform.rotation);
-                yield return new WaitForSeconds(moveSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition, transform.position.z), Time.deltaTime * moveSpeed);
+                //transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z), transform.rotation);
+                yield return new WaitForSeconds(0.01f);
             }
 
             yield return new WaitForSeconds(3f);
