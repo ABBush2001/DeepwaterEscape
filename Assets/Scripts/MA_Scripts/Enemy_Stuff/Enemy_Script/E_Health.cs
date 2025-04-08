@@ -8,50 +8,42 @@ public class E_Health : MonoBehaviour
 {
     public int EnemyHealth = 100;
     public int EnemyDmg = 25;
+    public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
 
     [SerializeField] private Animator EnColl = null;
 
-    private string sceneToLoad;
+    //private string sceneToLoad;
 
-    public TextMeshProUGUI Healtext;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    //public TextMeshProUGUI Healtext;
 
     public void DamageOnEnemy(int damage)
     {
         EnemyHealth -= damage;
         if (EnemyHealth <= 0)
         {
-            defeat();
+            Defeat();
             // SceneManager.LoadScene(sceneToLoad);
         }
     }
 
-    public void defeat()
+    public void Defeat()
     {
-        Destroy(gameObject);
+        if (parentObj != null) {
+            Destroy(parentObj); 
+        }
+        else {
+            Debug.LogWarning("Parent obj not assigned", this);
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) // More efficient tag comparison
         {
-            Player_Health playerHealth = other.GetComponent<Player_Health>();
-            if (playerHealth != null)
+            if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
                 playerHealth.TakeDamage(EnemyDmg);
-
             }
         }
     }

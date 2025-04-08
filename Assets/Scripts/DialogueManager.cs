@@ -23,7 +23,10 @@ public class DialogueManager : MonoBehaviour
 
     private static DialogueManager instance;
 
-    //awake checks if a dialogue manager already exists in scene
+    // Reference to the TextEffect component
+    private TextEffect textEffect;
+
+    // Awake checks if a dialogue manager already exists in scene
     private void Awake()
     {
         if (instance != null)
@@ -31,27 +34,33 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue manager in the scene!");
         }
         instance = this;
+
+        //audioSource = this.gameObject.AddComponent<AudioSource>();
     }
 
-    //returns if there is an active instance of the DialogueManager
+    // Returns if there is an active instance of the DialogueManager
     public static DialogueManager GetInstance()
     {
         return instance;
     }
 
-    //sets dialogue active to false on start
+    // Sets dialogue active to false on start
     private void Start()
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+
+        // Get the TextEffect component from the dialogueText object
+        textEffect = dialogueText.GetComponent<TextEffect>();
     }
 
-    //checks if dialogue is playing. If player presses appropriate
-    //dialogue button, it continues the dialogue
+    // Checks if dialogue is playing. If player presses appropriate
+    // dialogue button, it continues the dialogue
     private void Update()
     {
         if (!dialogueIsPlaying)
         {
+            dialogueComplete = false;
             return;
         }
 
@@ -61,7 +70,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    //enters the dialogue queue
+    // Enters the dialogue queue
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
@@ -71,7 +80,7 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
-    //exits the dialogue queue
+    // Exits the dialogue queue
     private void ExitDialogueMode()
     {
         Debug.Log("Running");
@@ -82,12 +91,18 @@ public class DialogueManager : MonoBehaviour
         dialogueComplete = true;
     }
 
-    //continues dialogue
+    // Continues dialogue and uses typewriter effect to display text
     private void ContinueStory()
     {
         if (currentStory.canContinue)
         {
-            dialogueText.text = currentStory.Continue();
+            string dialogue = currentStory.Continue();
+
+            // Trigger the typewriter effect with the dialogue text
+            if (textEffect != null)
+            {
+                textEffect.SetText(dialogue);  // Use the SetText method to update the text and start the effect
+            }
         }
         else
         {
@@ -95,3 +110,4 @@ public class DialogueManager : MonoBehaviour
         }
     }
 }
+

@@ -11,6 +11,8 @@ namespace StarterAssets
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
+		public AudioSource footsteps;
+
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -92,7 +94,9 @@ namespace StarterAssets
 			if (_mainCamera == null)
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-			}
+                Cursor.lockState = CursorLockMode.Locked; //Lock the cursor again
+                Cursor.visible = false; // Makes the cursor invisible
+            }
 		}
 
 		private void Start()
@@ -112,11 +116,25 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			if (DialogueManager.GetInstance().dialogueIsPlaying)
+			{
+				return;
+			}
+
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-		}
+        }
 
+
+		//      private void FixedUpdate()
+		//      {
+		//          if (DialogueManager.GetInstance().dialogueIsPlaying)
+		//          {
+		//              return;
+		//          }
+
+		//}
 		private void LateUpdate()
 		{
 			CameraRotation();
@@ -153,6 +171,19 @@ namespace StarterAssets
 
 		private void Move()
 		{
+			//play walking sound effect if moving, otherwise stop it
+			if(_input.move != Vector2.zero)
+            {
+				if (!footsteps.isPlaying)
+				{
+					footsteps.Play();
+				}
+            }
+			else
+            {
+				footsteps.Stop();
+            }
+
 			// set target speed based on move speed, sprint speed and if sprint is pressed
 			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -266,5 +297,12 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
+
+		//public void SetMovement(bool canMove)
+		//{
+		//	enabled = canMove;
+		//}
+
 	}
+
 }
