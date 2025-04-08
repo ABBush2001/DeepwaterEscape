@@ -104,13 +104,13 @@ public class Wave_Script : MonoBehaviour
     private IEnumerator DisableMovemant(CommentedThirdPersonController pControl, float longTime)
     {
 
-        gun.GetComponent<Shooting>().enabled = false;
+        //gun.GetComponent<Shooting>().enabled = false;
         pControl.SetMovement(false);
         Debug.Log("Player movement disable");
 
         yield return new WaitForSeconds(longTime);
 
-        gun.GetComponent<Shooting>().enabled = true;
+        //gun.GetComponent<Shooting>().enabled = true;
         pControl.SetMovement(true);
         Debug.Log("Player movement enable!");
 
