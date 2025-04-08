@@ -83,6 +83,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         Debug.Log("You Pressed the Exit Button");
         StartCoroutine(PlayExit());
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
         Application.Quit();
     }
 
@@ -109,6 +110,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         _audioSource.Play();
         yield return new WaitForSeconds(_audioSource.clip.length); // Wait for the sound to finish
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
         Application.Quit();
     }
 
