@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * This script handles the opening cutscene that introduces the anglerfish queen
@@ -17,6 +18,8 @@ public class OpeningBossCutscene : MonoBehaviour
     public GameObject Node1;
     public GameObject bossFightSystem;
     public GameObject DialogueManager;
+
+    public TextMeshProUGUI instructionsText;
 
     [SerializeField] private TextAsset inkJson;
 
@@ -39,6 +42,15 @@ public class OpeningBossCutscene : MonoBehaviour
             cutsceneCamera.enabled = false;
             bossFightSystem.SetActive(true);
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
+            instructionsText.enabled = true;
+            Time.timeScale = 0.1f;
+            //Destroy(this.gameObject);
+        }
+
+        if(instructionsText.enabled && Input.GetKeyDown(KeyCode.Space))
+        {
+            instructionsText.enabled = false;
+            Time.timeScale = 1f;
             Destroy(this.gameObject);
         }
     }
