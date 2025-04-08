@@ -15,7 +15,8 @@ public class OnDebrisTrigger : MonoBehaviour
         {
             if (damageCircle)
             {
-                other.gameObject.GetComponent<Player_Health>().TakeDamage(5);
+                other.gameObject.GetComponent<Player_Health>().TakeDamage(10);
+                damageCircle = false;
             }
 
         }
@@ -35,9 +36,10 @@ public class OnDebrisTrigger : MonoBehaviour
     IEnumerator playExplosion()
     {
         explosion.Play();
-        damageCircle = false;
-
+        
         yield return new WaitForSeconds(2f);
+
+        damageCircle = false;
 
         explosion.Stop();
     }
