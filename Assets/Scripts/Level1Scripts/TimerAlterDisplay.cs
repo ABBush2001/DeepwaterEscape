@@ -33,7 +33,7 @@ public class TimerAlterDisplay : MonoBehaviour
                 timerRunning = false;
                 curTimeRemaining = 0;
                 timerText.text = string.Format("00:00");
-                SceneManager.LoadScene("Lose");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
     }
