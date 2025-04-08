@@ -28,13 +28,13 @@ public class SpikeExplosion : MonoBehaviour
 
                 rb.velocity = randomDirection * explosionForce;
 
-                StartCoroutine(ReenableGravityAndRotation(rb));
+                StartCoroutine(ReenableGravity(rb));
                 StartCoroutine(HideSpikeAfterDelay(spike));
             }
         }
     }
 
-    IEnumerator ReenableGravityAndRotation(Rigidbody rb)
+    IEnumerator ReenableGravity(Rigidbody rb)
     {
         yield return new WaitForSeconds(gravityDelay);
         rb.useGravity = true;
@@ -58,6 +58,7 @@ public class SpikeExplosion : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
                 rb.useGravity = false;
                 rb.freezeRotation = true;
+
                 spike.transform.localPosition = Vector3.zero;
                 spike.transform.localRotation = Quaternion.identity;
             }
@@ -84,4 +85,3 @@ public class SpikeExplosion : MonoBehaviour
             col.enabled = true;
     }
 }
-
