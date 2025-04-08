@@ -5967,6 +5967,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 349335649902493469, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 349335649902493469, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1836180015502763537, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1884577214972125328, guid: 970fe4b8ca562754f85cb9c26626b54a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6019,6 +6034,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3366175258507064029, guid: 970fe4b8ca562754f85cb9c26626b54a,
         type: 3}
+      propertyPath: inkJson
+      value: 
+      objectReference: {fileID: 4900000, guid: 73f44abfdc877407783d470c68a1e8ec, type: 3}
+    - target: {fileID: 3366175258507064029, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
       propertyPath: visualCue
       value: 
       objectReference: {fileID: 710885834}
@@ -6031,6 +6051,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AngObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482466685349748747, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 91.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482466685349748747, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6051003340134604687, guid: 970fe4b8ca562754f85cb9c26626b54a, type: 3}
@@ -8580,10 +8610,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2292542622931377041, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292542622931377041, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292542622931377041, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 5552738195010539617, guid: 93c451a08a787cd499d0a95e19144dfd,
         type: 2}
+    - target: {fileID: 2292542622931377041, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4137249680377115100, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: startOnEnable
@@ -13192,6 +13237,7 @@ GameObject:
   - component: {fileID: 1856708683}
   - component: {fileID: 1856708687}
   - component: {fileID: 1856708688}
+  - component: {fileID: 1856708689}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -13312,7 +13358,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveUp: 5
-  moveSpeed: 0.01
+  moveSpeed: 3
+--- !u!114 &1856708689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856708682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9e4fe17a6b34df1839817dc16f37a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 916173918}
 --- !u!1 &1859030405
 GameObject:
   m_ObjectHideFlags: 0
@@ -14893,6 +14952,11 @@ PrefabInstance:
       propertyPath: dialoguePanel
       value: 
       objectReference: {fileID: 1188678978}
+    - target: {fileID: 3349326175999831296, guid: 7fd0c00f9d8ca4e52864bbb03f146856,
+        type: 3}
+      propertyPath: nextLevelTrigger
+      value: 
+      objectReference: {fileID: 930729641}
     - target: {fileID: 6582732737887979991, guid: 7fd0c00f9d8ca4e52864bbb03f146856,
         type: 3}
       propertyPath: m_Name

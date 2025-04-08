@@ -15,17 +15,18 @@ public class OctopusDamage : MonoBehaviour
         {
             if (tookDamage)
             {
+                Debug.Log("HIt from octo!");
                 collision.gameObject.GetComponent<Player_Health>().TakeDamage(10);
                 StartCoroutine(waitToDamage());
             }
 
         }
+    }
 
-        IEnumerator waitToDamage()
-        {
-            tookDamage = false;
-            yield return new WaitForSeconds(3f);
-            tookDamage = true;
-        }
+    IEnumerator waitToDamage()
+    {
+        tookDamage = false;
+        yield return new WaitForSeconds(3f);
+        tookDamage = true;
     }
 }
