@@ -34,8 +34,6 @@ public class BossManager : MonoBehaviour
 
     public GameObject waveNode;
 
-    public GameObject digNode;
-
     public int[] attackQueue = new int[5];
     private bool attackInProcess;
 
@@ -47,6 +45,7 @@ public class BossManager : MonoBehaviour
     {
 
         //initialize attackQueue to all 0's
+
         for (int i = 0; i < 5; i++)
         {
             attackQueue[i] = 0;
@@ -54,9 +53,8 @@ public class BossManager : MonoBehaviour
 
         attackInProcess = false;
 
-        
-        //start coroutine
-        StartCoroutine(bossFight());
+
+        //StartCoroutine(bossFight());
     }
 
     // Update is called once per frame
@@ -66,6 +64,7 @@ public class BossManager : MonoBehaviour
         {
             StartCoroutine(ChaseAttack()); // Set the target position here
         }
+
     }
 
 
@@ -108,18 +107,7 @@ public class BossManager : MonoBehaviour
         WaveAround(wave6, new Vector3(0, -45, 90));
         WaveAround(wave7, new Vector3(0, 45, 90));
 
-        /*biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-        biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-        biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;*/
-    }
 
-
-    void ChargeAttack()
-    {
-        
-        transform.LookAt(player.transform);
-        enemy.transform.position =
-            new Vector3(player.transform.position.x, enemy.transform.position.y , enemy.transform.position.z);
     }
 
 
@@ -156,31 +144,35 @@ public class BossManager : MonoBehaviour
         {
             enemy.transform.position = waveNode.transform.position;
 
+            enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
             StartWave();
+        }
 
-            elapsedTime = 0f;
+         yield return new WaitForSeconds(3);
 
-            while (elapsedTime < moveDuration)
+        elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            if(enemy == null)
             {
-                if(enemy == null)
-                {
-                    yield break;
-                }
-
-                enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
-                elapsedTime += Time.deltaTime;
-                yield return null;
+                yield break;
             }
+            enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
 
 
-            if(enemy != null)
+
+        if(enemy != null)
+
+        {
+            enemy.transform.position = originalPosition;
+            if (followPath != null)
             {
-                enemy.transform.position = originalPosition;
-
-                if (followPath != null)
-                {
-                    followPath.moveSpeed = 1;
-                }
+                followPath.moveSpeed = 1;
             }
         }
     }
@@ -189,73 +181,102 @@ public class BossManager : MonoBehaviour
 
     public IEnumerator ChaseAttack()
     {
-        if (enemy == null)
-        {
-            yield break;
-        }
+        if (enemy == null) yield break;
 
         FollowPath followPath = enemy.GetComponent<FollowPath>();
+        float originalSpeed = 1f;
+
+        
         if (followPath != null)
         {
-            followPath.moveSpeed = 0;
+            originalSpeed = followPath.moveSpeed;
+            followPath.moveSpeed = 0; 
+            followPath.enabled = false; 
         }
 
         Vector3 originalPosition = enemy.transform.position;
+        Quaternion originalRotation = enemy.transform.rotation;
 
-        float elapsedTime = 0f;
-        float moveDuration = 1f;
-        float chaseDuration = 0.8f;
-
-        while (elapsedTime < chaseDuration)
-        {
-            if (enemy == null)
-            {
-                yield break;
-            }
-
-            enemy.transform.position = Vector3.Lerp(originalPosition, player.transform.position, (elapsedTime / moveDuration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        if (enemy != null)
-        {
-            // enemy.transform.position = waveNode.transform.position;
-
-            Vector3 directionToPlayer = (player.transform.position - enemy.transform.position).normalized;
-            enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
-        }
-
-        //yield return new WaitForSeconds(0.5f); 
-
-        // dash at the player
+       
         if (player != null)
         {
+            Vector3 dashStart = enemy.transform.position;
             Vector3 dashTarget = player.transform.position;
+            float dashDuration = 0.5f;
+            float elapsedTime = 0f;
 
-            elapsedTime = 0f;
-
-            while (elapsedTime < moveDuration)
+            // Look at the player
+            Vector3 directionToPlayer = (player.transform.position - enemy.transform.position).normalized;
+            if (directionToPlayer != Vector3.zero)
             {
-                if (enemy == null)
-                {
-                    yield break;
-                }
+                enemy.transform.rotation = Quaternion.LookRotation(directionToPlayer);
+            }
 
-                enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
+            // Dash toward the player
+            while (elapsedTime < dashDuration)
+            {
+                if (enemy == null) yield break;
+
+                enemy.transform.position = Vector3.Lerp(dashStart, dashTarget, elapsedTime / dashDuration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
-            if (enemy != null)
-            {
-                enemy.transform.position = originalPosition;
+            enemy.transform.position = dashTarget;
+        }
 
-                if (followPath != null)
-                {
-                    followPath.moveSpeed = 1;
-                }
+        
+        if (enemy != null)
+        {
+            float chaseBackDuration = 0.5f;
+            float elapsedReturn = 0f;
+
+            Vector3 chaseStart = enemy.transform.position;
+
+            // Look toward the original position
+            Vector3 directionToOriginal = (originalPosition - enemy.transform.position).normalized;
+            if (directionToOriginal != Vector3.zero)
+            {
+                enemy.transform.rotation = Quaternion.LookRotation(directionToOriginal);
             }
+
+            // Chase back to the original position
+            while (elapsedReturn < chaseBackDuration)
+            {
+                if (enemy == null) yield break;
+
+                enemy.transform.position = Vector3.Lerp(chaseStart, originalPosition, elapsedReturn / chaseBackDuration);
+                elapsedReturn += Time.deltaTime;
+                yield return null;
+            }
+
+            enemy.transform.position = originalPosition;
+        }
+
+        
+        if (enemy != null)
+        {
+            float rotationDuration = 0.5f;
+            float elapsedRotation = 0f;
+            Quaternion currentRotation = enemy.transform.rotation;
+
+            while (elapsedRotation < rotationDuration)
+            {
+                if (enemy == null) yield break;
+
+                enemy.transform.rotation = Quaternion.Slerp(currentRotation, originalRotation, elapsedRotation / rotationDuration);
+                elapsedRotation += Time.deltaTime;
+                yield return null;
+            }
+
+            enemy.transform.rotation = originalRotation;
+        }
+
+        
+        if (followPath != null)
+        {
+            followPath.enabled = true;
+            followPath.moveSpeed = originalSpeed; 
         }
     }
 
@@ -277,7 +298,7 @@ public class BossManager : MonoBehaviour
                 {
                     attackQueue[i] = 2;
                 }
-                else if(temp > 25 && temp <= 75)
+                else if (temp > 25 && temp <= 75)
                 {
                     attackQueue[i] = 3; // change it back to 1
                 }
@@ -302,7 +323,7 @@ public class BossManager : MonoBehaviour
                 //flashbang
                 else if (attackQueue[i] == 2)
                 {
-                    
+
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
@@ -314,28 +335,21 @@ public class BossManager : MonoBehaviour
                     biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                     biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                 }
-                //wave
-                else if(attackQueue[i] == 3)
-                {
-                    yield return new WaitForSeconds(0.5f);
+                ////wave
+                //else if (attackQueue[i] == 3)
+                //{
 
-                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-
-
-                    StartCoroutine(MoveEnemyAndStartWave());
-                    yield return new WaitForSeconds(3);
-
-
-                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-
-                    yield return new WaitForSeconds(0.5f);
-
-                    player.GetComponent<CommentedThirdPersonController>().SetMovement(true);
-                }
+                //    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                //    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                //    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                //    enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                //    queenAnimator.SetBool("IsFlashbang", true);
+                //    yield return new WaitForSeconds(6);
+                //    queenAnimator.SetBool("IsFlashbang", false);
+                //    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
+                //    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                //    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                //}
             }
         }
     }
