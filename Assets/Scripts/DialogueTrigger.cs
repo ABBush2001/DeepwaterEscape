@@ -33,7 +33,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             // Show the visual cue only if player is in range and dialogue isn't playing
             visualCue.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.F))  // Player presses F to start the dialogue
+            if (Input.GetKeyDown(KeyCode.E))  // Player presses F to start the dialogue
             {
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
             }
