@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -38,7 +39,7 @@ public class CommentedThirdPersonController : MonoBehaviour
 
 
     // Get control of the character's animations
-    Animator animator;
+    public Animator animator;
     // Gets the character's collision and movement controller component
     CharacterController cc;
 
@@ -46,8 +47,9 @@ public class CommentedThirdPersonController : MonoBehaviour
     float jumpElapsedTime = 0;
 
     private AudioSource audioSource;
-    public AudioClip footStepClip;
-    // private bool isFootstep = false;
+    public AudioClip footStepClip; // private bool isFootstep = false;
+    public AudioClip jumpSound;
+    
 
     // footStep
     private float footStep = 0.5f;
@@ -57,7 +59,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     {
         // Starts any of the above variables when starting the game
         cc = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -74,6 +76,16 @@ public class CommentedThirdPersonController : MonoBehaviour
         inputSprint = Input.GetAxis("Fire3") == 1f;
         // Unfortunately GetAxis does not work with GetKeyDown, so inputs must be taken individually
         inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+
+        //check movement for animations
+        if(inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0 || inputVertical < 0)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
         // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
         // Note: It is possible to make changes to keep player crouched only while the key is pressed
@@ -140,6 +152,11 @@ public class CommentedThirdPersonController : MonoBehaviour
             isJumping = true;
             // Disable crounching when jumping? You decide, just uncomment:
             // isCrouching = false;
+            audioSource.Stop();
+            if (jumpSound != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         // It's at the end of the code. Leave it for later.
@@ -203,8 +220,17 @@ public class CommentedThirdPersonController : MonoBehaviour
         */
 
         // First, we need to locate which side is the player's front and right side.
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
+        Vector3 forward = Vector3.zero;
+        Vector3 right = Vector3.zero;
+
+        try
+        {
+            forward = Camera.main.transform.forward;
+            right = Camera.main.transform.right;
+        }catch(Exception e)
+        {
+            Debug.Log("Cutscene in progress");
+        }
 
         // We will not rotate the Y axis, as this would cause the player to hit the ground
         forward.y = 0;
@@ -245,9 +271,9 @@ public class CommentedThirdPersonController : MonoBehaviour
         cc.Move( moviment );
 
         // when player move they will make footstep
-        if(cc.isGrounded && (directionX != 0 || directionZ != 0))
+        if (cc.isGrounded && (directionX != 0 || directionZ != 0) && !isJumping)
         {
-            if(Time.time - lastFootstep >= footStep)
+            if (Time.time - lastFootstep >= footStep)
             {
                 audioSource.PlayOneShot(footStepClip);
                 lastFootstep = Time.time;

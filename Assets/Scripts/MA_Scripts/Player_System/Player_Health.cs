@@ -13,6 +13,7 @@ public class Player_Health : MonoBehaviour
     
 
     public Image Healthbar;
+    public Image damageScreen;
 
     [SerializeField]
     private string sceneToLoad;
@@ -61,6 +62,7 @@ public class Player_Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        StartCoroutine(damageScreenDisplay());
         UpdateText();
     }
 
@@ -70,5 +72,12 @@ public class Player_Health : MonoBehaviour
         {
             Healthbar.fillAmount = currentHealth / 100f;
         }
+    }
+
+    IEnumerator damageScreenDisplay()
+    {
+        damageScreen.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        damageScreen.enabled = false;
     }
 }
