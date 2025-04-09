@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.autodesk.fbx": {
+      "version": "4.2.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.eflatun.scenereference": {
       "version": "https://github.com/starikcetin/Eflatun.SceneReference.git#4.1.1",
       "depth": 0,
@@ -18,11 +25,11 @@
       "hash": "8d3a0ee421588faaf373e0fe4b8f4577a522f029"
     },
     "com.unity.2d.animation": {
-      "version": "9.0.4",
+      "version": "9.1.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.common": "8.0.1",
+        "com.unity.2d.common": "8.0.2",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.collections": "1.1.0",
         "com.unity.modules.animation": "1.0.0",
@@ -31,7 +38,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.aseprite": {
-      "version": "1.1.0",
+      "version": "1.1.4",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -63,13 +70,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.psdimporter": {
-      "version": "8.0.3",
+      "version": "8.0.5",
       "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.2d.common": "8.0.2",
         "com.unity.2d.sprite": "1.0.0",
-        "com.unity.2d.animation": "9.0.4"
+        "com.unity.2d.animation": "9.1.1"
       },
       "url": "https://packages.unity.com"
     },
@@ -80,11 +87,11 @@
       "dependencies": {}
     },
     "com.unity.2d.spriteshape": {
-      "version": "9.0.2",
+      "version": "9.0.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.common": "8.0.1",
+        "com.unity.2d.common": "8.0.2",
         "com.unity.mathematics": "1.1.0",
         "com.unity.modules.physics2d": "1.0.0"
       },
@@ -120,8 +127,18 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.animation.rigging": {
+      "version": "1.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.4.1",
+        "com.unity.test-framework": "1.1.24"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.burst": {
-      "version": "1.8.16",
+      "version": "1.8.19",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -157,7 +174,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
-      "version": "1.0.6",
+      "version": "2.0.3",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -168,14 +185,25 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.2d.animation": "9.0.4",
+        "com.unity.2d.animation": "9.1.1",
         "com.unity.2d.pixel-perfect": "5.0.3",
-        "com.unity.2d.psdimporter": "8.0.3",
+        "com.unity.2d.psdimporter": "8.0.5",
         "com.unity.2d.sprite": "1.0.0",
-        "com.unity.2d.spriteshape": "9.0.2",
+        "com.unity.2d.spriteshape": "9.0.3",
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.2d.tilemap.extras": "3.1.2",
-        "com.unity.2d.aseprite": "1.1.0"
+        "com.unity.2d.aseprite": "1.1.4"
+      }
+    },
+    "com.unity.feature.characters-animation": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.animation.rigging": "1.2.1",
+        "com.unity.timeline": "1.7.6",
+        "com.unity.cinemachine": "2.10.0",
+        "com.unity.formats.fbx": "4.2.1"
       }
     },
     "com.unity.formats.alembic": {
@@ -189,6 +217,16 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.formats.fbx": {
+      "version": "4.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.autodesk.fbx": "4.2.1",
+        "com.unity.timeline": "1.7.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ide.rider": {
       "version": "3.0.28",
       "depth": 0,
@@ -199,7 +237,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
+      "version": "2.0.23",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -258,7 +296,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
-      "version": "14.0.11",
+      "version": "15.0.7",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
@@ -269,23 +307,23 @@
       }
     },
     "com.unity.render-pipelines.universal": {
-      "version": "14.0.11",
+      "version": "15.0.7",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
         "com.unity.mathematics": "1.2.1",
         "com.unity.burst": "1.8.9",
-        "com.unity.render-pipelines.core": "14.0.9",
-        "com.unity.shadergraph": "14.0.9",
+        "com.unity.render-pipelines.core": "14.0.11",
+        "com.unity.shadergraph": "14.0.11",
         "com.unity.render-pipelines.universal-config": "14.0.9"
       }
     },
     "com.unity.render-pipelines.universal-config": {
-      "version": "14.0.9",
+      "version": "14.0.10",
       "depth": 1,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.9"
+        "com.unity.render-pipelines.core": "14.0.10"
       }
     },
     "com.unity.searcher": {
@@ -303,30 +341,31 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.shadergraph": {
-      "version": "14.0.11",
+      "version": "15.0.7",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.render-pipelines.core": "14.0.9",
+        "com.unity.render-pipelines.core": "14.0.11",
         "com.unity.searcher": "4.9.2"
       }
     },
-    "com.unity.terrain-tools": {
-      "version": "5.0.5",
+    "com.unity.splines": {
+      "version": "2.6.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.modules.terrain": "1.0.0",
-        "com.unity.modules.terrainphysics": "1.0.0"
+        "com.unity.ugui": "1.0.0",
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.settings-manager": "1.0.3"
       },
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.33",
+      "version": "1.3.9",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.ext.nunit": "1.0.6",
+        "com.unity.ext.nunit": "2.0.3",
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
       },
@@ -342,7 +381,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.7.6",
+      "version": "1.8.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -363,16 +402,16 @@
       }
     },
     "com.unity.visualeffectgraph": {
-      "version": "14.0.9",
+      "version": "14.0.11",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.shadergraph": "14.0.9",
-        "com.unity.render-pipelines.core": "14.0.9"
+        "com.unity.shadergraph": "14.0.11",
+        "com.unity.render-pipelines.core": "14.0.11"
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.4",
+      "version": "1.9.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {

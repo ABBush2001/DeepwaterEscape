@@ -24,6 +24,7 @@ public class ClamWalker : MonoBehaviour
     private Player_Health playerHealth;
     public Transform looker;
     public GameObject clamBody;
+    public Animator animator;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
@@ -123,7 +124,9 @@ public class ClamWalker : MonoBehaviour
         }
     }
 
+#pragma warning disable IDE0060 // Remove unused parameter
     public void Alert(Collider other, bool isNoise)
+#pragma warning restore IDE0060 // Remove unused parameter
     {
         if (!hasSeenPlayer)
         {

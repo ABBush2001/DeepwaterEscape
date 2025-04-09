@@ -6,6 +6,7 @@ public class PlatformMovement : MonoBehaviour
 {
     public GameObject Node1;
     public GameObject Node2;
+    public GameObject playerPrefab;
 
     [SerializeField] private int curNode = 1;
     [SerializeField] private float moveSpeed = 2f;
@@ -13,6 +14,21 @@ public class PlatformMovement : MonoBehaviour
 
     private Vector3 lastPlatformPosition;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.transform.SetParent(this.gameObject.transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.transform.SetParent(playerPrefab.transform);
+        }
+    }
 
     // Update is called once per frame
     void Update()
