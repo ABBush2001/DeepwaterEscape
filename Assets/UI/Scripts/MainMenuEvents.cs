@@ -10,33 +10,36 @@ public class MainMenuEvents : MonoBehaviour
     private Button _startButton;
     private Button _exitButton;
     private Button _howToPlayButton;
+    private Button _creditsButton; // NEW
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
+
+    private bool _isTransitioning = false;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _document = GetComponent<UIDocument>();
 
+        // Query buttons by name (match them in your UI Toolkit)
         _startButton = _document.rootVisualElement.Q<Button>("Start");
         _exitButton = _document.rootVisualElement.Q<Button>("Exit");
         _howToPlayButton = _document.rootVisualElement.Q<Button>("HowToPlay");
+        _creditsButton = _document.rootVisualElement.Q<Button>("Credits"); // NEW
 
         if (_startButton != null)
-        {
             _startButton.RegisterCallback<ClickEvent>(OnPlayGameClick);
-        }
 
         if (_exitButton != null)
-        {
             _exitButton.RegisterCallback<ClickEvent>(OnExitGameClick);
-        }
 
         if (_howToPlayButton != null)
-        {
             _howToPlayButton.RegisterCallback<ClickEvent>(OnHowToPlayClick);
-        }
 
+        if (_creditsButton != null)
+            _creditsButton.RegisterCallback<ClickEvent>(OnCreditsClick); // NEW
+
+        // Collect all buttons for sound + effect
         _menuButtons = _document.rootVisualElement.Query<Button>().ToList();
         foreach (var button in _menuButtons)
         {
@@ -47,19 +50,16 @@ public class MainMenuEvents : MonoBehaviour
     private void OnDisable()
     {
         if (_startButton != null)
-        {
             _startButton.UnregisterCallback<ClickEvent>(OnPlayGameClick);
-        }
 
         if (_exitButton != null)
-        {
             _exitButton.UnregisterCallback<ClickEvent>(OnExitGameClick);
-        }
 
         if (_howToPlayButton != null)
-        {
             _howToPlayButton.UnregisterCallback<ClickEvent>(OnHowToPlayClick);
-        }
+
+        if (_creditsButton != null)
+            _creditsButton.UnregisterCallback<ClickEvent>(OnCreditsClick); // NEW
 
         foreach (var button in _menuButtons)
         {
@@ -83,35 +83,66 @@ public class MainMenuEvents : MonoBehaviour
     {
         Debug.Log("You Pressed the Exit Button");
         StartCoroutine(PlayExit());
-        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
-        Application.Quit();
+    }
+
+    private void OnCreditsClick(ClickEvent evt)
+    {
+        Debug.Log("You Pressed the Credits Button");
+        StartCoroutine(PlayCredits()); // NEW
     }
 
     private void OnAllButtonsClick(ClickEvent evt)
     {
-        _audioSource.Play();
+        if (_audioSource != null)
+            _audioSource.Play();
     }
+
     private IEnumerator PlayStart()
     {
-        _audioSource.Play();
-        yield return new WaitForSeconds(_audioSource.clip.length); // Wait for the sound to finish
-        SceneManager.LoadScene("1.Submarine"); // Load the "Main" scene after the sound finishes
+        if (_isTransitioning) yield break;
+        _isTransitioning = true;
+
+        if (_audioSource != null)
+            _audioSource.Play();
+
+        yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
+        SceneManager.LoadScene("1.Submarine");
     }
 
     private IEnumerator PlayHowto()
     {
-        _audioSource.Play();
-        yield return new WaitForSeconds(_audioSource.clip.length); // Wait for the sound to finish
-        SceneManager.LoadScene("Howto"); // Load the "Main" scene after the sound finishes
-    }
+        if (_isTransitioning) yield break;
+        _isTransitioning = true;
 
+        if (_audioSource != null)
+            _audioSource.Play();
+
+        yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
+        SceneManager.LoadScene("Howto");
+    }
 
     private IEnumerator PlayExit()
     {
-        _audioSource.Play();
-        yield return new WaitForSeconds(_audioSource.clip.length); // Wait for the sound to finish
+        if (_isTransitioning) yield break;
+        _isTransitioning = true;
+
+        if (_audioSource != null)
+            _audioSource.Play();
+
+        yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
         Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
         Application.Quit();
     }
 
+    private IEnumerator PlayCredits() // NEW
+    {
+        if (_isTransitioning) yield break;
+        _isTransitioning = true;
+
+        if (_audioSource != null)
+            _audioSource.Play();
+
+        yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
+        SceneManager.LoadScene("Credits"); // Make sure the scene name matches exactly!
+    }
 }
