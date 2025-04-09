@@ -26,6 +26,8 @@ public class DialogueManager : MonoBehaviour
     // Reference to the TextEffect component
     private TextEffect textEffect;
 
+    public GameObject nextLevelTrigger;
+
     // Awake checks if a dialogue manager already exists in scene
     private void Awake()
     {
@@ -89,6 +91,11 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialogueText.text = "";
         dialogueComplete = true;
+
+        if(nextLevelTrigger != null)
+        {
+            nextLevelTrigger.SetActive(true);
+        }
     }
 
     // Continues dialogue and uses typewriter effect to display text
