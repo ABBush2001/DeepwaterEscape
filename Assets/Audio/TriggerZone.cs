@@ -1,29 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TriggerZone : MonoBehaviour
 {
-    public AudioSource audioSource;  // Assign in Inspector
-    public AudioClip bossMusic;      // Assign in Inspector
+    [SerializeField] string tagFilter;
+    [SerializeField] UnityEvent onTriggerEnter;
+    [SerializeField] UnityEvent onTriggerExit;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Ensure your player has the "Player" tag
-        {
-            if (audioSource.clip != bossMusic) // Only change if it's a different clip
-            {
-                audioSource.clip = bossMusic;
-                audioSource.Play();
-            }
-        }
+        if (!String.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
+        onTriggerEnter.Invoke();
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            audioSource.Stop(); // Optional: Stop music when leaving the trigger
-        }
+        if (!String.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
+        onTriggerEnter.Invoke();
     }
 }
