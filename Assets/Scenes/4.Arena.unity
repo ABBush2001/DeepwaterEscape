@@ -531,6 +531,7 @@ MonoBehaviour:
   mainPath: {fileID: 1576243201}
   enemy: {fileID: 1476229171}
   player: {fileID: 716005005}
+  enemyModel: {fileID: 2015326040}
   wave: {fileID: 1184733853262629006, guid: 0631b9dfc73a748a697cf3746e23be14, type: 3}
   wave1: {fileID: 1184733853262629006, guid: 98ff91c5a092f4e198342f4f54bca172, type: 3}
   wave2: {fileID: 1184733853262629006, guid: 5855f699167654161b67c7e6dec39579, type: 3}
@@ -5292,12 +5293,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1087251383}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1091111286 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 139668524560958798, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-    type: 3}
-  m_PrefabInstance: {fileID: 716005004}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1150286234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9899,6 +9894,7 @@ MonoBehaviour:
   moveSpeed: 8
   Node1: {fileID: 1160070703}
   bossFightSystem: {fileID: 966857475}
+  bossManager: {fileID: 45651013}
   DialogueManager: {fileID: 1664839197}
   instructionsText: {fileID: 503556137}
   inkJson: {fileID: 4900000, guid: 894f43d512c764c0cac37299df5d9fcf, type: 3}
@@ -9930,6 +9926,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &2015326040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -918550690816631646, guid: 16421955931489e41aa5953632d8b09a,
+    type: 3}
+  m_PrefabInstance: {fileID: 80637372}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2025911802
 GameObject:
   m_ObjectHideFlags: 0
@@ -11202,7 +11204,7 @@ PrefabInstance:
         type: 3}
       propertyPath: QAF
       value: 
-      objectReference: {fileID: 565713927}
+      objectReference: {fileID: 2015326040}
     - target: {fileID: 4417085379706284672, guid: 015d96ba0fa6f46f38787bb429c1c291,
         type: 3}
       propertyPath: m_Enabled
