@@ -349,7 +349,7 @@ public class BossManager : MonoBehaviour
                     //biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     //biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     //biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    MoveEnemyAndStartWave();
+                    StartCoroutine(MoveEnemyAndStartWave());
                     yield return new WaitForSeconds(6);
                     //    enemy.GetComponent<FlashBang_V1>().startFlashbang();
                     //    queenAnimator.SetBool("IsFlashbang", true);

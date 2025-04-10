@@ -6,7 +6,7 @@ public class Wave_Script : MonoBehaviour
 {
     public GameObject gun;
 
-    public int waveDmg = 4;
+    public int waveDmg = 15;
 
     public float moveSpeed = 10f;
     public float moveDistanceX = 5f;
@@ -81,14 +81,14 @@ public class Wave_Script : MonoBehaviour
         {
             StartCoroutine(MoveAndScale());
         }
-        CommentedThirdPersonController playerController = other.GetComponent<CommentedThirdPersonController>();
+        //CommentedThirdPersonController playerController = other.GetComponent<CommentedThirdPersonController>();
 
-        if (playerController != null)
-        {
-            // Disable the player's movement
-            StartCoroutine(DisableMovemant(playerController, 1f));
-            Debug.Log("Player movement disable by Wave");
-        }
+        //if (playerController != null)
+        //{
+        //    // Disable the player's movement
+        //    //StartCoroutine(DisableMovemant(playerController, 1f));
+        //    //Debug.Log("Player movement disable by Wave");
+        //}
 
 
         if (other.CompareTag("Player"))
@@ -101,18 +101,18 @@ public class Wave_Script : MonoBehaviour
         }
     }
 
-    private IEnumerator DisableMovemant(CommentedThirdPersonController pControl, float longTime)
-    {
+    //private IEnumerator DisableMovemant(CommentedThirdPersonController pControl, float longTime)
+    //{
 
-        //gun.GetComponent<Shooting>().enabled = false;
-        pControl.SetMovement(false);
-        Debug.Log("Player movement disable");
+    //    //gun.GetComponent<Shooting>().enabled = false;
+    //    pControl.SetMovement(false);
+    //    Debug.Log("Player movement disable");
 
-        yield return new WaitForSeconds(longTime);
+    //    yield return new WaitForSeconds(longTime);
 
-        //gun.GetComponent<Shooting>().enabled = true;
-        pControl.SetMovement(true);
-        Debug.Log("Player movement enable!");
+    //    //gun.GetComponent<Shooting>().enabled = true;
+    //    pControl.SetMovement(true);
+    //    Debug.Log("Player movement enable!");
 
-    }
+    //}
 }
