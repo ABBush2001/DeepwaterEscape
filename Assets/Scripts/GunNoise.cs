@@ -17,10 +17,10 @@ public class GunNoise : MonoBehaviour
     private void FixedUpdate()
     {
         curTime--;
-        if (curTime>= 0)
+        if (curTime <= 0)
         {
             curTime = timeToLive;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
