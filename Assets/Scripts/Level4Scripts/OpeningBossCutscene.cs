@@ -17,18 +17,21 @@ public class OpeningBossCutscene : MonoBehaviour
 
     public GameObject Node1;
     public GameObject bossFightSystem;
+    public GameObject bossManager;
     public GameObject DialogueManager;
 
     public TextMeshProUGUI instructionsText;
 
     [SerializeField] private TextAsset inkJson;
 
+    bool canTrigger = true;
     bool cutsceneStarted = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && canTrigger)
         {
+            canTrigger = false;
             StartCoroutine(cutscene());
         }
     }
@@ -41,6 +44,7 @@ public class OpeningBossCutscene : MonoBehaviour
             mainCamera.enabled = true;
             cutsceneCamera.enabled = false;
             bossFightSystem.SetActive(true);
+            //StartCoroutine(bossManager.GetComponent<BossManager>().bossFight());
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
             instructionsText.enabled = true;
             Time.timeScale = 0.1f;
