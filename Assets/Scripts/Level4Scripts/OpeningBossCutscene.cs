@@ -6,6 +6,7 @@ using TMPro;
 /*
  * This script handles the opening cutscene that introduces the anglerfish queen
 */
+
 public class OpeningBossCutscene : MonoBehaviour
 {
     public Camera mainCamera;
@@ -20,6 +21,9 @@ public class OpeningBossCutscene : MonoBehaviour
     public GameObject DialogueManager;
 
     public TextMeshProUGUI instructionsText;
+
+    public AudioSource mainAudio;
+    public AudioSource cutsceneAudio;
 
     [SerializeField] private TextAsset inkJson;
 
@@ -58,6 +62,14 @@ public class OpeningBossCutscene : MonoBehaviour
     IEnumerator cutscene()
     {
         cutsceneStarted = true;
+        // Ensure only cutscene audio is playing
+        if (mainAudio != null) mainAudio.Stop();
+        if (cutsceneAudio != null)
+        {
+            cutsceneAudio.Stop(); // force reset if looping
+            cutsceneAudio.Play();
+        }
+
 
         //player.GetComponent<CommentedThirdPersonController>().velocity = 0;
 
