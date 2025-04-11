@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class ClamWalker : MonoBehaviour
 {
+    // BEHOLD, CONVENIENCE
     const string ANIM_ISSLEEPER = "B_isSleeper";
     const string ANIM_ISPATROLLER = "B_isPatroller";
     const string ANIM_JUMP = "b_isJumping";
