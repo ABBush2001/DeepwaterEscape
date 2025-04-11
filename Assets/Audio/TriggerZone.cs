@@ -11,13 +11,13 @@ public class TriggerZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!String.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
+        if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
         onTriggerEnter.Invoke();
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (!String.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
-        onTriggerEnter.Invoke();
+        if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
+        onTriggerExit.Invoke();
     }
 }
