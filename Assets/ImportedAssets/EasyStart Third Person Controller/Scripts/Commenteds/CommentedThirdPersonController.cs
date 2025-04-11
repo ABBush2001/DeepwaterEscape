@@ -305,4 +305,3 @@ public class CommentedThirdPersonController : MonoBehaviour
         enabled = canMove;
     }
 }
-
