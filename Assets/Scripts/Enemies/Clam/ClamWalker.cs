@@ -24,6 +24,7 @@ public class ClamWalker : MonoBehaviour
     private Player_Health playerHealth;
     public Transform looker;
     public GameObject clamBody;
+    public ClamAnimPlayer claminator;
     //public Animator animator;
 
     private bool hasSeenPlayer = false;

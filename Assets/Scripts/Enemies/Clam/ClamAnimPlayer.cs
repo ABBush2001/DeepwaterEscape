@@ -13,7 +13,6 @@ public class ClamAnimPlayer : MonoBehaviour
 {
     Animator claminator;
     ClamWalker walker;
-
     
 
     private void Start()
