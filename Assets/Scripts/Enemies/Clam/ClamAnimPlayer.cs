@@ -2,8 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClamJumpy : StateMachineBehaviour
+/*
+ * Script created by Wyatt Blackwell, last edited by ___
+ * Modified date: 4/10/2024
+ * This script handles clamination by recieving state information from ClamWalker and applying the appropriate animation.
+ * In other words, ClamWalker is the brain, this is a leech.
+ */
+
+public class ClamAnimPlayer : MonoBehaviour
 {
+    Animator claminator;
+    ClamWalker walker;
+
+    
+
+    private void Start()
+    {
+        if((claminator = GetComponent<Animator>()) == null) { // Obtain animator component IN the if statement, log error in body
+            Debug.LogAssertion("Clam could not find animator component!",this.gameObject);
+        }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+    private void Update()
+    {
+        
+    }
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
