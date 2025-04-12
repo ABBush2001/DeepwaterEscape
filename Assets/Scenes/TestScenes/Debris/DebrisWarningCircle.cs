@@ -8,7 +8,7 @@ using UnityEngine;
 */
 public class DebrisWarningCircle : MonoBehaviour
 {
-    public int duration = 5;
+    public int duration = 3;
     public bool warningComplete = false;
 
     private Material circleMat;
