@@ -16,7 +16,6 @@ public class TriggerZone : MonoBehaviour
         if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) {
             return;
         }
-
         onTriggerEnter.Invoke();
     }
 
