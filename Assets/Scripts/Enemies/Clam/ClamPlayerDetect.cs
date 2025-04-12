@@ -14,16 +14,13 @@ public class ClamPlayerDetect : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (detectPlayer) {
-            if (other.CompareTag("Player"))
-            {
-                walkScript.Alert(other, false);
+            if (other.CompareTag("Player")) {
+                walkScript.Alert(false);
             }
         }
-        if (detectPlayerNoise)
-        {
-            if (other.CompareTag("PlayerNoise"))
-            {
-                walkScript.Alert(other, true);
+        if (detectPlayerNoise) {
+            if (other.CompareTag("PlayerNoise")) {
+                walkScript.Alert(true);
             }
         }
 
