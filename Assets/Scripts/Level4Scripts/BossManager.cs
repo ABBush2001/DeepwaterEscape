@@ -298,8 +298,6 @@ public class BossManager : MonoBehaviour
             {
                 Debug.Log("Initializing queue!");
 
-                //TESTING
-                //attackQueue[i] = 3;
                 int temp = Random.Range(1, 101);
                 if (temp <= 25)
                 {
@@ -307,9 +305,13 @@ public class BossManager : MonoBehaviour
                 }
                 else if (temp > 25 && temp <= 75)
                 {
-                    if(i > 0)
+                    attackQueue[i] = 1; // change it back to 3
+                }
+                else
+                {
+                    if (i > 0)
                     {
-                        if(attackQueue[i-1] == 3)
+                        if (attackQueue[i - 1] == 3)
                         {
                             attackQueue[i] = 1;
                         }
@@ -320,9 +322,23 @@ public class BossManager : MonoBehaviour
                     }
 
                 }
-                else
+            }
+
+            //get rid of any zero's in the attack queue
+            for(int i = 0; i < 5; i++)
+            {
+                if(attackQueue[i] == 0)
                 {
-                    attackQueue[i] = 1; // change it back to 3
+                    int temp = Random.Range(1, 101);
+
+                    if(temp <= 25)
+                    {
+                        attackQueue[i] = 2;
+                    }
+                    else
+                    {
+                        attackQueue[i] = 1;
+                    }
                 }
             }
 
