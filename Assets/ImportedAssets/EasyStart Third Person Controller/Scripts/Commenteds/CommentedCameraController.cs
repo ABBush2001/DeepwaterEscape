@@ -63,7 +63,7 @@ public class CommentedCameraController : MonoBehaviour
         try
         {
             targetYRotation = Camera.main.transform.eulerAngles.y;
-        }catch(Exception e)
+        }catch (Exception)
         {
             Debug.Log("Cutscene in Progress");
         }
