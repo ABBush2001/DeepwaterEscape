@@ -40,6 +40,7 @@ public class BossManager : MonoBehaviour
 
     public Animator queenAnimator;
 
+    public static bool isMoving = false;
     
     // Start is called before the first frame update
     void Start()
@@ -61,12 +62,12 @@ public class BossManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        /*if (Input.GetKeyDown(KeyCode.F))
         {
             //StartCoroutine(ChaseAttack()); // Set the target position here
             //enemy.GetComponent<FlashBang_V1>().startFlashbang();
             MoveEnemyAndStartWave();
-        }
+        }*/
 
     }
 
@@ -116,74 +117,70 @@ public class BossManager : MonoBehaviour
 
     public IEnumerator MoveEnemyAndStartWave()
     {
-        if(enemy == null)
-        {
-            yield break;
-        }
+        isMoving = true;
+
+        if (enemy == null) yield break;
 
         FollowPath followPath = enemy.GetComponent<FollowPath>();
         if (followPath != null)
         {
-            followPath.moveSpeed = 0;
+            followPath.enabled = false; // <== Fully disable script
         }
 
         Vector3 originalPosition = enemy.transform.position;
-
         float elapsedTime = 0f;
-        float moveDuration = 1f;
+        float moveDuration = 2f;
 
+        // Move to wave center
         while (elapsedTime < moveDuration)
         {
-            if (enemy == null)
-            {
-                yield break;
-            }
-            enemy.transform.position = Vector3.Lerp(originalPosition, waveNode.transform.position, (elapsedTime / moveDuration));
+            if (enemy == null) yield break;
+            enemy.transform.position = Vector3.Lerp(originalPosition, waveNode.transform.position, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        if (enemy != null)
-        {
-            enemy.transform.position = waveNode.transform.position;
+        enemy.transform.position = waveNode.transform.position;
+        enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-            enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        yield return new WaitForSeconds(3f);
 
-            StartWave();
-        }
+        StartWave();
 
-         yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3f);
 
+        // Move back
         elapsedTime = 0f;
-
         while (elapsedTime < moveDuration)
         {
-            if(enemy == null)
-            {
-                yield break;
-            }
-            enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, (elapsedTime / moveDuration));
+            if (enemy == null) yield break;
+            enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        enemy.transform.position = originalPosition;
 
-
-        if(enemy != null)
-
+        // Sync pathing with current position
+        if (followPath != null)
         {
-            enemy.transform.position = originalPosition;
-            if (followPath != null)
-            {
-                followPath.moveSpeed = 1;
-            }
+            followPath.SnapToClosestNode();
+            followPath.enabled = true;
+
+            // Optional but recommended: force re-check current node
+            //followPath.SetNode(followPath.getNode().NodeIndex);
         }
+
+        isMoving = false;
     }
+
 
 
 
     public IEnumerator ChaseAttack()
     {
+        isMoving = true;
+
         if (enemy == null) yield break;
 
         FollowPath followPath = enemy.GetComponent<FollowPath>();
@@ -205,7 +202,7 @@ public class BossManager : MonoBehaviour
         {
             Vector3 dashStart = enemy.transform.position;
             Vector3 dashTarget = player.transform.position;
-            float dashDuration = 0.5f;
+            float dashDuration = 1f;
             float elapsedTime = 0f;
 
             // Look at the player
@@ -279,8 +276,11 @@ public class BossManager : MonoBehaviour
         if (followPath != null)
         {
             followPath.enabled = true;
+            followPath.SnapToClosestNode();
             followPath.moveSpeed = originalSpeed; 
         }
+
+        isMoving = false;
     }
 
 
@@ -307,13 +307,30 @@ public class BossManager : MonoBehaviour
                 }
                 else if (temp > 25 && temp <= 75)
                 {
-                    attackQueue[i] = 3; // change it back to 1
+                    if(i > 0)
+                    {
+                        if(attackQueue[i-1] == 3)
+                        {
+                            attackQueue[i] = 1;
+                        }
+                    }
+                    else
+                    {
+                        attackQueue[i] = 3; // change it back to 1
+                    }
+
                 }
                 else
                 {
                     attackQueue[i] = 1; // change it back to 3
                 }
             }
+
+            //set first queue item to always be the wave,
+            //second to always be dash
+            attackQueue[0] = 3;
+            attackQueue[1] = 1;
+
 
             //begin looping through queue
             for (int i = 0; i < 5; i++)
@@ -324,7 +341,7 @@ public class BossManager : MonoBehaviour
                 if (attackQueue[i] == 1)
                 {
 
-                    yield return new WaitForSeconds(20);
+                    yield return new WaitForSeconds(15);
 
                 }
                 //flashbang
@@ -332,32 +349,19 @@ public class BossManager : MonoBehaviour
                 {
 
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     enemy.GetComponent<FlashBang_V1>().startFlashbang();
                     queenAnimator.SetBool("IsFlashbang", true);
                     yield return new WaitForSeconds(6);
                     queenAnimator.SetBool("IsFlashbang", false);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-                    biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                    biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
                 }
                 ////wave
                 else if (attackQueue[i] == 3)
                 {
-
-                    //biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    //biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    //biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     StartCoroutine(MoveEnemyAndStartWave());
-                    yield return new WaitForSeconds(6);
-                    //    enemy.GetComponent<FlashBang_V1>().startFlashbang();
-                    //    queenAnimator.SetBool("IsFlashbang", true);
-                    //    yield return new WaitForSeconds(6);
-                    //    queenAnimator.SetBool("IsFlashbang", false);
-                    //biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
-                    //biteSystem.transform.GetChild(1).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
-                    //biteSystem.transform.GetChild(2).gameObject.GetComponent<FollowPath>().moveSpeed = 2;
+                    yield return new WaitForSeconds(6f);
+                    biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                 }
             }
         }
