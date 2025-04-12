@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class OctopusTrigger : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class OctopusTrigger : MonoBehaviour
     public Transform player;
 
     private bool isPlayerInside = false;
+    private Coroutine attackCoroutine = null;
 
     void Update()
     {
@@ -18,37 +20,55 @@ public class OctopusTrigger : MonoBehaviour
         {
             if (!isPlayerInside)
             {
-                // Player has entered the radius, start attack
                 isPlayerInside = true;
-                StartAttack();
+                StartAttackSequence();
             }
         }
         else
         {
             if (isPlayerInside)
             {
-                // Player has left the radius, stop attack
                 isPlayerInside = false;
                 StopAttack();
             }
         }
     }
 
-    void StartAttack()
+    void StartAttackSequence()
     {
-        // Set the isAttacking flag to true to trigger the animation in Animator
-        octopusAnimator.SetBool("isAttacking", true);
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
 
-        // Play particle effect ONCE when the attack begins
+        attackCoroutine = StartCoroutine(DelayedAttack());
+    }
+
+    IEnumerator DelayedAttack()
+    {
+        // Play particle first
         if (sandParticle && !sandParticle.isPlaying)
         {
             sandParticle.Play();
         }
+
+        // Wait 1 second before starting the animation
+        yield return new WaitForSeconds(1f);
+
+        // Trigger the animation
+        octopusAnimator.SetBool("isAttacking", true);
     }
 
     void StopAttack()
     {
-        // Set the isAttacking flag to false to stop the attack animation
+        // Stop the coroutine if it's running
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+            attackCoroutine = null;
+        }
+
+        // Stop the attack animation
         octopusAnimator.SetBool("isAttacking", false);
     }
 
