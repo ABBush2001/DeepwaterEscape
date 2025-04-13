@@ -174,14 +174,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
         type: 3}
-      propertyPath: playerC
+      propertyPath: noiseObj
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5841576124082770524, guid: ea1ca34c09d759e4abaabb1c9e5a922c,
+        type: 3}
     - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
         type: 3}
       propertyPath: bulletSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
+        type: 3}
+      propertyPath: playerTrans
+      value: 
+      objectReference: {fileID: 2955184583788420057}
     - target: {fileID: 9080791664315093029, guid: 432858f7b28f64eb7ae2415851b89861,
         type: 3}
       propertyPath: BulletPrefab
@@ -459,7 +465,9 @@ MonoBehaviour:
   jumpForce: 50
   jumpTime: 0.85
   gravity: 25
+  animator: {fileID: 0}
   footStepClip: {fileID: 8300000, guid: 6c7656185c9526242bb63ac984b9a1cc, type: 3}
+  jumpSound: {fileID: 0}
 --- !u!82 &6609397475248914839
 AudioSource:
   m_ObjectHideFlags: 0

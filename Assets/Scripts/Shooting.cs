@@ -117,7 +117,7 @@ public class Shooting : MonoBehaviour
         try
         {
             bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
-        }catch(Exception e)
+        }catch(Exception)
         {
             Debug.Log("In Cutscene");
         }
