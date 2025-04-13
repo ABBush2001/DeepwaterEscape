@@ -11,49 +11,93 @@ public class SpikeTrigger : MonoBehaviour
 
     Vector3 startPoint;
 
-    public float radius, moveSpeed;
+    public float radius;
+    public float duration = 0.001f;
+
+    public GameObject circleMat;
+    private Color tempColor;
+
+    private bool inDamageZone = false;
 
     private void Start()
     {
+        tempColor = circleMat.GetComponent<Renderer>().material.color;
+
         startPoint = transform.position;
 
         radius = 5f;
-        moveSpeed = 5f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            inDamageZone = true;
             SpawnProjectiles(other.gameObject);
-            other.gameObject.GetComponent<Player_Health>().TakeDamage(5);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            inDamageZone = false;
         }
     }
 
     private void SpawnProjectiles(GameObject player)
     {
-        projectiles.Play();
-        StartCoroutine(endAnimation());
+        //projectiles.Play();
+        StartCoroutine(flashAnimation(player));
         //StartCoroutine(pushPlayerBack(player));
     }
 
-    IEnumerator endAnimation()
+    IEnumerator flashAnimation(GameObject playerObj)
     {
-        yield return new WaitForSeconds(2);
+        Renderer rend = circleMat.GetComponent<Renderer>();
+        Material mat = rend.material;
+
+        Color color = mat.color;
+
+        for (int cycle = 0; cycle < 2; cycle++)
+        {
+            // Fade out
+            for (float alpha = color.a; alpha > 0; alpha -= 0.05f)
+            {
+                color.a = alpha;
+                mat.color = color;
+                yield return new WaitForSeconds(duration);
+            }
+
+            // Fade in
+            for (float alpha = 0; alpha < 0.5f; alpha += 0.05f)
+            {
+                color.a = alpha;
+                mat.color = color;
+                yield return new WaitForSeconds(duration);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        // Final fade out
+        for (float alpha = 0.5f; alpha > 0; alpha -= 0.05f)
+        {
+            color.a = alpha;
+            mat.color = color;
+            yield return new WaitForSeconds(duration);
+        }
+
+        projectiles.Play();
+
+        if (inDamageZone)
+        {
+            playerObj.gameObject.GetComponent<Player_Health>().TakeDamage(5);
+        }
+
+        yield return new WaitForSeconds(2f);
         projectiles.Stop();
     }
 
-    IEnumerator pushPlayerBack(GameObject player)
-    {
-        player.GetComponent<CommentedThirdPersonController>().velocity = 0;
-
-        for(int i = 0; i < 10; i++)
-        {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, new Vector3(player.transform.forward.x * -1, player.transform.forward.y, player.transform.forward.z * -1), Time.deltaTime * 30);
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        player.GetComponent<CommentedThirdPersonController>().velocity = 10;
-    }
 }
 

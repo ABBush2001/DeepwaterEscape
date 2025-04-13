@@ -57,13 +57,14 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-        if (objectmat.name != "AnglerfishMat (Instance)")
+        if (objectmat.name != "QAFTEX (Instance)")
         {
             Debug.LogError("Renderer or material is not emission_Glow");
             return;
         }
 
 
+        startFlashbang();
     }
 
 

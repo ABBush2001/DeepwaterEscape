@@ -10,7 +10,8 @@ public class MainMenuEvents : MonoBehaviour
     private Button _startButton;
     private Button _exitButton;
     private Button _howToPlayButton;
-    private Button _creditsButton; // NEW
+    private Button _creditsButton;
+    private Button _levelButton;
     private List<Button> _menuButtons = new List<Button>();
     private AudioSource _audioSource;
 
@@ -25,7 +26,8 @@ public class MainMenuEvents : MonoBehaviour
         _startButton = _document.rootVisualElement.Q<Button>("Start");
         _exitButton = _document.rootVisualElement.Q<Button>("Exit");
         _howToPlayButton = _document.rootVisualElement.Q<Button>("HowToPlay");
-        _creditsButton = _document.rootVisualElement.Q<Button>("Credits"); // NEW
+        _creditsButton = _document.rootVisualElement.Q<Button>("Credits");
+        _levelButton = _document.rootVisualElement.Q<Button>("Levels");
 
         if (_startButton != null)
             _startButton.RegisterCallback<ClickEvent>(OnPlayGameClick);
@@ -37,7 +39,10 @@ public class MainMenuEvents : MonoBehaviour
             _howToPlayButton.RegisterCallback<ClickEvent>(OnHowToPlayClick);
 
         if (_creditsButton != null)
-            _creditsButton.RegisterCallback<ClickEvent>(OnCreditsClick); // NEW
+            _creditsButton.RegisterCallback<ClickEvent>(OnCreditsClick);
+
+        if (_levelButton != null)
+            _levelButton.RegisterCallback<ClickEvent>(OnLevelClick);
 
         // Collect all buttons for sound + effect
         _menuButtons = _document.rootVisualElement.Query<Button>().ToList();
@@ -59,7 +64,10 @@ public class MainMenuEvents : MonoBehaviour
             _howToPlayButton.UnregisterCallback<ClickEvent>(OnHowToPlayClick);
 
         if (_creditsButton != null)
-            _creditsButton.UnregisterCallback<ClickEvent>(OnCreditsClick); // NEW
+            _creditsButton.UnregisterCallback<ClickEvent>(OnCreditsClick);
+
+        if (_levelButton != null)
+            _levelButton.RegisterCallback<ClickEvent>(OnLevelClick);
 
         foreach (var button in _menuButtons)
         {
@@ -88,8 +96,14 @@ public class MainMenuEvents : MonoBehaviour
     private void OnCreditsClick(ClickEvent evt)
     {
         Debug.Log("You Pressed the Credits Button");
-        StartCoroutine(PlayCredits()); // NEW
+        StartCoroutine(PlayCredits()); 
     }
+    private void OnLevelClick(ClickEvent evt)
+    {
+        Debug.Log("You Pressed the Level Button");
+        StartCoroutine(PlayLevel());
+    }
+
 
     private void OnAllButtonsClick(ClickEvent evt)
     {
@@ -134,7 +148,7 @@ public class MainMenuEvents : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator PlayCredits() // NEW
+    private IEnumerator PlayCredits()
     {
         if (_isTransitioning) yield break;
         _isTransitioning = true;
@@ -145,4 +159,18 @@ public class MainMenuEvents : MonoBehaviour
         yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
         SceneManager.LoadScene("Credits"); // Make sure the scene name matches exactly!
     }
+
+    private IEnumerator PlayLevel()
+    {
+        if (_isTransitioning) yield break;
+        _isTransitioning = true;
+
+        if (_audioSource != null)
+            _audioSource.Play();
+
+        yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
+        SceneManager.LoadScene("leveltest"); // Make sure the scene name matches exactly!
+    }
+
+
 }
