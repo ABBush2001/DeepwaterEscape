@@ -6,6 +6,7 @@ using TMPro;
 /*
  * This script handles the opening cutscene that introduces the anglerfish queen
 */
+
 public class OpeningBossCutscene : MonoBehaviour
 {
     public Camera mainCamera;
@@ -17,18 +18,26 @@ public class OpeningBossCutscene : MonoBehaviour
 
     public GameObject Node1;
     public GameObject bossFightSystem;
+    public GameObject bossManager;
     public GameObject DialogueManager;
 
     public TextMeshProUGUI instructionsText;
+    public TextMeshProUGUI bossTitle;
+    public GameObject bossHealthSlider;
+
+    public AudioSource mainAudio;
+    public AudioSource cutsceneAudio;
 
     [SerializeField] private TextAsset inkJson;
 
+    bool canTrigger = true;
     bool cutsceneStarted = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && canTrigger)
         {
+            canTrigger = false;
             StartCoroutine(cutscene());
         }
     }
@@ -41,6 +50,7 @@ public class OpeningBossCutscene : MonoBehaviour
             mainCamera.enabled = true;
             cutsceneCamera.enabled = false;
             bossFightSystem.SetActive(true);
+            //StartCoroutine(bossManager.GetComponent<BossManager>().bossFight());
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
             instructionsText.enabled = true;
             Time.timeScale = 0.1f;
@@ -49,6 +59,8 @@ public class OpeningBossCutscene : MonoBehaviour
 
         if(instructionsText.enabled && Input.GetKeyDown(KeyCode.Space))
         {
+            bossHealthSlider.SetActive(true);
+            bossTitle.enabled = true;
             instructionsText.enabled = false;
             Time.timeScale = 1f;
             Destroy(this.gameObject);
@@ -58,6 +70,14 @@ public class OpeningBossCutscene : MonoBehaviour
     IEnumerator cutscene()
     {
         cutsceneStarted = true;
+        // Ensure only cutscene audio is playing
+        if (mainAudio != null) mainAudio.Stop();
+        if (cutsceneAudio != null)
+        {
+            cutsceneAudio.Stop(); // force reset if looping
+            cutsceneAudio.Play();
+        }
+
 
         //player.GetComponent<CommentedThirdPersonController>().velocity = 0;
 
