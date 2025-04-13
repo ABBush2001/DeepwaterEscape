@@ -22,6 +22,8 @@ public class OpeningBossCutscene : MonoBehaviour
     public GameObject DialogueManager;
 
     public TextMeshProUGUI instructionsText;
+    public TextMeshProUGUI bossTitle;
+    public GameObject bossHealthSlider;
 
     public AudioSource mainAudio;
     public AudioSource cutsceneAudio;
@@ -57,6 +59,8 @@ public class OpeningBossCutscene : MonoBehaviour
 
         if(instructionsText.enabled && Input.GetKeyDown(KeyCode.Space))
         {
+            bossHealthSlider.SetActive(true);
+            bossTitle.enabled = true;
             instructionsText.enabled = false;
             Time.timeScale = 1f;
             Destroy(this.gameObject);

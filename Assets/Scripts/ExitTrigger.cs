@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 public class ExitTrigger : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class ExitTrigger : MonoBehaviour
     public AudioSource ExplosionSound2;
     public AudioSource ExplosionSound3;
     public AudioSource ExplosionSound4;
+
+    public GameObject explosion;
+    public GameObject explosion1;
+    public GameObject explosion2;
 
     public float shakeAmount;
 
@@ -39,19 +44,19 @@ public class ExitTrigger : MonoBehaviour
         outroCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         ExplosionSound1.Play();
         StartCoroutine(cameraShake(1f, shakeAmount));
-        Explosion1.GetComponent<ParticleSystem>().Play();
+        explosion.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.5f);
         ExplosionSound2.Play();
         StartCoroutine(cameraShake(1f, shakeAmount));
-        Explosion2.GetComponent<ParticleSystem>().Play();
+        explosion1.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.2f);
         ExplosionSound3.Play();
         StartCoroutine(cameraShake(1f, shakeAmount));
-        Explosion3.GetComponent<ParticleSystem>().Play();
+        explosion2.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.3f);
         ExplosionSound4.Play();
         StartCoroutine(cameraShake(5f, shakeAmount));
-        Explosion4.GetComponent<ParticleSystem>().Play();
+        explosion.GetComponent<VisualEffect>().Play();
 
         yield return new WaitForSeconds(6);
         SceneManager.LoadScene("UpdatedOceanFloor");
