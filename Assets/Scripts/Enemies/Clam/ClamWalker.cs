@@ -7,11 +7,20 @@ using UnityEngine.AI;
 
 public class ClamWalker : MonoBehaviour
 {
+    // BEHOLD, CONVENIENCE
+    const string ANIM_ISSLEEPER = "B_isSleeper";
+    const string ANIM_ISPATROLLER = "B_isPatroller";
+    const string ANIM_JUMP = "b_isJumping";
+    const string ANIM_SPOOKED = "t_spooked";
+    const string ANIM_FINISHDEBURROW = "b_hasDeburrowed";
+    const string ANIM_SEENPLAYER = "b_hasSeenPlayer";
+    const string ANIM_DEAD = "b_isDead";
+
     [Header("Clam Type (Don't Touch)")]
-    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")]
-    public bool patrols;
-    [Tooltip("Is the clam a sleeper clam? Does not function with patrols, and you shouldn't touch it.")]
-    public bool sleeper;
+    [Tooltip("Does the clam patrol? Enables below variables to work. You shouldn't touch this.")] [SerializeField]
+    protected bool patrols;
+    [Tooltip("Is the clam a sleeper clam? Does not function with patrols, and you shouldn't touch it.")] [SerializeField]
+    protected bool sleeper;
 
     [Space(10f)]
 
@@ -24,7 +33,8 @@ public class ClamWalker : MonoBehaviour
     private Player_Health playerHealth;
     public Transform looker;
     public GameObject clamBody;
-    public Animator animator;
+    public ClamAnimPlayer claminatorScript;
+    //public Animator animator;
 
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
@@ -76,6 +86,8 @@ public class ClamWalker : MonoBehaviour
             waypointIndex = 0; // We're using this for later, keep it around at 0
             UpdateClamPatrolDest();
         }
+        claminatorScript.SetAnimBool(ANIM_ISPATROLLER, patrols);
+        claminatorScript.SetAnimBool(ANIM_ISSLEEPER, sleeper);
     }
 
     private void FixedUpdate()
@@ -96,13 +108,12 @@ public class ClamWalker : MonoBehaviour
         else if (hasSeenPlayer && !isRebounding) // Hasn't deburrowed, has it seen the player? If so, run the deburrow timer and look at the player.
         {
             canLook = true;
-            if (deBurrowTime > 0)
-            {
+            if (deBurrowTime > 0) {
                 deBurrowTime -= Time.fixedDeltaTime;
             }
-            else
-            {
+            else {
                 hasDeBurrowed = true;
+                claminatorScript.SetAnimBool(ANIM_FINISHDEBURROW, hasDeBurrowed);
             }
         }
     }
@@ -120,13 +131,11 @@ public class ClamWalker : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Alert(other, false); // Alert() is public for detector scripts to call
+            Alert(false); // Alert() is public for detector scripts to call
         }
     }
 
-#pragma warning disable IDE0060 // Remove unused parameter
-    public void Alert(Collider other, bool isNoise)
-#pragma warning restore IDE0060 // Remove unused parameter
+    public void Alert(bool isNoise)
     {
         if (!hasSeenPlayer)
         {
@@ -136,18 +145,29 @@ public class ClamWalker : MonoBehaviour
             //else {
             //    playerPos = other.gameObject.GetComponentInParent<Transform>();
             //}
-            Debug.Log(playerPos);
+            //Debug.Log(playerPos);
+
+            hasSeenPlayer = true;
+            claminatorScript.SetAnimBool(ANIM_SEENPLAYER, hasSeenPlayer);
+
             if (!sleeper)
             {
                 //clamBody.transform.localPosition.Set(0, deBurrowHeight, 0); // 
                 clamBody.transform.localPosition = new Vector3(0, deBurrowHeight, 0); // Put clam body above surface if not sleeper
             }
+
             clamNavAgent.destination = transform.position; // stop patrol when player is detected
+
             if (patrols) {
                 UpdateStats(); // update to alert stats
             }
+
+            if (isNoise) { 
+                claminatorScript.SetAnimTrigger(ANIM_SPOOKED); 
+            }
+
+            
         }
-        hasSeenPlayer = true;
     }
 
     private void InitBaseDataStats() // constructors simply break w/ scriptable objects, so it has to be done with a function
@@ -189,8 +209,8 @@ public class ClamWalker : MonoBehaviour
                     curJumpCooldown -= Time.fixedDeltaTime;
                     canLook = true;
                 }
-                else { // if rebounding, decrement rebound counter and
-                    curReboundJumpDelay -= Time.fixedDeltaTime; // 50 ms 
+                else { // if rebounding, decrement rebound counter and check if it's done
+                    curReboundJumpDelay -= Time.fixedDeltaTime; // 50 ms
                     if (curReboundJumpDelay <= 0) {
                         isRebounding = false;
                         clamNavAgent.isStopped = false;
@@ -198,6 +218,8 @@ public class ClamWalker : MonoBehaviour
                 }
             }
         }
+
+        claminatorScript.SetAnimBool(ANIM_JUMP, isJumping);
     }
 
     private void ClamJump()
@@ -208,7 +230,8 @@ public class ClamWalker : MonoBehaviour
         curJumpCooldown = jumpCooldown;
         isJumping = true; // isJumping only exists to make code relating to looking at the player easier to understand
         canHurt = true; // Clam only hurts player when jumping.
-        canLook = false;
+        canLook = false; // Don't rotate to face player while jumping
+        claminatorScript.SetAnimBool(ANIM_JUMP, isJumping);
     }
 
     public void AttemptHurt()
@@ -223,11 +246,11 @@ public class ClamWalker : MonoBehaviour
 
     private void Rebound()
     {
-        clamNavAgent.ResetPath();
-        clamNavAgent.velocity = Vector3.zero;
-        clamNavAgent.isStopped = true;
+        clamNavAgent.ResetPath(); // CEASE
+        clamNavAgent.velocity = Vector3.zero; // THINE
+        clamNavAgent.isStopped = true; // M O V E M E N T
         curReboundJumpDelay = reboundJumpDelay;
-        rb.AddRelativeForce(Vector3.forward * -clamData.hitReboundPushForce, ForceMode.VelocityChange);
+        rb.AddRelativeForce(Vector3.forward * -clamData.hitReboundPushForce, ForceMode.VelocityChange); // the actual physics, it's kinda borked.
         isJumping = false;
         isRebounding = true;
         canLook = false;
@@ -247,19 +270,3 @@ public class ClamWalker : MonoBehaviour
         }
     }
 }
-
-
-/*
- * Clam patrol values;
- * Base offset: 0
- * Speed: 15
- * Angular Speed: 360
- * Acceleration: 20
- * Stop Dist.: 0
- * Auto Brake: False
- * 
- * Radius: 2.75
- * Height: 2.85
- * No Quality
- * Priority: 50
- */

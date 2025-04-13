@@ -76,6 +76,8 @@ public class PathManager : MonoBehaviour
                         //path1.GetComponent<FollowPath>().setCurrentNode(2);
                     }
                 }
+
+                yield return new WaitForSeconds(6f);
             }
         }
     }

@@ -29,5 +29,6 @@ public class InputReader : MonoBehaviour
     {
         //playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
+        Debug.LogAssertion("This stanky onrails inputreader script is still being used",this.gameObject);
     }
 }

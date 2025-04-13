@@ -36,6 +36,33 @@ public class FollowPath : MonoBehaviour
         }
     }
 
+    public void SnapToClosestNode()
+    {
+        float closestDist = float.MaxValue;
+        int closestIndex = 0;
+
+        for (int i = 0; i < PathNode.Length; i++)
+        {
+            float dist = Vector3.Distance(enemy.transform.position, PathNode[i].transform.position);
+            if (dist < closestDist)
+            {
+                closestDist = dist;
+                closestIndex = i;
+            }
+        }
+
+        currentNode = closestIndex;
+        CheckNode();
+    }
+
+
+    public void SyncToCurrentPosition()
+    {
+        startPosition = enemy.transform.position;
+        currentPositionHolder = PathNode[currentNode].transform.position;
+        timer = 0;
+    }
+
     //set the current node
     void CheckNode()
     {
@@ -93,6 +120,11 @@ public class FollowPath : MonoBehaviour
     // Lerp the enemy between nodes
     void Update()
     {
+        if (BossManager.isMoving)
+        {
+            return;
+        }
+
         Debug.Log(currentNode);
         timer += Time.deltaTime * moveSpeed;
 

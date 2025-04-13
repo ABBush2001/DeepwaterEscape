@@ -78,13 +78,18 @@ public class CommentedThirdPersonController : MonoBehaviour
         inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
 
         //check movement for animations
-        if(inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0 || inputVertical < 0)
+        if(inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0)
         {
             animator.SetBool("isWalking", true);
+        }
+        else if (inputHorizontal > 0 || inputHorizontal < 0 || inputVertical < 0)
+        {
+            animator.SetBool("isBackWalking", true);
         }
         else
         {
             animator.SetBool("isWalking", false);
+            animator.SetBool("isBackWalking", false);
         }
 
         // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
@@ -127,6 +132,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             else
             {
                 isSprinting = false;
+                animator.SetBool("isSprinting", false);
             }
             
             // After going through the above condition, we already have the answer to whether it is running or not within the variable
@@ -138,6 +144,7 @@ public class CommentedThirdPersonController : MonoBehaviour
         if( cc.isGrounded == true )
         {
             animator.SetBool( "air", false );
+            animator.SetTrigger("Landing");
         }
         else
         {
@@ -148,7 +155,7 @@ public class CommentedThirdPersonController : MonoBehaviour
         if ( inputJump && cc.isGrounded )
         {
             Debug.Log("Jumping");
-
+            
             isJumping = true;
             // Disable crounching when jumping? You decide, just uncomment:
             // isCrouching = false;
@@ -174,6 +181,11 @@ public class CommentedThirdPersonController : MonoBehaviour
         if ( isSprinting )
         {
             velocityAdittion = sprintAdittion;
+            animator.SetBool("isSprinting", true);
+        }
+        else
+        {
+            animator.SetBool("isSprinting", false);
         }
         // Checks if the player is couching, because if he is, it will add a speed debuff
         if (isCrouching)
@@ -196,6 +208,8 @@ public class CommentedThirdPersonController : MonoBehaviour
             // Learn more here: https://docs.unity3d.com/ScriptReference/Mathf.SmoothStep.html
             // You can test this to see how strange it would sound: directionY = jumpForce * Time.deltaTime;
             directionY = Mathf.SmoothStep(jumpForce, jumpForce * 0.30f, jumpElapsedTime / jumpTime) * Time.deltaTime;
+            animator.SetTrigger("Jumping");
+
 
             // Increases the time that has passed since the player started the jump
             jumpElapsedTime += Time.deltaTime;
@@ -227,7 +241,7 @@ public class CommentedThirdPersonController : MonoBehaviour
         {
             forward = Camera.main.transform.forward;
             right = Camera.main.transform.right;
-        }catch(Exception e)
+        }catch(Exception)
         {
             Debug.Log("Cutscene in progress");
         }
@@ -305,4 +319,3 @@ public class CommentedThirdPersonController : MonoBehaviour
         enabled = canMove;
     }
 }
-
