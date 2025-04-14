@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * This script is placed on a collider to check if the player
@@ -16,6 +17,8 @@ public class DialogueTrigger : MonoBehaviour
 
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJson;  // Ink file for dialogue
+
+    [SerializeField] private TextMeshProUGUI continueText;
 
     private bool playerInRange;
 
@@ -35,6 +38,7 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))  // Player presses F to start the dialogue
             {
+                continueText.enabled = true;
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
             }
         }

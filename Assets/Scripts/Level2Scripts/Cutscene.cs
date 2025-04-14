@@ -31,12 +31,16 @@ public class Cutscene : MonoBehaviour
 
     [SerializeField] float moveSpeed = 10;
 
+    public GameObject playerAnimator;
+    private Animator animControl;
+
     // Start is called before the first frame update
     void Start()
     {
         mainCamera.enabled = false;
         camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
         lastCoroutine = StartCoroutine(startMovingCamera());
+        animControl = playerAnimator.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,13 +58,16 @@ public class Cutscene : MonoBehaviour
             camera2.enabled = false;
             camera3.enabled = false;
             mainCamera.enabled = true;
-
+            animControl.SetTrigger("IntroAnim");
             mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
+            
         }
     }
 
     IEnumerator startMovingCamera()
     {
+        skipText.enabled = true;
+
         while (camera1.transform.position.z < camNode2.transform.position.z)
         {
             //camera1.transform.SetPositionAndRotation(new Vector3(camera1.transform.position.x, camera1.transform.position.y, camera1.transform.position.z + 0.1f), camera1.transform.rotation);
@@ -96,6 +103,7 @@ public class Cutscene : MonoBehaviour
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
         instructions.enabled = true;
+        animControl.SetTrigger("IntroAnim");
 
         levelStarted = true;
     }
