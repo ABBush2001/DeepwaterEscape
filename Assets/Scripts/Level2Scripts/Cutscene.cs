@@ -61,6 +61,8 @@ public class Cutscene : MonoBehaviour
 
     IEnumerator startMovingCamera()
     {
+        skipText.enabled = true;
+
         while (camera1.transform.position.z < camNode2.transform.position.z)
         {
             //camera1.transform.SetPositionAndRotation(new Vector3(camera1.transform.position.x, camera1.transform.position.y, camera1.transform.position.z + 0.1f), camera1.transform.rotation);
