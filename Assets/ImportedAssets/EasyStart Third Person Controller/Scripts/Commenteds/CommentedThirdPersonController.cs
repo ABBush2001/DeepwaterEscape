@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Main script for third-person movement of the character in the game.
@@ -24,6 +25,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     [Space]
     [Tooltip("Force that pulls the player down. Changing this value causes all movement, jumping and falling to be changed as well.")]
     public float gravity = 9.8f;
+    public float IncreaseGravity = 4.9f;
 
     // Checks the character's current state
     bool isJumping = false;
@@ -163,6 +165,21 @@ public class CommentedThirdPersonController : MonoBehaviour
             if (jumpSound != null)
             {
                 audioSource.PlayOneShot(jumpSound);
+            }
+        }
+
+        // This is to increase the gravity of the player 
+        if (SceneManager.GetActiveScene().name == "5. JellyfishJump") // Set scene to activate the effect
+        {
+            if (Input.GetKey(KeyCode.C))
+            {
+                gravity = IncreaseGravity;
+                isJumping = false;
+                jumpElapsedTime = 0;
+            }
+            else
+            {
+                gravity = 9.8f;
             }
         }
 
