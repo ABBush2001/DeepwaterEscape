@@ -71,7 +71,7 @@ public class FlashBang_V1 : MonoBehaviour
             Debug.LogError("Timer text is not assigned");
             return;
         }
-        startFlashbang();
+        //startFlashbang();
     }
 
 
