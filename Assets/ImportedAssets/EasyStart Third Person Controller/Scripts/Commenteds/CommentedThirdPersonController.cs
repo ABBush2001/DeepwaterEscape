@@ -241,7 +241,7 @@ public class CommentedThirdPersonController : MonoBehaviour
         {
             forward = Camera.main.transform.forward;
             right = Camera.main.transform.right;
-        }catch(Exception e)
+        }catch(Exception)
         {
             Debug.Log("Cutscene in progress");
         }
@@ -319,4 +319,3 @@ public class CommentedThirdPersonController : MonoBehaviour
         enabled = canMove;
     }
 }
-

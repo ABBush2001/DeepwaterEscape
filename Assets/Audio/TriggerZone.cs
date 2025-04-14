@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Unknown script function
+
 public class TriggerZone : MonoBehaviour
 {
     [SerializeField] string tagFilter;
@@ -11,13 +13,18 @@ public class TriggerZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
+        if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) {
+            return;
+        }
         onTriggerEnter.Invoke();
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) return;
-        onTriggerExit.Invoke();
+        if (!string.IsNullOrEmpty(tagFilter) && !other.gameObject.CompareTag(tagFilter)) {
+            return;
+        }
+
+        onTriggerEnter.Invoke();
     }
 }

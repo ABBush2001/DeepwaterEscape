@@ -62,7 +62,7 @@ public class Player_Health : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        StartCoroutine(damageScreenDisplay());
+        StartCoroutine(DamageScreenDisplay());
         UpdateText();
     }
 
@@ -74,7 +74,7 @@ public class Player_Health : MonoBehaviour
         }
     }
 
-    IEnumerator damageScreenDisplay()
+    IEnumerator DamageScreenDisplay()
     {
         damageScreen.enabled = true;
         yield return new WaitForSeconds(0.5f);
