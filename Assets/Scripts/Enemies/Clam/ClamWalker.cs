@@ -50,7 +50,7 @@ public class ClamWalker : MonoBehaviour
     protected float jumpCooldown;
     private float curJumpCooldown;
     [Tooltip("The maximum horizontal distance the clam can jump to.")]
-    protected float maxJumpDistance;
+    protected float maxJumpDistance = 25;
     [Tooltip("The amount of damage the clam does.")]
     protected int damage;
     
