@@ -10,7 +10,7 @@ public class E_Health : MonoBehaviour
     public int EnemyDmg = 25;
     public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
 
-    [SerializeField] private Animator EnColl = null;
+    // [SerializeField] private Animator EnColl = null;
 
     //private string sceneToLoad;
 
