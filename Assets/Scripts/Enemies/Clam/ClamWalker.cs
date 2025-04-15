@@ -269,4 +269,11 @@ public class ClamWalker : MonoBehaviour
             waypointIndex = 0;
         }
     }
+
+    public void SetDead(bool dead)
+    {
+        claminatorScript.SetAnimBool(ANIM_DEAD, dead);
+        Rebound(); // knockback on death baybee
+        enabled = false; // stop logic when ded
+    }
 }

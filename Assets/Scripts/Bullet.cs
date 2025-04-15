@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
                 enemyHealth.DamageOnEnemy(Damage);
             }
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
 
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Gun") || collision.gameObject.CompareTag("Player"))
         {
-
+            
         }
         else
         {
@@ -67,7 +67,7 @@ public class Bullet : MonoBehaviour
                 enemyHealth.DamageOnEnemy(Damage);
             }
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

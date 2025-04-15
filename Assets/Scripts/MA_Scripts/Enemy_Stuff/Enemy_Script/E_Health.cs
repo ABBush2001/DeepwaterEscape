@@ -9,6 +9,9 @@ public class E_Health : MonoBehaviour
     public int EnemyHealth = 100;
     public int EnemyDmg = 25;
     public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
+    public ClamWalker walker;
+
+    const string ANIM_DEAD = "b_isDead";
 
     // [SerializeField] private Animator EnColl = null;
 
@@ -28,13 +31,18 @@ public class E_Health : MonoBehaviour
 
     public void Defeat()
     {
-        if (parentObj != null) {
-            Destroy(parentObj); 
+        if (walker != null) {
+            walker.SetDead(true);
         }
         else {
             Debug.LogWarning("Parent obj not assigned", this);
             Destroy(gameObject);
         }
+    }
+
+    public void DestroyGameObj()
+    {
+        if (parentObj != null) { Destroy(parentObj); }
     }
 
     void OnTriggerEnter(Collider other)
