@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
                 enemyHealth.DamageOnEnemy(Damage);
             }
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
 
 
@@ -67,7 +67,7 @@ public class Bullet : MonoBehaviour
                 enemyHealth.DamageOnEnemy(Damage);
             }
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }
