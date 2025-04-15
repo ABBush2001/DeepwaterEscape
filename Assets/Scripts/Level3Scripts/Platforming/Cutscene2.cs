@@ -19,6 +19,7 @@ public class Cutscene2 : MonoBehaviour
     public GameObject textBox;
     public TextMeshProUGUI skipText;
 
+    public CheckpointManager checkPointManager;
 
     public float moveSpeed = 10;
 
@@ -29,6 +30,8 @@ public class Cutscene2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        checkPointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
+
         mainCamera.enabled = false;
         camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
         lastCoroutine = StartCoroutine(startMovingCamera());
