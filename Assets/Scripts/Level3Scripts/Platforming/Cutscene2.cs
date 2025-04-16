@@ -38,9 +38,14 @@ public class Cutscene2 : MonoBehaviour
     {
         checkPointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
 
-        mainCamera.enabled = false;
-        camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
-        lastCoroutine = StartCoroutine(startMovingCamera());
+        if (checkPointManager.currentCheckpoint == "")
+        {
+            mainCamera.enabled = false;
+            camera1.enabled = true;
+            camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
+            lastCoroutine = StartCoroutine(startMovingCamera());
+        }
+
     }
 
     //exit out of the cutscene if the skip key is pressed
