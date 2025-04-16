@@ -25,6 +25,6 @@ public class TriggerZone : MonoBehaviour
             return;
         }
 
-        onTriggerExit.Invoke();
+        onTriggerEnter.Invoke();
     }
 }

@@ -22,7 +22,6 @@ public class Cutscene : MonoBehaviour
     public GameObject camNode5;
     public GameObject camNode6;
 
-
     public GameObject textBox;
     public TextMeshProUGUI skipText;
 
