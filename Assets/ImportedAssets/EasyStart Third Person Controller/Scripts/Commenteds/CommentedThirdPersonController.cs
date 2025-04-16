@@ -27,10 +27,11 @@ public class CommentedThirdPersonController : MonoBehaviour
     public float gravity = 9.8f;
     public float IncreaseGravity = 4.9f;
 
+
     // Checks the character's current state
-    bool isJumping = false;
-    bool isSprinting = false;
-    bool isCrouching = false;
+    public bool isJumping = false;
+    public bool isSprinting = false;
+    public bool isCrouching = false;
 
     // Identifiable game keys input for the player
     float inputHorizontal;
@@ -46,7 +47,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     CharacterController cc;
 
     // Variable controlling the time the player spent in the air. Explained further below.
-    float jumpElapsedTime = 0;
+    public float jumpElapsedTime = 0;
 
     private AudioSource audioSource;
     public AudioClip footStepClip; // private bool isFootstep = false;
