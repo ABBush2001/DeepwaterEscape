@@ -64,7 +64,7 @@ public class SpikeTrigger : MonoBehaviour
         for (int cycle = 0; cycle < 2; cycle++)
         {
             // Fade out
-            for (float alpha = color.a; alpha > 0; alpha -= 0.05f)
+            for (float alpha = color.a; alpha > 0; alpha -= 0.07f)
             {
                 color.a = alpha;
                 mat.color = color;
@@ -72,7 +72,7 @@ public class SpikeTrigger : MonoBehaviour
             }
 
             // Fade in
-            for (float alpha = 0; alpha < 0.5f; alpha += 0.05f)
+            for (float alpha = 0; alpha < 0.5f; alpha += 0.07f)
             {
                 color.a = alpha;
                 mat.color = color;
