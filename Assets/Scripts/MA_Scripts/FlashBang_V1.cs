@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FlashBang_V1 : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class FlashBang_V1 : MonoBehaviour
     private object glowMat;
 
     public GameObject QAF;
+    public TextMeshProUGUI timerText;// display timer
 
     private AudioSource WhiteNoise;
 
@@ -57,27 +59,53 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-        if (objectmat.name != "AnglerfishMat (Instance)")
+        if (objectmat.name != "QAFTEX (Instance)")
         {
             Debug.LogError("Renderer or material is not emission_Glow");
             return;
         }
 
 
+        if (timerText == null)
+        {
+            Debug.LogError("Timer text is not assigned");
+            return;
+        }
+        startFlashbang();
     }
 
 
     public void startFlashbang()
     {
+        timerText.gameObject.SetActive(true);
+        StopAllCoroutines(); // Stops all coroutines to prevent overlapping behavior
+        StartCoroutine(ShowWarningAndStartTimer());
+    }
+
+    private IEnumerator ShowWarningAndStartTimer()
+    {
+        // Display the warning message
+        timerText.text = "FlashBang Warning";
+        yield return new WaitForSeconds(1.5f); // Show warning for X amount seconds
+
+        // Start the timer countdown
+        StartCoroutine(UpdateTimer());
         StartCoroutine(GlowEffect());
-
-
-
-        // This audio to trigger
-        // StartCoroutine(AudioEffect());
-
-        // this is important this is to set off the explodion and when it activate
         Invoke(nameof(Explode), fuseTime);
+    }
+
+    private IEnumerator UpdateTimer()
+    {
+        float remainingTime = fuseTime;
+
+        while (remainingTime > 0)
+        {
+            timerText.text = $"{remainingTime:F1}s";
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f;
+        }
+
+        timerText.text = "0.0s";
     }
 
     // to show the explosion and to determen that it was seen or not
@@ -102,6 +130,7 @@ public class FlashBang_V1 : MonoBehaviour
             // If you dont see it
             Debug.Log("don't get affected!");
         }
+        timerText.gameObject.SetActive(false);
     }
 
     // this is to determan if the camera is not looking or something is blocking the view
@@ -157,7 +186,7 @@ public class FlashBang_V1 : MonoBehaviour
     private IEnumerator GlowEffect()
     {
         float glowSpeed = 2f; // Speed of the glow pulseing 
-        float maxEmn = 1.5f; // how bright the glow is
+        float maxEmn = 10; // how bright the glow is
         float minEmn = 0.5f; // how dim the glow is
         Color baseColor = objectmat.GetColor("_EmissionColor"); // Base color of emission
 
