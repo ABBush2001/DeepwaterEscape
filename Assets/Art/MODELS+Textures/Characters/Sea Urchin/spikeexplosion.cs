@@ -44,6 +44,8 @@ public class SpikeExplosion : MonoBehaviour
         {
             ShowSpike(spike);
 
+            spike.transform.localScale = new Vector3(2, 2, 2);
+
             if (spike.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
                 rb.isKinematic = false;
