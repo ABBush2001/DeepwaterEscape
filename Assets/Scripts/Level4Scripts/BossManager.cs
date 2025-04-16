@@ -16,13 +16,14 @@ using UnityEngine;
 */
 public class BossManager : MonoBehaviour
 {
+    //variables
     public GameObject biteSystem;
     public GameObject mainPath;
     public GameObject enemy;
     public GameObject player;
     public GameObject enemyModel;
 
-    // wave
+    // wave variables
     public GameObject wave;
     public GameObject wave1;
     public GameObject wave2;
@@ -41,8 +42,8 @@ public class BossManager : MonoBehaviour
     public Animator queenAnimator;
 
     public static bool isMoving = false;
-    
-    // Start is called before the first frame update
+
+    //initialize the attack queue and start the boss fight coroutine 
     void Start()
     {
 
@@ -59,24 +60,10 @@ public class BossManager : MonoBehaviour
         StartCoroutine(bossFight());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*if (Input.GetKeyDown(KeyCode.F))
-        {
-            //StartCoroutine(ChaseAttack()); // Set the target position here
-            //enemy.GetComponent<FlashBang_V1>().startFlashbang();
-            MoveEnemyAndStartWave();
-        }*/
-
-    }
-
-
-    
-
-
+    //method to do the wave attack
     void WaveAround(GameObject wavePrefab, Vector3 rotationOffset)
     {
+        //instantiate the wave and call script to move it
         GameObject temp = Instantiate(wavePrefab);
         temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
         temp.transform.Rotate(rotationOffset);
@@ -94,7 +81,7 @@ public class BossManager : MonoBehaviour
         Destroy(temp, 1.5f);
     }
 
-
+    //method to start waves for each wave cylinder
     void StartWave()
     {
         
@@ -115,6 +102,7 @@ public class BossManager : MonoBehaviour
     }
 
 
+    //coroutine to move the boss into position to start the wave
     public IEnumerator MoveEnemyAndStartWave()
     {
         isMoving = true;
@@ -166,9 +154,6 @@ public class BossManager : MonoBehaviour
         {
             followPath.SnapToClosestNode();
             followPath.enabled = true;
-
-            // Optional but recommended: force re-check current node
-            //followPath.SetNode(followPath.getNode().NodeIndex);
         }
 
         isMoving = false;
@@ -176,7 +161,7 @@ public class BossManager : MonoBehaviour
 
 
 
-
+    //method to handle the boss charging at the player
     public IEnumerator ChaseAttack()
     {
         isMoving = true;
@@ -186,7 +171,8 @@ public class BossManager : MonoBehaviour
         FollowPath followPath = enemy.GetComponent<FollowPath>();
         float originalSpeed = 1f;
 
-        
+        //disable boss movement
+
         if (followPath != null)
         {
             originalSpeed = followPath.moveSpeed;
@@ -197,6 +183,7 @@ public class BossManager : MonoBehaviour
         Vector3 originalPosition = enemy.transform.position;
         Quaternion originalRotation = enemy.transform.rotation;
 
+        //move boss towards player
        
         if (player != null)
         {
@@ -225,6 +212,7 @@ public class BossManager : MonoBehaviour
             enemy.transform.position = dashTarget;
         }
 
+        //move boss back towards its original position
         
         if (enemy != null)
         {
@@ -253,6 +241,7 @@ public class BossManager : MonoBehaviour
             enemy.transform.position = originalPosition;
         }
 
+        //reset rotation
         
         if (enemy != null)
         {
@@ -272,6 +261,7 @@ public class BossManager : MonoBehaviour
             enemy.transform.rotation = originalRotation;
         }
 
+        //reactivate boss movement
         
         if (followPath != null)
         {
@@ -284,19 +274,16 @@ public class BossManager : MonoBehaviour
     }
 
 
-
+    //method for handling the boss fight
     public IEnumerator bossFight()
     {
-        Debug.Log("Attack queue started!");
 
         //loop for boss fight
-        //NOTE - will later be updated to loop on boss health
         while (true)
         {
             //initialize queue
             for (int i = 0; i < 5; i++)
             {
-                Debug.Log("Initializing queue!");
 
                 int temp = Random.Range(1, 101);
                 if (temp <= 25)
@@ -305,7 +292,7 @@ public class BossManager : MonoBehaviour
                 }
                 else if (temp > 25 && temp <= 75)
                 {
-                    attackQueue[i] = 1; // change it back to 3
+                    attackQueue[i] = 1;
                 }
                 else
                 {
@@ -318,7 +305,7 @@ public class BossManager : MonoBehaviour
                     }
                     else
                     {
-                        attackQueue[i] = 3; // change it back to 1
+                        attackQueue[i] = 3;
                     }
 
                 }
