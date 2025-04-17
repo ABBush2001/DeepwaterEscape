@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * This script handles the movement from level 3 to the arena.
+*/
 public class Level3NextLevelTrigger : MonoBehaviour
 {
     [SerializeField] GameObject mainCamera;
