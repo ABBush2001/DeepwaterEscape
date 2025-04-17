@@ -46,7 +46,7 @@ public class Cutscene2 : MonoBehaviour
         if (checkPointManager.currentCheckpoint == "")
         {
             player.SetActive(false);
-            canvas.SetActive(false)
+            canvas.SetActive(false);
             mainCamera.enabled = false;
             camera1.enabled = true;
             camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
