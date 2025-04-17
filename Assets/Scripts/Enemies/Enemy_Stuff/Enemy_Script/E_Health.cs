@@ -4,34 +4,35 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-/*
- * This script tracks and updates enemy health. This also includes
- * Enemies dealing damage to the player
-*/
 public class E_Health : MonoBehaviour
 {
-    //variables
     public int EnemyHealth = 100;
     public int EnemyDmg = 25;
     public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
+    public ClamWalker walker;
 
-    [SerializeField] private Animator EnColl = null;
+    const string ANIM_DEAD = "b_isDead";
 
-    //Method to deal damage to enemies
+    // [SerializeField] private Animator EnColl = null;
+
+    //private string sceneToLoad;
+
+    //public TextMeshProUGUI Healtext;
+
     public void DamageOnEnemy(int damage)
     {
         EnemyHealth -= damage;
         if (EnemyHealth <= 0)
         {
             Defeat();
+            // SceneManager.LoadScene(sceneToLoad);
         }
     }
 
-    //Destroy the enemy when health hits zero
     public void Defeat()
     {
-        if (parentObj != null) {
-            Destroy(parentObj); 
+        if (walker != null) {
+            walker.SetDead(true);
         }
         else {
             Debug.LogWarning("Parent obj not assigned", this);
@@ -39,7 +40,11 @@ public class E_Health : MonoBehaviour
         }
     }
 
-    //if the player collides with the enemy, deal damage to the player
+    public void DestroyGameObj()
+    {
+        if (parentObj != null) { Destroy(parentObj); }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) // More efficient tag comparison
