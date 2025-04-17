@@ -9,6 +9,7 @@ using UnityEngine;
 
 public class ChangeWaves : MonoBehaviour
 {
+    //variables
     public Material redFlatlineMat;
     public Material redStaticMat;
     public Material redSonarMat;
@@ -20,18 +21,7 @@ public class ChangeWaves : MonoBehaviour
     public GameObject staticFuzz;
     public GameObject sonar;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //update the materials
     public void updateMats()
     {
         flatline1.GetComponent<MeshRenderer>().material = redFlatlineMat;
