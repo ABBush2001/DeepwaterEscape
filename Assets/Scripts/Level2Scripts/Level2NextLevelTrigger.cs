@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * This script handles movement from the ocean floor scene
+ * to level 3.
+*/
 public class Level2NextLevelTrigger : MonoBehaviour
 {
+    //variable
     [SerializeField] GameObject mainCamera;
 
+    //check to see if player has triggered the collider
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -17,12 +23,13 @@ public class Level2NextLevelTrigger : MonoBehaviour
         }
     }
 
-
+    //move to next scene
     public void GoToNextScene()
     {
         StartCoroutine(fadeToNextScene());
     }
 
+    //call scene manager to load the next scene
     IEnumerator fadeToNextScene()
     {
         mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;

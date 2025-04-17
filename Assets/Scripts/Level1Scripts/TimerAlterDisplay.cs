@@ -4,21 +4,27 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+/*
+ * This script handles the countdown timer in level 1. 
+ * If the timer hits 0, the scene resets
+*/
 public class TimerAlterDisplay : MonoBehaviour
 {
+    //variables
     public float timeLimit = 10f;
     private float curTimeRemaining;
     public float endTime = 0f;
     public bool timerRunning = false;
     public TextMeshProUGUI timerText;
 
-    // Start is called before the first frame update
+    //set variable initial values
     void Start()
     {
         timerRunning = false;
         curTimeRemaining = timeLimit;
     }
-    // Update is called once per frame
+
+    //update the timer
     void Update()
     {
         if (timerRunning)
@@ -37,6 +43,8 @@ public class TimerAlterDisplay : MonoBehaviour
             }
         }
     }
+
+    //method to update the timer
     void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;
