@@ -37,7 +37,7 @@ public class BossManager : MonoBehaviour
     public GameObject waveNode;
 
     public int[] attackQueue = new int[5];
-    private bool attackInProcess;
+    //private bool attackInProcess;
 
     public Animator queenAnimator;
 
@@ -54,7 +54,7 @@ public class BossManager : MonoBehaviour
             attackQueue[i] = 0;
         }
 
-        attackInProcess = false;
+        //attackInProcess = false;
 
 
         StartCoroutine(bossFight());
