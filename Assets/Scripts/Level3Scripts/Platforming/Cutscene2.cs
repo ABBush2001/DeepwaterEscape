@@ -22,6 +22,11 @@ public class Cutscene2 : MonoBehaviour
 
     public float moveSpeed = 10;
 
+    public GameObject player;
+    public GameObject camera;
+    public GameObject canvas;
+
+
     Coroutine lastCoroutine = null;
 
     private bool levelStarted = false;
@@ -32,6 +37,9 @@ public class Cutscene2 : MonoBehaviour
         mainCamera.enabled = false;
         camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
         lastCoroutine = StartCoroutine(startMovingCamera());
+        player.SetActive(false);
+        camera.SetActive(false);
+        canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,6 +48,9 @@ public class Cutscene2 : MonoBehaviour
         if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted)
         {
             levelStarted = true;
+            player.SetActive(true);
+            camera.SetActive(true);
+            canvas.SetActive(true);
 
             textBox.SetActive(false);
             skipText.enabled = false;
@@ -86,6 +97,9 @@ public class Cutscene2 : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         camera3.gameObject.SetActive(false);
+        player.SetActive(true);
+        camera.SetActive(true);
+        canvas.SetActive(true);
         mainCamera.enabled = true;
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
