@@ -50,9 +50,10 @@ public class ClamWalker : MonoBehaviour
     protected float jumpCooldown;
     private float curJumpCooldown;
     [Tooltip("The maximum horizontal distance the clam can jump to.")]
-    protected float maxJumpDistance;
+    protected float maxJumpDistance = 25;
     [Tooltip("The amount of damage the clam does.")]
     protected int damage;
+    private Vector3 lookTarget;
     
     protected float reboundJumpDelay;
     private float curReboundJumpDelay = 0;
@@ -121,7 +122,9 @@ public class ClamWalker : MonoBehaviour
     void Update()
     {
         if (canLook) {
-            looker.LookAt(playerPos);
+            lookTarget = playerPos.position;
+            lookTarget.y = transform.position.y;
+            looker.LookAt(lookTarget);
             transform.rotation = Quaternion.Lerp(transform.rotation, looker.rotation, Time.deltaTime * 10);
         } // should probably add a variable for lookspeed but ah well
     }
@@ -246,14 +249,17 @@ public class ClamWalker : MonoBehaviour
 
     private void Rebound()
     {
-        clamNavAgent.ResetPath(); // CEASE
-        clamNavAgent.velocity = Vector3.zero; // THINE
-        clamNavAgent.isStopped = true; // M O V E M E N T
-        curReboundJumpDelay = reboundJumpDelay;
-        rb.AddRelativeForce(Vector3.forward * -clamData.hitReboundPushForce, ForceMode.VelocityChange); // the actual physics, it's kinda borked.
-        isJumping = false;
-        isRebounding = true;
-        canLook = false;
+        if (isRebounding != true)
+        {
+            clamNavAgent.ResetPath(); // CEASE
+            clamNavAgent.velocity = Vector3.zero; // THINE
+            clamNavAgent.isStopped = true; // M O V E M E N T
+            curReboundJumpDelay = reboundJumpDelay;
+            rb.AddRelativeForce(Vector3.forward * -clamData.hitReboundPushForce, ForceMode.VelocityChange); // the actual physics, it's kinda borked.
+            isJumping = false;
+            isRebounding = true;
+            canLook = false;
+        }
     }
 
     private void UpdateClamPatrolDest()
@@ -268,5 +274,12 @@ public class ClamWalker : MonoBehaviour
         if (waypointIndex == waypoints.Length) {
             waypointIndex = 0;
         }
+    }
+
+    public void SetDead(bool dead)
+    {
+        claminatorScript.SetAnimBool(ANIM_DEAD, dead);
+        Rebound(); // knockback on death baybee
+        enabled = false; // stop logic when ded
     }
 }
