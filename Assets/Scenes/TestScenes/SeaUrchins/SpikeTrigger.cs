@@ -7,7 +7,6 @@ using UnityEngine;
 */
 public class SpikeTrigger : MonoBehaviour
 {
-    public GameObject spikes;
     public ParticleSystem projectiles;
 
     Vector3 startPoint;
@@ -48,7 +47,6 @@ public class SpikeTrigger : MonoBehaviour
 
     private void SpawnProjectiles(GameObject player)
     {
-        
         //projectiles.Play();
         StartCoroutine(flashAnimation(player));
         //StartCoroutine(pushPlayerBack(player));
@@ -64,7 +62,7 @@ public class SpikeTrigger : MonoBehaviour
         for (int cycle = 0; cycle < 2; cycle++)
         {
             // Fade out
-            for (float alpha = color.a; alpha > 0; alpha -= 0.07f)
+            for (float alpha = color.a; alpha > 0; alpha -= 0.05f)
             {
                 color.a = alpha;
                 mat.color = color;
@@ -72,7 +70,7 @@ public class SpikeTrigger : MonoBehaviour
             }
 
             // Fade in
-            for (float alpha = 0; alpha < 0.5f; alpha += 0.07f)
+            for (float alpha = 0; alpha < 0.5f; alpha += 0.05f)
             {
                 color.a = alpha;
                 mat.color = color;
@@ -90,10 +88,7 @@ public class SpikeTrigger : MonoBehaviour
             yield return new WaitForSeconds(duration);
         }
 
-        //projectiles.Play();
-        //spikes.GetComponent<SpikeExplosion>().Explode();
-        GameObject spike = Instantiate(spikes, this.gameObject.transform);
-        spike.GetComponent<SpikeExplosion>().Explode();
+        projectiles.Play();
 
         if (inDamageZone)
         {
@@ -101,7 +96,7 @@ public class SpikeTrigger : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
-        //projectiles.Stop();
+        projectiles.Stop();
     }
 
 }

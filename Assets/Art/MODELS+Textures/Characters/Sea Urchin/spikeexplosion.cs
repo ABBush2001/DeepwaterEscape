@@ -10,45 +10,14 @@ public class SpikeExplosion : MonoBehaviour
     public float gravityMultiplier = 2f;
     public float lifetimeAfterExplosion = 2f;
 
-    private Vector3[] originalPositions;
-    private Quaternion[] originalRotations;
-
-    private void Start()
-    {
-        int i = 0;
-
-        foreach(GameObject spike in spikes)
-        {
-            originalPositions[i] = spike.transform.position;
-            originalRotations[i] = spike.transform.rotation;
-            i++;
-        }
-    }
-
-    private void resetSpikePositions()
-    {
-        int i = 0;
-
-        foreach(GameObject spike in spikes)
-        {
-            spike.transform.SetPositionAndRotation(originalPositions[i], originalRotations[i]);
-            i++;
-        }
-    }
-
     public void Explode()
     {
-        Debug.Log("Explode called!");
-
         foreach (GameObject spike in spikes)
         {
             ShowSpike(spike);
 
-            spike.transform.localScale = new Vector3(2, 2, 2);
-
             if (spike.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
-                rb.isKinematic = false;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 rb.freezeRotation = true;
@@ -77,7 +46,6 @@ public class SpikeExplosion : MonoBehaviour
     {
         yield return new WaitForSeconds(lifetimeAfterExplosion);
         HideSpike(spike);
-        ResetSpikes();
     }
 
     public void ResetSpikes()
@@ -86,7 +54,6 @@ public class SpikeExplosion : MonoBehaviour
         {
             if (spike.TryGetComponent<Rigidbody>(out Rigidbody rb))
             {
-                rb.isKinematic = true;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
                 rb.useGravity = false;
@@ -97,8 +64,6 @@ public class SpikeExplosion : MonoBehaviour
             }
 
             HideSpike(spike);
-
-            resetSpikePositions();
         }
     }
 
@@ -113,8 +78,6 @@ public class SpikeExplosion : MonoBehaviour
 
     void ShowSpike(GameObject spike)
     {
-        Debug.Log("Show Spike Called!");
-
         if (spike.TryGetComponent<MeshRenderer>(out MeshRenderer mr))
             mr.enabled = true;
 
