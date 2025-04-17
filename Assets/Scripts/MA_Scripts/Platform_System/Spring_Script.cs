@@ -7,6 +7,7 @@ public class Spring_Script : MonoBehaviour
     public float jumpHeight = 100f;
     public float jumpDuration = 0.5f;
 
+    //public float jumpForce = 18f;
     private Coroutine jumpCoroution;
 
     private void OnTriggerEnter(Collider other)
