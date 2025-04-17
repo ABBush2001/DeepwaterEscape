@@ -21,6 +21,7 @@ public class FollowPath : MonoBehaviour
 
 
     private Boss_health bHealth;
+
     // Initialize list of nodes
     void Start()
     {
@@ -36,6 +37,7 @@ public class FollowPath : MonoBehaviour
         }
     }
 
+    //move the boss back to the closest node on the path
     public void SnapToClosestNode()
     {
         float closestDist = float.MaxValue;
@@ -55,7 +57,7 @@ public class FollowPath : MonoBehaviour
         CheckNode();
     }
 
-
+    //make sure the boss is synced to the correct posit
     public void SyncToCurrentPosition()
     {
         startPosition = enemy.transform.position;
@@ -108,12 +110,10 @@ public class FollowPath : MonoBehaviour
         if(path == 3)
         {
             currentNode = GameObject.Find("ChargeEndNode1").GetComponent<Node>().NodeIndex;
-            //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
         }
         if(path == 2)
         {
             currentNode = GameObject.Find("ChargeEndNode2").GetComponent<Node>().NodeIndex;
-            //enemy.transform.Rotate(new Vector3(enemy.transform.rotation.x, enemy.transform.rotation.y - 90, enemy.transform.rotation.z));
         }
     }
 

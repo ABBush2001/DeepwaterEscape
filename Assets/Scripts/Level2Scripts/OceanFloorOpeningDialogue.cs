@@ -9,21 +9,17 @@ using TMPro;
 */
 public class OceanFloorOpeningDialogue : MonoBehaviour
 {
+    //variables
     public GameObject TextBox;
     public TextMeshProUGUI dialogueText;
 
-    // Start is called before the first frame update
+    //call the dialogue coroutine
     void Start()
     {
         StartCoroutine(openingDialogue());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //play dialogue
     IEnumerator openingDialogue()
     {
         yield return new WaitForSeconds(3f);
