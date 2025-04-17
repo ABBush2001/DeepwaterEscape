@@ -43,12 +43,15 @@ public class Cutscene2 : MonoBehaviour
     {
         checkPointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
 
-        mainCamera.enabled = false;
-        camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
-        lastCoroutine = StartCoroutine(startMovingCamera());
-        player.SetActive(false);
-        camera.SetActive(false);
-        canvas.SetActive(false);
+        if (checkPointManager.currentCheckpoint == "")
+        {
+            player.SetActive(false);
+            canvas.SetActive(false)
+            mainCamera.enabled = false;
+            camera1.enabled = true;
+            camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
+            lastCoroutine = StartCoroutine(startMovingCamera());
+        }
     }
 
     //exit out of the cutscene if the skip key is pressed
@@ -58,7 +61,7 @@ public class Cutscene2 : MonoBehaviour
         {
             levelStarted = true;
             player.SetActive(true);
-            camera.SetActive(true);
+            //camera.SetActive(true);
             canvas.SetActive(true);
 
             textBox.SetActive(false);
@@ -110,7 +113,7 @@ public class Cutscene2 : MonoBehaviour
 
         camera3.gameObject.SetActive(false);
         player.SetActive(true);
-        camera.SetActive(true);
+        //camera.SetActive(true);
         canvas.SetActive(true);
         mainCamera.enabled = true;
 
