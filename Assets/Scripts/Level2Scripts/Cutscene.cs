@@ -5,10 +5,12 @@ using TMPro;
 
 /*
  * This script handles an opening cutscene for the oceanfloor 
- * scene to help make the scene more interesting
+ * scene to help make the scene more interesting. If a player
+ * presses the E key, the cutscene is skipped
 */
 public class Cutscene : MonoBehaviour
 {
+    //variables
     public Camera camera1;
     public Camera camera2;
     public Camera camera3;
@@ -19,6 +21,7 @@ public class Cutscene : MonoBehaviour
     public GameObject camNode4;
     public GameObject camNode5;
     public GameObject camNode6;
+
 
     public GameObject textBox;
     public TextMeshProUGUI skipText;
@@ -34,7 +37,7 @@ public class Cutscene : MonoBehaviour
     public GameObject playerAnimator;
     private Animator animControl;
 
-    // Start is called before the first frame update
+    //start the cutscene - disable the main camera, call the coroutine
     void Start()
     {
         mainCamera.enabled = false;
@@ -43,7 +46,7 @@ public class Cutscene : MonoBehaviour
         animControl = playerAnimator.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    //check to see if player has pressed E to skip
     void Update()
     {
         if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted)
@@ -64,13 +67,14 @@ public class Cutscene : MonoBehaviour
         }
     }
 
+    //move each cutscene camera from one node to another, then move to the next camera
     IEnumerator startMovingCamera()
     {
         skipText.enabled = true;
 
+        //camera 1
         while (camera1.transform.position.z < camNode2.transform.position.z)
         {
-            //camera1.transform.SetPositionAndRotation(new Vector3(camera1.transform.position.x, camera1.transform.position.y, camera1.transform.position.z + 0.1f), camera1.transform.rotation);
             camera1.gameObject.transform.position = Vector3.MoveTowards(camera1.gameObject.transform.position, camNode2.transform.position, Time.deltaTime * moveSpeed);
             yield return new WaitForSeconds(0.01f);
         }
@@ -78,9 +82,9 @@ public class Cutscene : MonoBehaviour
         camera1.enabled = false;
         camera2.enabled = true;
 
+        //camera 2
         while (camera2.transform.position.x < camNode4.transform.position.x)
         {
-            //camera2.transform.SetPositionAndRotation(new Vector3(camera2.transform.position.x + 0.1f, camera2.transform.position.y, camera2.transform.position.z), camera2.transform.rotation);
             camera2.gameObject.transform.position = Vector3.MoveTowards(camera2.gameObject.transform.position, camNode4.transform.position, Time.deltaTime * moveSpeed);
             yield return new WaitForSeconds(0.01f);
         }
@@ -88,15 +92,17 @@ public class Cutscene : MonoBehaviour
         camera2.enabled = false;
         camera3.enabled = true;
 
+        //camera 3
         while (camera3.transform.position.x > camNode6.transform.position.x)
         {
-            //camera3.transform.SetPositionAndRotation(new Vector3(camera3.transform.position.x - 0.1f, camera3.transform.position.y, camera3.transform.position.z), camera3.transform.rotation);
             camera3.gameObject.transform.position = Vector3.MoveTowards(camera3.gameObject.transform.position, camNode6.transform.position, Time.deltaTime * moveSpeed);
             yield return new WaitForSeconds(0.01f);
         }
 
         camera3.gameObject.GetComponent<CameraFadeOut>().fadeOut = true;
         yield return new WaitForSeconds(3f);
+
+        //set main camera
 
         camera3.gameObject.SetActive(false);
         mainCamera.enabled = true;

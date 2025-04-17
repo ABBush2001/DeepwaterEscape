@@ -2,8 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script manages the collection of items in level 1, turn the
+ * collectables on when appropriate
+*/
 public class LevelOneManager : MonoBehaviour
 {
+    //variables
     [SerializeField] private bool item1PickedUp;
     [SerializeField] private bool item2PickedUp;
     [SerializeField] private bool item3PickedUp;
@@ -16,6 +21,7 @@ public class LevelOneManager : MonoBehaviour
 
     public bool alarmStart = false;
 
+    //set all collectables to inactive on awake
     private void Awake()
     {
         item1PickedUp = false;
@@ -27,6 +33,7 @@ public class LevelOneManager : MonoBehaviour
         item3.SetActive(false);
     }
 
+    //method to turn on collectables
     public void turnOnObjects()
     {
         item1.SetActive(true);
@@ -34,7 +41,7 @@ public class LevelOneManager : MonoBehaviour
         item3.SetActive(true);
     }
 
-    // Update is called once per frame
+    //if all items collected, turn on the player gun
     void Update()
     {
         if(item1PickedUp && item2PickedUp && item3PickedUp)
@@ -42,6 +49,8 @@ public class LevelOneManager : MonoBehaviour
             playerGun.SetActive(true);
         }
     }
+
+    //setters and getters
 
     public void setItem1()
     {
