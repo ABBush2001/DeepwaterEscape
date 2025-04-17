@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This script spins the alarm around in the submarine scene.
+*/
 public class AlarmSpin : MonoBehaviour
 {
     public int rotateSpeed;
