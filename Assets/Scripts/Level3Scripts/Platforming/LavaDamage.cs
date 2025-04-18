@@ -25,7 +25,7 @@ public class LavaDamage : MonoBehaviour
     //reload the level
     IEnumerator reloadScene()
     {
-        //mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         mainCamera.transform.SetParent(null, true);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
