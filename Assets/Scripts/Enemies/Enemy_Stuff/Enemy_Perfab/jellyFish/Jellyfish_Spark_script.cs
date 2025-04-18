@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Jellyfish_Spark_script : MonoBehaviour
 {
-    public GameObject particlePrefab; // Assign your particle prefab in the Inspector
-    private ParticleSystem particleSystemInstance; // Reference to the instantiated Particle System
+    public GameObject particlePrefab; 
+    private ParticleSystem particleSystemInstance;
 
     private void Start()
     {
         if (particlePrefab != null)
         {
-            // Instantiate the particle prefab and get its ParticleSystem component
-            GameObject particleObject = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+            
+            Vector3 particlePosition = transform.position + new Vector3(0, 10, 0);
+
+            GameObject particleObject = Instantiate(particlePrefab, particlePosition, Quaternion.identity);
             particleSystemInstance = particleObject.GetComponent<ParticleSystem>();
 
             if (particleSystemInstance != null)
             {
-                particleSystemInstance.Play(); // Start the particle system
+                particleSystemInstance.Play();
             }
             else
             {
