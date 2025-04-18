@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /*
@@ -21,6 +22,8 @@ public class LevelOneManager : MonoBehaviour
 
     public bool alarmStart = false;
 
+    public TextMeshProUGUI timerText;
+
     //set all collectables to inactive on awake
     private void Awake()
     {
@@ -33,12 +36,24 @@ public class LevelOneManager : MonoBehaviour
         item3Collider.enabled = false;
     }
 
+    public void BeginAlarm()
+    {
+        alarmStart = true;
+        turnOnObjects();
+        ShowTimer();
+    }
+
     //method to turn on collectables
     public void turnOnObjects()
     {
         item1Collider.enabled = true;
         item2Collider.enabled = true;
         item3Collider.enabled = true;
+    }
+
+    public void ShowTimer()
+    {
+        gameObject.GetComponent<TimerAlterDisplay>().ShowTimer(true);
     }
 
     //if all items collected, turn on the player gun
