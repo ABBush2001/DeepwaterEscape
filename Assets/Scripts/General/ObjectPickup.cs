@@ -16,6 +16,8 @@ public class ObjectPickup : MonoBehaviour
     private bool promptOn;
     public AudioSource pickUp;
     public GameObject alarm;
+    public GameObject timerText;
+    public GameObject Checklist;
     private bool alarmStart = false;
 
     [SerializeField] private TextAsset inkJson;
@@ -41,7 +43,7 @@ public class ObjectPickup : MonoBehaviour
 
                 GameObject levelManager = GameObject.Find("LevelManager");
 
-                if (this.gameObject.tag == "Button")
+                if (gameObject.CompareTag("Button"))
                 {
                     alarm.SetActive(true);
                     alarmStart = true;
@@ -93,7 +95,7 @@ public class ObjectPickup : MonoBehaviour
     //activates prompt on entry
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             pickupPrompt.SetActive(true);
             promptOn = true;
@@ -102,7 +104,7 @@ public class ObjectPickup : MonoBehaviour
     //closes prompt on exit
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             pickupPrompt.SetActive(false);
             promptOn = false;

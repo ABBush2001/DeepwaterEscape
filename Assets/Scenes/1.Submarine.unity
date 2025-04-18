@@ -312,13 +312,14 @@ MonoBehaviour:
   m_text: Press E To Pick Up
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 93c451a08a787cd499d0a95e19144dfd, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 5552738195010539617, guid: 93c451a08a787cd499d0a95e19144dfd,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.35
+  m_fontSize: 48
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6753,6 +6754,8 @@ MonoBehaviour:
   pickupPrompt: {fileID: 42321207}
   pickUp: {fileID: 253212796}
   alarm: {fileID: 1323569735}
+  timerText: {fileID: 0}
+  Checklist: {fileID: 0}
   inkJson: {fileID: 0}
 --- !u!135 &253212798
 SphereCollider:
@@ -28966,6 +28969,8 @@ MonoBehaviour:
   pickupPrompt: {fileID: 42321207}
   pickUp: {fileID: 1352495241}
   alarm: {fileID: 1323569735}
+  timerText: {fileID: 0}
+  Checklist: {fileID: 0}
   inkJson: {fileID: 0}
 --- !u!135 &1352495243
 SphereCollider:
@@ -29299,7 +29304,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FirstSelected
       value: 
-      objectReference: {fileID: 1174271305}
+      objectReference: {fileID: 0}
     - target: {fileID: 7150896826743956667, guid: f680b11ba37d4493f8915401935cc0b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29427,12 +29432,23 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 550436621}
   m_SourcePrefab: {fileID: 100100000, guid: f680b11ba37d4493f8915401935cc0b1, type: 3}
---- !u!1 &1412370260 stripped
+--- !u!1 &1412370260
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 34dbea85fae5448379695e6a68f3ba27,
-    type: 3}
-  m_PrefabInstance: {fileID: 2034838140}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1412370265}
+  - component: {fileID: 1412370264}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!65 &1412370264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29454,6 +29470,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5399997, y: 2.5399997, z: 2.5399997}
   m_Center: {x: -0.051533993, y: 1.2699999, z: -0.22299998}
+--- !u!4 &1412370265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412370260}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469184133
 GameObject:
   m_ObjectHideFlags: 0
@@ -30075,7 +30106,7 @@ Transform:
   m_LocalScale: {x: 2.0142634, y: 0.6272803, z: 1.8232628}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2021877036}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1554302215
 CapsuleCollider:
@@ -30590,9 +30621,9 @@ MonoBehaviour:
   item1PickedUp: 0
   item2PickedUp: 0
   item3PickedUp: 0
-  item1: {fileID: 1714214519}
-  item2: {fileID: 1352495240}
-  item3: {fileID: 253212795}
+  item1Collider: {fileID: 1352495243}
+  item2Collider: {fileID: 253212798}
+  item3Collider: {fileID: 1714214521}
   playerGun: {fileID: 439744777}
   alarmStart: 0
 --- !u!114 &1647020767
@@ -31089,6 +31120,8 @@ MonoBehaviour:
   pickupPrompt: {fileID: 42321207}
   pickUp: {fileID: 1714214523}
   alarm: {fileID: 1323569735}
+  timerText: {fileID: 0}
+  Checklist: {fileID: 0}
   inkJson: {fileID: 0}
 --- !u!65 &1714214521
 BoxCollider:
@@ -32339,12 +32372,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853918313}
   m_Mesh: {fileID: 6357282866014537507, guid: 23ac4bf77d085744890898e3917147c0, type: 3}
---- !u!1 &1855204401 stripped
+--- !u!1 &1855204401
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 34dbea85fae5448379695e6a68f3ba27,
-    type: 3}
-  m_PrefabInstance: {fileID: 2034838140}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1855204402}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1855204402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855204401}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1887485319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34139,6 +34197,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1412370265}
+  - {fileID: 1855204402}
   - {fileID: 207765669}
   - {fileID: 1397350392}
   - {fileID: 1079276463}
@@ -34175,3 +34235,6 @@ SceneRoots:
   - {fileID: 882215664}
   - {fileID: 1959071336}
   - {fileID: 1716442879}
+  - {fileID: 415501470}
+  - {fileID: 1260371004}
+  - {fileID: 1670158235}
