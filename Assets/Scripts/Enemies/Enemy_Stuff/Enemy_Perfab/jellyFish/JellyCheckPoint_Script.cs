@@ -6,6 +6,7 @@ public class JellyCheckPoint_Script : MonoBehaviour
 {
     public static Transform currentCheckpoint; // Stores the latest checkpoint
     public GameObject thePlayer;
+    private bool checkDisable = false;
 
     private void Update()
     {
@@ -25,6 +26,12 @@ public class JellyCheckPoint_Script : MonoBehaviour
         if (other.CompareTag("Zap"))
         {
             thePlayer.transform.position = currentCheckpoint.transform.position;
+        }
+
+        if (other.CompareTag("Boss"))
+        {
+            checkDisable = true;
+            Debug.Log("Checkpoints are now disabled.");
         }
     }
 }

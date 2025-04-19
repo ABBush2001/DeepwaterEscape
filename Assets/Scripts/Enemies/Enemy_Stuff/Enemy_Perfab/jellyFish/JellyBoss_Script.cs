@@ -85,5 +85,11 @@ public class JellyBoss_Script : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         SceneManager.LoadScene(sceneToLoad);
+
+        if (other.CompareTag("Checkpoint"))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("Checkpoint object destroyed: " + other.gameObject.name);
+        }
     }
 }
