@@ -13258,43 +13258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c3e358e66684e3e8ddefbfe91573b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadein: 1
-  speedScale: 0.1
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!114 &550436621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13307,43 +13270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067796a9bac0a459a8da809ac112e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOut: 0
-  speedScale: 0.5
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!20 &550436625 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7150896826743956668, guid: f680b11ba37d4493f8915401935cc0b1,
@@ -15012,6 +14938,16 @@ PrefabInstance:
       propertyPath: doorHandle
       value: 
       objectReference: {fileID: 90882397}
+    - target: {fileID: 4511321848709245139, guid: 7ec7ac57f27b64534b7aee8b2bea87ed,
+        type: 3}
+      propertyPath: openTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511321848709245139, guid: 7ec7ac57f27b64534b7aee8b2bea87ed,
+        type: 3}
+      propertyPath: closeTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4868788946462094194, guid: 7ec7ac57f27b64534b7aee8b2bea87ed,
         type: 3}
       propertyPath: m_Enabled
@@ -29025,8 +28961,7 @@ PrefabInstance:
 --- !u!1 &1412370260
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: 34dbea85fae5448379695e6a68f3ba27,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -30130,20 +30065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ef8f8283075401bb8cca4a971d7040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 550436615}
-  outroCamera: {fileID: 1948598038}
-  Explosion1: {fileID: 185458556}
-  Explosion2: {fileID: 327872180}
-  Explosion3: {fileID: 911502206}
-  Explosion4: {fileID: 879541315}
-  ExplosionSound1: {fileID: 68893211}
-  ExplosionSound2: {fileID: 845601831}
-  ExplosionSound3: {fileID: 1853121030}
-  ExplosionSound4: {fileID: 1035873681}
-  explosion: {fileID: 947694419}
-  explosion1: {fileID: 485396119}
-  explosion2: {fileID: 1473543838}
-  shakeAmount: 0.02
 --- !u!1 &1647020763
 GameObject:
   m_ObjectHideFlags: 0
@@ -31862,8 +31783,7 @@ MeshFilter:
 --- !u!1 &1855204401
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 34dbea85fae5448379695e6a68f3ba27,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -32589,43 +32509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067796a9bac0a459a8da809ac112e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOut: 0
-  speedScale: 0.1
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!114 &1948598044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32638,43 +32521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c3e358e66684e3e8ddefbfe91573b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadein: 0
-  speedScale: 0.5
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!1001 &1959071336
 PrefabInstance:
   m_ObjectHideFlags: 0
