@@ -31,6 +31,8 @@ public class ExitTrigger : MonoBehaviour
 
     public float shakeAmount;
 
+    public GameObject loading;
+
     //checks to see if the player has entered the exit trigger
     private void OnTriggerEnter(Collider other)
     {
@@ -49,7 +51,7 @@ public class ExitTrigger : MonoBehaviour
         outroCamera.SetActive(true);
         outroCamera.GetComponent<CameraFadeIn>().fadein = true;
         yield return new WaitForSeconds(1);
-        outroCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        //outroCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         ExplosionSound1.Play();
         StartCoroutine(cameraShake(1f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();
@@ -67,7 +69,9 @@ public class ExitTrigger : MonoBehaviour
         explosion.GetComponent<VisualEffect>().Play();
 
         yield return new WaitForSeconds(6);
-        SceneManager.LoadScene("UpdatedOceanFloor");
+
+        //SceneManager.LoadScene("UpdatedOceanFloor");
+        loading.GetComponent<loading>().LoadNextScene(14);
     }
 
     //shakes the camera
