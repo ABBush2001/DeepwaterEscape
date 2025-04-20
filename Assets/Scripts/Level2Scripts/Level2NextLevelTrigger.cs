@@ -12,6 +12,8 @@ public class Level2NextLevelTrigger : MonoBehaviour
     //variable
     [SerializeField] GameObject mainCamera;
 
+    public GameObject loading;
+
     //check to see if player has triggered the collider
     private void OnTriggerEnter(Collider other)
     {
@@ -32,8 +34,10 @@ public class Level2NextLevelTrigger : MonoBehaviour
     //call scene manager to load the next scene
     IEnumerator fadeToNextScene()
     {
-        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
-        yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("Level3Test");
+        //mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        //yield return new WaitForSeconds(4);
+        //SceneManager.LoadScene("Level3Test");
+        loading.GetComponent<loading>().LoadNextScene(15);
+        yield return null;
     }
 }
