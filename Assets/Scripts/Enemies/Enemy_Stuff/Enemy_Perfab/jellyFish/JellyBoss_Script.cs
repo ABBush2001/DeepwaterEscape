@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JellyBoss_Script : MonoBehaviour
 {
@@ -22,7 +23,9 @@ public class JellyBoss_Script : MonoBehaviour
     //Vector3 targetPoint;
 
 
-    public int waveDmg = 999;
+    //public int waveDmg = 999;
+
+    public string sceneToLoad;
 
     // Start is called before the first frame update
     private void Start()
@@ -81,13 +84,12 @@ public class JellyBoss_Script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        SceneManager.LoadScene(sceneToLoad);
+
+        if (other.CompareTag("Checkpoint"))
         {
-            Player_Health playerHealth = other.GetComponent<Player_Health>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(waveDmg);
-            }
+            Destroy(other.gameObject);
+            Debug.Log("Checkpoint object destroyed: " + other.gameObject.name);
         }
     }
 }
