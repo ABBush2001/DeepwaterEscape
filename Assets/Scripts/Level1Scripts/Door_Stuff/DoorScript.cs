@@ -6,7 +6,7 @@ using UnityEngine;
  * This script handles the movement of the door in the submarine scene.
  * It includes the playing of the animation for the door swinging open
 */
-public class Door_Script : MonoBehaviour
+public class DoorScript : MonoBehaviour
 {
     //variables
     [SerializeField] private Animator myDoor = null;

@@ -50,6 +50,7 @@ public class OpeningBossCutscene : MonoBehaviour
         if(cutsceneStarted && DialogueManager.GetComponent<DialogueManager>().dialogueComplete)
         {
             player.GetComponent<CommentedThirdPersonController>().velocity = 10;
+            enemy.transform.Rotate(0, 180, 0);
             mainCamera.enabled = true;
             cutsceneCamera.enabled = false;
             bossFightSystem.SetActive(true);

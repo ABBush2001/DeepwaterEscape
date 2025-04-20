@@ -848,7 +848,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.1601562
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
@@ -858,12 +858,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.487671
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.81915194
+      value: -0.57357895
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
@@ -873,7 +873,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.57357657
+      value: -0.8191504
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
@@ -888,7 +888,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 290
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 16421955931489e41aa5953632d8b09a,
         type: 3}
@@ -1241,7 +1241,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &172726086
 PrefabInstance:
@@ -2470,8 +2470,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3151667, y: 0.10011113}
   m_AnchorMax: {x: 0.68741655, y: 0.15285186}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -3.619873, y: -1.5471191}
+  m_SizeDelta: {x: -4.7108154, y: -2.0697021}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &410934549
 MonoBehaviour:
@@ -4402,8 +4402,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.016166667, y: 0.027777778}
   m_AnchorMax: {x: 0.9845625, y: 0.10937038}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.000030517578, y: 0.000015258789}
+  m_AnchoredPosition: {x: -1, y: 0.5}
+  m_SizeDelta: {x: 10.777222, y: -2.4406128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767428162
 MonoBehaviour:
@@ -6267,7 +6267,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160070703}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6715,8 +6715,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1278911290
 GameObject:
@@ -7303,6 +7303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 722942388625376254, guid: 70abc2a251aad9e49b1ce63b3618b455,
         type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1462552664}
+    - target: {fileID: 722942388625376254, guid: 70abc2a251aad9e49b1ce63b3618b455,
+        type: 3}
       propertyPath: otherUI
       value: 
       objectReference: {fileID: 1542258768}
@@ -7356,26 +7361,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PauseSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 6338593433095619849, guid: 70abc2a251aad9e49b1ce63b3618b455,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6338593433095619849, guid: 70abc2a251aad9e49b1ce63b3618b455,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6338593433095619849, guid: 70abc2a251aad9e49b1ce63b3618b455,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6338593433095619849, guid: 70abc2a251aad9e49b1ce63b3618b455,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6398333540358959376, guid: 70abc2a251aad9e49b1ce63b3618b455,
         type: 3}
@@ -9020,8 +9005,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.38943753, y: 0.44300002}
   m_AnchorMax: {x: 0.615125, y: 0.551}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -4.5, y: 3}
+  m_SizeDelta: {x: 1.9809875, y: 11.860001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1736154975
 MonoBehaviour:
@@ -9952,8 +9937,8 @@ Transform:
   m_GameObject: {fileID: 1963738730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2237.5, y: 120.25, z: 1412}
-  m_LocalScale: {x: 7.362712, y: 10.720605, z: 8.68762}
+  m_LocalPosition: {x: 2237.5, y: 124.1, z: 1412}
+  m_LocalScale: {x: 11.497611, y: 18.418, z: 8.68762}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -9974,7 +9959,7 @@ MonoBehaviour:
   cutsceneCamera: {fileID: 314326511}
   enemy: {fileID: 1476229171}
   player: {fileID: 716005005}
-  moveSpeed: 8
+  moveSpeed: 30
   Node1: {fileID: 1160070703}
   bossFightSystem: {fileID: 966857475}
   bossManager: {fileID: 45651013}
@@ -10177,7 +10162,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027903100
 MonoBehaviour:
