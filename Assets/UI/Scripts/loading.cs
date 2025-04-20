@@ -10,6 +10,8 @@ public class loading : MonoBehaviour
     public GameObject LoadingScreen;
     public Slider slider;
 
+    public GameObject otherUI;
+
     public void LoadNextScene(int sceneIndex)
     {
         StartCoroutine(LoadAsynchronously(sceneIndex));
@@ -18,9 +20,13 @@ public class loading : MonoBehaviour
 
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
+        otherUI.SetActive(false);
         LoadingScreen.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!operation.isDone)
         {
@@ -29,5 +35,6 @@ public class loading : MonoBehaviour
 
             yield return null;
         }
+
     }
 }
