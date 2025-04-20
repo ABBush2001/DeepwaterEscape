@@ -9,24 +9,20 @@ using UnityEngine;
 */
 public class LavaLevel : MonoBehaviour
 {
+    //variables
     public float maxMoveUp = 10;
     public float moveSpeed = 1;
 
     private float initialPosition;
 
-    // Start is called before the first frame update
+    //sets the initial position of the lava and starts the movement
     void Start()
     {
         initialPosition = transform.position.y;
         StartCoroutine(moveLava());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //transform.position = Vector3.MoveTowards(transform.position, maxPosition.position, moveSpeed * Time.deltaTime);
-    }
-
+    //moves the lava up and down
     IEnumerator moveLava()
     {
         while (true)
@@ -35,7 +31,6 @@ public class LavaLevel : MonoBehaviour
             {
 
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition + maxMoveUp, transform.position.z), Time.deltaTime * moveSpeed);
-                //transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z), transform.rotation);
                 yield return new WaitForSeconds(0.01f);
             }
 
@@ -44,7 +39,6 @@ public class LavaLevel : MonoBehaviour
             while (transform.position.y > initialPosition)
             {
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition, transform.position.z), Time.deltaTime * moveSpeed);
-                //transform.SetPositionAndRotation(new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z), transform.rotation);
                 yield return new WaitForSeconds(0.01f);
             }
 

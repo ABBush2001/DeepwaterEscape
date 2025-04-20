@@ -9,6 +9,7 @@ using TMPro;
 
 public class OpeningBossCutscene : MonoBehaviour
 {
+    //variables
     public Camera mainCamera;
     public Camera cutsceneCamera;
     public GameObject enemy;
@@ -33,6 +34,7 @@ public class OpeningBossCutscene : MonoBehaviour
     bool canTrigger = true;
     bool cutsceneStarted = false;
 
+    //start cutscene when the player enters the trigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && canTrigger)
@@ -42,21 +44,22 @@ public class OpeningBossCutscene : MonoBehaviour
         }
     }
 
+    //Check to see if boss movement is complete to begin dialogue
     private void Update()
     {
         if(cutsceneStarted && DialogueManager.GetComponent<DialogueManager>().dialogueComplete)
         {
             player.GetComponent<CommentedThirdPersonController>().velocity = 10;
+            enemy.transform.Rotate(0, 180, 0);
             mainCamera.enabled = true;
             cutsceneCamera.enabled = false;
             bossFightSystem.SetActive(true);
-            //StartCoroutine(bossManager.GetComponent<BossManager>().bossFight());
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
             instructionsText.enabled = true;
             Time.timeScale = 0.1f;
-            //Destroy(this.gameObject);
         }
 
+        //update dialogue if started
         if(instructionsText.enabled && Input.GetKeyDown(KeyCode.Space))
         {
             bossHealthSlider.SetActive(true);
@@ -67,6 +70,7 @@ public class OpeningBossCutscene : MonoBehaviour
         }
     }
 
+    //move boss into position
     IEnumerator cutscene()
     {
         cutsceneStarted = true;

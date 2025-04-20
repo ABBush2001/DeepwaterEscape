@@ -1,40 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
+/*
+ * This script manages the collection of items in level 1, turn the
+ * collectables on when appropriate
+*/
 public class LevelOneManager : MonoBehaviour
 {
+    //variables
     [SerializeField] private bool item1PickedUp;
     [SerializeField] private bool item2PickedUp;
     [SerializeField] private bool item3PickedUp;
 
-    [SerializeField] private GameObject item1;
-    [SerializeField] private GameObject item2;
-    [SerializeField] private GameObject item3;
+    [SerializeField] private Collider item1Collider;
+    [SerializeField] private Collider item2Collider;
+    [SerializeField] private Collider item3Collider;
 
     [SerializeField] private GameObject playerGun;
 
     public bool alarmStart = false;
 
+    public TextMeshProUGUI timerText;
+
+    //set all collectables to inactive on awake
     private void Awake()
     {
         item1PickedUp = false;
         item2PickedUp = false;
         item3PickedUp = false;
 
-        item1.SetActive(false);
-        item2.SetActive(false);
-        item3.SetActive(false);
+        item1Collider.enabled = false;
+        item2Collider.enabled = false;
+        item3Collider.enabled = false;
     }
 
+    public void BeginAlarm()
+    {
+        alarmStart = true;
+        turnOnObjects();
+        ShowTimer();
+    }
+
+    //method to turn on collectables
     public void turnOnObjects()
     {
-        item1.SetActive(true);
-        item2.SetActive(true);
-        item3.SetActive(true);
+        item1Collider.enabled = true;
+        item2Collider.enabled = true;
+        item3Collider.enabled = true;
     }
 
-    // Update is called once per frame
+    public void ShowTimer()
+    {
+        gameObject.GetComponent<TimerAlterDisplay>().ShowTimer(true);
+    }
+
+    //if all items collected, turn on the player gun
     void Update()
     {
         if(item1PickedUp && item2PickedUp && item3PickedUp)
@@ -42,6 +64,8 @@ public class LevelOneManager : MonoBehaviour
             playerGun.SetActive(true);
         }
     }
+
+    //setters and getters
 
     public void setItem1()
     {

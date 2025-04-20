@@ -6,6 +6,7 @@ public class PauseMenu2 : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
     public GameObject otherUI;
+    public GameObject camera;
     private bool isPaused = false;
 
     // Define Events for Other Scripts (like Bullet)
@@ -35,9 +36,9 @@ public class PauseMenu2 : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        camera.gameObject.GetComponent<CommentedCameraController>().enabled = false;
         isPaused = true;
         otherUI.SetActive(false);
-
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -50,6 +51,7 @@ public class PauseMenu2 : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         otherUI.SetActive(true);
+        camera.gameObject.GetComponent<CommentedCameraController>().enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -72,7 +74,6 @@ public class PauseMenu2 : MonoBehaviour
 
     public void OpenSettings()
     {
-        Debug.Log("TESTING");
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(true);
     }
