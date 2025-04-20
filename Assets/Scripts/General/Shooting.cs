@@ -154,6 +154,7 @@ public class Shooting : MonoBehaviour
 
         isreload = true;
         Debug.Log("Reloading...");
+        Ammotext.text = "Reloading...";
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         isreload = false;
@@ -172,7 +173,7 @@ public class Shooting : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Ammotext.text = "Reloading";
+                Ammotext.text = "Reloading...";
             }
         }
     }
