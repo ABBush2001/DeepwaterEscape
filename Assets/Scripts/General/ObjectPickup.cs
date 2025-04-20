@@ -30,10 +30,8 @@ public class ObjectPickup : MonoBehaviour
 
     private void Update()
     {
-        if(promptOn == true && Input.GetKeyDown(KeyCode.E))
+        if (promptOn == true && Input.GetKeyDown(KeyCode.E))
         {
-            
-
             //check if level 1
             if (SceneManager.GetActiveScene().name == "1.Submarine")
             {
@@ -41,7 +39,7 @@ public class ObjectPickup : MonoBehaviour
 
                 GameObject levelManager = GameObject.Find("LevelManager");
 
-                if (this.gameObject.tag == "Button")
+                if (gameObject.CompareTag("Button"))
                 {
                     alarm.SetActive(true);
                     alarmStart = true;
@@ -73,8 +71,6 @@ public class ObjectPickup : MonoBehaviour
                 }
                 
             }
-
-            
             promptOn = false;
             pickupPrompt.SetActive(false);
             GetComponent<Renderer>().enabled = false;
@@ -84,7 +80,7 @@ public class ObjectPickup : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "1.Submarine" && alarmStart && DialogueManager.GetInstance().dialogueComplete)
         {
             GameObject levelManager = GameObject.Find("LevelManager");
-            levelManager.GetComponent<LevelOneManager>().turnOnObjects();
+            levelManager.GetComponent<LevelOneManager>().BeginAlarm();
             levelManager.GetComponent<TimerAlterDisplay>().timerRunning = true;
             Destroy(this.gameObject, 1);
         }
@@ -93,7 +89,7 @@ public class ObjectPickup : MonoBehaviour
     //activates prompt on entry
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             pickupPrompt.SetActive(true);
             promptOn = true;
@@ -102,7 +98,7 @@ public class ObjectPickup : MonoBehaviour
     //closes prompt on exit
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             pickupPrompt.SetActive(false);
             promptOn = false;
