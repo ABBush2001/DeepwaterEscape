@@ -27,6 +27,7 @@ public class ClamWalker : MonoBehaviour
     public NavMeshAgent clamNavAgent;
     public ClamScriptObj clamData;
     private Transform playerPos;
+    private Transform floorPlayerPos;
     private Vector3 clamJumpTarget;
     private Transform clamTransform;
     private Rigidbody rb;
@@ -227,8 +228,16 @@ public class ClamWalker : MonoBehaviour
 
     private void ClamJump()
     {
-        clamJumpTarget = Vector3.MoveTowards(clamTransform.position, playerPos.position, maxJumpDistance);
-        clamJumpTarget.y = 0;
+        LayerMask mask = LayerMask.GetMask("default");
+        if (Physics.Raycast(playerPos.position, Vector3.down, out RaycastHit hit, 20f, mask)) {
+            floorPlayerPos.position = hit.point;
+        }
+        else {
+            floorPlayerPos = playerPos;
+        }
+
+        clamJumpTarget = Vector3.MoveTowards(clamTransform.position, floorPlayerPos.position, maxJumpDistance);
+        // clamJumpTarget.y = 0;
         clamNavAgent.destination = clamJumpTarget;
         curJumpCooldown = jumpCooldown;
         isJumping = true; // isJumping only exists to make code relating to looking at the player easier to understand
