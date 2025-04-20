@@ -8,12 +8,11 @@ public class SplineCutscene : MonoBehaviour
     public GameObject cutsceneJF;
     public GameObject cutsceneCamera;
 
-    public GameObject splineAnimationObject; // Reference to the object with the SplineAnimation script
-    //public GameObject DialogueManager;
+    public GameObject splineAnimationObject;
 
 
     private Animator jellyFishAnimator;
-    private MonoBehaviour splineAnimationScript; // General reference for the spline animation script
+    private MonoBehaviour splineAnimationScript;
 
    // [SerializeField] private TextAsset inkJson;
     private void Start()
