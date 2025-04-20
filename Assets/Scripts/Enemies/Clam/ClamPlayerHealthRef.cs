@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 /*
  * This script exists purely for the clams to reference the health variable of Player_Health.
@@ -10,9 +11,11 @@ public class ClamPlayerHealthRef : MonoBehaviour
 {
     public Player_Health playerHealth;
     public GameObject player;
+    const string MethodName = "GetPlayerHealthScript"; // silence compiler suggestion about string literal
     private void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("UI").GetComponent<Player_Health>();
+        //playerHealth = GameObject.FindGameObjectWithTag("UI").GetComponent<Player_Health>();
+        Invoke(MethodName, .1f); // Invoke w/ .1f delay to make sure the UI gets loaded before referencing it.
     }
 
     public Player_Health GetPlayerHealth()
@@ -23,5 +26,10 @@ public class ClamPlayerHealthRef : MonoBehaviour
     public GameObject GetPlayer()
     {
         return player;
+    }
+    
+    private void GetPlayerHealthScript()
+    {
+        //playerHealth = GameObject.FindGameObjectWithTag("UI").GetComponent<Player_Health>();
     }
 }
