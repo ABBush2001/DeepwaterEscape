@@ -16,9 +16,6 @@ public class Resolutions : MonoBehaviour
 
     private void Start()
     {
-
-        Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
-
         if (resolutionDropDown == null)
         {
             Debug.LogError("Resolution Dropdown is not assigned!");
