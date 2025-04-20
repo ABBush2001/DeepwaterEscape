@@ -228,6 +228,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &796630538 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8512034320197668559, guid: a0c409174bdebde4593dbb93405e5807,
+    type: 3}
+  m_PrefabInstance: {fileID: 2111298339}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &821397211
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,13 +808,18 @@ PrefabInstance:
         type: 3}
       propertyPath: Ammotext
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 796630538}
     - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: noiseObj
       value: 
       objectReference: {fileID: 5841576124082770524, guid: ea1ca34c09d759e4abaabb1c9e5a922c,
         type: 3}
+    - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: playerTrans
@@ -1168,6 +1185,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeaUrchParent
       objectReference: {fileID: 0}
+    - target: {fileID: 6728548684628604909, guid: 5165fcb6e55030d47b713be2b4aac614,
+        type: 3}
+      propertyPath: m_PlayableAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 209c8e5494731fe499b1e58b44f6cb6f,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

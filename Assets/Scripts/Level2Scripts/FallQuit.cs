@@ -15,7 +15,7 @@ public class FallQuit : MonoBehaviour
     //if player collides with exit trigger, begin reload sequence
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(fallTransition());
         }
