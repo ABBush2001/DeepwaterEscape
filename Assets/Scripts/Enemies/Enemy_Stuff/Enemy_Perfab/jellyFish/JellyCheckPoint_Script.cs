@@ -30,8 +30,7 @@ public class JellyCheckPoint_Script : MonoBehaviour
 
         if (other.CompareTag("Boss"))
         {
-            checkDisable = true;
-            Debug.Log("Checkpoints are now disabled.");
+            Destroy(other.gameObject);
         }
     }
 }
