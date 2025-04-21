@@ -12,12 +12,20 @@ public class LavaLevel : MonoBehaviour
     //variables
     public float maxMoveUp = 10;
     public float moveSpeed = 1;
+    public float timeToRise = 4;
+    public AnimationCurve moveCurve;
+    private float moveTime = 0;
+   // private Keyframe[] frames;
 
     private float initialPosition;
 
     //sets the initial position of the lava and starts the movement
     void Start()
     {
+        //frames[0] = new Keyframe(0, 0);
+        //frames[1] = new Keyframe(timeToRise/2, moveSpeed);
+        //frames[2] = new Keyframe(timeToRise, 0);
+        //moveCurve = new AnimationCurve(frames);
         initialPosition = transform.position.y;
         StartCoroutine(moveLava());
     }
@@ -27,22 +35,25 @@ public class LavaLevel : MonoBehaviour
     {
         while (true)
         {
-            while (transform.position.y < initialPosition + maxMoveUp)
+            while (moveTime < timeToRise)
             {
-
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition + maxMoveUp, transform.position.z), Time.deltaTime * moveSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition + maxMoveUp, transform.position.z), Time.deltaTime * moveCurve.Evaluate(moveTime));
+                moveTime += 0.01f;
                 yield return new WaitForSeconds(0.01f);
             }
 
             yield return new WaitForSeconds(3f);
+            moveTime = 0;
 
-            while (transform.position.y > initialPosition)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition, transform.position.z), Time.deltaTime * moveSpeed);
+            while (moveTime < timeToRise)
+            {   
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialPosition, transform.position.z), Time.deltaTime * moveCurve.Evaluate(moveTime));
+                moveTime += 0.01f;
                 yield return new WaitForSeconds(0.01f);
             }
 
             yield return new WaitForSeconds(3f);
+            moveTime = 0;
         }
     }
 }
