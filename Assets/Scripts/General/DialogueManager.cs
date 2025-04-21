@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Ink.Runtime;
+using UnityEngine.SceneManagement;
 
 /*
  * This script represents a dialogue manager system. It manages active dialogue
@@ -87,15 +88,33 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("Running");
 
-        dialoguePanel.SetActive(false);
-        dialogueIsPlaying = false;
-        dialogueText.text = "";
+        if(SceneManager.GetActiveScene().name != "1.Submarine" && SceneManager.GetActiveScene().name != "4.Arena")
+        {
+            Destroy(dialoguePanel.gameObject);
+        }
+        else
+        {
+            dialoguePanel.SetActive(false);
+            dialogueIsPlaying = false;
+            dialogueText.text = "";
+        }
+
         dialogueComplete = true;
 
-        if(nextLevelTrigger != null)
+
+        if(SceneManager.GetActiveScene().name == "UpdatedOceanFloor")
+        {
+            nextLevelTrigger.GetComponent<Level2NextLevelTrigger>().GoToNextScene();
+        }
+        else if (SceneManager.GetActiveScene().name == "Level3Test")
+        {
+            nextLevelTrigger.GetComponent<Level3NextLevelTrigger>().goToNextScene();
+        }
+
+        /*if(nextLevelTrigger != null)
         {
             nextLevelTrigger.SetActive(true);
-        }
+        }*/
     }
 
     // Continues dialogue and uses typewriter effect to display text
