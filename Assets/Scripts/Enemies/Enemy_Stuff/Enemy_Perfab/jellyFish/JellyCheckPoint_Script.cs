@@ -28,10 +28,7 @@ public class JellyCheckPoint_Script : MonoBehaviour
             thePlayer.transform.position = currentCheckpoint.transform.position;
         }
 
-        if (other.CompareTag("Boss"))
-        {
-            Destroy(other.gameObject);
-        }
+
     }
 }
 
