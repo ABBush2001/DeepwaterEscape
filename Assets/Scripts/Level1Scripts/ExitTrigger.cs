@@ -51,7 +51,7 @@ public class ExitTrigger : MonoBehaviour
         outroCamera.SetActive(true);
         outroCamera.GetComponent<CameraFadeIn>().fadein = true;
         yield return new WaitForSeconds(1);
-        outroCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        //outroCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         ExplosionSound1.Play();
         StartCoroutine(cameraShake(1f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();
@@ -68,12 +68,12 @@ public class ExitTrigger : MonoBehaviour
         StartCoroutine(cameraShake(5f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();
 
-        yield return new WaitForSeconds(6);
+        //yield return new WaitForSeconds(6);
 
-        SceneManager.LoadScene("UpdatedOceanFloor");
-        Debug.Log("Loading Next Scene");
+        //SceneManager.LoadScene("UpdatedOceanFloor");
+        //Debug.Log("Loading Next Scene");
 
-        //loading.GetComponent<loading>().LoadNextScene(SceneManager.GetSceneByName("UpdatedOceanFloor").buildIndex);
+        loading.GetComponent<loading>().LoadNextScene("UpdatedOceanFloor");
     }
 
     //shakes the camera

@@ -10,6 +10,8 @@ public class Level3NextLevelTrigger : MonoBehaviour
 {
     [SerializeField] GameObject mainCamera;
 
+    public GameObject loading;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -25,8 +27,10 @@ public class Level3NextLevelTrigger : MonoBehaviour
 
     IEnumerator fadeToNextScene()
     {
-        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
-        yield return new WaitForSeconds(6);
-        SceneManager.LoadScene("4.Arena");
+        //mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        //yield return new WaitForSeconds(6);
+        //SceneManager.LoadScene("4.Arena");
+        loading.GetComponent<loading>().LoadNextScene("4.Arena");
+        yield return null;
     }
 }
