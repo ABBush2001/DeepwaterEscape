@@ -23,6 +23,8 @@ public class Boss_health : MonoBehaviour
     public Gradient gradirnt;
     public Image fill;
 
+    public GameObject loading;
+
     //Set the initial health and slider values
     void Start()
     {
@@ -45,7 +47,8 @@ public class Boss_health : MonoBehaviour
         UpdateSliderColor();
         if (BossHealth <= 0)
         {
-            SceneManager.LoadScene(sceneToLoad);
+            //SceneManager.LoadScene(sceneToLoad);
+            loading.GetComponent<loading>().LoadNextScene("5. JellyfishJump");
             defeat();
             
         }
