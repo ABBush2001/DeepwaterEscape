@@ -84,6 +84,9 @@ public class JellyBoss_Script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(sceneToLoad);
+        if (other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }
