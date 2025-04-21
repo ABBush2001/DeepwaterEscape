@@ -71,7 +71,9 @@ public class ExitTrigger : MonoBehaviour
         yield return new WaitForSeconds(6);
 
         //SceneManager.LoadScene("UpdatedOceanFloor");
-        loading.GetComponent<loading>().LoadNextScene(14);
+        Debug.Log("Loading Next Scene");
+
+        loading.GetComponent<loading>().LoadNextScene(SceneManager.GetSceneByName("UpdatedOceanFloor").buildIndex);
     }
 
     //shakes the camera
