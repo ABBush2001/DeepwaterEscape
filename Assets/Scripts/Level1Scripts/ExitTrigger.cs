@@ -68,12 +68,10 @@ public class ExitTrigger : MonoBehaviour
         StartCoroutine(cameraShake(5f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();
 
-        //yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(6);
 
         //SceneManager.LoadScene("UpdatedOceanFloor");
-        //Debug.Log("Loading Next Scene");
-
-        loading.GetComponent<loading>().LoadNextScene("UpdatedOceanFloor");
+        loading.GetComponent<loading>().LoadNextScene(14);
     }
 
     //shakes the camera

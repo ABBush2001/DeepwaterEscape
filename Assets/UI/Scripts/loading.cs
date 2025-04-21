@@ -12,13 +12,13 @@ public class loading : MonoBehaviour
 
     public GameObject otherUI;
 
-    public void LoadNextScene(string sceneIndex)
+    public void LoadNextScene(int sceneIndex)
     {
         StartCoroutine(LoadAsynchronously(sceneIndex));
         
     }
 
-    IEnumerator LoadAsynchronously(string sceneIndex)
+    IEnumerator LoadAsynchronously(int sceneIndex)
     {
 
         otherUI.SetActive(false);
