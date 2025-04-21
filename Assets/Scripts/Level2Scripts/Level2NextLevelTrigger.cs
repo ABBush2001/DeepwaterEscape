@@ -21,7 +21,7 @@ public class Level2NextLevelTrigger : MonoBehaviour
         {
             Debug.Log("Collided!");
 
-            StartCoroutine(fadeToNextScene());
+           //StartCoroutine(fadeToNextScene());
         }
     }
 

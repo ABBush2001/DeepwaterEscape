@@ -14,8 +14,13 @@ public class Level3NextLevelTrigger : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            StartCoroutine(fadeToNextScene());
+            //StartCoroutine(fadeToNextScene());
         }
+    }
+
+    public void goToNextScene()
+    {
+        StartCoroutine(fadeToNextScene());
     }
 
     IEnumerator fadeToNextScene()
