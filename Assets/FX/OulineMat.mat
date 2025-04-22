@@ -7,11 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LiquidEffect Variant
-  m_Shader: {fileID: -6465566751694194690, guid: 4b3dd124a57201c439746ec2427300cd,
+  m_Name: OulineMat
+  m_Shader: {fileID: -6465566751694194690, guid: 9afee39a960338d44bb4464a9e046d60,
     type: 3}
-  m_Parent: {fileID: -876546973899608171, guid: 4b3dd124a57201c439746ec2427300cd,
-    type: 3}
+  m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -24,18 +23,28 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamWidth: 0
     - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Scale: 1.01
     m_Colors:
-    - _BottomColor: {r: 0.4528302, g: 0, b: 0.035515983, a: 1}
-    - _FoamColor: {r: 1, g: 0, b: 0.028217316, a: 1}
-    - _Rim_Color: {r: 1, g: 0, b: 0.02849722, a: 1}
-    - _TopColor: {r: 0.5943396, g: 0, b: 0.017407475, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8029990157278135149
+--- !u!114 &6240784257949135471
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
