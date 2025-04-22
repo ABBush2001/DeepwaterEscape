@@ -45,7 +45,7 @@ public class FallingDebris : MonoBehaviour
                 break;
             }
 
-            temp.transform.SetPositionAndRotation(new Vector3(temp.transform.position.x, temp.transform.position.y - 0.1f, temp.transform.position.z), temp.transform.rotation);
+            temp.transform.SetPositionAndRotation(new Vector3(temp.transform.position.x, temp.transform.position.y - 2f, temp.transform.position.z), temp.transform.rotation);
             yield return new WaitForSeconds(fallSpeed);
 
             if (temp == null)
