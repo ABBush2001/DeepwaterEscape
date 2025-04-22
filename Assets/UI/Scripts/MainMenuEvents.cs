@@ -123,7 +123,7 @@ public class MainMenuEvents : MonoBehaviour
 
         yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
         //SceneManager.LoadScene("1.Submarine");
-        loading.GetComponent<loading>().LoadNextScene("1.Submarine");
+        loading.GetComponent<loading>().LoadNextScene(6);
     }
 
     private IEnumerator PlayHowto()

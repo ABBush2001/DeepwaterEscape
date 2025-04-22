@@ -21,7 +21,7 @@ public class Level2NextLevelTrigger : MonoBehaviour
         {
             Debug.Log("Collided!");
 
-           //StartCoroutine(fadeToNextScene());
+            StartCoroutine(fadeToNextScene());
         }
     }
 
@@ -37,7 +37,7 @@ public class Level2NextLevelTrigger : MonoBehaviour
         //mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         //yield return new WaitForSeconds(4);
         //SceneManager.LoadScene("Level3Test");
-        loading.GetComponent<loading>().LoadNextScene("Level3Test");
+        loading.GetComponent<loading>().LoadNextScene(15);
         yield return null;
     }
 }
