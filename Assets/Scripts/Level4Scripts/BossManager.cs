@@ -43,6 +43,8 @@ public class BossManager : MonoBehaviour
 
     public static bool isMoving = false;
 
+    public bool bossDefeated = false;
+
     //initialize the attack queue and start the boss fight coroutine 
     void Start()
     {

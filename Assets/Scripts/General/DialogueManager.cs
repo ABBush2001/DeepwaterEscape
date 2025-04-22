@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Ink.Runtime;
+using UnityEngine.SceneManagement;
 
 /*
  * This script represents a dialogue manager system. It manages active dialogue
@@ -95,6 +96,14 @@ public class DialogueManager : MonoBehaviour
         if(nextLevelTrigger != null)
         {
             nextLevelTrigger.SetActive(true);
+        }
+
+        if (SceneManager.GetActiveScene().name == "4.Arena")
+        {
+            if (GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated)
+            {
+                GameObject.Find("loading").GetComponent<loading>().LoadNextScene("5. JellyfishJump");
+            }
         }
     }
 
