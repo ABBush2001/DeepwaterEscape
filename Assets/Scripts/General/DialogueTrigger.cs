@@ -21,16 +21,21 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private TextMeshProUGUI continueText;
 
     [Header("Optional Components")]
-    [SerializeField] private Animator animator;
-    [SerializeField] private string animvar;
+    [SerializeField] [Tooltip("Can be left empty.")] private Animator animator;
+    [SerializeField] private string animvar = "Talk";
 
     private bool playerInRange;
+    private bool canTalk = false;
+    private bool animTalking = false;
 
     // Set playerInRange to false by default
     private void Awake()
     {
         playerInRange = false;
         visualCue.SetActive(false);  // Make sure the visual cue starts hidden
+        if (animator != null) { //if there's an animator component, let 'em talk.
+        canTalk = true;
+        }
     }
 
     // Checks if the player is in range and dialogue hasn't started yet
@@ -44,11 +49,18 @@ public class DialogueTrigger : MonoBehaviour
             {
                 continueText.enabled = true;
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
+                animTalking = true;
             }
         }
         else
         {
             visualCue.SetActive(false);  // Hide the visual cue when the player is out of range or dialogue is playing
+        }
+
+        if (animTalking && canTalk) // for talkin'
+        {
+            DialogueManager.GetInstance(); // hhhhhhhh
+            animator.SetTrigger(animvar); // play talkin' animation
         }
     }
 
