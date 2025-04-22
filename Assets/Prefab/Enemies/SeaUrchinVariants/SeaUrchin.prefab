@@ -118,11 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60360a067ed4c5842be5c29bfb5d9bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numProjectiles: 10
-  projectile: {fileID: 1376763137900838486, guid: f4e8081e3e914c242a915ad4179fb4b1,
-    type: 3}
+  spikes: {fileID: 0}
+  projectiles: {fileID: 0}
   radius: 5
-  moveSpeed: 50
+  duration: 0.001
+  circleMat: {fileID: 0}
 --- !u!1001 &1603719215133462788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -180,6 +180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4a2cd70f0ee2c2b4facecd0f6b195b21,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4a2cd70f0ee2c2b4facecd0f6b195b21,
         type: 3}
