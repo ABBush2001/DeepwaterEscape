@@ -22,7 +22,7 @@ public class DialogueTrigger : MonoBehaviour
 
     [Header("Optional Components")]
     [SerializeField] [Tooltip("Can be left empty.")] private Animator animator;
-    [SerializeField] private string animvar = "Talk";
+    [SerializeField] private string animvarString = "Talk";
 
     private bool playerInRange;
     private bool canTalk = false;
@@ -48,6 +48,10 @@ public class DialogueTrigger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))  // Player presses F to start the dialogue
             {
                 continueText.enabled = true;
+                if (animator != null)
+                {
+                    DialogueManager.GetInstance().SetAnim(animator, animvarString);
+                }
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
                 animTalking = true;
             }
@@ -57,11 +61,7 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(false);  // Hide the visual cue when the player is out of range or dialogue is playing
         }
 
-        if (animTalking && canTalk) // for talkin'
-        {
-            DialogueManager.GetInstance(); // hhhhhhhh
-            animator.SetTrigger(animvar); // play talkin' animation
-        }
+        
     }
 
     // Trigger when player enters collider range
