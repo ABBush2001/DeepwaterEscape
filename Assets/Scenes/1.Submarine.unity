@@ -6640,6 +6640,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CapsuleV2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 92444bf1e4fad694688f95bcff8e9d4e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Panacea
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -6790,6 +6795,9 @@ MonoBehaviour:
   pickUp: {fileID: 253212796}
   alarm: {fileID: 1323569735}
   inkJson: {fileID: 0}
+  gunX: {fileID: 1013695330}
+  panX: {fileID: 2040756335}
+  tankX: {fileID: 926303869}
 --- !u!135 &253212798
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -25784,7 +25792,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926303867}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -26475,7 +26483,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013695328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -28726,6 +28734,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Copy of bubble gun v2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e409726f20f841599b0be66bdd2583a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Gun
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28867,6 +28880,9 @@ MonoBehaviour:
   pickUp: {fileID: 1352495241}
   alarm: {fileID: 1323569735}
   inkJson: {fileID: 0}
+  gunX: {fileID: 1013695330}
+  panX: {fileID: 2040756335}
+  tankX: {fileID: 926303869}
 --- !u!135 &1352495243
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -28993,7 +29009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380596940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30521,6 +30537,7 @@ MonoBehaviour:
   item2Collider: {fileID: 253212798}
   item3Collider: {fileID: 1714214521}
   playerGun: {fileID: 439744777}
+  checklist: {fileID: 1380596939}
   alarmStart: 0
   timerText: {fileID: 0}
 --- !u!114 &1647020767
@@ -30873,6 +30890,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: oxygen tank
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 814b730008b27c64690800698ca77118,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tank
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30916,6 +30938,9 @@ MonoBehaviour:
   pickUp: {fileID: 1714214523}
   alarm: {fileID: 1323569735}
   inkJson: {fileID: 0}
+  gunX: {fileID: 1013695330}
+  panX: {fileID: 2040756335}
+  tankX: {fileID: 926303869}
 --- !u!65 &1714214521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33289,7 +33314,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040756333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
