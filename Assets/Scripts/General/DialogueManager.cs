@@ -22,12 +22,17 @@ public class DialogueManager : MonoBehaviour
 
     public bool dialogueComplete = false;
 
+    private bool isAnimating = false;
+    private string animTriggerString;
+
     private static DialogueManager instance;
 
     // Reference to the TextEffect component
     private TextEffect textEffect;
 
     public GameObject nextLevelTrigger;
+
+    private Animator animator;
 
     // Awake checks if a dialogue manager already exists in scene
     private void Awake()
@@ -81,6 +86,10 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         ContinueStory();
+        if (isAnimating)
+        {
+            animator.SetTrigger(animTriggerString);
+        }
     }
 
     // Exits the dialogue queue
@@ -88,33 +97,27 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("Running");
 
-        if(SceneManager.GetActiveScene().name != "1.Submarine" && SceneManager.GetActiveScene().name != "4.Arena")
-        {
-            Destroy(dialoguePanel.gameObject);
-        }
-        else
-        {
-            dialoguePanel.SetActive(false);
-            dialogueIsPlaying = false;
-            dialogueText.text = "";
-        }
-
+        dialoguePanel.SetActive(false);
+        dialogueIsPlaying = false;
+        dialogueText.text = "";
         dialogueComplete = true;
 
-
-        if(SceneManager.GetActiveScene().name == "UpdatedOceanFloor")
-        {
-            nextLevelTrigger.GetComponent<Level2NextLevelTrigger>().GoToNextScene();
-        }
-        else if (SceneManager.GetActiveScene().name == "Level3Test")
-        {
-            nextLevelTrigger.GetComponent<Level3NextLevelTrigger>().goToNextScene();
-        }
-
-        /*if(nextLevelTrigger != null)
+        if(nextLevelTrigger != null)
         {
             nextLevelTrigger.SetActive(true);
-        }*/
+        }
+
+        if (SceneManager.GetActiveScene().name == "4.Arena")
+        {
+            if (GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated)
+            {
+                GameObject.Find("loading").GetComponent<loading>().LoadNextScene("5. JellyfishJump");
+            }
+        }
+
+        isAnimating = false;
+        animator = null;
+        animTriggerString = null;
     }
 
     // Continues dialogue and uses typewriter effect to display text
@@ -123,7 +126,11 @@ public class DialogueManager : MonoBehaviour
         if (currentStory.canContinue)
         {
             string dialogue = currentStory.Continue();
-
+            // if animating something, animate it.
+            if (isAnimating)
+            {
+                animator.SetTrigger(animTriggerString);
+            }
             // Trigger the typewriter effect with the dialogue text
             if (textEffect != null)
             {
@@ -134,6 +141,13 @@ public class DialogueManager : MonoBehaviour
         {
             ExitDialogueMode();
         }
+    }
+
+    public void SetAnim(Animator p_animator, string triggerString)
+    {
+        animator = p_animator;
+        animTriggerString = triggerString;
+        isAnimating = true;
     }
 }
 
