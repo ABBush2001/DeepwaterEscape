@@ -39,7 +39,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6564,12 +6563,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1008
+      value: 4.0742
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -206.573
+      value: -206.594
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
@@ -6579,37 +6578,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.34396553
+      value: 0.48773727
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.6126928
+      value: 0.0061665624
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6218665
+      value: 0.8729675
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.34579954
+      value: 0.0014756633
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -58.383
+      value: 0.197
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 179.556
+      value: 121.616
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -88.9
+      value: 0.699
       objectReference: {fileID: 0}
     - target: {fileID: -7635826562936255635, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
@@ -6630,13 +6629,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 9afee39a960338d44bb4464a9e046d60,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 1ed3d5f3c92f36c4f8709f711be3a7f9, type: 2}
     - target: {fileID: -7635826562936255635, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 60e1a6b451b606b4380dc19d4bf7da90, type: 2}
+      objectReference: {fileID: 2100000, guid: 1ed3d5f3c92f36c4f8709f711be3a7f9, type: 2}
     - target: {fileID: 919132149155446097, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
       propertyPath: m_Name
@@ -6644,8 +6642,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 92444bf1e4fad694688f95bcff8e9d4e,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_TagString
+      value: Panacea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6797,6 +6795,9 @@ MonoBehaviour:
   pickUp: {fileID: 253212796}
   alarm: {fileID: 1323569735}
   inkJson: {fileID: 0}
+  gunX: {fileID: 1013695330}
+  panX: {fileID: 2040756335}
+  tankX: {fileID: 926303869}
 --- !u!135 &253212798
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -12854,7 +12855,7 @@ MonoBehaviour:
   updateMode: 0
   MaxWobble: 0.03
   WobbleSpeedMove: 1
-  fillAmount: 0.5
+  fillAmount: 0.48
   Recovery: 1
   Thickness: 1
   CompensateShapeAmount: 0
@@ -12903,7 +12904,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: c2a9e6140ef61a541a3e21b44a4ca54e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -25791,7 +25792,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926303867}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -26482,7 +26483,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013695328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -28733,6 +28734,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Copy of bubble gun v2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e409726f20f841599b0be66bdd2583a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Gun
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28874,6 +28880,9 @@ MonoBehaviour:
   pickUp: {fileID: 1352495241}
   alarm: {fileID: 1323569735}
   inkJson: {fileID: 0}
+  gunX: {fileID: 1013695330}
+  panX: {fileID: 2040756335}
+  tankX: {fileID: 926303869}
 --- !u!135 &1352495243
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -29000,7 +29009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1380596940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30528,6 +30537,7 @@ MonoBehaviour:
   item2Collider: {fileID: 253212798}
   item3Collider: {fileID: 1714214521}
   playerGun: {fileID: 439744777}
+  checklist: {fileID: 1380596939}
   alarmStart: 0
   timerText: {fileID: 0}
 --- !u!114 &1647020767
@@ -30880,6 +30890,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: oxygen tank
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 814b730008b27c64690800698ca77118,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tank
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30923,6 +30938,9 @@ MonoBehaviour:
   pickUp: {fileID: 1714214523}
   alarm: {fileID: 1323569735}
   inkJson: {fileID: 0}
+  gunX: {fileID: 1013695330}
+  panX: {fileID: 2040756335}
+  tankX: {fileID: 926303869}
 --- !u!65 &1714214521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32814,12 +32832,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!81 &1948598040
 AudioListener:
   m_ObjectHideFlags: 0
@@ -33296,7 +33314,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040756333}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -33407,11 +33425,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5094369317663836731, guid: c69aac8431ac85d4abe22814b485823c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.010131836
-      objectReference: {fileID: 0}
     - target: {fileID: 7310884127210925708, guid: c69aac8431ac85d4abe22814b485823c,
         type: 3}
       propertyPath: m_TargetCamera
