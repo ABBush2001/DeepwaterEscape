@@ -37,6 +37,10 @@ public class ClamWalker : MonoBehaviour
     public ClamAnimPlayer claminatorScript;
     //public Animator animator;
 
+    [Header("Audio")]
+    public AudioSource clamAudioSource;
+    public AudioClip clamWalkClip;
+
     private bool hasSeenPlayer = false;
     private bool hasDeBurrowed = false;
     private bool isJumping = false;
@@ -90,6 +94,17 @@ public class ClamWalker : MonoBehaviour
         }
         claminatorScript.SetAnimBool(ANIM_ISPATROLLER, patrols);
         claminatorScript.SetAnimBool(ANIM_ISSLEEPER, sleeper);
+
+        //Audio
+        if (clamAudioSource == null)
+        {
+            clamAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        clamAudioSource.clip = clamWalkClip;
+        clamAudioSource.loop = false; // Most clam jumps probably don’t need to loop
+        clamAudioSource.playOnAwake = false;
+
     }
 
     private void FixedUpdate()
@@ -244,6 +259,19 @@ public class ClamWalker : MonoBehaviour
         canHurt = true; // Clam only hurts player when jumping.
         canLook = false; // Don't rotate to face player while jumping
         claminatorScript.SetAnimBool(ANIM_JUMP, isJumping);
+
+        //Audio
+        if (clamWalkClip != null)
+        {
+            clamAudioSource.PlayOneShot(clamWalkClip);
+        }
+
+        curJumpCooldown = jumpCooldown;
+        isJumping = true;
+        canHurt = true;
+        canLook = false;
+
+        claminatorScript.SetAnimBool(ANIM_JUMP, isJumping);
     }
 
     public void AttemptHurt()
@@ -290,5 +318,20 @@ public class ClamWalker : MonoBehaviour
         claminatorScript.SetAnimBool(ANIM_DEAD, dead);
         Rebound(); // knockback on death baybee
         enabled = false; // stop logic when ded
+    }
+    public void StartWalkSound()
+    {
+        if (clamWalkClip != null && !clamAudioSource.isPlaying)
+        {
+            clamAudioSource.Play();
+        }
+    }
+
+    public void StopWalkSound()
+    {
+        if (clamAudioSource.isPlaying)
+        {
+            clamAudioSource.Stop();
+        }
     }
 }

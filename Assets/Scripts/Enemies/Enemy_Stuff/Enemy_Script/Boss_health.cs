@@ -23,6 +23,8 @@ public class Boss_health : MonoBehaviour
     public Gradient gradirnt;
     public Image fill;
 
+    public GameObject cutscene2;
+
     //Set the initial health and slider values
     void Start()
     {
@@ -45,7 +47,8 @@ public class Boss_health : MonoBehaviour
         UpdateSliderColor();
         if (BossHealth <= 0)
         {
-            SceneManager.LoadScene(sceneToLoad);
+            //SceneManager.LoadScene(sceneToLoad);
+            cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
             defeat();
             
         }
@@ -54,6 +57,7 @@ public class Boss_health : MonoBehaviour
     //destroy enemy when defeated
     public void defeat()
     {
+        GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated = true;
         Destroy(gameObject);
     }
 
