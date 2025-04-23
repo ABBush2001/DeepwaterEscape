@@ -20,6 +20,10 @@ public class DialogueTrigger : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI continueText;
 
+    [Header("Optional Components")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private string animvar;
+
     private bool playerInRange;
 
     // Set playerInRange to false by default
