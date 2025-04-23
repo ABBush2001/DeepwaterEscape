@@ -10,7 +10,10 @@ public class Player_Health : MonoBehaviour
     public float currentHealth;
     public float autoHeal = 1f;
     public float autoTime = 1f;
-    
+
+    [Header("Audio")]
+    public AudioSource hurtAudioSource;
+    public AudioClip hurtClip;
 
     public Image Healthbar;
     public Image damageScreen;
@@ -24,6 +27,16 @@ public class Player_Health : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateText();
+
+        //Audio
+        if (hurtAudioSource == null)
+        {
+            hurtAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        hurtAudioSource.clip = hurtClip;
+        hurtAudioSource.loop = false; 
+        hurtAudioSource.playOnAwake = false;
     }
 
     void Update()
@@ -64,6 +77,10 @@ public class Player_Health : MonoBehaviour
         currentHealth -= damage;
         StartCoroutine(DamageScreenDisplay());
         UpdateText();
+        if (hurtClip != null && hurtAudioSource != null)
+        {
+            hurtAudioSource.PlayOneShot(hurtClip);
+        }
     }
 
     void UpdateText()
