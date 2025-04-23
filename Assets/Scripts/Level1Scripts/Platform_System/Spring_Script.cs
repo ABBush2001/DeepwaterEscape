@@ -12,7 +12,13 @@ public class Spring_Script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Boss"))
+        { 
+            this.enabled = false;
+            return;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
         {
             CommentedThirdPersonController playerC = other.GetComponent<CommentedThirdPersonController>();
 
@@ -43,9 +49,9 @@ public class Spring_Script : MonoBehaviour
         while (elapsedTime < jumpDuration)
         {
             // When the c button is press the player will fall down fast 
-            if(Input.GetKey(KeyCode.C))
+            if (Input.GetKey(KeyCode.C))
             {
-                playerC.isJumping = true;
+                playerC.isJumping = false;
                 yield break;
             }
 

@@ -88,5 +88,9 @@ public class JellyBoss_Script : MonoBehaviour
         {
             SceneManager.LoadScene(sceneToLoad);
         }
+        if (other.CompareTag("Untagged"))
+        {
+            other.gameObject.tag = "Zap";
+        }
     }
 }
