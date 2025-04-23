@@ -13,6 +13,8 @@ public class FallingDebris : MonoBehaviour
     public GameObject warningCircle;
     public GameObject fallingDebris;
 
+
+
     public bool isFalling = false;
     private GameObject temp;
 
@@ -54,9 +56,6 @@ public class FallingDebris : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(3f);
-
-        warningCircle.GetComponent<DebrisWarningCircle>().startWarningCircle();
     }
 
 }
