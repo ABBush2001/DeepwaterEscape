@@ -52,7 +52,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip footStepClip; // private bool isFootstep = false;
     public AudioClip jumpSound;
-    
+
 
     // footStep
     private float footStep = 0.5f;
