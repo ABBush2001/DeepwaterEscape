@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class CheckpointTrigger : MonoBehaviour
 {
-    public GameObject checkpointText;
+    public GameObject checkPointText;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().setCheckpoint(this.gameObject);
-            StartCoroutine(flashCheckpointText());
         }
     }
 
-    IEnumerator flashCheckpointText()
+    IEnumerator flashText()
     {
-        checkpointText.SetActive(true);
+        checkPointText.SetActive(true);
         yield return new WaitForSeconds(2f);
-        checkpointText.SetActive(false);
+        checkPointText.SetActive(false);
+
     }
 }
