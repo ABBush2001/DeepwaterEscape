@@ -20,6 +20,8 @@ public class LevelOneManager : MonoBehaviour
 
     [SerializeField] private GameObject playerGun;
 
+    public GameObject checklist;
+
     public bool alarmStart = false;
 
     public TextMeshProUGUI timerText;
@@ -54,6 +56,7 @@ public class LevelOneManager : MonoBehaviour
     public void ShowTimer()
     {
         gameObject.GetComponent<TimerAlterDisplay>().ShowTimer(true);
+        checklist.SetActive(true);
     }
 
     //if all items collected, turn on the player gun
