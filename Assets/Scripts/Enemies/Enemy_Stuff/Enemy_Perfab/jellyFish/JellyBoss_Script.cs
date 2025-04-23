@@ -88,9 +88,16 @@ public class JellyBoss_Script : MonoBehaviour
         {
             SceneManager.LoadScene(sceneToLoad);
         }
-        if (other.CompareTag("Untagged"))
+        else if (other.CompareTag("Untagged"))
         {
             other.gameObject.tag = "Zap";
+        }
+
+        
+        Jellyfish_Spark_script sparkScript = other.GetComponent<Jellyfish_Spark_script>();
+        if (sparkScript != null)
+        {
+            sparkScript.enabled = true; // Enable the script
         }
     }
 }
