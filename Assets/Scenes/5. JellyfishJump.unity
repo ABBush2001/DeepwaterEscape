@@ -428,6 +428,11 @@ PrefabInstance:
       propertyPath: footStepClip
       value: 
       objectReference: {fileID: 8300000, guid: 6dd928f48deab884cba750efdc718173, type: 3}
+    - target: {fileID: 6945263260116173475, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: IncreaseGravity
+      value: 4.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100662072719934047, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: m_Name
@@ -772,7 +777,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162844225}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1941,7 +1946,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274079341}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2183,7 +2188,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282894319}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2736,7 +2741,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 438067317}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2931,7 +2936,7 @@ MonoBehaviour:
   clickToMoveCamera: 0
   canZoom: 1
   sensitivity: 5
-  cameraLimit: {x: -10, y: 90}
+  cameraLimit: {x: -10, y: 80}
 --- !u!114 &447969176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3098,7 +3103,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460714403}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4392,7 +4397,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668758936}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4558,7 +4563,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717646426}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4683,7 +4688,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725399760}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4954,7 +4959,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751035366}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5225,7 +5230,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769960024}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -9152,7 +9157,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763944093}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -9423,7 +9428,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816325634}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -9915,6 +9920,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Jellyfish boss
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5297ce5c343f8ca4ea1668e8e44d37cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10564,7 +10574,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009898721}
   serializedVersion: 4
-  m_Mass: 0.0000001
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
