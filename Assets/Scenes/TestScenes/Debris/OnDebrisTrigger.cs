@@ -7,6 +7,9 @@ public class OnDebrisTrigger : MonoBehaviour
     public ParticleSystem explosion;
     public GameObject fallSystem;
 
+    public AudioClip crashSound;
+    private AudioSource audioSource;
+
     private bool damageCircle = false;
 
     private void OnTriggerStay(Collider other)
@@ -28,9 +31,16 @@ public class OnDebrisTrigger : MonoBehaviour
         {
             damageCircle = true;
             fallSystem.GetComponent<FallingDebris>().isFalling = false;
+
+            if (crashSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(crashSound);
+            }
+
             Destroy(other.gameObject);
             StartCoroutine(playExplosion());
         }
+
     }
 
     IEnumerator playExplosion()
