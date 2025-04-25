@@ -8,6 +8,8 @@ public class OctopusTrigger : MonoBehaviour
     public float detectionRadius = 5f;
     public Transform player;
 
+    //public AudioSource attackAudio; //audio
+
     private bool isPlayerInside = false;
     private Coroutine attackCoroutine = null;
 
@@ -42,6 +44,12 @@ public class OctopusTrigger : MonoBehaviour
         }
 
         attackCoroutine = StartCoroutine(DelayedAttack());
+
+       /* if (attackAudio && !attackAudio.isPlaying)
+        {
+            attackAudio.loop = true;
+            attackAudio.Play();
+        }*/
     }
 
     IEnumerator DelayedAttack()
@@ -70,6 +78,11 @@ public class OctopusTrigger : MonoBehaviour
 
         // Stop the attack animation
         octopusAnimator.SetBool("isAttacking", false);
+
+       /* if (attackAudio && attackAudio.isPlaying)
+        {
+            attackAudio.Stop();
+        } */
     }
 
     void OnDrawGizmosSelected()
