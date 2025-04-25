@@ -12,6 +12,8 @@ using UnityEngine.VFX;
 public class ExitTrigger : MonoBehaviour
 {
     //variables
+    public LevelOneManager levelManger;
+
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject outroCamera;
 
@@ -45,6 +47,8 @@ public class ExitTrigger : MonoBehaviour
     //switches cameras, plays explosions w/sfx, shakes the camera and loads the next scene
     IEnumerator fadeToNextScene()
     {
+        levelManger.StopTimer();
+
         mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         yield return new WaitForSeconds(3);
         mainCamera.SetActive(false);
