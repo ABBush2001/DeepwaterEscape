@@ -20,6 +20,7 @@ public class DestroyCheckpoint : MonoBehaviour
     {
         if (other.CompareTag("Checkpoint"))
         {
+            Debug.Log("Checkpoint delete to: " + name);
             Destroy(other.gameObject);
         }
     }
