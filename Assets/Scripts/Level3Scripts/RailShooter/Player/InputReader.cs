@@ -1,34 +1,34 @@
-using KBCore.Refs;
-using UnityEngine;
-using UnityEngine.InputSystem;
+//using KBCore.Refs;
+//using UnityEngine;
+//using UnityEngine.InputSystem;
 
-public class InputReader : MonoBehaviour
-{
-    [SerializeField, Self] private PlayerInput playerInput;
-    InputAction moveAction;
+//public class InputReader : MonoBehaviour
+//{
+//    [SerializeField, Self] private PlayerInput playerInput;
+//    InputAction moveAction;
 
-    public Vector2 GetMove => moveAction.ReadValue<Vector2>();
-    // For reference, the above is equivalent to this:
+//    public Vector2 GetMove => moveAction.ReadValue<Vector2>();
+//    // For reference, the above is equivalent to this:
 
-    //public Vector2 GetMove
-    //{
-    //    get
-    //    {
-    //        return moveAction.ReadValue<Vector2>();
-    //    }
-    //}
+//    //public Vector2 GetMove
+//    //{
+//    //    get
+//    //    {
+//    //        return moveAction.ReadValue<Vector2>();
+//    //    }
+//    //}
 
 
-    // Validates references, attempts to assign missing refs, and logs errors for us.
-    private void OnValidate()
-    {
-        this.ValidateRefs();
-    }
+//    // Validates references, attempts to assign missing refs, and logs errors for us.
+//    private void OnValidate()
+//    {
+//        this.ValidateRefs();
+//    }
 
-    private void Awake()
-    {
-        //playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions["Move"];
-        Debug.LogAssertion("This stanky onrails inputreader script is still being used",this.gameObject);
-    }
-}
+//    private void Awake()
+//    {
+//        //playerInput = GetComponent<PlayerInput>();
+//        moveAction = playerInput.actions["Move"];
+//        Debug.LogAssertion("This stanky onrails inputreader script is still being used",this.gameObject);
+//    }
+//}
