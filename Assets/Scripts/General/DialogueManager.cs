@@ -143,6 +143,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Set animation to play each time dialogue is advanced
     public void SetAnim(Animator p_animator, string triggerString)
     {
         animator = p_animator;
@@ -150,4 +151,3 @@ public class DialogueManager : MonoBehaviour
         isAnimating = true;
     }
 }
-
