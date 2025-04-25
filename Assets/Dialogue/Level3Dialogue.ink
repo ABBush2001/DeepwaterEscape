@@ -1,5 +1,5 @@
-Anglerfish: Wow! You made it through all that?
-Anglerfish: Pretty impressive! Those urchins are no joke.
-Anglerfish: Well, up next is the Anglerfish Queen...
-Anglerfish: I'll lead you there, but I don't dare step into her lair.
-Anglerfish: Well, good luck...
+Anglerfish: "Wow! You made it through all that?"
+Anglerfish: "Pretty impressive! Those urchins are no joke."
+Anglerfish: "Well, up next is the Anglerfish Queen..."
+Anglerfish: "I'll lead you there, but I don't dare step into her lair myself."
+Anglerfish: "Good luck..."

@@ -2,18 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class distanceSFX : MonoBehaviour
+public class DistanceSFX : MonoBehaviour
 {
+    [Header("References")]
     public Transform player;
     public AudioSource audioSource;
+
+    [Header("Audio Settings")]
     public float maxDistance = 20f;
+    public float smoothSpeed = 2f;
+
+    private float currentVolume = 0f;
+    private Transform myTransform;
+
+    void Awake()
+    {
+        myTransform = transform;
+
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+    }
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        if (player == null || audioSource == null) return;
 
-        // Normalize volume between 0 and 1
-        float volume = 1 - Mathf.Clamp01(distance / maxDistance);
-        audioSource.volume = volume;
+        float distance = Vector3.Distance(myTransform.position, player.position);
+
+        // Normalize the target volume
+        float targetVolume = 1 - Mathf.Clamp01(distance / maxDistance);
+
+        // Smooth the volume transition
+        currentVolume = Mathf.Lerp(currentVolume, targetVolume, Time.deltaTime * smoothSpeed);
+
+        audioSource.volume = currentVolume;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, maxDistance);
     }
 }
