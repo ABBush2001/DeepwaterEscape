@@ -47,9 +47,15 @@ public class TimerAlterDisplay : MonoBehaviour
     //method to update the timer
     void DisplayTime(float timeToDisplay)
     {
+        timerText.enabled = true;
         timeToDisplay += 1;
         float minutes = Mathf.FloorToInt(timeToDisplay / 60); //2
         float seconds = Mathf.FloorToInt(timeToDisplay % 60); //10
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void ShowTimer(bool show = true)
+    {
+        timerText.enabled = show;
     }
 }

@@ -17,6 +17,8 @@ public class MainMenuEvents : MonoBehaviour
 
     private bool _isTransitioning = false;
 
+    public GameObject loading;
+
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -120,7 +122,8 @@ public class MainMenuEvents : MonoBehaviour
             _audioSource.Play();
 
         yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
-        SceneManager.LoadScene("1.Submarine");
+        //SceneManager.LoadScene("1.Submarine");
+        loading.GetComponent<loading>().LoadNextScene("OpeningCutscene");
     }
 
     private IEnumerator PlayHowto()

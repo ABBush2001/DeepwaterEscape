@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*
  * This script handles object collection. It is attached to an object
@@ -20,6 +21,14 @@ public class ObjectPickup : MonoBehaviour
 
     [SerializeField] private TextAsset inkJson;
 
+    public TextMeshProUGUI gunX;
+    public TextMeshProUGUI panX;
+    public TextMeshProUGUI tankX;
+
+    private bool isGun = false;
+    private bool isPan = false;
+    private bool isTank = false;
+
     //initially set prompt to false
     private void Start()
     {
@@ -30,10 +39,8 @@ public class ObjectPickup : MonoBehaviour
 
     private void Update()
     {
-        if(promptOn == true && Input.GetKeyDown(KeyCode.E))
+        if (promptOn == true && Input.GetKeyDown(KeyCode.E))
         {
-            
-
             //check if level 1
             if (SceneManager.GetActiveScene().name == "1.Submarine")
             {
@@ -41,7 +48,7 @@ public class ObjectPickup : MonoBehaviour
 
                 GameObject levelManager = GameObject.Find("LevelManager");
 
-                if (this.gameObject.tag == "Button")
+                if (gameObject.CompareTag("Button"))
                 {
                     alarm.SetActive(true);
                     alarmStart = true;
@@ -69,12 +76,24 @@ public class ObjectPickup : MonoBehaviour
                         levelManager.GetComponent<LevelOneManager>().setItem3();
                     }
 
+                    //update UI
+                    if (isGun)
+                    {
+                        gunX.enabled = true;
+                    }
+                    else if (isPan)
+                    {
+                        panX.enabled = true;
+                    }
+                    else if (isTank)
+                    {
+                        tankX.enabled = true;
+                    }
+
                     Destroy(this.gameObject, 1);
                 }
                 
             }
-
-            
             promptOn = false;
             pickupPrompt.SetActive(false);
             GetComponent<Renderer>().enabled = false;
@@ -84,7 +103,7 @@ public class ObjectPickup : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "1.Submarine" && alarmStart && DialogueManager.GetInstance().dialogueComplete)
         {
             GameObject levelManager = GameObject.Find("LevelManager");
-            levelManager.GetComponent<LevelOneManager>().turnOnObjects();
+            levelManager.GetComponent<LevelOneManager>().BeginAlarm();
             levelManager.GetComponent<TimerAlterDisplay>().timerRunning = true;
             Destroy(this.gameObject, 1);
         }
@@ -93,8 +112,21 @@ public class ObjectPickup : MonoBehaviour
     //activates prompt on entry
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
+            if(this.tag == "Gun")
+            {
+                isGun = true;
+            }
+            else if(this.tag == "Panacea")
+            {
+                isPan = true;
+            }
+            else if(this.tag == "Tank")
+            {
+                isTank = true;
+            }
+
             pickupPrompt.SetActive(true);
             promptOn = true;
         }
@@ -102,8 +134,21 @@ public class ObjectPickup : MonoBehaviour
     //closes prompt on exit
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
+            if (this.tag == "Gun")
+            {
+                isGun = false;
+            }
+            else if (this.tag == "Panacea")
+            {
+                isPan = false;
+            }
+            else if (this.tag == "Tank")
+            {
+                isTank = false;
+            }
+
             pickupPrompt.SetActive(false);
             promptOn = false;
         }
