@@ -10,6 +10,7 @@ public class Resolutions : MonoBehaviour
 
     private Resolution[] resolutions;
     private List<Resolution> filteredResolutions;
+    public List<Resolution> FilteredResolutions => filteredResolutions;
     private int currentResolutionIndex = 0;
 
     [HideInInspector] public Resolution resolution;
@@ -73,6 +74,10 @@ public class Resolutions : MonoBehaviour
         }
 
         resolution = filteredResolutions[resolutionIndex];
+
+        // Save user selection
+        PlayerPrefs.SetInt("ResolutionIndex", resolutionIndex);
+        PlayerPrefs.Save();
 
         int screenMode = PlayerPrefs.GetInt("ScreenMode", 0); // Default to FullScreenWindow
         FullScreenMode mode = (FullScreenMode)screenMode;
