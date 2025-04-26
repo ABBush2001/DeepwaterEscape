@@ -20,8 +20,11 @@ public class BossManager : MonoBehaviour
     public GameObject biteSystem;
     public GameObject mainPath;
     public GameObject enemy;
+    public Transform desiredRotation;
     public GameObject player;
     public GameObject enemyModel;
+    public int rotLerpSpeed= 10;
+    private Vector3 destination;
 
     // wave variables
     public GameObject wave;
@@ -48,7 +51,6 @@ public class BossManager : MonoBehaviour
     //initialize the attack queue and start the boss fight coroutine 
     void Start()
     {
-
         //initialize attackQueue to all 0's
 
         for (int i = 0; i < 5; i++)
@@ -59,8 +61,19 @@ public class BossManager : MonoBehaviour
         //attackInProcess = false;
 
 
-        StartCoroutine(bossFight());
+        StartCoroutine(BossFight());
     }
+
+    private void Update()
+    {
+        desiredRotation.position = enemy.transform.position;
+        desiredRotation.LookAt(destination);
+        desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
+        enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
+    }
+
+    // Set destination of fish, will be what desiredRotation looks at
+    public void SetDestination(Vector3 p_destination) => destination = p_destination;
 
     //method to do the wave attack
     void WaveAround(GameObject wavePrefab, Vector3 rotationOffset)
@@ -121,6 +134,7 @@ public class BossManager : MonoBehaviour
         float elapsedTime = 0f;
         float moveDuration = 2f;
 
+        SetDestination(waveNode.transform.position);
         // Move to wave center
         while (elapsedTime < moveDuration)
         {
@@ -131,7 +145,8 @@ public class BossManager : MonoBehaviour
         }
 
         enemy.transform.position = waveNode.transform.position;
-        enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         yield return new WaitForSeconds(3f);
 
@@ -146,7 +161,7 @@ public class BossManager : MonoBehaviour
             if (enemy == null) yield break;
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
-            yield return null;
+            yield return null; // The method will never progress past this point, as elapsedTime will always be reset to 0f
         }
 
         enemy.transform.position = originalPosition;
@@ -277,7 +292,7 @@ public class BossManager : MonoBehaviour
 
 
     //method for handling the boss fight
-    public IEnumerator bossFight()
+    public IEnumerator BossFight()
     {
 
         //loop for boss fight
