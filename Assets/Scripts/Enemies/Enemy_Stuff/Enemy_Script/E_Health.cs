@@ -10,6 +10,8 @@ public class E_Health : MonoBehaviour
     public int EnemyDmg = 25;
     public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
     public ClamWalker walker;
+    public AudioClip deathClip;
+    public AudioSource audioSource;
 
     const string ANIM_DEAD = "b_isDead";
 
@@ -33,6 +35,7 @@ public class E_Health : MonoBehaviour
     {
         if (walker != null) {
             walker.SetDead(true);
+            audioSource.PlayOneShot(deathClip);
         }
         else {
             Debug.LogWarning("Parent obj not assigned", this);

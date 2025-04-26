@@ -465,9 +465,14 @@ MonoBehaviour:
   jumpForce: 50
   jumpTime: 0.85
   gravity: 25
+  IncreaseGravity: 4.9
+  isJumping: 0
+  isSprinting: 0
+  isCrouching: 0
   animator: {fileID: 0}
-  footStepClip: {fileID: 8300000, guid: 6c7656185c9526242bb63ac984b9a1cc, type: 3}
-  jumpSound: {fileID: 0}
+  jumpElapsedTime: 0
+  footStepClip: {fileID: 8300000, guid: 6dd928f48deab884cba750efdc718173, type: 3}
+  jumpSound: {fileID: 8300000, guid: 457d5b03c992eeb4a8855278d4938126, type: 3}
 --- !u!82 &6609397475248914839
 AudioSource:
   m_ObjectHideFlags: 0
