@@ -11,13 +11,14 @@ using UnityEngine;
 public class FollowPath : MonoBehaviour
 {
     //variables
-    Node[] PathNode;
+    private Node[] PathNode;
     public GameObject enemy;
+    public GameObject lookerObj;
     public float moveSpeed;
-    float timer;
-    int currentNode;
-    static Vector3 currentPositionHolder;
-    static Vector3 startPosition;
+    private float timer;
+    private int currentNode;
+    private static Vector3 currentPositionHolder;
+    private static Vector3 startPosition;
 
 
     private Boss_health bHealth;
@@ -77,7 +78,8 @@ public class FollowPath : MonoBehaviour
             Vector3 directionNode = PathNode[currentNode + 1].transform.position - enemy.transform.position;
             if (directionNode != Vector3.zero)
             {
-                enemy.transform.rotation = Quaternion.LookRotation(directionNode);
+                //enemy.transform.rotation = Quaternion.LookRotation(directionNode);
+                lookerObj.transform.rotation = Quaternion.LookRotation(directionNode);
             }
         }
     }
