@@ -26,8 +26,23 @@ public class ScreenModeSetting : MonoBehaviour
         int val = PlayerPrefs.GetInt("ScreenMode", 0); // Default to FullScreenWindow
         ScreenModeDropDown.value = val;
         ScreenModeDropDown.RefreshShownValue();
-    }
 
+        ApplySavedSettings(); // Add this call
+    }
+    private void ApplySavedSettings()
+    {
+        int screenMode = PlayerPrefs.GetInt("ScreenMode", 0);
+        FullScreenMode mode = (FullScreenMode)screenMode;
+
+        int resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", -1);
+        if (resolutions != null && resolutionIndex >= 0 && resolutionIndex < resolutions.FilteredResolutions.Count)
+        {
+            Resolution res = resolutions.FilteredResolutions[resolutionIndex];
+            Screen.fullScreenMode = mode;
+            Screen.SetResolution(res.width, res.height, mode != FullScreenMode.Windowed);
+            Debug.Log($"[Startup] Applied saved settings: {res.width} x {res.height}, Mode: {mode}");
+        }
+    }
     public void SetScreenMode(int index)
     {
         if (resolutions == null)
@@ -45,4 +60,6 @@ public class ScreenModeSetting : MonoBehaviour
 
         Debug.Log($"Screen mode set to: {mode}, Resolution: {resolutions.resolution.width} x {resolutions.resolution.height}");
     }
+
 }
+

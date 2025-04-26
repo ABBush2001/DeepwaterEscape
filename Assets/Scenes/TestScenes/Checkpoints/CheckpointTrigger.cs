@@ -11,6 +11,7 @@ public class CheckpointTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().setCheckpoint(this.gameObject);
+            StartCoroutine(flashText());
         }
     }
 
