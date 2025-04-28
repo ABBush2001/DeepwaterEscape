@@ -1,5 +1,4 @@
 You: "What the heck!? Everything's shutting down!"
-You: "What the heck!? Everything's shutting down!"
 Intercom: "Hello, Doctor Thornfield. I'm speaking on behalf of the World Government. Allow me to keep things brief:"
 Intercom: "Your Panacea is... distinctly unprofitable. Tragically, due to a critical malfunction it will never reach the surface."
 Intercom: "Your submarine has been set to detonate one minute after the end of this recording."

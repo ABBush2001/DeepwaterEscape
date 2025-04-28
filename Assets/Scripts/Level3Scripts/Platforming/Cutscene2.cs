@@ -57,7 +57,7 @@ public class Cutscene2 : MonoBehaviour
     //exit out of the cutscene if the skip key is pressed
     void Update()
     {
-        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted)
+        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted && checkPointManager.currentCheckpoint == "")
         {
             levelStarted = true;
             player.SetActive(true);
