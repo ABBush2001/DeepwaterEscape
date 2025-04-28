@@ -20,7 +20,7 @@ public class FollowPath : MonoBehaviour
     private static Vector3 currentPositionHolder;
     private static Vector3 startPosition;
 
-
+    private BossManager bossManager;
     private Boss_health bHealth;
 
     // Initialize list of nodes
@@ -79,6 +79,7 @@ public class FollowPath : MonoBehaviour
             if (directionNode != Vector3.zero)
             {
                 //enemy.transform.rotation = Quaternion.LookRotation(directionNode);
+                
                 lookerObj.transform.rotation = Quaternion.LookRotation(directionNode);
             }
         }
