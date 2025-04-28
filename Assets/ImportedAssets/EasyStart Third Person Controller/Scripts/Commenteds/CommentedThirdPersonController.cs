@@ -32,7 +32,6 @@ public class CommentedThirdPersonController : MonoBehaviour
     public bool isJumping = false;
     public bool isSprinting = false;
     public bool isCrouching = false;
-    private bool jumped = false;
 
     // Identifiable game keys input for the player
     float inputHorizontal;
@@ -53,7 +52,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip footStepClip; // private bool isFootstep = false;
     public AudioClip jumpSound;
-
+    
 
     // footStep
     private float footStep = 0.5f;
@@ -145,11 +144,10 @@ public class CommentedThirdPersonController : MonoBehaviour
         }
 
         // Air/jumping animation if is or not in the ground
-        if( cc.isGrounded == true && jumped == true)
+        if( cc.isGrounded == true )
         {
             animator.SetBool( "air", false );
             animator.SetTrigger("Landing");
-            jumped = false;
         }
         else
         {
@@ -162,8 +160,6 @@ public class CommentedThirdPersonController : MonoBehaviour
             Debug.Log("Jumping");
             
             isJumping = true;
-            animator.SetTrigger("Jumping");
-            jumped = true;
             // Disable crounching when jumping? You decide, just uncomment:
             // isCrouching = false;
             audioSource.Stop();
@@ -230,7 +226,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             // Learn more here: https://docs.unity3d.com/ScriptReference/Mathf.SmoothStep.html
             // You can test this to see how strange it would sound: directionY = jumpForce * Time.deltaTime;
             directionY = Mathf.SmoothStep(jumpForce, jumpForce * 0.30f, jumpElapsedTime / jumpTime) * Time.deltaTime;
-            
+            animator.SetTrigger("Jumping");
 
 
             // Increases the time that has passed since the player started the jump
