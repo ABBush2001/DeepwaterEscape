@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * This script will handle the queue of boss fight attacks in the Arena.
@@ -23,6 +24,7 @@ public class BossManager : MonoBehaviour
     public Transform desiredRotation;
     public GameObject player;
     public GameObject enemyModel;
+    public TextMeshProUGUI waveText;
     public int rotLerpSpeed= 10;
     private Vector3 destination;
 
@@ -148,7 +150,22 @@ public class BossManager : MonoBehaviour
         desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
         //enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(3f);
+        waveText.text = "Wave Incoming";
+        yield return new WaitForSeconds(1.5f);
+
+        float remainingTime = 3f;
+
+        while (remainingTime > 0)
+        {
+            waveText.text = $"{remainingTime:F1}s";
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f;
+        }
+
+        waveText.text = "";
+        
+
+        //yield return new WaitForSeconds(3f);
 
         StartWave();
 
