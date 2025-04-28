@@ -87,8 +87,6 @@ public class Boss_health : MonoBehaviour
         {
             fill.color = gradirnt.Evaluate(slide.normalizedValue);
         }
-
-
     }
 }
 

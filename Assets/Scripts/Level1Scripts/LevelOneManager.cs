@@ -59,6 +59,12 @@ public class LevelOneManager : MonoBehaviour
         checklist.SetActive(true);
     }
 
+    public void StopTimer()
+    {
+        gameObject.GetComponent<TimerAlterDisplay>().timerRunning = false;
+        gameObject.GetComponent<TimerAlterDisplay>().ShowTimer(false);
+    }
+
     //if all items collected, turn on the player gun
     void Update()
     {
