@@ -111,8 +111,13 @@ public class DialogueManager : MonoBehaviour
         {
             if (GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated)
             {
-                GameObject.Find("loading").GetComponent<loading>().LoadNextScene("5. JellyfishJump");
+                GameObject.Find("loading").GetComponent<loading>().LoadNextScene("DemoJellyfishCutscene");
             }
+        }
+        if(SceneManager.GetActiveScene().name == "DemoJellyfishCutscene")
+        {
+            GameObject.Find("loading").GetComponent<loading>().LoadNextScene("5. JellyfishJump");
+            //GameObject.Find("EventSystem").GetComponent<IntroAnimation>().callAscending();
         }
 
         isAnimating = false;
