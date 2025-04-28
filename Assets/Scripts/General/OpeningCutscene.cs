@@ -23,4 +23,11 @@ public class OpeningCutscene : MonoBehaviour
         loading.GetComponent<loading>().LoadNextScene("1.Submarine");
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("e") || Input.GetKeyDown("escape"))
+        {
+            loading.GetComponent<loading>().LoadNextScene("1.Submarine");
+        }
+    }
 }

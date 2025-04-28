@@ -14,6 +14,7 @@ public class SpikeTrigger : MonoBehaviour
 
     public float radius;
     public float duration = 0.001f;
+    public int damage = 5;
 
     public GameObject circleMat;
     private Color tempColor;
@@ -97,7 +98,7 @@ public class SpikeTrigger : MonoBehaviour
 
         if (inDamageZone)
         {
-            playerObj.gameObject.GetComponent<Player_Health>().TakeDamage(5);
+            playerObj.gameObject.GetComponent<Player_Health>().TakeDamage(damage);
         }
 
         yield return new WaitForSeconds(2f);

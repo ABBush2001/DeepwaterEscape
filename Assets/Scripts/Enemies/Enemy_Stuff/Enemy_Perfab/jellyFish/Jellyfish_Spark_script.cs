@@ -12,7 +12,7 @@ public class Jellyfish_Spark_script : MonoBehaviour
         if (particlePrefab != null)
         {
             
-            Vector3 particlePosition = transform.position + new Vector3(0, 10, 0);
+            Vector3 particlePosition = transform.position + new Vector3(0, 0, 0);
 
             GameObject particleObject = Instantiate(particlePrefab, particlePosition, Quaternion.identity);
             particleSystemInstance = particleObject.GetComponent<ParticleSystem>();

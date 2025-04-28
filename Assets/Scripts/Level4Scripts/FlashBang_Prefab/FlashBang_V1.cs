@@ -161,11 +161,14 @@ public class FlashBang_V1 : MonoBehaviour
     // This is screen affect and the fade out
     private IEnumerator WhiteFade()
     {
+        //in case flashbang gets stuck
+        StartCoroutine(breakOutOfFlash());
+
         // Set the screen to fully white
         whiteImage.color = new Color(1, 1, 1, 1);
 
         float fadeDuration = 15f; // Total duration of the fade
-        float fadeStep = 0.0025f; // the fade step by step (it take make the screen visiable)
+        float fadeStep = 0.025f; // the fade step by step (it take make the screen visiable)
         float waitTime = fadeDuration * fadeStep;
 
         while (whiteImage.color.a > 0)
@@ -180,6 +183,13 @@ public class FlashBang_V1 : MonoBehaviour
 
         // to deactive the White Image 
         whiteImage.gameObject.SetActive(false);
+    }
+
+    private IEnumerator breakOutOfFlash()
+    {
+        yield return new WaitForSeconds(3f);
+        StopCoroutine(WhiteFade());
+        whiteImage.color = new Color(1, 1, 1, 0);
     }
 
     private IEnumerator GlowEffect()
