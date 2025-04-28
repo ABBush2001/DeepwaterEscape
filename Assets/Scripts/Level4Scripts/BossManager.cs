@@ -25,6 +25,7 @@ public class BossManager : MonoBehaviour
     public GameObject player;
     public GameObject enemyModel;
     public TextMeshProUGUI waveText;
+    public AudioSource waveRoar;
     public int rotLerpSpeed= 10;
     private Vector3 destination;
 
@@ -154,6 +155,7 @@ public class BossManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         float remainingTime = 3f;
+        waveRoar.Play();
 
         while (remainingTime > 0)
         {
@@ -163,7 +165,7 @@ public class BossManager : MonoBehaviour
         }
 
         waveText.text = "";
-        
+
 
         //yield return new WaitForSeconds(3f);
 
