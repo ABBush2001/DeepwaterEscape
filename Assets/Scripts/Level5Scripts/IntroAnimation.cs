@@ -7,6 +7,9 @@ public class IntroAnimation : MonoBehaviour
     public GameObject jellyfish;
     public Animator jellyAnim;
 
+    public TextAsset inkJson;
+    public DialogueManager dialogueManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,5 +26,6 @@ public class IntroAnimation : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         jellyAnim.SetBool("IntroDone", true);
+        dialogueManager.EnterDialogueMode(inkJson);
     }
 }
