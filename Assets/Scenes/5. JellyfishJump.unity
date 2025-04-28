@@ -4452,17 +4452,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 95434dd5c8f6f402fb2473d250e2a671,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95434dd5c8f6f402fb2473d250e2a671,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95434dd5c8f6f402fb2473d250e2a671,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95434dd5c8f6f402fb2473d250e2a671,
         type: 3}
@@ -4664,6 +4664,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1125345254}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 95434dd5c8f6f402fb2473d250e2a671,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1125345258}
   m_SourcePrefab: {fileID: 100100000, guid: 95434dd5c8f6f402fb2473d250e2a671, type: 3}
 --- !u!1 &700811644
 GameObject:
@@ -6461,8 +6465,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 13.25
-  m_Center: {x: 0, y: 25, z: 0}
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.54, z: 0}
 --- !u!114 &1125345256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6492,13 +6496,34 @@ MonoBehaviour:
   m_PlayOnAwake: 1
   m_LoopMode: 1
   m_Method: 0
-  m_Duration: 100
-  m_MaxSpeed: 29.061989
+  m_Duration: 80
+  m_MaxSpeed: 36.327488
   m_EasingMode: 0
   m_AlignmentMode: 3
   m_ObjectForwardAxis: 2
   m_ObjectUpAxis: 1
   m_StartOffset: 0
+--- !u!95 &1125345258
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125345253}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a73aedebcddda4aea8b26883d3c39891, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1141480108
 GameObject:
   m_ObjectHideFlags: 0
