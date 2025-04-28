@@ -23,8 +23,10 @@ public class OpeningBossCutscene : MonoBehaviour
     public GameObject DialogueManager;
 
     public TextMeshProUGUI instructionsText;
+    public GameObject instructionsBorder;
     public TextMeshProUGUI bossTitle;
     public GameObject bossHealthSlider;
+
 
     public AudioSource mainAudio;
     public AudioSource cutsceneAudio;
@@ -56,6 +58,7 @@ public class OpeningBossCutscene : MonoBehaviour
             bossFightSystem.SetActive(true);
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
             instructionsText.enabled = true;
+            instructionsBorder.SetActive(true);
             Time.timeScale = 0.1f;
         }
 
@@ -65,6 +68,7 @@ public class OpeningBossCutscene : MonoBehaviour
             bossHealthSlider.SetActive(true);
             bossTitle.enabled = true;
             instructionsText.enabled = false;
+            instructionsBorder.SetActive(false);
             Time.timeScale = 1f;
             Destroy(this.gameObject);
         }
