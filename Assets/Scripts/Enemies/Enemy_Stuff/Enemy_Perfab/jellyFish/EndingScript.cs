@@ -5,24 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class EndingScript : MonoBehaviour
 {
+    public Camera mainCamera;
     public string sceneToLoad;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(sceneToLoad);
+            StartCoroutine(fadeToCredits());
         }
+    }
+
+    IEnumerator fadeToCredits()
+    {
+        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

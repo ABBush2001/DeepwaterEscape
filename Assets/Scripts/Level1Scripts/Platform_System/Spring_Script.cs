@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Spring_Script : MonoBehaviour
 {
+    public Animator playerAnim;
+    public AudioSource jump;
+
     public float jumpHeight = 100f;
     public float jumpDuration = 0.5f;
 
@@ -19,6 +22,10 @@ public class Spring_Script : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
+            jump.Play();
+            playerAnim.SetTrigger("Landing");
+            playerAnim.SetTrigger("Jumping");
+
             CommentedThirdPersonController playerC = other.GetComponent<CommentedThirdPersonController>();
 
             if (playerC != null)
