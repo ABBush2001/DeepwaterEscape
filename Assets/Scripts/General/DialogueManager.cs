@@ -117,6 +117,7 @@ public class DialogueManager : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "DemoJellyfishCutscene")
         {
             GameObject.Find("loading").GetComponent<loading>().LoadNextScene("5. JellyfishJump");
+            //GameObject.Find("EventSystem").GetComponent<IntroAnimation>().callAscending();
         }
 
         isAnimating = false;
