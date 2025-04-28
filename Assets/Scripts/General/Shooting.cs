@@ -29,6 +29,7 @@ public class Shooting : MonoBehaviour
     public bool isreload = false;
 
     public TextMeshProUGUI Ammotext;
+    public TextMeshProUGUI reloadText;
 
     // camera Zoom
     public Camera playerC;
@@ -154,10 +155,12 @@ public class Shooting : MonoBehaviour
 
         isreload = true;
         Debug.Log("Reloading...");
-        Ammotext.text = "Reloading...";
+        reloadText.enabled = true;
+        reloadText.text = "Reloading...";
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
         isreload = false;
+        reloadText.enabled = false;
         Debug.Log("Reloaded");
         UpdateText();
     }
@@ -169,11 +172,13 @@ public class Shooting : MonoBehaviour
 
         if (currentAmmo == 0)
         {
-            Ammotext.text = "Press R to reload ";
-
+            reloadText.enabled = true;
+            reloadText.text = "Press R to reload ";
+            
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Ammotext.text = "Reloading...";
+                reloadText.enabled = true;
+                reloadText.text = "Reloading...";
             }
         }
     }
