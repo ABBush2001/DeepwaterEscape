@@ -167,9 +167,6 @@ public class BossManager : MonoBehaviour
 
         waveText.text = "";
 
-
-        //yield return new WaitForSeconds(3f);
-
         StartWave();
 
         yield return new WaitForSeconds(3f);
@@ -211,7 +208,6 @@ public class BossManager : MonoBehaviour
         float originalSpeed = 1f;
 
         //disable boss movement
-
         if (followPath != null)
         {
             originalSpeed = followPath.moveSpeed;

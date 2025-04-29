@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class LerpBossMovement : MonoBehaviour
 {
-    public Transform desiredRotation;
     public Transform enemy;
+    public float rotationSpeed = 10;
 
-    private GameObject enemyModel;
     // Start is called before the first frame update
     void Start()
     {
-        enemyModel = this.gameObject;
         if (enemy == null) {
-            Debug.LogAssertion("Enemy gameobj not hooked up to LerpBossMovement",this.gameObject);
+            Debug.LogAssertion("Enemy gameobj not hooked up to LerpBossMovement", gameObject);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.position = enemy.position;
+        transform.localRotation = Quaternion.Lerp(transform.rotation, enemy.localRotation, rotationSpeed);
+
         //desiredRotation.position = enemy.transform.position;
         //desiredRotation.LookAt(destination);
         //desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
