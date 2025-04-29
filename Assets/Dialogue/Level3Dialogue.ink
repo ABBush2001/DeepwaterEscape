@@ -1,5 +1,3 @@
-Anglerfish: "Wow! You made it through all that?"
-Anglerfish: "Pretty impressive! Those urchins are no joke."
+Anglerfish: "Sorry for swimming off. I had to test that you could handle your own."
 Anglerfish: "Well, up next is the Anglerfish Queen..."
-Anglerfish: "I'll lead you there, but I don't dare step into her lair myself."
-Anglerfish: "Good luck..."
+Anglerfish: "I’ll get you across — there’s a lava moat around her volcano."
