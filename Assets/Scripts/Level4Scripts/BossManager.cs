@@ -21,7 +21,7 @@ public class BossManager : MonoBehaviour
     public GameObject biteSystem;
     public GameObject mainPath;
     public GameObject enemy;
-    public Transform desiredRotation;
+    //public Transform desiredRotation;
     public GameObject player;
     public GameObject enemyModel;
     public TextMeshProUGUI waveText;
@@ -69,10 +69,11 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
-        desiredRotation.position = enemy.transform.position;
-        desiredRotation.LookAt(destination);
-        desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
-        enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
+        //Rotate smoothly. Rip out.
+        //desiredRotation.position = enemy.transform.position;
+        //desiredRotation.LookAt(destination);
+        //desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
+        //enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
     }
 
     // Set destination of fish, will be what desiredRotation looks at
@@ -148,7 +149,7 @@ public class BossManager : MonoBehaviour
         }
 
         enemy.transform.position = waveNode.transform.position;
-        desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
         //enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         waveText.text = "Wave Incoming";
@@ -177,7 +178,9 @@ public class BossManager : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < moveDuration)
         {
-            if (enemy == null) yield break;
+            if (enemy == null) {
+                yield break;
+            }
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null; // The method will never progress past this point, as elapsedTime will always be reset to 0f
