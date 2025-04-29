@@ -22,7 +22,8 @@ public class Cutscene : MonoBehaviour
     public GameObject camNode5;
     public GameObject camNode6;
 
-    public GameObject player;
+    //public GameObject player;
+    public CommentedThirdPersonController player;
     public GameObject canvas;
 
     private CheckpointManager checkpointManager;
@@ -50,7 +51,7 @@ public class Cutscene : MonoBehaviour
         {
             mainCamera.enabled = false;
             camera1.enabled = true;
-            player.SetActive(false);
+            player.isActive(false);
             canvas.SetActive(false);
             camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
             lastCoroutine = StartCoroutine(startMovingCamera());
@@ -64,8 +65,8 @@ public class Cutscene : MonoBehaviour
         if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted && checkpointManager.currentCheckpoint == "")
         {
             levelStarted = true;
-
-            player.SetActive(true);
+            player.isActive(true);
+            
             canvas.SetActive(true);
             textBox.SetActive(false);
             skipText.enabled = false;
@@ -123,9 +124,10 @@ public class Cutscene : MonoBehaviour
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
         instructions.enabled = true;
-        animControl.SetTrigger("IntroAnim");
 
-        player.SetActive(true);
+        player.isActive(true);
+
+        animControl.SetTrigger("IntroAnim");
         canvas.SetActive(true);
 
         levelStarted = true;
