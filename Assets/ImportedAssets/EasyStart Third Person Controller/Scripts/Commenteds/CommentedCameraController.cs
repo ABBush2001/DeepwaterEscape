@@ -81,6 +81,7 @@ public class CommentedCameraController : MonoBehaviour
         {
             // To zoom in or out, we can change the camera's transform, but it's easier to just set the field of view
             Camera.main.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * sensitivity * 2;
+            
         }
 
         // If the option to move camera with button is enabled
