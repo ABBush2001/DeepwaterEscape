@@ -37,10 +37,16 @@ public class Cutscene : MonoBehaviour
     public GameObject playerAnimator;
     private Animator animControl;
 
+    public GameObject player;
+    //public GameObject camera;
+    public GameObject canvas;
+
     //start the cutscene - disable the main camera, call the coroutine
     void Start()
     {
         mainCamera.enabled = false;
+        player.SetActive(false);
+        canvas.SetActive(false);
         camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
         lastCoroutine = StartCoroutine(startMovingCamera());
         animControl = playerAnimator.GetComponent<Animator>();
@@ -61,6 +67,8 @@ public class Cutscene : MonoBehaviour
             camera2.enabled = false;
             camera3.enabled = false;
             mainCamera.enabled = true;
+            player.SetActive(true);
+            canvas.SetActive(true);
             animControl.SetTrigger("IntroAnim");
             mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
             
@@ -109,6 +117,8 @@ public class Cutscene : MonoBehaviour
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
         instructions.enabled = true;
+        player.SetActive(true);
+        canvas.SetActive(true);
         animControl.SetTrigger("IntroAnim");
 
         levelStarted = true;
