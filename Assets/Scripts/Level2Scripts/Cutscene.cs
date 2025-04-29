@@ -22,6 +22,7 @@ public class Cutscene : MonoBehaviour
     public GameObject camNode5;
     public GameObject camNode6;
 
+    private CheckpointManager checkpointManager;
 
     public GameObject textBox;
     public TextMeshProUGUI skipText;
@@ -44,18 +45,24 @@ public class Cutscene : MonoBehaviour
     //start the cutscene - disable the main camera, call the coroutine
     void Start()
     {
-        mainCamera.enabled = false;
-        player.SetActive(false);
-        canvas.SetActive(false);
-        camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
-        lastCoroutine = StartCoroutine(startMovingCamera());
-        animControl = playerAnimator.GetComponent<Animator>();
+        checkpointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
+
+        if (checkpointManager.currentCheckpoint == "")
+        {
+            player.SetActive(false);
+            canvas.SetActive(false);
+            mainCamera.enabled = false;
+            camera1.enabled = true;
+            camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
+            lastCoroutine = StartCoroutine(startMovingCamera());
+            animControl = playerAnimator.GetComponent<Animator>();
+        }
     }
 
     //check to see if player has pressed E to skip
     void Update()
     {
-        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted)
+        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted && checkpointManager.currentCheckpoint == "")
         {
             levelStarted = true;
 
