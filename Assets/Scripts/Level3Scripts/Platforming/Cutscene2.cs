@@ -33,6 +33,7 @@ public class Cutscene2 : MonoBehaviour
     public GameObject camera;
     public GameObject canvas;
 
+    public static bool hasPlayedCutscene = false;
 
     Coroutine lastCoroutine = null;
 
@@ -43,7 +44,7 @@ public class Cutscene2 : MonoBehaviour
     {
         checkPointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
 
-        if (checkPointManager.currentCheckpoint == "")
+        if (checkPointManager.currentCheckpoint == "" && !hasPlayedCutscene)
         {
             player.SetActive(false);
             canvas.SetActive(false);
@@ -51,6 +52,16 @@ public class Cutscene2 : MonoBehaviour
             camera1.enabled = true;
             camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
             lastCoroutine = StartCoroutine(startMovingCamera());
+        }
+        else
+        {
+            // Cutscene already played: immediately set up gameplay
+            player.SetActive(true);
+            canvas.SetActive(true);
+            mainCamera.enabled = true;
+            camera1.enabled = false;
+            camera2.enabled = false;
+            camera3.enabled = false;
         }
     }
 

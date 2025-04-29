@@ -323,7 +323,7 @@ public class BossManager : MonoBehaviour
                 int temp = Random.Range(1, 101);
                 if (temp <= 25)
                 {
-                    attackQueue[i] = 2;
+                    attackQueue[i] = 1; //temp set to 1, will set back to 2 later
                 }
                 else if (temp > 25 && temp <= 75)
                 {
@@ -355,7 +355,7 @@ public class BossManager : MonoBehaviour
 
                     if(temp <= 25)
                     {
-                        attackQueue[i] = 2;
+                        attackQueue[i] = 1; //will set back to 2 later
                     }
                     else
                     {
