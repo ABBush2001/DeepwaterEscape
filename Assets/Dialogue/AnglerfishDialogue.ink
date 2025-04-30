@@ -1,5 +1,5 @@
 Anglerfish: "You sure are lost, aren’t you land dweller?"
-You: "Yeah, I'm trying to get back to the surface."
+You: "My submarine exploded, could you take me back to the surface?"
 Anglerfish: "Well, I suppose I could help you, though you'll need approval from our queen first."
 You: "How do I get her approval?"
-Anglerfish: "Through combat, of course! Hop on my back, land dweller. I'll take you to her."
+Anglerfish: "Through combat, of course! Follow me!."
