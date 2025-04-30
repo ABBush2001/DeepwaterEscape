@@ -14,18 +14,12 @@ public class ExitTrigger : MonoBehaviour
     //variables
     public LevelOneManager levelManger;
 
+    public GameObject gun;
+
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject outroCamera;
 
-    public GameObject Explosion1;
-    public GameObject Explosion2;
-    public GameObject Explosion3;
-    public GameObject Explosion4;
-
     public AudioSource ExplosionSound1;
-    public AudioSource ExplosionSound2;
-    public AudioSource ExplosionSound3;
-    public AudioSource ExplosionSound4;
 
     public GameObject explosion;
     public GameObject explosion1;
@@ -40,6 +34,7 @@ public class ExitTrigger : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            gun.SetActive(false);
             StartCoroutine(fadeToNextScene());
         }
     }
@@ -49,17 +44,10 @@ public class ExitTrigger : MonoBehaviour
     {
         levelManger.StopTimer();
 
-        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
-        yield return new WaitForSeconds(3);
-        mainCamera.SetActive(false);
-        outroCamera.SetActive(true);
-        outroCamera.GetComponent<CameraFadeIn>().fadein = true;
-        yield return new WaitForSeconds(1);
-        //outroCamera.GetComponent<CameraFadeOut>().fadeOut = true;
         ExplosionSound1.Play();
-        StartCoroutine(cameraShake(1f, shakeAmount));
+        //StartCoroutine(cameraShake(1f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();
-        yield return new WaitForSeconds(0.5f);
+        /*yield return new WaitForSeconds(0.5f);
         ExplosionSound2.Play();
         StartCoroutine(cameraShake(1f, shakeAmount));
         explosion1.GetComponent<VisualEffect>().Play();
@@ -70,9 +58,9 @@ public class ExitTrigger : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         ExplosionSound4.Play();
         StartCoroutine(cameraShake(5f, shakeAmount));
-        explosion.GetComponent<VisualEffect>().Play();
+        explosion.GetComponent<VisualEffect>().Play();*/
 
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(2);
 
         //SceneManager.LoadScene("UpdatedOceanFloor");
         loading.GetComponent<loading>().LoadNextScene("UpdatedOceanFloor");
