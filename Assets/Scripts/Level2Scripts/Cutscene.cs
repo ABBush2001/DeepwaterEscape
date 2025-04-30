@@ -22,6 +22,11 @@ public class Cutscene : MonoBehaviour
     public GameObject camNode5;
     public GameObject camNode6;
 
+    //public GameObject player;
+    public CommentedThirdPersonController player;
+    public GameObject canvas;
+
+    private CheckpointManager checkpointManager;
 
     public GameObject textBox;
     public TextMeshProUGUI skipText;
@@ -37,28 +42,32 @@ public class Cutscene : MonoBehaviour
     public GameObject playerAnimator;
     private Animator animControl;
 
-    public GameObject player;
-    //public GameObject camera;
-    public GameObject canvas;
-
     //start the cutscene - disable the main camera, call the coroutine
     void Start()
     {
-        mainCamera.enabled = false;
-        player.SetActive(false);
-        canvas.SetActive(false);
-        camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
-        lastCoroutine = StartCoroutine(startMovingCamera());
-        animControl = playerAnimator.GetComponent<Animator>();
+        checkpointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
+
+        if (checkpointManager.currentCheckpoint == "")
+        {
+            mainCamera.enabled = false;
+            camera1.enabled = true;
+            player.isActive(false);
+            canvas.SetActive(false);
+            camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
+            lastCoroutine = StartCoroutine(startMovingCamera());
+            animControl = playerAnimator.GetComponent<Animator>();
+        }
     }
 
     //check to see if player has pressed E to skip
     void Update()
     {
-        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted)
+        if (textBox && Input.GetKeyDown(KeyCode.E) && !levelStarted && checkpointManager.currentCheckpoint == "")
         {
             levelStarted = true;
-
+            player.isActive(true);
+            
+            canvas.SetActive(true);
             textBox.SetActive(false);
             skipText.enabled = false;
             instructions.enabled = true;
@@ -67,8 +76,6 @@ public class Cutscene : MonoBehaviour
             camera2.enabled = false;
             camera3.enabled = false;
             mainCamera.enabled = true;
-            player.SetActive(true);
-            canvas.SetActive(true);
             animControl.SetTrigger("IntroAnim");
             mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
             
@@ -117,9 +124,11 @@ public class Cutscene : MonoBehaviour
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
         instructions.enabled = true;
-        player.SetActive(true);
-        canvas.SetActive(true);
+
+        player.isActive(true);
+
         animControl.SetTrigger("IntroAnim");
+        canvas.SetActive(true);
 
         levelStarted = true;
     }

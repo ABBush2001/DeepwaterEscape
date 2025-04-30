@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * This script will handle the queue of boss fight attacks in the Arena.
@@ -20,9 +21,11 @@ public class BossManager : MonoBehaviour
     public GameObject biteSystem;
     public GameObject mainPath;
     public GameObject enemy;
-    public Transform desiredRotation;
+    //public Transform desiredRotation;
     public GameObject player;
     public GameObject enemyModel;
+    public TextMeshProUGUI waveText;
+    public AudioSource waveRoar;
     public int rotLerpSpeed= 10;
     private Vector3 destination;
 
@@ -66,10 +69,11 @@ public class BossManager : MonoBehaviour
 
     private void Update()
     {
-        desiredRotation.position = enemy.transform.position;
-        desiredRotation.LookAt(destination);
-        desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
-        enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
+        //Rotate smoothly. Rip out.
+        //desiredRotation.position = enemy.transform.position;
+        //desiredRotation.LookAt(destination);
+        //desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
+        //enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
     }
 
     // Set destination of fish, will be what desiredRotation looks at
@@ -145,10 +149,23 @@ public class BossManager : MonoBehaviour
         }
 
         enemy.transform.position = waveNode.transform.position;
-        desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
         //enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(3f);
+        waveText.text = "Wave Incoming";
+        yield return new WaitForSeconds(1.5f);
+
+        float remainingTime = 3f;
+        waveRoar.Play();
+
+        while (remainingTime > 0)
+        {
+            waveText.text = $"{remainingTime:F1}s";
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f;
+        }
+
+        waveText.text = "";
 
         StartWave();
 
@@ -158,7 +175,9 @@ public class BossManager : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < moveDuration)
         {
-            if (enemy == null) yield break;
+            if (enemy == null) {
+                yield break;
+            }
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null; // The method will never progress past this point, as elapsedTime will always be reset to 0f
@@ -189,7 +208,6 @@ public class BossManager : MonoBehaviour
         float originalSpeed = 1f;
 
         //disable boss movement
-
         if (followPath != null)
         {
             originalSpeed = followPath.moveSpeed;
@@ -305,7 +323,7 @@ public class BossManager : MonoBehaviour
                 int temp = Random.Range(1, 101);
                 if (temp <= 25)
                 {
-                    attackQueue[i] = 2;
+                    attackQueue[i] = 1; //temp set to 1, will set back to 2 later
                 }
                 else if (temp > 25 && temp <= 75)
                 {
@@ -337,7 +355,7 @@ public class BossManager : MonoBehaviour
 
                     if(temp <= 25)
                     {
-                        attackQueue[i] = 2;
+                        attackQueue[i] = 1; //will set back to 2 later
                     }
                     else
                     {

@@ -13,10 +13,17 @@ public class OceanFloorOpeningDialogue : MonoBehaviour
     public GameObject TextBox;
     public TextMeshProUGUI dialogueText;
 
+    private CheckpointManager checkpointManager;
+
     //call the dialogue coroutine
     void Start()
     {
-        StartCoroutine(openingDialogue());
+        checkpointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
+
+        if (checkpointManager.currentCheckpoint == "")
+        {
+            StartCoroutine(openingDialogue());
+        }
     }
 
     //play dialogue
