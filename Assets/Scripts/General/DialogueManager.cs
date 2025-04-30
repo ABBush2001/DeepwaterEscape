@@ -107,6 +107,12 @@ public class DialogueManager : MonoBehaviour
             nextLevelTrigger.SetActive(true);
         }
 
+        if(SceneManager.GetActiveScene().name == "UpdatedOceanFloor")
+        {
+            CheckpointManager temp = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
+            temp.currentCheckpoint = "";
+        }
+
         if (SceneManager.GetActiveScene().name == "4.Arena")
         {
             if (GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated)
