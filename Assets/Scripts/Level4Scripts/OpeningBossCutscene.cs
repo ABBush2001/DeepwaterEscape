@@ -14,6 +14,7 @@ public class OpeningBossCutscene : MonoBehaviour
     public Camera cutsceneCamera;
     public GameObject enemy;
     public GameObject player;
+    public GameObject canvas;
 
     public float moveSpeed = 1f;
 
@@ -51,6 +52,7 @@ public class OpeningBossCutscene : MonoBehaviour
     {
         if(cutsceneStarted && DialogueManager.GetComponent<DialogueManager>().dialogueComplete)
         {
+            canvas.SetActive(true);
             player.GetComponent<CommentedThirdPersonController>().velocity = 10;
             enemy.transform.Rotate(0, 180, 0);
             mainCamera.enabled = true;
@@ -78,6 +80,9 @@ public class OpeningBossCutscene : MonoBehaviour
     IEnumerator cutscene()
     {
         cutsceneStarted = true;
+
+        canvas.SetActive(false);
+
         // Ensure only cutscene audio is playing
         if (mainAudio != null) mainAudio.Stop();
         if (cutsceneAudio != null)
