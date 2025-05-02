@@ -170,6 +170,7 @@ public class Shooting : MonoBehaviour
     {
         Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
 
+        
         if (currentAmmo == 0)
         {
             reloadText.enabled = true;
