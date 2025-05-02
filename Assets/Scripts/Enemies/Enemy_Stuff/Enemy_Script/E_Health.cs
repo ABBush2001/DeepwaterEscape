@@ -7,7 +7,7 @@ using TMPro;
 public class E_Health : MonoBehaviour
 {
     public int EnemyHealth = 100;
-    public int EnemyDmg = 25;
+    public int EnemyDmg = 10;
     public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
     public ClamWalker walker;
     public AudioClip deathClip;
