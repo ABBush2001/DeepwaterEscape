@@ -81,7 +81,8 @@ public class CommentedThirdPersonController : MonoBehaviour
             inputJump = Input.GetAxis("Jump") == 1f;
             inputSprint = Input.GetAxis("Fire3") == 1f;
             // Unfortunately GetAxis does not work with GetKeyDown, so inputs must be taken individually
-            inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+            //inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+            //crouching is commented out because we do not need to crouch. - Wyatt
 
             //check movement for animations
             if (inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0)
@@ -100,10 +101,11 @@ public class CommentedThirdPersonController : MonoBehaviour
 
             // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
             // Note: It is possible to make changes to keep player crouched only while the key is pressed
-            if (inputCrouch == true)
-            {
-                isCrouching = !isCrouching; // Use the ! in a boolean is a way to toggle it!
-            }
+            //if (inputCrouch == true)
+            //{
+            //    isCrouching = !isCrouching; // Use the ! in a boolean is a way to toggle it!
+            //}
+            // crouching is commented out because we do not need to crouch. - Wyatt
 
             // isGrounded is a Character Controller property that informs whether the player is touching the ground. It's very easy to use!
             if (cc.isGrounded)
