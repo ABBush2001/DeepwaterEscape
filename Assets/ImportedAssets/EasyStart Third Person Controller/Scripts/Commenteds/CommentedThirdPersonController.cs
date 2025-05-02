@@ -84,33 +84,33 @@ public class CommentedThirdPersonController : MonoBehaviour
             inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
 
             //check movement for animations
-            while (inputVertical > 0)
+            if (inputVertical > 0)
             {
                 animator.SetBool("isWalking", true);
             }
-            while (inputVertical < 0)
+            else if (inputVertical < 0)
             {
                 animator.SetBool("isBackWalking", true);
             }
-            //else
-            //{
-              //  animator.SetBool("isWalking", false);
-                //animator.SetBool("isBackWalking", false);
-            //}
+            else
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isBackWalking", false);
+            }
 
-            while (inputHorizontal > 0)
+            if (inputHorizontal > 0)
             {
                 animator.SetBool("isWalkingRight", true);
             }
-            while (inputHorizontal < 0)
+            else if (inputHorizontal < 0)
             {
                 animator.SetBool("isWalkingLeft", true);
             }
-            //else
-            //{
-              //  animator.SetBool("isWalkingRight", false);
-                //animator.SetBool("isWalkingLeft", false);
-            //}
+            else
+            {
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingLeft", false);
+            }
 
             // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
             // Note: It is possible to make changes to keep player crouched only while the key is pressed
