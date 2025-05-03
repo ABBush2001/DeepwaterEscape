@@ -83,8 +83,11 @@ public class BossManager : MonoBehaviour
     void WaveAround(GameObject wavePrefab, Vector3 rotationOffset)
     {
         //instantiate the wave and call script to move it
+        Quaternion goodEnemyRot = enemy.transform.rotation;
+        goodEnemyRot.Set(0f,goodEnemyRot.y,0f,goodEnemyRot.w);
+
         GameObject temp = Instantiate(wavePrefab);
-        temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
+        temp.transform.SetPositionAndRotation(enemy.transform.position, goodEnemyRot);
         temp.transform.Rotate(rotationOffset);
         Wave_Script waveScript = temp.GetComponent<Wave_Script>();
 
@@ -139,6 +142,7 @@ public class BossManager : MonoBehaviour
         float moveDuration = 2f;
 
         SetDestination(waveNode.transform.position);
+        enemy.transform.LookAt(waveNode.transform.position);
         // Move to wave center
         while (elapsedTime < moveDuration)
         {
@@ -150,7 +154,9 @@ public class BossManager : MonoBehaviour
 
         enemy.transform.position = waveNode.transform.position;
         //desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
-        //enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, 0f);
+        enemy.transform.localRotation.Set(0f, 0f, 0f, 0f); // WORK
+        //enemy.transform.rotation.SetLookRotation(Vector3.forward);
 
         waveText.text = "Wave Incoming";
         yield return new WaitForSeconds(1.5f);
@@ -179,6 +185,7 @@ public class BossManager : MonoBehaviour
                 yield break;
             }
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
+            enemy.transform.LookAt(originalPosition);
             elapsedTime += Time.deltaTime;
             yield return null; // The method will never progress past this point, as elapsedTime will always be reset to 0f
         }
