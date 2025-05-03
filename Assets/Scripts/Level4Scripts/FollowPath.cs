@@ -20,7 +20,6 @@ public class FollowPath : MonoBehaviour
     private static Vector3 currentPositionHolder;
     private static Vector3 startPosition;
 
-    private BossManager bossManager;
     private Boss_health bHealth;
 
     // Initialize list of nodes
@@ -89,13 +88,13 @@ public class FollowPath : MonoBehaviour
     }
 
     //return the current node
-    public Node getNode()
+    public Node GetNode()
     {
         return PathNode[currentNode];
     }
 
     //reset the path to the first node
-    public void resetNode()
+    public void ResetNode()
     {
         currentNode = 0;
     }
@@ -111,7 +110,7 @@ public class FollowPath : MonoBehaviour
     }
 
     //set the current node based on the last path traveled
-    public void setCurrentNode(int path)
+    public void SetCurrentNode(int path)
     {
         if(path == 3)
         {
