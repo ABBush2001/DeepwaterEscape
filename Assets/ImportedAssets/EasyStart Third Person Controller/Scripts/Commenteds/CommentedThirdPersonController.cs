@@ -85,11 +85,11 @@ public class CommentedThirdPersonController : MonoBehaviour
             //crouching is commented out because we do not need to crouch. - Wyatt
 
             //check movement for animations
-            if (inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0)
+            if (inputVertical > 0)
             {
                 animator.SetBool("isWalking", true);
             }
-            else if (inputHorizontal > 0 || inputHorizontal < 0 || inputVertical < 0)
+            else if (inputVertical < 0)
             {
                 animator.SetBool("isBackWalking", true);
             }
@@ -97,6 +97,20 @@ public class CommentedThirdPersonController : MonoBehaviour
             {
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isBackWalking", false);
+            }
+
+            if (inputHorizontal > 0)
+            {
+                animator.SetBool("isWalkingRight", true);
+            }
+            else if (inputHorizontal < 0)
+            {
+                animator.SetBool("isWalkingLeft", true);
+            }
+            else
+            {
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingLeft", false);
             }
 
             // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
