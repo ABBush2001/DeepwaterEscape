@@ -80,8 +80,9 @@ public class FollowPath : MonoBehaviour
             {
 
                 enemy.transform.rotation = Quaternion.LookRotation(directionNode);
-                enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, enemy.transform.rotation.w);
-                
+                //enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, enemy.transform.rotation.w);
+                enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, 0f);
+
                 //lookerObj.transform.rotation = Quaternion.LookRotation(directionNode);
             }
         }
@@ -140,7 +141,8 @@ public class FollowPath : MonoBehaviour
 
         if (enemy.transform.position != currentPositionHolder)
         {
-            enemy.transform.position = Vector3.Lerp(startPosition, currentPositionHolder, timer);
+            //enemy.transform.position = Vector3.Lerp(startPosition, currentPositionHolder, timer);
+            //enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, enemy.transform.rotation.w);
         }
         else
         {
