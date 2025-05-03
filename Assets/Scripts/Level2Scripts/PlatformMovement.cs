@@ -40,17 +40,20 @@ public class PlatformMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Move the platform towards the target position
-        Vector3 targetPosition = (curNode == 1) ? Node1.transform.position : Node2.transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-        // Switch nodes when the platform is close enough
-        if (Vector3.Distance(transform.position, targetPosition) < threshold)
+        if (Node1 != null || Node2 != null) // Check so that there aren't 60 errors in the console
         {
-            curNode = (curNode == 1) ? 2 : 1;
-        }
+            // Move the platform towards the target position
+            Vector3 targetPosition = (curNode == 1) ? Node1.transform.position : Node2.transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-        // Update the platform's position for the next frame
-        lastPlatformPosition = transform.position;
+            // Switch nodes when the platform is close enough
+            if (Vector3.Distance(transform.position, targetPosition) < threshold)
+            {
+                curNode = (curNode == 1) ? 2 : 1;
+            }
+
+            // Update the platform's position for the next frame
+            lastPlatformPosition = transform.position;
+        }
     }
 }
