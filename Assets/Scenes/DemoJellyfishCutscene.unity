@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.1071111, g: 0.46071836, b: 0.7830189, a: 1}
+  m_FogColor: {r: 0, g: 0.24348465, b: 0.3018868, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
@@ -25,15 +25,15 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.22076362, g: 0.2677529, b: 0.38679248, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 21a5dfabedcb0894aaaa3ab6e132ba9f, type: 2}
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 2048
+  m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
@@ -96,8 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 26f9f8f78c143584c8f8a17030989096,
-    type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -309,11 +308,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5094369317663836731, guid: c69aac8431ac85d4abe22814b485823c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.010070801
-      objectReference: {fileID: 0}
     - target: {fileID: 7310884127210925708, guid: c69aac8431ac85d4abe22814b485823c,
         type: 3}
       propertyPath: m_TargetCamera
@@ -779,8 +773,8 @@ Camera:
   m_GameObject: {fileID: 827056663}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0.45262766, b: 1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -848,7 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 0
+  m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -859,9 +853,9 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
-  m_Antialiasing: 2
-  m_AntialiasingQuality: 1
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
@@ -1051,11 +1045,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8874921840675230841, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1126,50 +1115,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -7640558969779515294, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -4800108415213932180, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -4497111358015079880, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
         type: 3}
       propertyPath: m_Name
       value: Angler Fish(UV unwrapped)
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2597019010784920425, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561010544757998077, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8836805248588017474, guid: 3121eb35a034d8c4ab47b89ef4bfdbb7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1202,8 +1151,7 @@ AudioSource:
   m_GameObject: {fileID: 900290787}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -7018405881341350182, guid: 585e8ff32307d4142835ad2612b261fb,
-    type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ec7fabc91bffc4445bda1e82d0945aea, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -1298,8 +1246,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900290787}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.6065, y: 1111.9961, z: 32.103027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -162.60652, y: 1111.9963, z: 32.103256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1344,11 +1292,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Caustics Effect
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617845749383242060, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
@@ -1955,11 +1898,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Caustics Effect (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617845749383242060, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
@@ -2767,11 +2705,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Caustics Effect (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1617845749383242060, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
       propertyPath: m_Size.x
@@ -3011,8 +2944,8 @@ SceneRoots:
   - {fileID: 1816561361}
   - {fileID: 659450014}
   - {fileID: 623945952}
+  - {fileID: 1671129613}
   - {fileID: 484913194}
   - {fileID: 422647150}
   - {fileID: 1985690036}
   - {fileID: 900290789}
-  - {fileID: 1671129613}
