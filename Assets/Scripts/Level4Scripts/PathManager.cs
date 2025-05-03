@@ -22,19 +22,19 @@ public class PathManager : MonoBehaviour
     void Start()
     {
         
-        StartCoroutine(switchPaths());
+        StartCoroutine(SwitchPaths());
     }
 
 
     //coroutine to cycle between paths
-    IEnumerator switchPaths()
+    IEnumerator SwitchPaths()
     {
         while(true)
         {
             yield return new WaitForSeconds(1);
 
             //if a charge node is hit, randomly decide to charge or continue
-            if(path1.GetComponent<FollowPath>().getNode().isChargeNode)
+            if(path1.GetComponent<FollowPath>().GetNode().isChargeNode)
             {
                 int randPath = Random.Range(1, 3);
 
@@ -48,11 +48,11 @@ public class PathManager : MonoBehaviour
                 else
                 {
                 
-                    if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode1")
+                    if(path1.GetComponent<FollowPath>().GetNode().gameObject.name == "ChargeNode1")
                     {
                         StartCoroutine(bossM.ChaseAttack());
                     }
-                    else if(path1.GetComponent<FollowPath>().getNode().gameObject.name == "ChargeNode2")
+                    else if(path1.GetComponent<FollowPath>().GetNode().gameObject.name == "ChargeNode2")
                     {
                         StartCoroutine(bossM.ChaseAttack());
                     }
