@@ -32,12 +32,13 @@ public class ExitTrigger : MonoBehaviour
     //checks to see if the player has entered the exit trigger
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             gun.SetActive(false);
             StartCoroutine(fadeToNextScene());
         }
     }
+
 
     //switches cameras, plays explosions w/sfx, shakes the camera and loads the next scene
     IEnumerator fadeToNextScene()
@@ -59,6 +60,11 @@ public class ExitTrigger : MonoBehaviour
         ExplosionSound4.Play();
         StartCoroutine(cameraShake(5f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();*/
+
+        gun.SetActive(false);
+        DontDestroyOnLoad(gun);
+        Destroy(gun);
+
 
         yield return new WaitForSeconds(2);
 

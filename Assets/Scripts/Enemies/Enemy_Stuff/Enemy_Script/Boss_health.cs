@@ -49,13 +49,13 @@ public class Boss_health : MonoBehaviour
         {
             //SceneManager.LoadScene(sceneToLoad);
             cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
-            defeat();
+            Defeat();
             
         }
     }
 
     //destroy enemy when defeated
-    public void defeat()
+    public void Defeat()
     {
         GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated = true;
         Destroy(gameObject);

@@ -81,14 +81,15 @@ public class CommentedThirdPersonController : MonoBehaviour
             inputJump = Input.GetAxis("Jump") == 1f;
             inputSprint = Input.GetAxis("Fire3") == 1f;
             // Unfortunately GetAxis does not work with GetKeyDown, so inputs must be taken individually
-            inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+            //inputCrouch = Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton1);
+            //crouching is commented out because we do not need to crouch. - Wyatt
 
             //check movement for animations
-            if (inputHorizontal > 0 || inputHorizontal < 0 || inputVertical > 0)
+            if (inputVertical > 0)
             {
                 animator.SetBool("isWalking", true);
             }
-            else if (inputHorizontal > 0 || inputHorizontal < 0 || inputVertical < 0)
+            else if (inputVertical < 0)
             {
                 animator.SetBool("isBackWalking", true);
             }
@@ -98,37 +99,52 @@ public class CommentedThirdPersonController : MonoBehaviour
                 animator.SetBool("isBackWalking", false);
             }
 
+            if (inputHorizontal > 0)
+            {
+                animator.SetBool("isWalkingRight", true);
+            }
+            else if (inputHorizontal < 0)
+            {
+                animator.SetBool("isWalkingLeft", true);
+            }
+            else
+            {
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingLeft", false);
+            }
+
             // Check if you pressed the crouch input key and change the player's state. Read at the end of the script.
             // Note: It is possible to make changes to keep player crouched only while the key is pressed
-            if (inputCrouch == true)
-            {
-                isCrouching = !isCrouching; // Use the ! in a boolean is a way to toggle it!
-            }
+            //if (inputCrouch == true)
+            //{
+            //    isCrouching = !isCrouching; // Use the ! in a boolean is a way to toggle it!
+            //}
+            // crouching is commented out because we do not need to crouch. - Wyatt
 
             // isGrounded is a Character Controller property that informs whether the player is touching the ground. It's very easy to use!
             if (cc.isGrounded)
             {
                 // If the crouched state is true, it runs its animation, otherwise, not.
                 // Note: The crouch animation does not shrink the character's collider
-                if (isCrouching == true)
-                {
-                    animator.SetBool("crouch", true);
-                }
-                else
-                {
-                    animator.SetBool("crouch", false);
-                }
+                //if (isCrouching == true)
+                //{
+                //    animator.SetBool("crouch", true);
+                //}
+                //else
+                //{
+                //    animator.SetBool("crouch", false);
+                //}
 
                 // Check the player's speed and whether it is high enough to trigger the running animation
                 float minimumSpeed = 0.9f; // You can test with other values
                 if (cc.velocity.magnitude > minimumSpeed)
-                {
-                    animator.SetBool("run", true);
-                }
-                else
-                {
-                    animator.SetBool("run", false);
-                }
+                //{
+                //    animator.SetBool("run", true);
+                //}
+                //else
+                //{
+                //    animator.SetBool("run", false);
+                //}
 
                 // Same logic as the run, but adding the sprint input condition
                 if (cc.velocity.magnitude > 0.9f && inputSprint)
@@ -142,20 +158,20 @@ public class CommentedThirdPersonController : MonoBehaviour
                 }
 
                 // After going through the above condition, we already have the answer to whether it is running or not within the variable
-                animator.SetBool("sprint", isSprinting);
+                //animator.SetBool("sprint", isSprinting);
 
             }
 
             // Air/jumping animation if is or not in the ground
             if (cc.isGrounded == true)
             {
-                animator.SetBool("air", false);
+                //animator.SetBool("air", false);
                 animator.SetTrigger("Landing");
             }
-            else
-            {
-                animator.SetBool("air", true);
-            }
+            //else
+            //{
+            //    animator.SetBool("air", true);
+            //}
 
             // Check if input jump is pressed and if player is in the ground
             if (inputJump && cc.isGrounded)

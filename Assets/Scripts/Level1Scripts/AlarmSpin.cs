@@ -7,7 +7,7 @@ using UnityEngine;
 */
 public class AlarmSpin : MonoBehaviour
 {
-    public int rotateSpeed;
+    public float rotateSpeed;
 
     // Start is called before the first frame update
     void Start()
