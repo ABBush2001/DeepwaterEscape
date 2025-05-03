@@ -20,7 +20,6 @@ public class FollowPath : MonoBehaviour
     private static Vector3 currentPositionHolder;
     private static Vector3 startPosition;
 
-    private BossManager bossManager;
     private Boss_health bHealth;
 
     // Initialize list of nodes
@@ -80,21 +79,22 @@ public class FollowPath : MonoBehaviour
             {
 
                 enemy.transform.rotation = Quaternion.LookRotation(directionNode);
-                enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, enemy.transform.rotation.w);
-                
+                //enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, enemy.transform.rotation.w);
+                //enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, 0f);
+
                 //lookerObj.transform.rotation = Quaternion.LookRotation(directionNode);
             }
         }
     }
 
     //return the current node
-    public Node getNode()
+    public Node GetNode()
     {
         return PathNode[currentNode];
     }
 
     //reset the path to the first node
-    public void resetNode()
+    public void ResetNode()
     {
         currentNode = 0;
     }
@@ -110,7 +110,7 @@ public class FollowPath : MonoBehaviour
     }
 
     //set the current node based on the last path traveled
-    public void setCurrentNode(int path)
+    public void SetCurrentNode(int path)
     {
         if(path == 3)
         {
@@ -141,6 +141,7 @@ public class FollowPath : MonoBehaviour
         if (enemy.transform.position != currentPositionHolder)
         {
             enemy.transform.position = Vector3.Lerp(startPosition, currentPositionHolder, timer);
+            enemy.transform.LookAt(currentPositionHolder);
         }
         else
         {
