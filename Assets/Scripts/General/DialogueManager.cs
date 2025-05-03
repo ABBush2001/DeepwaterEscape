@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI dialogueName;
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -136,7 +137,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+            List<string> tags = currentStory.currentTags;
             string dialogue = currentStory.Continue();
+            if (tags.Count > 0)
+            {
+                dialogueName.text = tags[0];
+            }
             // if animating something, animate it.
             if (isAnimating)
             {
@@ -145,7 +151,9 @@ public class DialogueManager : MonoBehaviour
             // Trigger the typewriter effect with the dialogue text
             if (textEffect != null)
             {
+                
                 textEffect.SetText(dialogue);  // Use the SetText method to update the text and start the effect
+                
             }
         }
         else

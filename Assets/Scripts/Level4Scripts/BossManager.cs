@@ -67,15 +67,6 @@ public class BossManager : MonoBehaviour
         StartCoroutine(BossFight());
     }
 
-    private void Update()
-    {
-        //Rotate smoothly. Rip out.
-        //desiredRotation.position = enemy.transform.position;
-        //desiredRotation.LookAt(destination);
-        //desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
-        //enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
-    }
-
     // Set destination of fish, will be what desiredRotation looks at
     public void SetDestination(Vector3 p_destination) => destination = p_destination;
 
@@ -83,8 +74,11 @@ public class BossManager : MonoBehaviour
     void WaveAround(GameObject wavePrefab, Vector3 rotationOffset)
     {
         //instantiate the wave and call script to move it
+        Quaternion goodEnemyRot = enemy.transform.rotation;
+        goodEnemyRot.Set(0f,goodEnemyRot.y,0f,goodEnemyRot.w);
+
         GameObject temp = Instantiate(wavePrefab);
-        temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
+        temp.transform.SetPositionAndRotation(enemy.transform.position, goodEnemyRot);
         temp.transform.Rotate(rotationOffset);
         Wave_Script waveScript = temp.GetComponent<Wave_Script>();
 
@@ -138,7 +132,8 @@ public class BossManager : MonoBehaviour
         float elapsedTime = 0f;
         float moveDuration = 2f;
 
-        SetDestination(waveNode.transform.position);
+        
+        enemy.transform.LookAt(waveNode.transform.position);
         // Move to wave center
         while (elapsedTime < moveDuration)
         {
@@ -147,10 +142,9 @@ public class BossManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        enemy.transform.position = waveNode.transform.position;
-        //desiredRotation.rotation = Quaternion.Euler(0f, 0f, 0f);
-        //enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        
+        // This has to be done *very* specifically in order to remove tilt.
+        enemy.transform.SetPositionAndRotation(waveNode.transform.position, Quaternion.Euler(0f, enemy.transform.rotation.y, enemy.transform.rotation.z));
 
         waveText.text = "Wave Incoming";
         yield return new WaitForSeconds(1.5f);
@@ -179,8 +173,9 @@ public class BossManager : MonoBehaviour
                 yield break;
             }
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
+            enemy.transform.LookAt(originalPosition);
             elapsedTime += Time.deltaTime;
-            yield return null; // The method will never progress past this point, as elapsedTime will always be reset to 0f
+            yield return null;
         }
 
         enemy.transform.position = originalPosition;
@@ -215,11 +210,10 @@ public class BossManager : MonoBehaviour
             followPath.enabled = false; 
         }
 
-        Vector3 originalPosition = enemy.transform.position;
-        Quaternion originalRotation = enemy.transform.rotation;
+        enemy.transform.GetPositionAndRotation(out Vector3 originalPosition, out Quaternion originalRotation);
 
         //move boss towards player
-       
+
         if (player != null)
         {
             Vector3 dashStart = enemy.transform.position;
