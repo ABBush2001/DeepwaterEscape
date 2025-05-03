@@ -52,10 +52,26 @@ public class E_Health : MonoBehaviour
     {
         if (other.CompareTag("Player")) // More efficient tag comparison
         {
+            Debug.Log("Jelly Hit!");
+
             if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
-                playerHealth.TakeDamage(EnemyDmg);
+                if (SceneManager.GetActiveScene().name == "5. JellyfishJump")
+                {
+                    StartCoroutine(jellyDamage(other.gameObject));
+                }
+                else
+                {
+                    playerHealth.TakeDamage(EnemyDmg);
+                }
             }
         }
+    }
+
+    //for use in the jellyfish jump scene
+    IEnumerator jellyDamage(GameObject player)
+    {
+        player.GetComponent<Player_Health>().TakeDamage(EnemyDmg);
+        yield return new WaitForSeconds(2f);
     }
 }
