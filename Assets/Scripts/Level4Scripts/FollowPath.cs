@@ -141,7 +141,7 @@ public class FollowPath : MonoBehaviour
 
         if (enemy.transform.position != currentPositionHolder)
         {
-            //enemy.transform.position = Vector3.Lerp(startPosition, currentPositionHolder, timer);
+            enemy.transform.position = Vector3.Lerp(startPosition, currentPositionHolder, timer);
             //enemy.transform.rotation.Set(0f, enemy.transform.rotation.y, 0f, enemy.transform.rotation.w);
         }
         else
