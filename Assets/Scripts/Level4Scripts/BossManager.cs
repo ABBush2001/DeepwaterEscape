@@ -175,7 +175,7 @@ public class BossManager : MonoBehaviour
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
             enemy.transform.LookAt(originalPosition);
             elapsedTime += Time.deltaTime;
-            yield return null; // The method will never progress past this point, as elapsedTime will always be reset to 0f
+            yield return null;
         }
 
         enemy.transform.position = originalPosition;
