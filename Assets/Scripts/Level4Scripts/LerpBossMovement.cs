@@ -19,7 +19,7 @@ public class LerpBossMovement : MonoBehaviour
     void Update()
     {
         transform.position = enemy.position;
-        transform.localRotation = Quaternion.Lerp(transform.rotation, enemy.localRotation, rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, enemy.rotation, rotationSpeed * Time.deltaTime);
 
         //desiredRotation.position = enemy.transform.position;
         //desiredRotation.LookAt(destination);
