@@ -1,10 +1,10 @@
-#You
+#<color=green>Anglerfish</color>
 "You sure are lost, aren’t you land dweller?" 
-#<color=green>Anglerfish</color>
+#You
 You: "My submarine exploded, could you take me back to the surface?"
-#You
-"Well, I suppose I could help you, though you'll need approval from our queen first."
 #<color=green>Anglerfish</color>
-"How do I get her approval?"
+"Well, I suppose I could help you, though you'll need approval from our queen first."
 #You
+"How do I get her approval?"
+#<color=green>Anglerfish</color>
 "Through combat, of course! Follow me!"

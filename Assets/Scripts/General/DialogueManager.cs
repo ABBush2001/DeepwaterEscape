@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -137,12 +137,8 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
-            List<string> tags = currentStory.currentTags;
             string dialogue = currentStory.Continue();
-            if (tags.Count > 0)
-            {
-                dialogueName.text = tags[0];
-            }
+            
             // if animating something, animate it.
             if (isAnimating)
             {
@@ -151,7 +147,11 @@ public class DialogueManager : MonoBehaviour
             // Trigger the typewriter effect with the dialogue text
             if (textEffect != null)
             {
-                
+                List<string> tags = currentStory.currentTags;
+                if (tags.Count > 0)
+                {
+                    dialogueName.text = tags[0];
+                }
                 textEffect.SetText(dialogue);  // Use the SetText method to update the text and start the effect
                 
             }
