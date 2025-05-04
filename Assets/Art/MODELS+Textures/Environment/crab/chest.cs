@@ -8,7 +8,7 @@ public class TreasureChestTrigger : MonoBehaviour
     public float detectionRadius = 3f;
     public Transform player;
 
-    //public AudioSource openSound; // optional sound
+    // public AudioSource openSound; // optional sound
 
     private bool isPlayerInside = false;
     private bool isOpened = false;
@@ -46,8 +46,8 @@ public class TreasureChestTrigger : MonoBehaviour
             bubbleEffect.Play();
         }
 
-        // Trigger the chest opening animation
-        chestAnimator.SetTrigger("Open");
+        // Set isOpen bool to true
+        chestAnimator.SetBool("isOpen", true);
 
         /* // Optional sound
         if (openSound)
