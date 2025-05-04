@@ -30,7 +30,7 @@ public class Cutscene2 : MonoBehaviour
     public float moveSpeed = 10;
 
     public GameObject player;
-    public GameObject camera;
+    //public GameObject camera; Not used.
     public GameObject canvas;
 
     public static bool hasPlayedCutscene = false;
@@ -51,7 +51,7 @@ public class Cutscene2 : MonoBehaviour
             mainCamera.enabled = false;
             camera1.enabled = true;
             camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
-            lastCoroutine = StartCoroutine(startMovingCamera());
+            lastCoroutine = StartCoroutine(StartMovingCamera());
         }
         else
         {
@@ -88,7 +88,7 @@ public class Cutscene2 : MonoBehaviour
     }
 
     //play the cutscene
-    IEnumerator startMovingCamera()
+    IEnumerator StartMovingCamera()
     {
         //camera 1
         while (camera1.transform.position != camNode2.transform.position)
