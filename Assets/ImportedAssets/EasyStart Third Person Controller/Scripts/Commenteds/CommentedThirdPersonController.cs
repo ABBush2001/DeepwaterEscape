@@ -32,6 +32,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     public bool isJumping = false;
     public bool isSprinting = false;
     public bool isCrouching = false;
+    private bool Jumped = false;
 
     // Identifiable game keys input for the player
     float inputHorizontal;
@@ -147,7 +148,7 @@ public class CommentedThirdPersonController : MonoBehaviour
                 //}
 
                 // Same logic as the run, but adding the sprint input condition
-                if (cc.velocity.magnitude > 0.9f && inputSprint)
+                if (inputVertical > 0.9f && inputSprint)
                 {
                     isSprinting = true;
                 }
@@ -167,6 +168,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             {
                 //animator.SetBool("air", false);
                 animator.SetTrigger("Landing");
+                animator.SetBool("isLanding", true);
             }
             //else
             //{
@@ -177,7 +179,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             if (inputJump && cc.isGrounded)
             {
                 Debug.Log("Jumping");
-
+                animator.SetBool("isLanding", false);
                 isJumping = true;
                 // Disable crounching when jumping? You decide, just uncomment:
                 // isCrouching = false;
