@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LerpBossMovement : MonoBehaviour
@@ -19,10 +17,5 @@ public class LerpBossMovement : MonoBehaviour
     void Update()
     {
         transform.SetPositionAndRotation(enemy.position, Quaternion.Slerp(transform.rotation, enemy.rotation, rotationSpeed * Time.deltaTime));
-
-        //desiredRotation.position = enemy.transform.position;
-        //desiredRotation.LookAt(destination);
-        //desiredRotation.rotation.Set(0f, desiredRotation.rotation.y, 0f, desiredRotation.rotation.w);
-        //enemy.transform.rotation = Quaternion.Lerp(enemy.transform.rotation, desiredRotation.rotation, Time.deltaTime * rotLerpSpeed);
     }
 }
