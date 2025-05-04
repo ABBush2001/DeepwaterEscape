@@ -7,15 +7,9 @@ public class JellyCheckPoint_Script : MonoBehaviour
 {
     public static Transform currentCheckpoint; // Stores the latest checkpoint
     public GameObject thePlayer;
-    private bool checkDisable = false;
+    //private bool checkDisable = false;
 
     public string sceneToLoad;
-
-    private void Update()
-    {
-
-    }
-
 
     private void OnTriggerEnter(Collider other)
     {

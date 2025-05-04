@@ -65,8 +65,8 @@ public class JellyCheckpointManager : MonoBehaviour
         }
     }
 
-    public void setCheckpoint(GameObject newCheckpoint)
+    public void SetCheckpoint(GameObject newCheckpoint)
     {
-        currentCheckpoint = newCheckpoint.gameObject.tag;
+        currentCheckpoint = newCheckpoint.tag;
     }
 }

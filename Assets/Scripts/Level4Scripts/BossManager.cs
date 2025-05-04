@@ -232,8 +232,7 @@ public class BossManager : MonoBehaviour
             enemy.transform.position = dashTarget;
         }
 
-        //move boss back towards its original position
-        
+        //move boss back towards its original position        
         if (enemy != null)
         {
             float chaseBackDuration = 0.5f;
@@ -380,6 +379,12 @@ public class BossManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void KillBoss()
+    {
+        bossDefeated = true;
+        StopAllCoroutines();
     }
 }
 
