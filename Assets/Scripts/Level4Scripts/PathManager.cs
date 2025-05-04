@@ -21,7 +21,6 @@ public class PathManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         StartCoroutine(SwitchPaths());
     }
 
@@ -34,7 +33,7 @@ public class PathManager : MonoBehaviour
             yield return new WaitForSeconds(1);
 
             //if a charge node is hit, randomly decide to charge or continue
-            if(path1.GetComponent<FollowPath>().GetNode().isChargeNode)
+            if (path1.GetComponent<FollowPath>().GetNode().isChargeNode)
             {
                 int randPath = Random.Range(1, 3);
 
@@ -47,7 +46,7 @@ public class PathManager : MonoBehaviour
                 //the charge end node
                 else
                 {
-                
+
                     if(path1.GetComponent<FollowPath>().GetNode().gameObject.name == "ChargeNode1")
                     {
                         StartCoroutine(bossM.ChaseAttack());

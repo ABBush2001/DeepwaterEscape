@@ -66,8 +66,7 @@ public class Boss_health : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player_Health playerHealth = other.GetComponent<Player_Health>();
-            if (playerHealth != null)
+            if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
                 playerHealth.TakeDamage(BossDmg);
             }

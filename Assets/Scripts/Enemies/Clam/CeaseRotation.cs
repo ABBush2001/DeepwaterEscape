@@ -18,6 +18,7 @@ public class CeaseRotation : MonoBehaviour
     void Awake()
     {
         objRot = transform.rotation;
+        Debug.Log("I am sorry, but this script is not going to do anything, it is dumb.", gameObject);
     }
 
     void Update()
