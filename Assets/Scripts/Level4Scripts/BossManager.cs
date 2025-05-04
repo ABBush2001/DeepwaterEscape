@@ -342,14 +342,12 @@ public class BossManager : MonoBehaviour
             //set first queue item to always be the wave,
             //second to always be dash
 
-            /* TEMP
-            //attackQueue[0] = 3;
-            //attackQueue[1] = 1;
-            */
+            attackQueue[0] = 3;
+            attackQueue[1] = 1;
 
-            attackQueue[0] = 3; //wave
-            attackQueue[1] = 2; //Flash
-            attackQueue[2] = 1; //Dash
+            //attackQueue[0] = 3; //wave
+            //attackQueue[1] = 2; //Flash
+            //attackQueue[2] = 1; //Dash
 
             //begin looping through queue
             for (int i = 0; i < 5; i++)
