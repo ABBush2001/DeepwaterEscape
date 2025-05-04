@@ -34,8 +34,6 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-
-
         // it for the camera 
         cam = Camera.main;
         // if the Camera is not found
@@ -45,10 +43,8 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-
         // to render the material
         Renderer renderer = QAF.GetComponent<Renderer>();
-
 
         // check if the material is in the object
         if (renderer != null)
@@ -67,14 +63,12 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-
         if (timerText == null)
         {
             Debug.LogError("Timer text is not assigned");
             return;
         }
     }
-
 
     public void startFlashbang()
     {
