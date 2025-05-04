@@ -13,6 +13,8 @@ public class LavaLevel : MonoBehaviour
     public float maxMoveUp = 10;
     public float moveSpeed = 1;
     public float timeToRise = 4;
+    public float bottomWaitTime = 3f;
+    public float topWaitTime = 3f;
     public AnimationCurve moveCurve;
     private float moveTime = 0;
    // private Keyframe[] frames;
@@ -27,11 +29,11 @@ public class LavaLevel : MonoBehaviour
         //frames[2] = new Keyframe(timeToRise, 0);
         //moveCurve = new AnimationCurve(frames);
         initialPosition = transform.position.y;
-        StartCoroutine(moveLava());
+        StartCoroutine(MoveLava());
     }
 
     //moves the lava up and down
-    IEnumerator moveLava()
+    IEnumerator MoveLava()
     {
         while (true)
         {
@@ -42,7 +44,7 @@ public class LavaLevel : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(topWaitTime);
             moveTime = 0;
 
             while (moveTime < timeToRise)
@@ -52,7 +54,7 @@ public class LavaLevel : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(bottomWaitTime);
             moveTime = 0;
         }
     }
