@@ -35,6 +35,10 @@ public class ScreenModeSetting : MonoBehaviour
         FullScreenMode mode = (FullScreenMode)screenMode;
 
         int resolutionIndex = PlayerPrefs.GetInt("ResolutionIndex", -1);
+        Debug.Log(resolutions);
+        Debug.Log(resolutionIndex);
+        Debug.Log(resolutions.FilteredResolutions);
+        Debug.Log(resolutions.FilteredResolutions.Count);
         if (resolutions != null && resolutionIndex >= 0 && resolutionIndex < resolutions.FilteredResolutions.Count)
         {
             Resolution res = resolutions.FilteredResolutions[resolutionIndex];
