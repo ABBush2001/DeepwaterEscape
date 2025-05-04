@@ -8,7 +8,7 @@ public class JellyCheckpointTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameObject.Find("JellyCheckpointManager").GetComponent<JellyCheckpointManager>().setCheckpoint(this.gameObject);
+            GameObject.Find("JellyCheckpointManager").GetComponent<JellyCheckpointManager>().SetCheckpoint(this.gameObject);
         }
     }
 }

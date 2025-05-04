@@ -119,7 +119,6 @@ public class FlashBang_V1 : MonoBehaviour
 
             // this where the screen on blind and fade
             StartCoroutine(WhiteFade());
-
         }
         else
         {
@@ -168,7 +167,7 @@ public class FlashBang_V1 : MonoBehaviour
         //float fadeStep = 0.025f; // the fade step by step (it take make the screen visiable) !NOTUSED
         //float waitTime = fadeDuration * fadeStep; !NOTUSED
 
-        while (whiteImage.color.a >= 0.03)
+        while (whiteImage.color.a > 0.01)
         {
             // Gradually reduce the white screen
             whiteImage.color = new Color(1, 1, 1, whiteImage.color.a - (flashFadeSpeed * Time.deltaTime));
