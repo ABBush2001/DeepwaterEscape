@@ -142,9 +142,11 @@ public class BossManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
-        // This has to be done *very* specifically in order to remove tilt.
-        enemy.transform.SetPositionAndRotation(waveNode.transform.position, Quaternion.Euler(0f, enemy.transform.rotation.y, enemy.transform.rotation.z));
+
+        // This has to be done *very* specifically in order to avoid gimbal lock and successfully remove tilt.
+        enemy.transform.position = waveNode.transform.position;
+        Quaternion desiredRot = new(0, enemy.transform.rotation.y, 0, enemy.transform.rotation.w);
+        enemy.transform.rotation = desiredRot;
 
         waveText.text = "Wave Incoming";
         yield return new WaitForSeconds(1.5f);
