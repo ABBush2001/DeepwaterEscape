@@ -116,7 +116,7 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			if (DialogueManager.GetInstance().dialogueIsPlaying)
+			if (DialogueManager.GetInstance().DialogueIsPlaying)
 			{
 				return;
 			}
