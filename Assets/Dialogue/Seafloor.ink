@@ -1,6 +1,6 @@
-#<color=red>You</color> 
+#You
 "*groans* Everything hurts..."
-#<color=red>You</color> 
+#You
 "How long did that explosion have me out for...?"
-#<color=red>You</color> 
+#You 
 "I need to find a way back to the surface."
