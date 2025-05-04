@@ -18,8 +18,7 @@ public class LerpBossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = enemy.position;
-        transform.rotation = Quaternion.Slerp(transform.rotation, enemy.rotation, rotationSpeed * Time.deltaTime);
+        transform.SetPositionAndRotation(enemy.position, Quaternion.Slerp(transform.rotation, enemy.rotation, rotationSpeed * Time.deltaTime));
 
         //desiredRotation.position = enemy.transform.position;
         //desiredRotation.LookAt(destination);
