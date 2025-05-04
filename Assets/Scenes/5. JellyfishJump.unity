@@ -5280,7 +5280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -9100,7 +9100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -11584,7 +11584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -12567,7 +12567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -14528,7 +14528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -17143,7 +17143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -22859,7 +22859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -23272,7 +23272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -24452,7 +24452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -25047,7 +25047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -29768,7 +29768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -30594,6 +30594,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.64, y: 0.22, z: 0.64}
   m_Center: {x: 0, y: 0.36, z: 0}
+--- !u!1 &745253999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745254001}
+  - component: {fileID: 745254000}
+  m_Layer: 0
+  m_Name: OpeningInstructions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &745254000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745253999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953d9865b4d8a4af1b7d8712cdb98406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIBorder: {fileID: 1389475336}
+  instructions: {fileID: 1438804308}
+--- !u!4 &745254001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745253999}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 902.3278, y: 515.3417, z: -2.8465333}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &745626514 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4403186628105574105, guid: 762cd7ca0e796f64c93dbdb523f1e7c4,
@@ -36193,7 +36239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -39122,7 +39168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -39978,7 +40024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -43014,7 +43060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -47455,7 +47501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -48927,7 +48973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -49424,7 +49470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -51527,6 +51573,81 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.64, y: 0.22, z: 0.64}
   m_Center: {x: 0, y: 0.36, z: 0}
+--- !u!1 &1389475336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389475337}
+  - component: {fileID: 1389475339}
+  - component: {fileID: 1389475338}
+  m_Layer: 5
+  m_Name: UIBorder (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1389475337
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389475336}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1537.8679}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1438804307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1178, y: 468.88733}
+  m_SizeDelta: {x: 771.9668, y: 584.8134}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1389475338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389475336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.21026169, g: 0.990566, b: 0.8774336, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: bbeeb546e287c4c0ab8eadef66e79f4e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1389475339
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389475336}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1391487675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52061,7 +52182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1411825505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52713,7 +52834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1433307425
 Transform:
   m_ObjectHideFlags: 0
@@ -53151,6 +53272,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4776263663199737409, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1187
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776263663199737409, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 472
+      objectReference: {fileID: 0}
     - target: {fileID: 5518293446883354532, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: m_Enabled
@@ -53159,23 +53290,34 @@ PrefabInstance:
     - target: {fileID: 6131993013150245268, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: m_text
-      value: 'Defeat the boss!
-
-        Watch out when he dashes!
-
-        When the
-        screen flashes, look away!
-
-        Jump when he roars!
+      value: 'Escape the Jellyfish King!
 
 
-        Press Space
-        to begin the fight'
+        Jump on the jellyfish to bounce
+        towards the surface.
+
+        Avoid Electric Jellyfish! Hitting them will
+        kill you.
+
+
+        Press SPACE to begin.
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 6131993013150245268, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131993013150245268, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6131993013150245268, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6258159055057880874, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
@@ -53185,7 +53327,7 @@ PrefabInstance:
     - target: {fileID: 7042783421175063890, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7131612999281127340, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
@@ -53223,8 +53365,30 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 62435533}
+    - targetCorrespondingSourceObject: {fileID: 805779588147554156, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 1389475337}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0c409174bdebde4593dbb93405e5807, type: 3}
+--- !u!4 &1438804307 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 805779588147554156, guid: a0c409174bdebde4593dbb93405e5807,
+    type: 3}
+  m_PrefabInstance: {fileID: 1438804306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1438804308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6131993013150245268, guid: a0c409174bdebde4593dbb93405e5807,
+    type: 3}
+  m_PrefabInstance: {fileID: 1438804306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1444042682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55457,7 +55621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -56337,7 +56501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -58821,7 +58985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -68129,7 +68293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -69604,7 +69768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -71954,7 +72118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -74956,7 +75120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -79911,7 +80075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyHealth: 2147483647
-  EnemyDmg: 30
+  EnemyDmg: 100
   parentObj: {fileID: 0}
   walker: {fileID: 0}
   deathClip: {fileID: 0}
@@ -80463,3 +80627,4 @@ SceneRoots:
   - {fileID: 1674937206}
   - {fileID: 1433307425}
   - {fileID: 1411825506}
+  - {fileID: 745254001}
