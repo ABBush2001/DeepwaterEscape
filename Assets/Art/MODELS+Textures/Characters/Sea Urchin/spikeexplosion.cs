@@ -13,18 +13,6 @@ public class SpikeExplosion : MonoBehaviour
     private Vector3[] originalPositions;
     private Quaternion[] originalRotations;
 
-    private void Start()
-    {
-        int i = 0;
-
-        foreach(GameObject spike in spikes)
-        {
-            originalPositions[i] = spike.transform.position;
-            originalRotations[i] = spike.transform.rotation;
-            i++;
-        }
-    }
-
     private void resetSpikePositions()
     {
         int i = 0;
@@ -77,7 +65,13 @@ public class SpikeExplosion : MonoBehaviour
     {
         yield return new WaitForSeconds(lifetimeAfterExplosion);
         HideSpike(spike);
-        ResetSpikes();
+        //ResetSpikes();
+        DeleteSpikes();
+    }
+
+    private void DeleteSpikes()
+    {
+        Destroy(gameObject);
     }
 
     public void ResetSpikes()
@@ -104,11 +98,13 @@ public class SpikeExplosion : MonoBehaviour
 
     void HideSpike(GameObject spike)
     {
-        if (spike.TryGetComponent<MeshRenderer>(out MeshRenderer mr))
+        if (spike.TryGetComponent<MeshRenderer>(out MeshRenderer mr)) {
             mr.enabled = false;
+        }
 
-        if (spike.TryGetComponent<Collider>(out Collider col))
+        if (spike.TryGetComponent(out Collider col)) {
             col.enabled = false;
+        }
     }
 
     void ShowSpike(GameObject spike)
