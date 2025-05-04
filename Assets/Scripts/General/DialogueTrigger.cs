@@ -25,8 +25,6 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private string animvarString = "Talk";
 
     private bool playerInRange;
-    private bool canTalk = false;
-    private bool animTalking = false;
 
     // Set playerInRange to false by default
     private void Awake()
@@ -34,14 +32,13 @@ public class DialogueTrigger : MonoBehaviour
         playerInRange = false;
         visualCue.SetActive(false);  // Make sure the visual cue starts hidden
         if (animator != null) { //if there's an animator component, let 'em talk.
-        canTalk = true;
         }
     }
 
     // Checks if the player is in range and dialogue hasn't started yet
     private void Update()
     {
-        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        if (playerInRange && !DialogueManager.GetInstance().DialogueIsPlaying)
         {
             // Show the visual cue only if player is in range and dialogue isn't playing
             visualCue.SetActive(true);
@@ -53,7 +50,6 @@ public class DialogueTrigger : MonoBehaviour
                     DialogueManager.GetInstance().SetAnim(animator, animvarString);
                 }
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
-                animTalking = true;
             }
         }
         else
