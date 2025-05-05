@@ -32,6 +32,7 @@ public class Cutscene : MonoBehaviour
     public TextMeshProUGUI skipText;
 
     public TextMeshProUGUI instructions;
+    public GameObject instructionsBorder;
 
     Coroutine lastCoroutine = null;
 
@@ -71,6 +72,7 @@ public class Cutscene : MonoBehaviour
             textBox.SetActive(false);
             skipText.enabled = false;
             instructions.enabled = true;
+            instructionsBorder.SetActive(true);
             StopCoroutine(lastCoroutine);
             camera1.enabled = false;
             camera2.enabled = false;
@@ -80,6 +82,16 @@ public class Cutscene : MonoBehaviour
             mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
             
         }
+    }
+
+    public void setLevelStarted(bool val)
+    {
+        levelStarted = val;
+    }
+
+    public bool getLevelStarted()
+    {
+        return levelStarted;
     }
 
     //move each cutscene camera from one node to another, then move to the next camera
@@ -124,6 +136,7 @@ public class Cutscene : MonoBehaviour
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
         instructions.enabled = true;
+        instructionsBorder.SetActive(true);
 
         player.IsActive(true);
 

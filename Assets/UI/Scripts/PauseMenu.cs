@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -66,6 +67,23 @@ public class PauseMenu2 : MonoBehaviour
     public void GoToHome()
     {
         Time.timeScale = 1f;
+
+        //check if a checkpoint manager exists and destroy it if so
+        GameObject checkpointManager = null;
+
+        try
+        {
+            checkpointManager = GameObject.Find("CheckpointManager");
+        }catch(Exception e)
+        {
+            Debug.Log("No checkpoint manager in scene!");
+        }
+
+        if(checkpointManager != null)
+        {
+            Destroy(checkpointManager);
+        }
+
         SceneManager.LoadScene("Main");
     }
 

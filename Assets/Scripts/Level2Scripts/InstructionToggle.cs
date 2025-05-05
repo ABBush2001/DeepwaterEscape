@@ -9,20 +9,24 @@ using TMPro;
 public class InstructionToggle : MonoBehaviour
 {
     public TextMeshProUGUI instructions;
+    public GameObject instructionsBorder;
+
+    public GameObject cutsceneSystem;
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (cutsceneSystem.GetComponent<Cutscene>().getLevelStarted())
         {
-            if(instructions.enabled)
-            {
-                instructions.enabled = false;
-            }
-            else
-            {
-                instructions.enabled = true;
-            }
+            cutsceneSystem.GetComponent<Cutscene>().setLevelStarted(true);
+            StartCoroutine(toggleOffInstructions());
         }
+    }
+
+    IEnumerator toggleOffInstructions()
+    {
+        yield return new WaitForSeconds(10f);
+        instructions.enabled = false;
+        instructionsBorder.SetActive(false);
     }
 }
