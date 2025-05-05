@@ -115,6 +115,11 @@ public class DialogueManager : MonoBehaviour
             GameObject.Find("loading").GetComponent<loading>().LoadNextScene("Level3Test");
         }
 
+        if(SceneManager.GetActiveScene().name == "Level3Test")
+        {
+            GameObject.Find("loading").GetComponent<loading>().LoadNextScene("4.Arena");
+        }
+
         if (SceneManager.GetActiveScene().name == "4.Arena")
         {
             if (GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated)
