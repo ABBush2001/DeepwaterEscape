@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueName;
 
     private Story currentStory;
-    public bool dialogueIsPlaying { get; private set; }
+    public bool DialogueIsPlaying { get; private set; }
 
     public bool dialogueComplete = false;
 
@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     // Sets dialogue active to false on start
     private void Start()
     {
-        dialogueIsPlaying = false;
+        DialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
 
         // Get the TextEffect component from the dialogueText object
@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour
     // dialogue button, it continues the dialogue
     private void Update()
     {
-        if (!dialogueIsPlaying)
+        if (!DialogueIsPlaying)
         {
             dialogueComplete = false;
             return;
@@ -83,7 +83,7 @@ public class DialogueManager : MonoBehaviour
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
-        dialogueIsPlaying = true;
+        DialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
         ContinueStory();
@@ -99,7 +99,7 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("Running");
 
         dialoguePanel.SetActive(false);
-        dialogueIsPlaying = false;
+        DialogueIsPlaying = false;
         dialogueText.text = "";
         dialogueComplete = true;
 

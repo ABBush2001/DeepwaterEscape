@@ -25,6 +25,8 @@ public class Boss_health : MonoBehaviour
 
     public GameObject cutscene2;
 
+    public GameObject enemyParentObj;
+
     //Set the initial health and slider values
     void Start()
     {
@@ -58,6 +60,7 @@ public class Boss_health : MonoBehaviour
     public void Defeat()
     {
         GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated = true;
+        Destroy(enemyParentObj, .03f); // kill the whole thing
         Destroy(gameObject);
     }
 
@@ -66,8 +69,7 @@ public class Boss_health : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player_Health playerHealth = other.GetComponent<Player_Health>();
-            if (playerHealth != null)
+            if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
                 playerHealth.TakeDamage(BossDmg);
             }

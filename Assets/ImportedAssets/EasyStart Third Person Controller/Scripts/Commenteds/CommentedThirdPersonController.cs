@@ -32,7 +32,6 @@ public class CommentedThirdPersonController : MonoBehaviour
     public bool isJumping = false;
     public bool isSprinting = false;
     public bool isCrouching = false;
-    private bool Jumped = false;
 
     // Identifiable game keys input for the player
     float inputHorizontal;
@@ -56,7 +55,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     
 
     // footStep
-    private float footStep = 0.5f;
+    private readonly float footStep = 0.5f;
     private float lastFootstep = 0f;
 
     public bool active = true;
@@ -326,6 +325,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             cc.Move(moviment);
 
             // when player move they will make footstep
+            // This should be done with animation events instead.
             if (cc.isGrounded && (directionX != 0 || directionZ != 0) && !isJumping)
             {
                 if (Time.time - lastFootstep >= footStep)
@@ -361,7 +361,7 @@ public class CommentedThirdPersonController : MonoBehaviour
         enabled = canMove;
     }
 
-    public void isActive(bool canMove)
+    public void IsActive(bool canMove)
     {
         active = canMove;
     }
