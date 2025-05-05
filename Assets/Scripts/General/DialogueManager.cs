@@ -112,6 +112,7 @@ public class DialogueManager : MonoBehaviour
         {
             CheckpointManager temp = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
             temp.currentCheckpoint = "";
+            GameObject.Find("loading").GetComponent<loading>().LoadNextScene("Level3Test");
         }
 
         if (SceneManager.GetActiveScene().name == "4.Arena")
