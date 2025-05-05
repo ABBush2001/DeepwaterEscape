@@ -105,7 +105,7 @@ public class ObjectPickup : MonoBehaviour
             GameObject levelManager = GameObject.Find("LevelManager");
             levelManager.GetComponent<LevelOneManager>().BeginAlarm();
             levelManager.GetComponent<TimerAlterDisplay>().timerRunning = true;
-            Destroy(this.gameObject, 1);
+            this.gameObject.SetActive(false);
         }
     }
 

@@ -12,6 +12,8 @@ public class OpeningCutscene : MonoBehaviour
     public VideoPlayer videoPlayer;
     public GameObject loading;
 
+    private bool skipped = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,15 @@ public class OpeningCutscene : MonoBehaviour
 
     void OnVideoFinished(VideoPlayer vp)
     {
+        skipped = true;
         loading.GetComponent<loading>().LoadNextScene("1.Submarine");
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown("e") || Input.GetKeyDown("escape"))
+        if ((Input.GetKeyDown("e") || Input.GetKeyDown("escape")) && skipped == false)
         {
+            skipped = true;
             loading.GetComponent<loading>().LoadNextScene("1.Submarine");
         }
     }
