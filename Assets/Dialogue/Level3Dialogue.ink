@@ -3,4 +3,4 @@
 #<color=green>Anglerfish</color> 
 "Well, up next is the Anglerfish Queen..."
 #<color=green>Anglerfish</color> 
-"I'll get you across - there’s a lava moat around her volcano."
+"I'll get you across - there's a lava moat around her volcano."
