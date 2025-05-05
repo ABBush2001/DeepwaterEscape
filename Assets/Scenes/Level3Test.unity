@@ -18099,43 +18099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c3e358e66684e3e8ddefbfe91573b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadein: 1
-  speedScale: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!114 &916173915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18148,43 +18111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067796a9bac0a459a8da809ac112e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOut: 0
-  speedScale: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!114 &916173916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34029,12 +33955,12 @@ PrefabInstance:
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
       propertyPath: m_Size.z
-      value: 200
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
       propertyPath: m_Offset.z
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
@@ -34135,6 +34061,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928200404607398970, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 946422680}
+    - target: {fileID: 8928200404607398970, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
+        type: 3}
+      propertyPath: followY
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928200404607398970, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
+        type: 3}
+      propertyPath: followZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928200404607398970, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
+        type: 3}
+      propertyPath: followDistance
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36736,43 +36682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c3e358e66684e3e8ddefbfe91573b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadein: 1
-  speedScale: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!114 &1629263816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42187,43 +42096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067796a9bac0a459a8da809ac112e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOut: 0
-  speedScale: 1
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
-  Curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: -1.5
-      outSlope: -1.5
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  startFadedOut: 0
 --- !u!114 &1904634577
 MonoBehaviour:
   m_ObjectHideFlags: 0
