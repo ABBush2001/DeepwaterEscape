@@ -1,7 +1,7 @@
 #<color=green>Anglerfish</color>
 "You sure are lost, aren’t you land dweller?" 
 #You
-You: "My submarine exploded, could you take me back to the surface?"
+"My submarine exploded, could you take me back to the surface?"
 #<color=green>Anglerfish</color>
 "Well, I suppose I could help you, though you'll need approval from our queen first."
 #You

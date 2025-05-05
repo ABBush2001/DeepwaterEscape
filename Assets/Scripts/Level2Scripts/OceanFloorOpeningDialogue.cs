@@ -12,6 +12,7 @@ public class OceanFloorOpeningDialogue : MonoBehaviour
     //variables
     public GameObject TextBox;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI dialogueName;
 
     private CheckpointManager checkpointManager;
 
@@ -31,11 +32,12 @@ public class OceanFloorOpeningDialogue : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         TextBox.SetActive(true);
-        dialogueText.text = "You: *groans* Everything hurts...";
+        dialogueName.text = "You";
+        dialogueText.text = "*groans* Everything hurts...";
         yield return new WaitForSeconds(6f);
-        dialogueText.text = "You: How long did that explosion have me out for?";
+        dialogueText.text = "How long did that explosion have me out for...?";
         yield return new WaitForSeconds(6f);
-        dialogueText.text = "You: I must find my way back to the surface.";
+        dialogueText.text = "I need to find a way back to the surface.";
         yield return new WaitForSeconds(6f);
         dialogueText.text = "";
         TextBox.SetActive(false);
