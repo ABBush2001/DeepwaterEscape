@@ -13,7 +13,8 @@ public class OpeningInstructions : MonoBehaviour
     {
         UIBorder.SetActive(true);
         instructions.enabled = true;
-        StartCoroutine(waitForFade());
+        //StartCoroutine(waitForFade());
+        Time.timeScale = 0f;
     }
 
     // Update is called once per frame
@@ -27,9 +28,9 @@ public class OpeningInstructions : MonoBehaviour
         }
     }
 
-    IEnumerator waitForFade()
+    /*IEnumerator waitForFade()
     {
         yield return new WaitForSeconds(1f);
         Time.timeScale = 0;
-    }
+    }*/
 }
