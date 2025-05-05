@@ -23,6 +23,8 @@ public class DialogueManager : MonoBehaviour
 
     public bool dialogueComplete = false;
 
+    public AudioSource audioDialogue;
+
     private bool isAnimating = false;
     private string animTriggerString;
 
@@ -82,6 +84,11 @@ public class DialogueManager : MonoBehaviour
     // Enters the dialogue queue
     public void EnterDialogueMode(TextAsset inkJSON)
     {
+        if(audioDialogue != null)
+        {
+            audioDialogue.Play();
+        }
+
         currentStory = new Story(inkJSON.text);
         DialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -96,6 +103,11 @@ public class DialogueManager : MonoBehaviour
     // Exits the dialogue queue
     private void ExitDialogueMode()
     {
+        if (audioDialogue != null)
+        {
+            audioDialogue.Stop();
+        }
+
         Debug.Log("Running");
 
         dialoguePanel.SetActive(false);
