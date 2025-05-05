@@ -9,7 +9,9 @@ public class Skip_Script : MonoBehaviour
 {
     public TMP_Text textOff;
     public VideoPlayer videoPlayer;
+    public GameObject border;
 
+    private bool skipped = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +22,12 @@ public class Skip_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && skipped == false)
         {
+            skipped = true;
             LoadScene();
             textOff.gameObject.SetActive(false);
+            border.SetActive(false);
         }
     }
 

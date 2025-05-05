@@ -61,7 +61,7 @@ public class OpeningBossCutscene : MonoBehaviour
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
             instructionsText.enabled = true;
             instructionsBorder.SetActive(true);
-            Time.timeScale = 0.1f;
+            Time.timeScale = 0f;
         }
 
         //update dialogue if started
