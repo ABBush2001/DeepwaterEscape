@@ -14,6 +14,7 @@ public class OpeningBossCutscene : MonoBehaviour
     public Camera cutsceneCamera;
     public GameObject enemy;
     public GameObject player;
+    public GameObject gun;
     public GameObject canvas;
 
     public float moveSpeed = 1f;
@@ -54,6 +55,7 @@ public class OpeningBossCutscene : MonoBehaviour
         {
             canvas.SetActive(true);
             player.GetComponent<CommentedThirdPersonController>().velocity = 10;
+            gun.GetComponent<Shooting>().enabled = true;
             enemy.transform.Rotate(0, 180, 0);
             mainCamera.enabled = true;
             cutsceneCamera.enabled = false;
@@ -80,6 +82,8 @@ public class OpeningBossCutscene : MonoBehaviour
     IEnumerator cutscene()
     {
         cutsceneStarted = true;
+
+        gun.GetComponent<Shooting>().enabled = false;
 
         canvas.SetActive(false);
 
