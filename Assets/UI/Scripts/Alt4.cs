@@ -16,6 +16,6 @@ public class Alt4 : MonoBehaviour
     //*this* will detect the quit command
     void OnApplicationQuit()
     {
-        Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); //nobody say a fucking word or you're dead
+        
     }
 }
