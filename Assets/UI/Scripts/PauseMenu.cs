@@ -57,12 +57,12 @@ public class PauseMenu2 : MonoBehaviour
         OnResume?.Invoke(); // Broadcast resume event
     }
 
-    //public void QuitGame()
-    //{
-    //    Time.timeScale = 1f;
-    //    Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
-    //    Application.Quit();
-    //}
+    public void QuitGame()
+    {
+        Debug.Log("Quitting!");
+        Time.timeScale = 1f;
+        Application.Quit();
+    }
 
     public void GoToHome()
     {

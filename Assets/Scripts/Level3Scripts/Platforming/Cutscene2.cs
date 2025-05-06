@@ -48,6 +48,8 @@ public class Cutscene2 : MonoBehaviour
         {
             player.SetActive(false);
             canvas.SetActive(false);
+            skipText.gameObject.SetActive(true);
+            skipText.enabled = true;
             mainCamera.enabled = false;
             camera1.enabled = true;
             camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
@@ -78,6 +80,8 @@ public class Cutscene2 : MonoBehaviour
             textBox.SetActive(false);
             skipText.enabled = false;
             StopCoroutine(lastCoroutine);
+            skipText.gameObject.SetActive(false);
+            skipText.enabled = false;
             camera1.enabled = false;
             camera2.enabled = false;
             camera3.enabled = false;
@@ -127,6 +131,8 @@ public class Cutscene2 : MonoBehaviour
         //camera.SetActive(true);
         canvas.SetActive(true);
         mainCamera.enabled = true;
+        skipText.gameObject.SetActive(false);
+        skipText.enabled = false;
 
         mainCamera.gameObject.GetComponent<CameraFadeIn>().fadein = true;
 
