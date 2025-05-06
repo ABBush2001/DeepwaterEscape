@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Alt4 : MonoBehaviour
 {
+    public ExitHandler progressionCheck;
+
     //void Update()
     //{
     //    // this won't intercept an alt-f4
@@ -16,6 +18,8 @@ public class Alt4 : MonoBehaviour
     //*this* will detect the quit command
     void OnApplicationQuit()
     {
-
+        if (progressionCheck.hasJellied || PlayerPrefs.GetInt("HasJellied") == 1) {
+            Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        }
     }
 }
