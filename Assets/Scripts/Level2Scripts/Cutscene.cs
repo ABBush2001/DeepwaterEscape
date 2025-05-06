@@ -24,6 +24,7 @@ public class Cutscene : MonoBehaviour
 
     //public GameObject player;
     public CommentedThirdPersonController player;
+    public GameObject gun;
     public GameObject canvas;
 
     private CheckpointManager checkpointManager;
@@ -53,6 +54,7 @@ public class Cutscene : MonoBehaviour
             mainCamera.enabled = false;
             camera1.enabled = true;
             player.IsActive(false);
+            gun.GetComponent<Shooting>().enabled = false;
             canvas.SetActive(false);
             camera1.transform.SetPositionAndRotation(camNode1.transform.position, camera1.transform.rotation);
             lastCoroutine = StartCoroutine(startMovingCamera());
@@ -67,7 +69,8 @@ public class Cutscene : MonoBehaviour
         {
             levelStarted = true;
             player.IsActive(true);
-            
+            gun.GetComponent<Shooting>().enabled = true;
+
             canvas.SetActive(true);
             textBox.SetActive(false);
             skipText.enabled = false;
@@ -139,6 +142,7 @@ public class Cutscene : MonoBehaviour
         instructionsBorder.SetActive(true);
 
         player.IsActive(true);
+        gun.GetComponent<Shooting>().enabled = true;
 
         animControl.SetTrigger("IntroAnim");
         canvas.SetActive(true);
