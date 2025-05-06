@@ -15,14 +15,21 @@ public class VolumeLoader : MonoBehaviour
         float BGMVol = PlayerPrefs.GetFloat("BGMVolume");
         float SFXVol = PlayerPrefs.GetFloat("SFXVolume");
 
-        // If values are above 0, convert them to suitable audio mixer values.
-        masterVol = PlayerPrefs.GetFloat("MasterVolume") > 0 ? Mathf.Log10(masterVol) * 20 : minVol;
-        BGMVol = PlayerPrefs.GetFloat("BGMVolume") > 0 ? Mathf.Log10(BGMVol) * 20 : minVol;
-        SFXVol = PlayerPrefs.GetFloat("SFXVolume") > 0 ? Mathf.Log10(SFXVol) * 20 : minVol;
+        // If values are above 0, convert them to suitable audio mixer values and set values.
+        // We set values only *if* they're above 0 to avoid(?) game being muted on first boot.
+        if (PlayerPrefs.GetFloat("MasterVolume") > 0) {
+            masterVol = (float)(Mathf.Log10(masterVol) * 20);
+            masterMixer.SetFloat("MasterVolume", masterVol);
+        }
 
-        // Set the mixer volume.
-        masterMixer.SetFloat("MasterVolume", masterVol);
-        masterMixer.SetFloat("BGMVolume", BGMVol);
-        masterMixer.SetFloat("SFXVolume", SFXVol);
+        if (PlayerPrefs.GetFloat("BGMVolume") > 0) {
+            BGMVol = (float)(Mathf.Log10(BGMVol) * 20);
+            masterMixer.SetFloat("BGMVolume", BGMVol);
+        }
+
+        if (PlayerPrefs.GetFloat("SFXVolume") > 0) {
+            SFXVol = (float)(Mathf.Log10(SFXVol) * 20);
+            masterMixer.SetFloat("SFXVolume", SFXVol);
+        }
     }
 }
