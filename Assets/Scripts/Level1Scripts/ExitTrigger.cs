@@ -34,6 +34,8 @@ public class ExitTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Jumped!");
+
             gun.SetActive(false);
             StartCoroutine(fadeToNextScene());
         }
