@@ -18,8 +18,6 @@ public class Alt4 : MonoBehaviour
     //*this* will detect the quit command
     void OnApplicationQuit()
     {
-        if (progressionCheck.hasJellied || PlayerPrefs.GetInt("HasJellied") == 1) {
-            Application.OpenURL("https://www.youtube.com/watch?v=a0OP8QYaMXg");
-        }
+        //Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");   
     }
 }
