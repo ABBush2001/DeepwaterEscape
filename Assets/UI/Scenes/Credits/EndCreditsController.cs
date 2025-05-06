@@ -19,6 +19,12 @@ public class EndCreditsController : MonoBehaviour
 
     IEnumerator HandleCreditsSequence()
     {
+        //if checkpoint manager exists, destroy it
+        if(GameObject.Find("CheckpointManager") != null)
+        {
+            Destroy(GameObject.Find("CheckpointManager"));
+        }
+
         // Wait for the duration of the credits
         yield return new WaitForSeconds(creditsDuration);
 
