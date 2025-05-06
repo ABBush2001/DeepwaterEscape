@@ -19,7 +19,7 @@ public class Alt4 : MonoBehaviour
     void OnApplicationQuit()
     {
         if (progressionCheck.hasJellied || PlayerPrefs.GetInt("HasJellied") == 1) {
-            Application.OpenURL("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+            Application.OpenURL("https://www.youtube.com/watch?v=a0OP8QYaMXg");
         }
     }
 }
