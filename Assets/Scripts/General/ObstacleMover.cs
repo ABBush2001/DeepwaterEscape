@@ -21,7 +21,7 @@ public class ObstacleMover : MonoBehaviour
     public Transform waypointList;
     private Transform[] waypoints;
     private int waypointIndex = 0;
-    private Vector3 waypointTarget;
+    private readonly Vector3 waypointTarget;
 
     // Start is called before the first frame update
     void Start()

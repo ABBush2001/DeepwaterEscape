@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class Player_Health : MonoBehaviour
 {
     public float maxHealth = 100;
-    public float currentHealth;
+    [SerializeField] private double currentHealth;
     public float autoHeal = 1f;
     public float autoTime = 1f;
 
@@ -22,6 +23,7 @@ public class Player_Health : MonoBehaviour
     private string sceneToLoad;
 
     private bool ishealing = false;
+    public float damageGrace = .2f;
 
     void Start()
     {
@@ -51,6 +53,10 @@ public class Player_Health : MonoBehaviour
         {
             StartCoroutine(AHeal());
         }
+
+        if (damageGrace > 0) {
+            damageGrace -= Time.deltaTime;
+        }
     }
 
     private IEnumerator AHeal()
@@ -60,7 +66,8 @@ public class Player_Health : MonoBehaviour
         while (currentHealth < maxHealth)
         {
             yield return new WaitForSeconds(autoTime);
-            currentHealth = Mathf.Min(currentHealth + autoHeal, maxHealth);
+            //currentHealth = Mathf.Min(currentHealth + autoHeal, maxHealth);
+            currentHealth += autoHeal;
             UpdateText();
         }
 
@@ -74,7 +81,13 @@ public class Player_Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (damageGrace <= 0f) {
+            currentHealth -= damage;
+            damageGrace = .2f;
+        }
+        if (currentHealth <= 0f) {
+            GameOver();
+        }
         StartCoroutine(DamageScreenDisplay());
         UpdateText();
         if (hurtClip != null && hurtAudioSource != null)
@@ -87,7 +100,11 @@ public class Player_Health : MonoBehaviour
     {
         if (Healthbar != null)
         {
-            Healthbar.fillAmount = currentHealth / 100f;
+            //System.Math.Round(currentHealth, 1, 0); //*SPECIFICALLY* System.Math lets you specify decimal places, Mathf does not.
+            //Mathf.Round(currentHealth);
+            Healthbar.fillAmount = (float)(currentHealth / 100);
+            Debug.Log(currentHealth / 100);
+            Debug.Log(currentHealth / 100f);
         }
     }
 

@@ -77,11 +77,12 @@ public class CommentedCameraController : MonoBehaviour
         transform.position = player.position + new Vector3(0, offsetDistanceY, 0);
 
         // If the camera zoom is enabled, set camera zoom when mouse wheel is scrolled
-        if (canZoom && Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            // To zoom in or out, we can change the camera's transform, but it's easier to just set the field of view
-            Camera.main.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * sensitivity * 2;
-        }
+        //if (canZoom && Input.GetAxis("Mouse ScrollWheel") != 0)
+        //{
+        //    // To zoom in or out, we can change the camera's transform, but it's easier to just set the field of view
+        //    //Camera.main.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * sensitivity * 2;
+        //    // Disabled since it's not useful
+        //}
 
         // If the option to move camera with button is enabled
         if (clickToMoveCamera == true)

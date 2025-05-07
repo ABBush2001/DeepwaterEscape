@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -16,11 +16,14 @@ public class DialogueManager : MonoBehaviour
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI dialogueName;
 
     private Story currentStory;
-    public bool dialogueIsPlaying { get; private set; }
+    public bool DialogueIsPlaying { get; private set; }
 
     public bool dialogueComplete = false;
+
+    public AudioSource audioDialogue;
 
     private bool isAnimating = false;
     private string animTriggerString;
@@ -55,7 +58,7 @@ public class DialogueManager : MonoBehaviour
     // Sets dialogue active to false on start
     private void Start()
     {
-        dialogueIsPlaying = false;
+        DialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
 
         // Get the TextEffect component from the dialogueText object
@@ -66,7 +69,7 @@ public class DialogueManager : MonoBehaviour
     // dialogue button, it continues the dialogue
     private void Update()
     {
-        if (!dialogueIsPlaying)
+        if (!DialogueIsPlaying)
         {
             dialogueComplete = false;
             return;
@@ -81,8 +84,13 @@ public class DialogueManager : MonoBehaviour
     // Enters the dialogue queue
     public void EnterDialogueMode(TextAsset inkJSON)
     {
+        if(audioDialogue != null)
+        {
+            audioDialogue.Play();
+        }
+
         currentStory = new Story(inkJSON.text);
-        dialogueIsPlaying = true;
+        DialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
         ContinueStory();
@@ -95,10 +103,15 @@ public class DialogueManager : MonoBehaviour
     // Exits the dialogue queue
     private void ExitDialogueMode()
     {
+        if (audioDialogue != null)
+        {
+            audioDialogue.Stop();
+        }
+
         Debug.Log("Running");
 
         dialoguePanel.SetActive(false);
-        dialogueIsPlaying = false;
+        DialogueIsPlaying = false;
         dialogueText.text = "";
         dialogueComplete = true;
 
@@ -111,6 +124,12 @@ public class DialogueManager : MonoBehaviour
         {
             CheckpointManager temp = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
             temp.currentCheckpoint = "";
+            GameObject.Find("loading").GetComponent<loading>().LoadNextScene("Level3Test");
+        }
+
+        if(SceneManager.GetActiveScene().name == "Level3Test")
+        {
+            GameObject.Find("loading").GetComponent<loading>().LoadNextScene("4.Arena");
         }
 
         if (SceneManager.GetActiveScene().name == "4.Arena")
@@ -137,6 +156,7 @@ public class DialogueManager : MonoBehaviour
         if (currentStory.canContinue)
         {
             string dialogue = currentStory.Continue();
+            
             // if animating something, animate it.
             if (isAnimating)
             {
@@ -145,7 +165,13 @@ public class DialogueManager : MonoBehaviour
             // Trigger the typewriter effect with the dialogue text
             if (textEffect != null)
             {
+                List<string> tags = currentStory.currentTags;
+                if (tags.Count > 0)
+                {
+                    dialogueName.text = tags[0];
+                }
                 textEffect.SetText(dialogue);  // Use the SetText method to update the text and start the effect
+                
             }
         }
         else

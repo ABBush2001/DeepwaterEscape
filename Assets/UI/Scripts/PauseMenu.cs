@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +8,19 @@ public class PauseMenu2 : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject otherUI;
     private bool isPaused = false;
+    private GameObject gun;
 
     // Define Events for Other Scripts (like Bullet)
     public static event System.Action OnPause;
     public static event System.Action OnResume;
+
+    private void Start()
+    {
+        if (GameObject.Find("Gun") != null)
+        {
+            gun = GameObject.Find("Gun");
+        }
+    }
 
     void Update()
     {
@@ -40,6 +50,8 @@ public class PauseMenu2 : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        gun.SetActive(false);
+
         OnPause?.Invoke(); // Broadcast pause event
     }
 
@@ -53,19 +65,38 @@ public class PauseMenu2 : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        gun.SetActive(true);
+
         OnResume?.Invoke(); // Broadcast resume event
     }
 
     public void QuitGame()
     {
+        Debug.Log("Quitting!");
         Time.timeScale = 1f;
-        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
         Application.Quit();
     }
 
     public void GoToHome()
     {
         Time.timeScale = 1f;
+
+        //check if a checkpoint manager exists and destroy it if so
+        GameObject checkpointManager = null;
+
+        try
+        {
+            checkpointManager = GameObject.Find("CheckpointManager");
+        }catch(Exception e)
+        {
+            Debug.Log("No checkpoint manager in scene!");
+        }
+
+        if(checkpointManager != null)
+        {
+            Destroy(checkpointManager);
+        }
+
         SceneManager.LoadScene("Main");
     }
 
@@ -81,5 +112,6 @@ public class PauseMenu2 : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+
     }
 }

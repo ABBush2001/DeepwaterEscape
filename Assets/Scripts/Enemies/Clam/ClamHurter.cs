@@ -13,7 +13,7 @@ public class ClamHurter : MonoBehaviour
         walkerScript = GetComponentInParent<ClamWalker>(); // Get clamwalker script component
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) {
             walkerScript.AttemptHurt();
