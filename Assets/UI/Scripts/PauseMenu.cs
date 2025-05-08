@@ -8,7 +8,7 @@ public class PauseMenu2 : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject otherUI;
     private bool isPaused = false;
-    private GameObject gun;
+    public GameObject gun;
 
     // Define Events for Other Scripts (like Bullet)
     public static event System.Action OnPause;

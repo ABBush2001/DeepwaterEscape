@@ -29,6 +29,8 @@ public class ExitTrigger : MonoBehaviour
 
     public GameObject loading;
 
+    public GameObject checklist;
+
     //checks to see if the player has entered the exit trigger
     private void OnTriggerEnter(Collider other)
     {
@@ -36,6 +38,7 @@ public class ExitTrigger : MonoBehaviour
         {
             Debug.Log("Jumped!");
 
+            Destroy(checklist);
             gun.SetActive(false);
             StartCoroutine(fadeToNextScene());
         }
@@ -55,11 +58,11 @@ public class ExitTrigger : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(1f, shakeAmount));
-        //explosion1.GetComponent<VisualEffect>().Play();
+        explosion.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.2f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(1f, shakeAmount));
-        //explosion2.GetComponent<VisualEffect>().Play();
+        explosion.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.3f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(5f, shakeAmount));
