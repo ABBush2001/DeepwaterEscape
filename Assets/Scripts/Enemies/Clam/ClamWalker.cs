@@ -214,7 +214,7 @@ public class ClamWalker : MonoBehaviour
 
         else // If jump cooldown isn't done, check velocity to see if clam is done jumping.
         {
-            if (clamNavAgent.remainingDistance <= .1f && !isRebounding)
+            if (clamNavAgent.remainingDistance <= .05f && !isRebounding)
             {
                 isJumping = false;
                 canHurt = false;
