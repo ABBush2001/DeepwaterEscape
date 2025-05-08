@@ -8,7 +8,7 @@ public class CheckpointTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().currentCheckpoint != this.gameObject.tag)
         {
             GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>().setCheckpoint(this.gameObject);
             StartCoroutine(flashText());
