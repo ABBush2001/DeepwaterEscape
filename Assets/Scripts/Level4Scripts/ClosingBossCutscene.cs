@@ -11,6 +11,8 @@ public class ClosingBossCutscene : MonoBehaviour
     public GameObject anglerfish;
     public GameObject dialogueManager;
 
+    public GameObject gun;
+
     public Camera mainCamera;
     public Camera otherCamera;
 
@@ -25,6 +27,7 @@ public class ClosingBossCutscene : MonoBehaviour
 
     public void BeginCutscene()
     {
+        gun.SetActive(false);
         anglerfish.SetActive(true);
         healthBarUI.SetActive(false);
         bossTitle.SetActive(false);

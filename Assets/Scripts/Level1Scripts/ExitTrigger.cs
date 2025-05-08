@@ -29,6 +29,8 @@ public class ExitTrigger : MonoBehaviour
 
     public GameObject loading;
 
+    public GameObject checklist;
+
     //checks to see if the player has entered the exit trigger
     private void OnTriggerEnter(Collider other)
     {
@@ -36,6 +38,7 @@ public class ExitTrigger : MonoBehaviour
         {
             Debug.Log("Jumped!");
 
+            Destroy(checklist);
             gun.SetActive(false);
             StartCoroutine(fadeToNextScene());
         }
@@ -47,21 +50,23 @@ public class ExitTrigger : MonoBehaviour
     {
         levelManger.StopTimer();
 
+        yield return new WaitForSeconds(0.5f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(1f, shakeAmount));
         explosion.GetComponent<VisualEffect>().Play();
-        /*yield return new WaitForSeconds(0.5f);
-        ExplosionSound2.Play();
-        StartCoroutine(cameraShake(1f, shakeAmount));
-        explosion1.GetComponent<VisualEffect>().Play();
+        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
+        yield return new WaitForSeconds(0.5f);
+        ExplosionSound1.Play();
+        //StartCoroutine(cameraShake(1f, shakeAmount));
+        explosion.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.2f);
-        ExplosionSound3.Play();
-        StartCoroutine(cameraShake(1f, shakeAmount));
-        explosion2.GetComponent<VisualEffect>().Play();
+        ExplosionSound1.Play();
+        //StartCoroutine(cameraShake(1f, shakeAmount));
+        explosion.GetComponent<VisualEffect>().Play();
         yield return new WaitForSeconds(0.3f);
-        ExplosionSound4.Play();
-        StartCoroutine(cameraShake(5f, shakeAmount));
-        explosion.GetComponent<VisualEffect>().Play();*/
+        ExplosionSound1.Play();
+        //StartCoroutine(cameraShake(5f, shakeAmount));
+        //explosion.GetComponent<VisualEffect>().Play();*/
 
         gun.SetActive(false);
         DontDestroyOnLoad(gun);
@@ -72,6 +77,8 @@ public class ExitTrigger : MonoBehaviour
 
         //SceneManager.LoadScene("UpdatedOceanFloor");
         loading.GetComponent<loading>().LoadNextScene("UpdatedOceanFloor");
+        mainCamera.SetActive(false);
+        outroCamera.SetActive(true);
     }
 
     //shakes the camera
