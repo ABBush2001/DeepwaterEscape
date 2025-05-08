@@ -24,7 +24,7 @@ public class FlashBang_V1 : MonoBehaviour
     public GameObject QAF;
     public TextMeshProUGUI timerText;// display timer
 
-    //private AudioSource WhiteNoise;
+    public AudioSource WhiteNoise;
 
     private void Start()
     {
@@ -76,7 +76,8 @@ public class FlashBang_V1 : MonoBehaviour
     public void StartFlashbang()
     {
         timerText.gameObject.SetActive(true);
-        StopAllCoroutines(); // Stops all coroutines to prevent overlapping behavior
+        //StopAllCoroutines(); // Stops all coroutines to prevent overlapping behavior
+        //^ This also stops the flashbang from fading. AKA it can permanently blind you.
         StartCoroutine(ShowWarningAndStartTimer());
     }
 
@@ -118,13 +119,17 @@ public class FlashBang_V1 : MonoBehaviour
             Debug.Log("go blind!");
 
             // this where the screen on blind and fade
+            StopCoroutine(WhiteFade()); // Multiple coroutines can run at once, restart whitefade to avoid things breaking.
             StartCoroutine(WhiteFade());
+            PlayFlashSound(1f);
         }
         else
         {
             // If you dont see it
             Debug.Log("don't get affected!");
+            PlayFlashSound(0.7f);
         }
+        
         timerText.gameObject.SetActive(false);
     }
 
@@ -154,11 +159,18 @@ public class FlashBang_V1 : MonoBehaviour
         return false;
     }
 
+    private void PlayFlashSound(float volume = 1f)
+    {
+        WhiteNoise.volume = volume;
+        WhiteNoise.Play();
+    }
+
     // This is screen affect and the fade out
     private IEnumerator WhiteFade()
     {
         //in case flashbang gets stuck
-        //StartCoroutine(BreakOutOfFlash());
+        StopCoroutine(BreakOutOfFlash()); // also restart it incase you get flashed several times in a row.
+        StartCoroutine(BreakOutOfFlash());
 
         // Set the screen to fully white
         whiteImage.color = new Color(1, 1, 1, 1);
@@ -183,7 +195,7 @@ public class FlashBang_V1 : MonoBehaviour
 
     private IEnumerator BreakOutOfFlash()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(15f);
         StopCoroutine(WhiteFade());
         whiteImage.color = new Color(1, 1, 1, 0);
     }
