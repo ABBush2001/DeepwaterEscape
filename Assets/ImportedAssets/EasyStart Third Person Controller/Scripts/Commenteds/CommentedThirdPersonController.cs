@@ -37,7 +37,6 @@ public class CommentedThirdPersonController : MonoBehaviour
     float inputHorizontal;
     float inputVertical;
     bool inputJump;
-    bool inputCrouch;
     bool inputSprint;
 
 

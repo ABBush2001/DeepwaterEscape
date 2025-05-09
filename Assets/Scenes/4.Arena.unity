@@ -10039,7 +10039,6 @@ GameObject:
   m_Component:
   - component: {fileID: 706355245}
   - component: {fileID: 706355247}
-  - component: {fileID: 706355246}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Untagged
@@ -10062,21 +10061,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 28402268}
   m_LocalEulerAnglesHint: {x: 0, y: 30.757, z: 0}
---- !u!114 &706355246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706355244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635b6ca99d8f7e748a1f5022ec30ca00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockX: 0
-  lockY: 1
-  lockZ: 1
 --- !u!65 &706355247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10276,6 +10260,11 @@ PrefabInstance:
       propertyPath: Healtext
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5626028469397833538, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: hurtClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ad102647f5ab1e48a6c74829a216e4a, type: 3}
     - target: {fileID: 5626028469397833538, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: Healthbar
@@ -11552,6 +11541,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Caustics Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617845749383242060, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
@@ -18790,6 +18784,21 @@ PrefabInstance:
     - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
@@ -27220,7 +27229,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2115782980}
   - component: {fileID: 2115782982}
-  - component: {fileID: 2115782981}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Untagged
@@ -27243,21 +27251,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1063112222}
   m_LocalEulerAnglesHint: {x: 0, y: 30.757, z: 0}
---- !u!114 &2115782981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115782979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635b6ca99d8f7e748a1f5022ec30ca00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockX: 0
-  lockY: 1
-  lockZ: 1
 --- !u!65 &2115782982
 BoxCollider:
   m_ObjectHideFlags: 0

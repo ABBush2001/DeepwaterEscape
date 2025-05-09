@@ -1166,7 +1166,6 @@ GameObject:
   - component: {fileID: 722015053438942560}
   - component: {fileID: 4810594629674561751}
   - component: {fileID: 6802256754501899179}
-  - component: {fileID: 2617153957163139645}
   m_Layer: 5
   m_Name: PlayerCanvas
   m_TagString: UI
@@ -1183,7 +1182,7 @@ RectTransform:
   m_GameObject: {fileID: 6258159055057880874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7219842048508778694}
@@ -1194,7 +1193,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &722015053438942560
 Canvas:
   m_ObjectHideFlags: 0
@@ -1258,27 +1257,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2617153957163139645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258159055057880874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de07845e364474942aa6a599a1812ec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  autoHeal: 1
-  autoTime: 1
-  hurtAudioSource: {fileID: 0}
-  hurtClip: {fileID: 0}
-  Healthbar: {fileID: 8594735979455230107}
-  damageScreen: {fileID: 5518293446883354532}
-  sceneToLoad: UpdatedOceanFloor
 --- !u!1 &6679162065975663565
 GameObject:
   m_ObjectHideFlags: 0
