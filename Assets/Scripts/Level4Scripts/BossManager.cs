@@ -373,7 +373,7 @@ public class BossManager : MonoBehaviour
                 {
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     StartCoroutine(MoveEnemyAndStartWave());
-                    yield return new WaitForSeconds(8f);
+                    yield return new WaitForSeconds(10f);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                 }
             }
