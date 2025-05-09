@@ -50,7 +50,7 @@ public class PauseMenu2 : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        shootScript.FreezeShoot(true);
+        shootScript.FreezeShoot(true); // Freeze shootin'.
 
         OnPause?.Invoke(); // Broadcast pause event
     }
