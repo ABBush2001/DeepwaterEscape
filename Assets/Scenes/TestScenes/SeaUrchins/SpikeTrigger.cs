@@ -84,7 +84,7 @@ public class SpikeTrigger : MonoBehaviour
         }
 
         // Final fade out
-        for (float alpha = 0.5f; alpha > 0; alpha -= 0.05f)
+        for (float alpha = 0.5f; alpha > 0; alpha -= 0.07f)
         {
             color.a = alpha;
             mat.color = color;
