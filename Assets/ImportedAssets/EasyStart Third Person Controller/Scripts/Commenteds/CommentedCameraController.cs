@@ -32,6 +32,8 @@ public class CommentedCameraController : MonoBehaviour
     // Get the player position, rotation, scale, etc
     Transform player;
 
+    public LayerMask collisionLayer; // Layers that will block the camera
+
 
     void Start()
     {
