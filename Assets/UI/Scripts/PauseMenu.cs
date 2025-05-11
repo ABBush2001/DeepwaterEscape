@@ -8,7 +8,7 @@ public class PauseMenu2 : MonoBehaviour
     public GameObject settingsMenuUI;
     public GameObject otherUI;
     private bool isPaused = false;
-    public GameObject gun;
+    public Shooting shootScript;
 
     // Define Events for Other Scripts (like Bullet)
     public static event System.Action OnPause;
@@ -18,7 +18,7 @@ public class PauseMenu2 : MonoBehaviour
     {
         if (GameObject.Find("Gun") != null)
         {
-            gun = GameObject.Find("Gun");
+            shootScript = GameObject.Find("Gun").GetComponent<Shooting>();
         }
     }
 
@@ -50,7 +50,7 @@ public class PauseMenu2 : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        gun.SetActive(false);
+        shootScript.FreezeShoot(true); // Freeze shootin'.
 
         OnPause?.Invoke(); // Broadcast pause event
     }
@@ -65,7 +65,7 @@ public class PauseMenu2 : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        gun.SetActive(true);
+        shootScript.FreezeShoot(false);
 
         OnResume?.Invoke(); // Broadcast resume event
     }
@@ -90,6 +90,7 @@ public class PauseMenu2 : MonoBehaviour
         }catch(Exception e)
         {
             Debug.Log("No checkpoint manager in scene!");
+            Debug.LogException(e);
         }
 
         if(checkpointManager != null)

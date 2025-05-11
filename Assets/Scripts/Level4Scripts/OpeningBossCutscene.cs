@@ -16,6 +16,7 @@ public class OpeningBossCutscene : MonoBehaviour
     public GameObject player;
     public GameObject gun;
     public GameObject canvas;
+    private CommentedThirdPersonController commentedController;
 
     public float moveSpeed = 1f;
 
@@ -38,13 +39,15 @@ public class OpeningBossCutscene : MonoBehaviour
     bool canTrigger = true;
     bool cutsceneStarted = false;
 
+    private void Awake() => commentedController = player.GetComponent<CommentedThirdPersonController>();
+
     //start cutscene when the player enters the trigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && canTrigger)
         {
             canTrigger = false;
-            StartCoroutine(cutscene());
+            StartCoroutine(Cutscene());
         }
     }
 
@@ -54,7 +57,7 @@ public class OpeningBossCutscene : MonoBehaviour
         if(cutsceneStarted && DialogueManager.GetComponent<DialogueManager>().dialogueComplete)
         {
             canvas.SetActive(true);
-            player.GetComponent<CommentedThirdPersonController>().velocity = 10;
+            commentedController.velocity = 10;
             gun.GetComponent<Shooting>().enabled = true;
             enemy.transform.Rotate(0, 180, 0);
             mainCamera.enabled = true;
@@ -74,16 +77,18 @@ public class OpeningBossCutscene : MonoBehaviour
             instructionsText.enabled = false;
             instructionsBorder.SetActive(false);
             Time.timeScale = 1f;
+            commentedController.SetMovement(true);
             Destroy(this.gameObject);
         }
     }
 
     //move boss into position
-    IEnumerator cutscene()
+    IEnumerator Cutscene()
     {
         cutsceneStarted = true;
 
         gun.GetComponent<Shooting>().enabled = false;
+        commentedController.SetMovement(false);
 
         canvas.SetActive(false);
 
@@ -108,7 +113,7 @@ public class OpeningBossCutscene : MonoBehaviour
 
         while(enemy.transform.position.y > Node1.transform.position.y)
         {
-            enemy.gameObject.transform.position = Vector3.MoveTowards(enemy.gameObject.transform.position, Node1.transform.position, Time.deltaTime * moveSpeed);
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, Node1.transform.position, Time.deltaTime * moveSpeed);
             yield return new WaitForSeconds(0.01f);
         }
 

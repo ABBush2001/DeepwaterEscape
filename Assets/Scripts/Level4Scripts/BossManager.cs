@@ -355,11 +355,12 @@ public class BossManager : MonoBehaviour
                 //bite path
                 if (attackQueue[i] == 1)
                 {
-                    yield return new WaitForSeconds(15f);
+                    yield return new WaitForSeconds(9f);
                 }
                 //flashbang
                 else if (attackQueue[i] == 2)
                 {
+                    yield return new WaitForSeconds(2f);
                     Debug.Log("Flashing!");
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     enemy.GetComponent<FlashBang_V1>().StartFlashbang();
@@ -373,7 +374,7 @@ public class BossManager : MonoBehaviour
                 {
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     StartCoroutine(MoveEnemyAndStartWave());
-                    yield return new WaitForSeconds(8f);
+                    yield return new WaitForSeconds(8.5f);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                 }
             }
