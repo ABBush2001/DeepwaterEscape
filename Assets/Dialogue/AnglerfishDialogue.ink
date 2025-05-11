@@ -1,5 +1,5 @@
 #<color=green>Anglerfish</color>
-"You sure are lost, aren’t you land dweller?" 
+"You sure are lost, aren't you land dweller?" 
 #You
 "My submarine exploded, could you take me back to the surface?"
 #<color=green>Anglerfish</color>
