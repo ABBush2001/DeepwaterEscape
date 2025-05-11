@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,7 +36,6 @@ public class CommentedThirdPersonController : MonoBehaviour
     float inputHorizontal;
     float inputVertical;
     bool inputJump;
-    bool inputCrouch;
     bool inputSprint;
 
 
@@ -136,8 +134,8 @@ public class CommentedThirdPersonController : MonoBehaviour
                 //}
 
                 // Check the player's speed and whether it is high enough to trigger the running animation
-                float minimumSpeed = 0.9f; // You can test with other values
-                if (cc.velocity.magnitude > minimumSpeed)
+                //float minimumSpeed = 0.9f; // You can test with other values
+                //if (cc.velocity.magnitude > minimumSpeed)
                 //{
                 //    animator.SetBool("run", true);
                 //}
@@ -359,6 +357,10 @@ public class CommentedThirdPersonController : MonoBehaviour
     public void SetMovement(bool canMove)
     {
         enabled = canMove;
+        if (!canMove) { // Resets the animation controller back to neutral — forces it back to the idle animation.
+            animator.Rebind();
+            animator.Update(0f);
+        }
     }
 
     public void IsActive(bool canMove)
