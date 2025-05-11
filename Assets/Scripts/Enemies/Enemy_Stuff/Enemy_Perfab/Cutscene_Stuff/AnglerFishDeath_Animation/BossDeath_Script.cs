@@ -13,58 +13,33 @@ public class BossDeath_Script : MonoBehaviour
     public GameObject bossTitle;
 
     // Animator components
-    public Animator bossAnimator;       // For the boss's death animation
-    public Animator deathCameraAnimator; // For the death camera animation
+    public Animator bossAnimator;
+    public Animator deathCameraAnimator;
 
-    // Next cutscene object
+
     public GameObject cutscene2;
 
-    // Animation triggers
-    private const string BossDeathTrigger = "AFDeath_AMN";
-    private const string CameraPlayTrigger = "Play";
-
-    void Start()
+    public void TriggerBossDeath()
     {
-        // Ensure proper initialization
-        if (mainCamera == null || deathCamera == null || healthBarUI == null || bossTitle == null || bossAnimator == null || deathCameraAnimator == null || cutscene2 == null)
-        {
-            Debug.LogError("Please assign all references in the inspector.");
-        }
-    }
-
-    public void BeginCutscene()
-    {
-        // Disable UI elements
-        healthBarUI.SetActive(false);
-        bossTitle.SetActive(false);
-
-        // Switch cameras
         mainCamera.enabled = false;
         deathCamera.enabled = true;
 
-        // Trigger the animations
-        bossAnimator.SetTrigger(BossDeathTrigger); // Boss death animation
-        deathCameraAnimator.SetTrigger(CameraPlayTrigger); // Camera animation
+        bossAnimator.SetTrigger("Death");
+        deathCameraAnimator.SetTrigger("Activate");
 
-        // Start coroutine to handle the transition to the next cutscene
-        StartCoroutine(WaitForAnimationsAndStartCutscene2());
+        healthBarUI.SetActive(false);
+        bossTitle.SetActive(false);
+
+        StartCoroutine(ActivateAnimation());
     }
 
-    private IEnumerator WaitForAnimationsAndStartCutscene2()
+    private IEnumerator ActivateAnimation()
     {
-        // Wait for the boss death animation to finish
-        while (bossAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || bossAnimator.IsInTransition(0))
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(bossAnimator.GetCurrentAnimatorStateInfo(0).length);
 
-        // Wait for the camera animation to finish
-        while (deathCameraAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || deathCameraAnimator.IsInTransition(0))
-        {
-            yield return null;
-        }
+        deathCamera.enabled = false;
+        mainCamera.enabled = true;
 
-        // Start the next cutscene
         cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
     }
 }
