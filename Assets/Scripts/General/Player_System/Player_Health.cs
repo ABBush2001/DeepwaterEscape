@@ -16,14 +16,17 @@ public class Player_Health : MonoBehaviour
     public AudioSource hurtAudioSource;
     public AudioClip hurtClip;
 
+    [Header("Damage")]
     public Image Healthbar;
     public Image damageScreen;
 
-    [SerializeField]
+    [SerializeField] [Tooltip("Scene to laod on death")]
     private string sceneToLoad;
 
     private bool ishealing = false;
+    [Tooltip("How long the player is invuln for when taking damage")]
     public float damageGrace = .2f;
+    private float graceTime; // Internal grace cooldown
 
     void Start()
     {
@@ -54,8 +57,8 @@ public class Player_Health : MonoBehaviour
             StartCoroutine(AHeal());
         }
 
-        if (damageGrace > 0) {
-            damageGrace -= Time.deltaTime;
+        if (graceTime > 0) {
+            graceTime -= Time.deltaTime;
         }
     }
 
@@ -81,9 +84,9 @@ public class Player_Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (damageGrace <= 0f) {
+        if (graceTime <= 0f) {
             currentHealth -= damage;
-            damageGrace = .2f;
+            graceTime = damageGrace;
         }
         if (currentHealth <= 0f) {
             GameOver();
@@ -103,8 +106,6 @@ public class Player_Health : MonoBehaviour
             //System.Math.Round(currentHealth, 1, 0); //*SPECIFICALLY* System.Math lets you specify decimal places, Mathf does not.
             //Mathf.Round(currentHealth);
             Healthbar.fillAmount = (float)(currentHealth / 100);
-            Debug.Log(currentHealth / 100);
-            Debug.Log(currentHealth / 100f);
         }
     }
 
