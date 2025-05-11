@@ -7,6 +7,7 @@ using UnityEngine;
  * It uses the OnGUI method to gradually reduce the opacity of the screen from black
  * to clear.
 */
+
 public class CameraFadeIn : MonoBehaviour
 {
     //variables
