@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
  * This script handles the fade out effect. It uses the OnGUI method to
  * gradually fade the screen to a black image.
 */
+
 public class CameraFadeOut : MonoBehaviour
 {
     //variables
