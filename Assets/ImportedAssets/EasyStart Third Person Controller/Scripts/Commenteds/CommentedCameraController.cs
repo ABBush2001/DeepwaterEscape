@@ -32,6 +32,10 @@ public class CommentedCameraController : MonoBehaviour
     // Get the player position, rotation, scale, etc
     Transform player;
 
+    public LayerMask collisionLayer; // Layers that will block the camera
+
+    private Vector3 defaultCO;
+    private Transform mainC;
 
     void Start()
     {
@@ -48,6 +52,9 @@ public class CommentedCameraController : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
 
         // Sets the minimum distance between the camera and the character.
+        mainC = Camera.main.transform;
+        defaultCO = mainC.localPosition;
+
         offsetDistanceY = transform.position.y;
         // You can adjust how far the camera is from the character through the CameraController prefab
         // Just move the Y position away and this variable will automatically save this value for every time your game starts
@@ -84,6 +91,8 @@ public class CommentedCameraController : MonoBehaviour
         //    // Disabled since it's not useful
         //}
 
+        HandleCamera();
+
         // If the option to move camera with button is enabled
         if (clickToMoveCamera == true)
         {
@@ -110,6 +119,21 @@ public class CommentedCameraController : MonoBehaviour
         // We make the calculated position of the mouse rotate the camera
         transform.rotation = Quaternion.Euler(-mouseY, mouseX, 0);
 
+    }
+
+    void HandleCamera()
+    {
+        Vector3 desiredCameraP = transform.position + transform.rotation * defaultCO;
+        RaycastHit hit;
+
+        if (Physics.Linecast(transform.position, desiredCameraP, out hit, collisionLayer))
+        {
+            mainC.localPosition = transform.InverseTransformPoint(hit.point) * 0.9f;
+        }
+        else
+        {
+            mainC.localPosition = Vector3.Lerp(mainC.localPosition, defaultCO, Time.deltaTime * 10f);
+        }
     }
 }
 
