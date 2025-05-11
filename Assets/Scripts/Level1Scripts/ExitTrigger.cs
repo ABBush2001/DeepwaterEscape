@@ -58,12 +58,12 @@ public class ExitTrigger : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(1f, shakeAmount));
-        explosion.GetComponent<VisualEffect>().Play();
-        yield return new WaitForSeconds(0.2f);
+        //explosion.GetComponent<VisualEffect>().Play();
+        yield return new WaitForSeconds(0.75f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(1f, shakeAmount));
-        explosion.GetComponent<VisualEffect>().Play();
-        yield return new WaitForSeconds(0.3f);
+        //explosion.GetComponent<VisualEffect>().Play();
+        yield return new WaitForSeconds(0.5f);
         ExplosionSound1.Play();
         //StartCoroutine(cameraShake(5f, shakeAmount));
         //explosion.GetComponent<VisualEffect>().Play();*/
