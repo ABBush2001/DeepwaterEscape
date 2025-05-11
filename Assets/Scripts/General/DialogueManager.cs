@@ -30,6 +30,8 @@ public class DialogueManager : MonoBehaviour
 
     private static DialogueManager instance;
 
+    private string dialogue;
+
     // Reference to the TextEffect component
     private TextEffect textEffect;
 
@@ -78,6 +80,27 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ContinueStory();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // if animating something, animate it.
+            if (isAnimating)
+            {
+                animator.SetTrigger(animTriggerString);
+            }
+            // Trigger the typewriter effect with the dialogue text
+            if (textEffect != null)
+            {
+                // Set the name of the character currently speaking to the current tag above the current line of dialogue
+                List<string> tags = currentStory.currentTags;
+                if (tags.Count > 0)
+                {
+                    dialogueName.text = tags[0];
+                }
+                textEffect.SetText(dialogue);  // Use the SetText method to update the text and start the effect
+
+            }
         }
     }
 
@@ -155,7 +178,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
-            string dialogue = currentStory.Continue();
+            dialogue = currentStory.Continue();
             
             // if animating something, animate it.
             if (isAnimating)
@@ -165,6 +188,7 @@ public class DialogueManager : MonoBehaviour
             // Trigger the typewriter effect with the dialogue text
             if (textEffect != null)
             {
+                // Set the name of the character currently speaking to the current tag above the current line of dialogue
                 List<string> tags = currentStory.currentTags;
                 if (tags.Count > 0)
                 {
