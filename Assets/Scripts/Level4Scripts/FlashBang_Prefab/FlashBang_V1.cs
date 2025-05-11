@@ -13,6 +13,10 @@ public class FlashBang_V1 : MonoBehaviour
     public float fuseTime = 4f; // Time when the bomb blow
         [Tooltip("Speed at which the white flashbang overlay fades")] 
     public float flashFadeSpeed = 15f;
+
+    [SerializeField][Range(0f,1f)] private float flashHitVol = .7f;
+    [SerializeField][Range(0f,1f)] private float flashMissVol = .4f;
+
     public Image whiteImage;
     private Camera cam;
 
@@ -25,6 +29,8 @@ public class FlashBang_V1 : MonoBehaviour
     public TextMeshProUGUI timerText;// display timer
 
     public AudioSource WhiteNoise;
+
+    
 
     private void Start()
     {
@@ -121,13 +127,13 @@ public class FlashBang_V1 : MonoBehaviour
             // this where the screen on blind and fade
             StopCoroutine(WhiteFade()); // Multiple coroutines can run at once, restart whitefade to avoid things breaking.
             StartCoroutine(WhiteFade());
-            PlayFlashSound(1f);
+            PlayFlashSound(flashHitVol);
         }
         else
         {
             // If you dont see it
             Debug.Log("don't get affected!");
-            PlayFlashSound(0.7f);
+            PlayFlashSound(flashMissVol);
         }
         
         timerText.gameObject.SetActive(false);
