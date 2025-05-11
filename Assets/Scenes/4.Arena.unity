@@ -1610,7 +1610,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4bd377a42a9dd0e4d952d7c664c0d3a4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.894
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9245,6 +9245,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1530668169}
     m_Modifications:
+    - target: {fileID: 1450820707066327151, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1884577214972125328, guid: 970fe4b8ca562754f85cb9c26626b54a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9324,6 +9329,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7593412164726058866, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8520938095344196775, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9088846315952032685, guid: 970fe4b8ca562754f85cb9c26626b54a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10039,7 +10059,6 @@ GameObject:
   m_Component:
   - component: {fileID: 706355245}
   - component: {fileID: 706355247}
-  - component: {fileID: 706355246}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Untagged
@@ -10062,21 +10081,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 28402268}
   m_LocalEulerAnglesHint: {x: 0, y: 30.757, z: 0}
---- !u!114 &706355246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706355244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635b6ca99d8f7e748a1f5022ec30ca00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockX: 0
-  lockY: 1
-  lockZ: 1
 --- !u!65 &706355247
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10212,12 +10216,6 @@ PrefabInstance:
       objectReference: {fileID: 1331533983}
     - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
-      propertyPath: noiseObj
-      value: 
-      objectReference: {fileID: 5841576124082770524, guid: ea1ca34c09d759e4abaabb1c9e5a922c,
-        type: 3}
-    - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-        type: 3}
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1331533984}
@@ -10296,16 +10294,6 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1034781066}
-    - target: {fileID: 6945263260116173475, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-        type: 3}
-      propertyPath: jumpSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 457d5b03c992eeb4a8855278d4938126, type: 3}
-    - target: {fileID: 6945263260116173475, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-        type: 3}
-      propertyPath: footStepClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6dd928f48deab884cba750efdc718173, type: 3}
     - target: {fileID: 7100662072719934047, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: m_Name
@@ -11552,6 +11540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Caustics Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617845749383242060, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5142510533580865779, guid: 2ee5d3bfa1eb8dd45ba507314e125b12,
         type: 3}
@@ -13463,6 +13456,16 @@ PrefabInstance:
       propertyPath: whiteImage
       value: 
       objectReference: {fileID: 522186752}
+    - target: {fileID: 4417085379706284672, guid: 015d96ba0fa6f46f38787bb429c1c291,
+        type: 3}
+      propertyPath: flashHitVol
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417085379706284672, guid: 015d96ba0fa6f46f38787bb429c1c291,
+        type: 3}
+      propertyPath: flashMissVol
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4417085379706284672, guid: 015d96ba0fa6f46f38787bb429c1c291,
         type: 3}
       propertyPath: flashFadeSpeed
@@ -18205,7 +18208,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21758184, y: 0.25}
   m_AnchorMax: {x: 0.83874553, y: 0.53174865}
-  m_AnchoredPosition: {x: 3.5, y: -7.044998}
+  m_AnchoredPosition: {x: 3.5, y: -7.0450134}
   m_SizeDelta: {x: 27.566498, y: 208.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278911292
@@ -18794,6 +18797,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803872011862487493, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -18962,6 +18980,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202797473921574105, guid: a0c409174bdebde4593dbb93405e5807,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -12.8479
       objectReference: {fileID: 0}
     - target: {fileID: 7495548383615825631, guid: a0c409174bdebde4593dbb93405e5807,
         type: 3}
@@ -27220,7 +27243,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2115782980}
   - component: {fileID: 2115782982}
-  - component: {fileID: 2115782981}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Untagged
@@ -27243,21 +27265,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1063112222}
   m_LocalEulerAnglesHint: {x: 0, y: 30.757, z: 0}
---- !u!114 &2115782981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115782979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 635b6ca99d8f7e748a1f5022ec30ca00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockX: 0
-  lockY: 1
-  lockZ: 1
 --- !u!65 &2115782982
 BoxCollider:
   m_ObjectHideFlags: 0
