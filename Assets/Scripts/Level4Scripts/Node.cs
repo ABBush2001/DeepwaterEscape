@@ -15,5 +15,4 @@ public class Node : MonoBehaviour
     public bool isCornerNode;
     public bool lookAtNode;
     public int NodeIndex;
-
 }
