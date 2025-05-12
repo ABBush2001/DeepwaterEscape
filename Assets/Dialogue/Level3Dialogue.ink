@@ -1,5 +1,6 @@
-Wow! You made it through all that?
-Pretty impressive! Those urchins are no joke.
-Well, up next is the Anglerfish Queen...
-I'll lead you there, but I don't dare step into her lair.
-Well, good luck...
+#<color=green>Anglerfish</color> 
+"Sorry for swimming off. I had to test that you could handle yourself."
+#<color=green>Anglerfish</color> 
+"Well, up next is the Anglerfish Queen..."
+#<color=green>Anglerfish</color> 
+"I'll get you across - there's a lava moat around her volcano."

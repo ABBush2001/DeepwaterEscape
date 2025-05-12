@@ -17,6 +17,8 @@ public class MainMenuEvents : MonoBehaviour
 
     private bool _isTransitioning = false;
 
+    public GameObject loading;
+
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -120,7 +122,8 @@ public class MainMenuEvents : MonoBehaviour
             _audioSource.Play();
 
         yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
-        SceneManager.LoadScene("1.Submarine");
+        //SceneManager.LoadScene("1.Submarine");
+        loading.GetComponent<loading>().LoadNextScene("OpeningCutscene");
     }
 
     private IEnumerator PlayHowto()
@@ -144,7 +147,8 @@ public class MainMenuEvents : MonoBehaviour
             _audioSource.Play();
 
         yield return new WaitForSeconds(_audioSource != null ? _audioSource.clip.length : 0.5f);
-        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
+        //don't need the feedback form anymore
+        //Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
         Application.Quit();
     }
 

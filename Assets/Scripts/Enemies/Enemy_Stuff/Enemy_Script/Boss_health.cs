@@ -23,6 +23,11 @@ public class Boss_health : MonoBehaviour
     public Gradient gradirnt;
     public Image fill;
 
+    public GameObject cutscene2;
+
+    public GameObject enemyParentObj;
+    public GameObject flashImage;
+
     //Set the initial health and slider values
     void Start()
     {
@@ -45,16 +50,22 @@ public class Boss_health : MonoBehaviour
         UpdateSliderColor();
         if (BossHealth <= 0)
         {
-            SceneManager.LoadScene(sceneToLoad);
-            defeat();
-            
+            //SceneManager.LoadScene(sceneToLoad);
+            //cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
+            //Defeat();
+
+            cutscene2.GetComponent<BossDeath_Script>().TriggerBossDeath();
+            Defeat();
         }
     }
 
     //destroy enemy when defeated
-    public void defeat()
+    public void Defeat()
     {
-        Destroy(gameObject);
+        GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated = true;
+        Destroy(enemyParentObj); // kill the whole thing
+        Destroy(flashImage);
+        //Destroy(gameObject);
     }
 
     // damage the player and damage from bullets
@@ -62,8 +73,7 @@ public class Boss_health : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player_Health playerHealth = other.GetComponent<Player_Health>();
-            if (playerHealth != null)
+            if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
                 playerHealth.TakeDamage(BossDmg);
             }
@@ -83,8 +93,6 @@ public class Boss_health : MonoBehaviour
         {
             fill.color = gradirnt.Evaluate(slide.normalizedValue);
         }
-
-
     }
 }
 

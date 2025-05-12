@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /*
  * This script will handle the queue of boss fight attacks in the Arena.
@@ -21,7 +22,9 @@ public class BossManager : MonoBehaviour
     public GameObject mainPath;
     public GameObject enemy;
     public GameObject player;
-    public GameObject enemyModel;
+    public TextMeshProUGUI waveText;
+    public AudioSource waveRoar;
+    public int rotLerpSpeed= 10;
 
     // wave variables
     public GameObject wave;
@@ -43,10 +46,11 @@ public class BossManager : MonoBehaviour
 
     public static bool isMoving = false;
 
+    public bool bossDefeated = false;
+
     //initialize the attack queue and start the boss fight coroutine 
     void Start()
     {
-
         //initialize attackQueue to all 0's
 
         for (int i = 0; i < 5; i++)
@@ -56,22 +60,22 @@ public class BossManager : MonoBehaviour
 
         //attackInProcess = false;
 
-
-        StartCoroutine(bossFight());
+        StartCoroutine(BossFight());
     }
 
     //method to do the wave attack
     void WaveAround(GameObject wavePrefab, Vector3 rotationOffset)
     {
         //instantiate the wave and call script to move it
-        GameObject temp = Instantiate(wavePrefab);
-        temp.transform.SetPositionAndRotation(enemy.transform.position, enemy.transform.rotation);
-        temp.transform.Rotate(rotationOffset);
-        Wave_Script waveScript = temp.GetComponent<Wave_Script>();
+        Quaternion goodEnemyRot = enemy.transform.rotation;
+        goodEnemyRot.Set(0f,goodEnemyRot.y,0f,goodEnemyRot.w);
 
-        if (waveScript != null)
+        GameObject temp = Instantiate(wavePrefab);
+        temp.transform.SetPositionAndRotation(enemy.transform.position, goodEnemyRot);
+        temp.transform.Rotate(rotationOffset);
+        
+        if (temp.TryGetComponent<Wave_Script>(out var waveScript))
         {
-            
             waveScript.startWave();
         }
         else
@@ -84,7 +88,6 @@ public class BossManager : MonoBehaviour
     //method to start waves for each wave cylinder
     void StartWave()
     {
-        
         WaveAround(wave, new Vector3(0, 0, 90));
         WaveAround(wave1, new Vector3(0, 90, 90));
         WaveAround(wave2, new Vector3(0, 90, 90));
@@ -101,7 +104,6 @@ public class BossManager : MonoBehaviour
 
     }
 
-
     //coroutine to move the boss into position to start the wave
     public IEnumerator MoveEnemyAndStartWave()
     {
@@ -109,8 +111,7 @@ public class BossManager : MonoBehaviour
 
         if (enemy == null) yield break;
 
-        FollowPath followPath = enemy.GetComponent<FollowPath>();
-        if (followPath != null)
+        if (enemy.TryGetComponent<FollowPath>(out var followPath))
         {
             followPath.enabled = false; // <== Fully disable script
         }
@@ -119,6 +120,8 @@ public class BossManager : MonoBehaviour
         float elapsedTime = 0f;
         float moveDuration = 2f;
 
+        
+        enemy.transform.LookAt(waveNode.transform.position);
         // Move to wave center
         while (elapsedTime < moveDuration)
         {
@@ -128,10 +131,25 @@ public class BossManager : MonoBehaviour
             yield return null;
         }
 
+        // This has to be done *very* specifically in order to avoid gimbal lock and successfully remove tilt.
         enemy.transform.position = waveNode.transform.position;
-        enemy.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        Quaternion desiredRot = new(0, enemy.transform.rotation.y, 0, enemy.transform.rotation.w);
+        enemy.transform.rotation = desiredRot;
 
-        yield return new WaitForSeconds(3f);
+        waveText.text = "Wave Incoming";
+        yield return new WaitForSeconds(1.5f);
+
+        float remainingTime = 3f;
+        waveRoar.Play();
+
+        while (remainingTime > 0)
+        {
+            waveText.text = $"{remainingTime:F1}s";
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f;
+        }
+
+        waveText.text = "";
 
         StartWave();
 
@@ -141,8 +159,11 @@ public class BossManager : MonoBehaviour
         elapsedTime = 0f;
         while (elapsedTime < moveDuration)
         {
-            if (enemy == null) yield break;
+            if (enemy == null) {
+                yield break;
+            }
             enemy.transform.position = Vector3.Lerp(waveNode.transform.position, originalPosition, elapsedTime / moveDuration);
+            enemy.transform.LookAt(originalPosition);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -172,7 +193,6 @@ public class BossManager : MonoBehaviour
         float originalSpeed = 1f;
 
         //disable boss movement
-
         if (followPath != null)
         {
             originalSpeed = followPath.moveSpeed;
@@ -180,11 +200,10 @@ public class BossManager : MonoBehaviour
             followPath.enabled = false; 
         }
 
-        Vector3 originalPosition = enemy.transform.position;
-        Quaternion originalRotation = enemy.transform.rotation;
+        enemy.transform.GetPositionAndRotation(out Vector3 originalPosition, out Quaternion originalRotation);
 
         //move boss towards player
-       
+
         if (player != null)
         {
             Vector3 dashStart = enemy.transform.position;
@@ -212,8 +231,7 @@ public class BossManager : MonoBehaviour
             enemy.transform.position = dashTarget;
         }
 
-        //move boss back towards its original position
-        
+        //move boss back towards its original position        
         if (enemy != null)
         {
             float chaseBackDuration = 0.5f;
@@ -275,39 +293,32 @@ public class BossManager : MonoBehaviour
 
 
     //method for handling the boss fight
-    public IEnumerator bossFight()
+    public IEnumerator BossFight()
     {
-
         //loop for boss fight
         while (true)
         {
             //initialize queue
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++) 
             {
-
                 int temp = Random.Range(1, 101);
-                if (temp <= 25)
-                {
-                    attackQueue[i] = 2;
+
+                if (temp <= 25) {
+                    attackQueue[i] = 2; //temp set to 1, will set back to 2 later
                 }
-                else if (temp > 25 && temp <= 75)
-                {
+                else if (temp > 25 && temp <= 75) {
                     attackQueue[i] = 1;
                 }
                 else
                 {
-                    if (i > 0)
-                    {
-                        if (attackQueue[i - 1] == 3)
-                        {
+                    if (i > 0) {
+                        if (attackQueue[i - 1] == 3) {
                             attackQueue[i] = 1;
                         }
                     }
-                    else
-                    {
+                    else {
                         attackQueue[i] = 3;
                     }
-
                 }
             }
 
@@ -318,10 +329,7 @@ public class BossManager : MonoBehaviour
                 {
                     int temp = Random.Range(1, 101);
 
-                    if(temp <= 25)
-                    {
-                        attackQueue[i] = 2;
-                    }
+                    if (temp <= 25) { attackQueue[i] = 2; }
                     else
                     {
                         attackQueue[i] = 1;
@@ -331,9 +339,13 @@ public class BossManager : MonoBehaviour
 
             //set first queue item to always be the wave,
             //second to always be dash
-            attackQueue[0] = 3;
-            attackQueue[1] = 1;
 
+            //attackQueue[0] = 3;
+            //attackQueue[1] = 1;
+
+            attackQueue[0] = 3; //wave
+            attackQueue[1] = 2; //Flash
+            attackQueue[2] = 1; //Dash
 
             //begin looping through queue
             for (int i = 0; i < 5; i++)
@@ -343,31 +355,36 @@ public class BossManager : MonoBehaviour
                 //bite path
                 if (attackQueue[i] == 1)
                 {
-
-                    yield return new WaitForSeconds(15);
-
+                    yield return new WaitForSeconds(9f);
                 }
                 //flashbang
                 else if (attackQueue[i] == 2)
                 {
-
+                    yield return new WaitForSeconds(2f);
+                    Debug.Log("Flashing!");
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
-                    enemy.GetComponent<FlashBang_V1>().startFlashbang();
+                    enemy.GetComponent<FlashBang_V1>().StartFlashbang();
                     queenAnimator.SetBool("IsFlashbang", true);
-                    yield return new WaitForSeconds(6);
+                    yield return new WaitForSeconds(9f);
                     queenAnimator.SetBool("IsFlashbang", false);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                 }
-                ////wave
+                //wave
                 else if (attackQueue[i] == 3)
                 {
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 0;
                     StartCoroutine(MoveEnemyAndStartWave());
-                    yield return new WaitForSeconds(6f);
+                    yield return new WaitForSeconds(8.5f);
                     biteSystem.transform.GetChild(0).gameObject.GetComponent<FollowPath>().moveSpeed = 1;
                 }
             }
         }
+    }
+
+    public void KillBoss()
+    {
+        bossDefeated = true;
+        StopAllCoroutines();
     }
 }
 

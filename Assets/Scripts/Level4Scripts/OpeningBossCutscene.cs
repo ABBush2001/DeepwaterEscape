@@ -14,6 +14,9 @@ public class OpeningBossCutscene : MonoBehaviour
     public Camera cutsceneCamera;
     public GameObject enemy;
     public GameObject player;
+    public GameObject gun;
+    public GameObject canvas;
+    private CommentedThirdPersonController commentedController;
 
     public float moveSpeed = 1f;
 
@@ -23,8 +26,10 @@ public class OpeningBossCutscene : MonoBehaviour
     public GameObject DialogueManager;
 
     public TextMeshProUGUI instructionsText;
+    public GameObject instructionsBorder;
     public TextMeshProUGUI bossTitle;
     public GameObject bossHealthSlider;
+
 
     public AudioSource mainAudio;
     public AudioSource cutsceneAudio;
@@ -34,13 +39,15 @@ public class OpeningBossCutscene : MonoBehaviour
     bool canTrigger = true;
     bool cutsceneStarted = false;
 
+    private void Awake() => commentedController = player.GetComponent<CommentedThirdPersonController>();
+
     //start cutscene when the player enters the trigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && canTrigger)
         {
             canTrigger = false;
-            StartCoroutine(cutscene());
+            StartCoroutine(Cutscene());
         }
     }
 
@@ -49,14 +56,17 @@ public class OpeningBossCutscene : MonoBehaviour
     {
         if(cutsceneStarted && DialogueManager.GetComponent<DialogueManager>().dialogueComplete)
         {
-            player.GetComponent<CommentedThirdPersonController>().velocity = 10;
+            canvas.SetActive(true);
+            commentedController.velocity = 10;
+            gun.GetComponent<Shooting>().enabled = true;
             enemy.transform.Rotate(0, 180, 0);
             mainCamera.enabled = true;
             cutsceneCamera.enabled = false;
             bossFightSystem.SetActive(true);
             enemy.transform.SetPositionAndRotation(enemy.transform.position, new Quaternion(enemy.transform.rotation.x, enemy.transform.rotation.y * -1, enemy.transform.rotation.z, enemy.transform.rotation.w));
             instructionsText.enabled = true;
-            Time.timeScale = 0.1f;
+            instructionsBorder.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         //update dialogue if started
@@ -65,15 +75,23 @@ public class OpeningBossCutscene : MonoBehaviour
             bossHealthSlider.SetActive(true);
             bossTitle.enabled = true;
             instructionsText.enabled = false;
+            instructionsBorder.SetActive(false);
             Time.timeScale = 1f;
+            commentedController.SetMovement(true);
             Destroy(this.gameObject);
         }
     }
 
     //move boss into position
-    IEnumerator cutscene()
+    IEnumerator Cutscene()
     {
         cutsceneStarted = true;
+
+        gun.GetComponent<Shooting>().enabled = false;
+        commentedController.SetMovement(false);
+
+        canvas.SetActive(false);
+
         // Ensure only cutscene audio is playing
         if (mainAudio != null) mainAudio.Stop();
         if (cutsceneAudio != null)
@@ -95,7 +113,7 @@ public class OpeningBossCutscene : MonoBehaviour
 
         while(enemy.transform.position.y > Node1.transform.position.y)
         {
-            enemy.gameObject.transform.position = Vector3.MoveTowards(enemy.gameObject.transform.position, Node1.transform.position, Time.deltaTime * moveSpeed);
+            enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, Node1.transform.position, Time.deltaTime * moveSpeed);
             yield return new WaitForSeconds(0.01f);
         }
 

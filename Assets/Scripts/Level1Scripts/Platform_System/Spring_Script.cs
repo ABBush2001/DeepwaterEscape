@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class Spring_Script : MonoBehaviour
 {
+    public Animator playerAnim;
+    public AudioSource jump;
+
     public float jumpHeight = 100f;
     public float jumpDuration = 0.5f;
 
-    //public float jumpForce = 18f;
-    private Coroutine jumpCoroution;
+    private Coroutine jumpCoroutine;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Boss"))
         {
+            this.enabled = false;
+            return;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            jump.Play();
+            playerAnim.SetTrigger("Landing");
+            playerAnim.SetTrigger("Jumping");
+
             CommentedThirdPersonController playerC = other.GetComponent<CommentedThirdPersonController>();
 
             if (playerC != null)
@@ -22,13 +34,12 @@ public class Spring_Script : MonoBehaviour
                 playerC.jumpElapsedTime = 0;
                 playerC.jumpForce = jumpHeight;
 
-                if(jumpCoroution != null)
+                if (jumpCoroutine != null)
                 {
-                    StopCoroutine(jumpCoroution);
+                    StopCoroutine(jumpCoroutine);
                 }
 
-                jumpCoroution = StartCoroutine(SmoothJump(other.transform, playerC));
-                //jumpHeight = playerC.jumpForce;
+                jumpCoroutine = StartCoroutine(SmoothJump(other.transform, playerC));
             }
         }
     }
@@ -42,20 +53,15 @@ public class Spring_Script : MonoBehaviour
 
         while (elapsedTime < jumpDuration)
         {
-            // When the c button is press the player will fall down fast 
-            if(Input.GetKey(KeyCode.C))
-            {
-                playerC.isJumping = true;
-                yield break;
-            }
 
-            float newY = Mathf.Lerp(startY, targetY, elapsedTime / jumpDuration);
+            float t = elapsedTime / jumpDuration;
+            float newY = Mathf.SmoothStep(startY, targetY, t);
+
             Vector3 currentPos = playerTran.position;
             playerTran.position = new Vector3(currentPos.x, newY, currentPos.z);
 
             elapsedTime += Time.deltaTime;
             yield return null;
-
         }
 
         Vector3 finalPos = playerTran.position;

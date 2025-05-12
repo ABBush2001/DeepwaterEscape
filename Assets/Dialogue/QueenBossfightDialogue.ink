@@ -1,6 +1,12 @@
-Behold me, my minions.
-It is I, the great QUEEN ANGLERFISH!
-Look upon me and weep for I -
-Wait, you aren't a fish. What the heck?!
-I'm not sure who let you in, but no land-dweller shall be permitted to live in my house!
-Sorry, pal. Its just the way it is.
+#<color=red>Queen Anglerfish</color>
+"WITNESS ME, MY MINIONS!!" #
+#<color=yellow>Queen Anglerfish</color> 
+"It is I- the great QUEEN ANGLERFISH!"
+#<color=red>Queen Anglerfish</color>
+"Look upon me and weep, for I-"
+#<color=red>Queen Anglerfish</color>
+"Wait, you aren't even a fish! What the heck?!"
+#<color=red>Queen Anglerfish</color>
+"I'm not sure who let you in, but no land-dweller shall be permitted to live in my house!"
+#<color=red>Queen Anglerfish</color>
+"Prepare to face the wrath of the sea!"

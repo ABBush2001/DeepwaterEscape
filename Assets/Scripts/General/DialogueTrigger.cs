@@ -20,6 +20,10 @@ public class DialogueTrigger : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI continueText;
 
+    [Header("Optional Components")]
+    [SerializeField] [Tooltip("Can be left empty.")] private Animator animator;
+    [SerializeField] private string animvarString = "Talk";
+
     private bool playerInRange;
 
     // Set playerInRange to false by default
@@ -27,18 +31,24 @@ public class DialogueTrigger : MonoBehaviour
     {
         playerInRange = false;
         visualCue.SetActive(false);  // Make sure the visual cue starts hidden
+        if (animator != null) { //if there's an animator component, let 'em talk.
+        }
     }
 
     // Checks if the player is in range and dialogue hasn't started yet
     private void Update()
     {
-        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        if (playerInRange && !DialogueManager.GetInstance().DialogueIsPlaying)
         {
             // Show the visual cue only if player is in range and dialogue isn't playing
             visualCue.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))  // Player presses F to start the dialogue
             {
                 continueText.enabled = true;
+                if (animator != null)
+                {
+                    DialogueManager.GetInstance().SetAnim(animator, animvarString);
+                }
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
             }
         }
@@ -46,6 +56,8 @@ public class DialogueTrigger : MonoBehaviour
         {
             visualCue.SetActive(false);  // Hide the visual cue when the player is out of range or dialogue is playing
         }
+
+        
     }
 
     // Trigger when player enters collider range

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,12 +7,20 @@ public class PauseMenu2 : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
     public GameObject otherUI;
-    public GameObject camera;
     private bool isPaused = false;
+    public Shooting shootScript;
 
     // Define Events for Other Scripts (like Bullet)
     public static event System.Action OnPause;
     public static event System.Action OnResume;
+
+    private void Start()
+    {
+        if (GameObject.Find("Gun") != null)
+        {
+            shootScript = GameObject.Find("Gun").GetComponent<Shooting>();
+        }
+    }
 
     void Update()
     {
@@ -36,11 +45,12 @@ public class PauseMenu2 : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        camera.gameObject.GetComponent<CommentedCameraController>().enabled = false;
         isPaused = true;
         otherUI.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        shootScript.FreezeShoot(true); // Freeze shootin'.
 
         OnPause?.Invoke(); // Broadcast pause event
     }
@@ -51,24 +61,43 @@ public class PauseMenu2 : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         otherUI.SetActive(true);
-        camera.gameObject.GetComponent<CommentedCameraController>().enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        shootScript.FreezeShoot(false);
 
         OnResume?.Invoke(); // Broadcast resume event
     }
 
     public void QuitGame()
     {
+        Debug.Log("Quitting!");
         Time.timeScale = 1f;
-        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfwdjz4HT0iWeojGLPPhOp7fo7Z4mVy0J8iz__-lf81F_aDhA/viewform?usp=header");
         Application.Quit();
     }
 
     public void GoToHome()
     {
         Time.timeScale = 1f;
+
+        //check if a checkpoint manager exists and destroy it if so
+        GameObject checkpointManager = null;
+
+        try
+        {
+            checkpointManager = GameObject.Find("CheckpointManager");
+        }catch(Exception e)
+        {
+            Debug.Log("No checkpoint manager in scene!");
+            Debug.LogException(e);
+        }
+
+        if(checkpointManager != null)
+        {
+            Destroy(checkpointManager);
+        }
+
         SceneManager.LoadScene("Main");
     }
 
@@ -84,5 +113,6 @@ public class PauseMenu2 : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+
     }
 }

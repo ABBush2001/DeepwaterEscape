@@ -44,7 +44,7 @@ public class VolumeManager : MonoBehaviour
     }
 
     // Load the saved volume values from PlayerPrefs
-    private void LoadVolume()
+    public void LoadVolume()
     {
         if (PlayerPrefs.HasKey("MasterVolume"))
         {

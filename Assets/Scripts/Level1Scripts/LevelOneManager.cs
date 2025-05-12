@@ -20,6 +20,8 @@ public class LevelOneManager : MonoBehaviour
 
     [SerializeField] private GameObject playerGun;
 
+    public GameObject checklist;
+
     public bool alarmStart = false;
 
     public TextMeshProUGUI timerText;
@@ -54,14 +56,31 @@ public class LevelOneManager : MonoBehaviour
     public void ShowTimer()
     {
         gameObject.GetComponent<TimerAlterDisplay>().ShowTimer(true);
+        checklist.SetActive(true);
+    }
+
+    public void StopTimer()
+    {
+        gameObject.GetComponent<TimerAlterDisplay>().timerRunning = false;
+        gameObject.GetComponent<TimerAlterDisplay>().ShowTimer(false);
     }
 
     //if all items collected, turn on the player gun
     void Update()
     {
-        if(item1PickedUp && item2PickedUp && item3PickedUp)
+        
+        if (playerGun != null && item1PickedUp && item2PickedUp && item3PickedUp)
         {
             playerGun.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the playerGun exists before accessing it
+        if (playerGun != null && other.CompareTag("Exit"))
+        {
+            playerGun.SetActive(false);
         }
     }
 

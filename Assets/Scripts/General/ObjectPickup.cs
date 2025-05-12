@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*
  * This script handles object collection. It is attached to an object
@@ -19,6 +20,14 @@ public class ObjectPickup : MonoBehaviour
     private bool alarmStart = false;
 
     [SerializeField] private TextAsset inkJson;
+
+    public TextMeshProUGUI gunX;
+    public TextMeshProUGUI panX;
+    public TextMeshProUGUI tankX;
+
+    private bool isGun = false;
+    private bool isPan = false;
+    private bool isTank = false;
 
     //initially set prompt to false
     private void Start()
@@ -67,6 +76,20 @@ public class ObjectPickup : MonoBehaviour
                         levelManager.GetComponent<LevelOneManager>().setItem3();
                     }
 
+                    //update UI
+                    if (isGun)
+                    {
+                        gunX.enabled = true;
+                    }
+                    else if (isPan)
+                    {
+                        panX.enabled = true;
+                    }
+                    else if (isTank)
+                    {
+                        tankX.enabled = true;
+                    }
+
                     Destroy(this.gameObject, 1);
                 }
                 
@@ -82,7 +105,7 @@ public class ObjectPickup : MonoBehaviour
             GameObject levelManager = GameObject.Find("LevelManager");
             levelManager.GetComponent<LevelOneManager>().BeginAlarm();
             levelManager.GetComponent<TimerAlterDisplay>().timerRunning = true;
-            Destroy(this.gameObject, 1);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -91,6 +114,19 @@ public class ObjectPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if(this.tag == "Gun")
+            {
+                isGun = true;
+            }
+            else if(this.tag == "Panacea")
+            {
+                isPan = true;
+            }
+            else if(this.tag == "Tank")
+            {
+                isTank = true;
+            }
+
             pickupPrompt.SetActive(true);
             promptOn = true;
         }
@@ -100,6 +136,19 @@ public class ObjectPickup : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (this.tag == "Gun")
+            {
+                isGun = false;
+            }
+            else if (this.tag == "Panacea")
+            {
+                isPan = false;
+            }
+            else if (this.tag == "Tank")
+            {
+                isTank = false;
+            }
+
             pickupPrompt.SetActive(false);
             promptOn = false;
         }

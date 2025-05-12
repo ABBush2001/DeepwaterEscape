@@ -7,9 +7,11 @@ using TMPro;
 public class E_Health : MonoBehaviour
 {
     public int EnemyHealth = 100;
-    public int EnemyDmg = 25;
+    public int EnemyDmg = 10;
     public GameObject parentObj = null; // Destroy parent obj to ensure the soul dies along with the vessel
     public ClamWalker walker;
+    public AudioClip deathClip;
+    public AudioSource audioSource;
 
     const string ANIM_DEAD = "b_isDead";
 
@@ -33,6 +35,7 @@ public class E_Health : MonoBehaviour
     {
         if (walker != null) {
             walker.SetDead(true);
+            audioSource.PlayOneShot(deathClip);
         }
         else {
             Debug.LogWarning("Parent obj not assigned", this);
@@ -49,10 +52,26 @@ public class E_Health : MonoBehaviour
     {
         if (other.CompareTag("Player")) // More efficient tag comparison
         {
+            Debug.Log("Jelly Hit!");
+
             if (other.TryGetComponent<Player_Health>(out var playerHealth))
             {
-                playerHealth.TakeDamage(EnemyDmg);
+                if (SceneManager.GetActiveScene().name == "5. JellyfishJump")
+                {
+                    StartCoroutine(jellyDamage(other.gameObject));
+                }
+                else
+                {
+                    playerHealth.TakeDamage(EnemyDmg);
+                }
             }
         }
+    }
+
+    //for use in the jellyfish jump scene
+    IEnumerator jellyDamage(GameObject player)
+    {
+        player.GetComponent<Player_Health>().TakeDamage(EnemyDmg);
+        yield return new WaitForSeconds(2f);
     }
 }

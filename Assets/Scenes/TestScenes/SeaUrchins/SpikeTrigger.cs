@@ -14,6 +14,7 @@ public class SpikeTrigger : MonoBehaviour
 
     public float radius;
     public float duration = 0.001f;
+    public int damage = 5;
 
     public GameObject circleMat;
     private Color tempColor;
@@ -83,7 +84,7 @@ public class SpikeTrigger : MonoBehaviour
         }
 
         // Final fade out
-        for (float alpha = 0.5f; alpha > 0; alpha -= 0.05f)
+        for (float alpha = 0.7f; alpha > 0; alpha -= 0.07f)
         {
             color.a = alpha;
             mat.color = color;
@@ -97,7 +98,7 @@ public class SpikeTrigger : MonoBehaviour
 
         if (inDamageZone)
         {
-            playerObj.gameObject.GetComponent<Player_Health>().TakeDamage(5);
+            playerObj.gameObject.GetComponent<Player_Health>().TakeDamage(damage);
         }
 
         yield return new WaitForSeconds(2f);

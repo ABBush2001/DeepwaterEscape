@@ -66,9 +66,18 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+        // Mouse smoothing
+        private Vector2 _currentMouseDelta;
+        private Vector2 _mouseDeltaVelocity;
+
+        [Tooltip("Mouse sensitivity multiplier")]
+        public float MouseSensitivity = 1.0f;
+
+        [Tooltip("Time it takes to reach target look input")]
+        public float LookSmoothingTime = 0.05f;
+
 #if ENABLE_INPUT_SYSTEM
-		private PlayerInput _playerInput;
+        private PlayerInput _playerInput;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
@@ -116,7 +125,7 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			if (DialogueManager.GetInstance().dialogueIsPlaying)
+			if (DialogueManager.GetInstance().DialogueIsPlaying)
 			{
 				return;
 			}
@@ -149,25 +158,30 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
-			{
-				//Don't multiply mouse input by Time.deltaTime
-				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
-				
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+            if (_input.look.sqrMagnitude >= _threshold)
+            {
+                // Smooth the look input
+                _currentMouseDelta = Vector2.SmoothDamp(
+                    _currentMouseDelta,
+                    _input.look * MouseSensitivity,
+                    ref _mouseDeltaVelocity,
+                    LookSmoothingTime
+                );
 
-				// clamp our pitch rotation
-				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+                // Apply pitch (vertical) and yaw (horizontal) changes
+                _cinemachineTargetPitch += _currentMouseDelta.y * RotationSpeed;
+                _rotationVelocity = _currentMouseDelta.x * RotationSpeed;
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+                // Clamp pitch angle
+                _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
-			}
-		}
+                // Apply to camera
+                CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+
+                // Rotate the player object (yaw)
+                transform.Rotate(Vector3.up * _rotationVelocity);
+            }
+        }
 
 		private void Move()
 		{

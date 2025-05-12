@@ -10,19 +10,27 @@ using TMPro;
 public class FlashBang_V1 : MonoBehaviour
 {
     // The screen go white
-    private float fuseTime = 4f; // Time when the bome blow
+    public float fuseTime = 4f; // Time when the bomb blow
+        [Tooltip("Speed at which the white flashbang overlay fades")] 
+    public float flashFadeSpeed = 15f;
+
+    [SerializeField][Range(0f,1f)] private float flashHitVol = .7f;
+    [SerializeField][Range(0f,1f)] private float flashMissVol = .4f;
+
     public Image whiteImage;
     private Camera cam;
 
     // this is the glowing affect material
     private Material objectmat;
     private bool isGlowing = true;
-    private object glowMat;
+    //private object glowMat;
 
     public GameObject QAF;
     public TextMeshProUGUI timerText;// display timer
 
-    private AudioSource WhiteNoise;
+    public AudioSource WhiteNoise;
+
+    
 
     private void Start()
     {
@@ -34,8 +42,6 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-
-
         // it for the camera 
         cam = Camera.main;
         // if the Camera is not found
@@ -45,13 +51,10 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-
         // to render the material
-        Renderer renderer = QAF.GetComponent<Renderer>();
-
-
+        
         // check if the material is in the object
-        if (renderer != null)
+        if (QAF.TryGetComponent<Renderer>(out var renderer))
         {
             objectmat = renderer.material;
         }
@@ -67,19 +70,20 @@ public class FlashBang_V1 : MonoBehaviour
             return;
         }
 
-
         if (timerText == null)
         {
             Debug.LogError("Timer text is not assigned");
             return;
         }
+
+        flashFadeSpeed /= 10; // So that inspector values don't need too many zeroes .0025
     }
 
-
-    public void startFlashbang()
+    public void StartFlashbang()
     {
         timerText.gameObject.SetActive(true);
-        StopAllCoroutines(); // Stops all coroutines to prevent overlapping behavior
+        //StopAllCoroutines(); // Stops all coroutines to prevent overlapping behavior
+        //^ This also stops the flashbang from fading. AKA it can permanently blind you.
         StartCoroutine(ShowWarningAndStartTimer());
     }
 
@@ -121,14 +125,17 @@ public class FlashBang_V1 : MonoBehaviour
             Debug.Log("go blind!");
 
             // this where the screen on blind and fade
+            StopCoroutine(WhiteFade()); // Multiple coroutines can run at once, restart whitefade to avoid things breaking.
             StartCoroutine(WhiteFade());
-
+            PlayFlashSound(flashHitVol);
         }
         else
         {
             // If you dont see it
             Debug.Log("don't get affected!");
+            PlayFlashSound(flashMissVol);
         }
+        
         timerText.gameObject.SetActive(false);
     }
 
@@ -147,7 +154,7 @@ public class FlashBang_V1 : MonoBehaviour
         // Check if the the flashbang is within the screen area
         if (screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1)
         {
-            Ray ray = new Ray(cam.transform.position, transform.position - cam.transform.position);
+            Ray ray = new(cam.transform.position, transform.position - cam.transform.position);
 
             // Check if there flashbang is on screen with nothing blocking the camera
             if (Physics.Raycast(ray, out RaycastHit hit))
@@ -158,28 +165,45 @@ public class FlashBang_V1 : MonoBehaviour
         return false;
     }
 
+    private void PlayFlashSound(float volume = 1f)
+    {
+        WhiteNoise.volume = volume;
+        WhiteNoise.Play();
+    }
+
     // This is screen affect and the fade out
     private IEnumerator WhiteFade()
     {
+        //in case flashbang gets stuck
+        StopCoroutine(BreakOutOfFlash()); // also restart it incase you get flashed several times in a row.
+        StartCoroutine(BreakOutOfFlash());
+
         // Set the screen to fully white
         whiteImage.color = new Color(1, 1, 1, 1);
 
-        float fadeDuration = 15f; // Total duration of the fade
-        float fadeStep = 0.0025f; // the fade step by step (it take make the screen visiable)
-        float waitTime = fadeDuration * fadeStep;
+        //float fadeDuration = 15f; // Total duration of the fade !NOTUSED
+        //float fadeStep = 0.025f; // the fade step by step (it take make the screen visiable) !NOTUSED
+        //float waitTime = fadeDuration * fadeStep; !NOTUSED
 
-        while (whiteImage.color.a > 0)
+        while (whiteImage.color.a > 0.01)
         {
             // Gradually reduce the white screen
-            whiteImage.color = new Color(1, 1, 1, whiteImage.color.a - fadeStep);
-            yield return new WaitForSeconds(waitTime);
+            whiteImage.color = new Color(1, 1, 1, whiteImage.color.a - (flashFadeSpeed * Time.deltaTime));
+            yield return null;
         }
 
         // set screen back to normal
         whiteImage.color = new Color(1, 1, 1, 0);
 
         // to deactive the White Image 
-        whiteImage.gameObject.SetActive(false);
+        //whiteImage.gameObject.SetActive(false);
+    }
+
+    private IEnumerator BreakOutOfFlash()
+    {
+        yield return new WaitForSeconds(15f);
+        StopCoroutine(WhiteFade());
+        whiteImage.color = new Color(1, 1, 1, 0);
     }
 
     private IEnumerator GlowEffect()

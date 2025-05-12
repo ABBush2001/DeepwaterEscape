@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,23 +8,40 @@ using UnityEngine.UI;
 public class Player_Health : MonoBehaviour
 {
     public float maxHealth = 100;
-    public float currentHealth;
+    [SerializeField] private double currentHealth;
     public float autoHeal = 1f;
     public float autoTime = 1f;
-    
 
+    [Header("Audio")]
+    public AudioSource hurtAudioSource;
+    public AudioClip hurtClip;
+
+    [Header("Damage")]
     public Image Healthbar;
     public Image damageScreen;
 
-    [SerializeField]
+    [SerializeField] [Tooltip("Scene to laod on death")]
     private string sceneToLoad;
 
     private bool ishealing = false;
+    [Tooltip("How long the player is invuln for when taking damage")]
+    public float damageGrace = .2f;
+    private float graceTime; // Internal grace cooldown
 
     void Start()
     {
         currentHealth = maxHealth;
         UpdateText();
+
+        //Audio
+        if (hurtAudioSource == null)
+        {
+            hurtAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        hurtAudioSource.clip = hurtClip;
+        hurtAudioSource.loop = false; 
+        hurtAudioSource.playOnAwake = false;
     }
 
     void Update()
@@ -38,6 +56,10 @@ public class Player_Health : MonoBehaviour
         {
             StartCoroutine(AHeal());
         }
+
+        if (graceTime > 0) {
+            graceTime -= Time.deltaTime;
+        }
     }
 
     private IEnumerator AHeal()
@@ -47,7 +69,8 @@ public class Player_Health : MonoBehaviour
         while (currentHealth < maxHealth)
         {
             yield return new WaitForSeconds(autoTime);
-            currentHealth = Mathf.Min(currentHealth + autoHeal, maxHealth);
+            //currentHealth = Mathf.Min(currentHealth + autoHeal, maxHealth);
+            currentHealth += autoHeal;
             UpdateText();
         }
 
@@ -61,16 +84,28 @@ public class Player_Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (graceTime <= 0f) {
+            currentHealth -= damage;
+            graceTime = damageGrace;
+        }
+        if (currentHealth <= 0f) {
+            GameOver();
+        }
         StartCoroutine(DamageScreenDisplay());
         UpdateText();
+        if (hurtClip != null && hurtAudioSource != null)
+        {
+            hurtAudioSource.PlayOneShot(hurtClip);
+        }
     }
 
     void UpdateText()
     {
         if (Healthbar != null)
         {
-            Healthbar.fillAmount = currentHealth / 100f;
+            //System.Math.Round(currentHealth, 1, 0); //*SPECIFICALLY* System.Math lets you specify decimal places, Mathf does not.
+            //Mathf.Round(currentHealth);
+            Healthbar.fillAmount = (float)(currentHealth / 100);
         }
     }
 

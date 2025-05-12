@@ -84,12 +84,21 @@ public class JellyBoss_Script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(sceneToLoad);
-
-        if (other.CompareTag("Checkpoint"))
+        if (other.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
-            Debug.Log("Checkpoint object destroyed: " + other.gameObject.name);
+            SceneManager.LoadScene(sceneToLoad);
+        }
+
+        else if (other.CompareTag("Untagged"))
+        {
+            other.gameObject.tag = "Zap";
+        }
+
+        
+        Jellyfish_Spark_script sparkScript = other.GetComponent<Jellyfish_Spark_script>();
+        if (sparkScript != null)
+        {
+            sparkScript.enabled = true; // Enable the script
         }
     }
 }

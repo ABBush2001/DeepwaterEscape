@@ -21,14 +21,16 @@ public class Shooting : MonoBehaviour
     public float bulletSpeed = 20;
     public float shootingDelay = 2f; // delay when firing
     private bool canShoot = true;
+    private bool pauseShoot = false;
 
     // Ammo and Reload 
     public int maxAmmo = 20;
     public int currentAmmo;
     public float reloadTime = 2f;
-    public bool isreload = false;
+    public bool isReload = false;
 
     public TextMeshProUGUI Ammotext;
+    public TextMeshProUGUI reloadText;
 
     // camera Zoom
     public Camera playerC;
@@ -64,7 +66,25 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isreload) return;
+        // The Right mouse to zoom the camera
+        // Zoom out. Forced when out of ammo.
+        if (!Input.GetMouseButton(1) || isReload || currentAmmo <= 0)
+        {
+            lerp = 0f;
+
+            lerp += Time.deltaTime / duration;
+            playerC.fieldOfView = Mathf.Lerp(playerC.fieldOfView, normalZoom, lerp);
+        }
+
+        if (isReload || pauseShoot) return;
+
+        else if (Input.GetMouseButton(1))
+        {
+            lerp = 0f;
+
+            lerp += Time.deltaTime / duration;
+            playerC.fieldOfView = Mathf.Lerp(playerC.fieldOfView, zoom, lerp);
+        }
 
         // To shoot 
         if (Input.GetMouseButton(0) && canShoot && currentAmmo > 0)
@@ -82,23 +102,6 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
-        }
-
-        // The Right mouse to zoom the camera
-        if (Input.GetMouseButton(1))
-        {
-            lerp = 0f;
-
-
-            lerp += Time.deltaTime / duration;
-            playerC.fieldOfView = Mathf.Lerp(playerC.fieldOfView, zoom, lerp);
-        }
-        else
-        {
-            lerp = 0f;
-
-            lerp += Time.deltaTime / duration;
-            playerC.fieldOfView = Mathf.Lerp(playerC.fieldOfView, normalZoom, lerp);
         }
 
     }
@@ -152,12 +155,14 @@ public class Shooting : MonoBehaviour
     {
         UpdateText();
 
-        isreload = true;
+        isReload = true;
         Debug.Log("Reloading...");
-        Ammotext.text = "Reloading...";
+        reloadText.enabled = true;
+        reloadText.text = "Reloading...";
         yield return new WaitForSeconds(reloadTime);
         currentAmmo = maxAmmo;
-        isreload = false;
+        isReload = false;
+        reloadText.enabled = false;
         Debug.Log("Reloaded");
         UpdateText();
     }
@@ -167,14 +172,19 @@ public class Shooting : MonoBehaviour
     {
         Ammotext.text = "Ammo: " + currentAmmo + " / " + maxAmmo;
 
+        
         if (currentAmmo == 0)
         {
-            Ammotext.text = "Press R to reload ";
-
+            reloadText.enabled = true;
+            reloadText.text = "Press R to reload ";
+            
             if (Input.GetKeyDown(KeyCode.R))
             {
-                Ammotext.text = "Reloading...";
+                reloadText.enabled = true;
+                reloadText.text = "Reloading...";
             }
         }
     }
+
+    public void FreezeShoot(bool p_pauseShoot) => pauseShoot = p_pauseShoot; // Intended for pausing
 }
