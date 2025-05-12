@@ -12,6 +12,8 @@ public class loading : MonoBehaviour
 
     public GameObject otherUI;
 
+    public GameObject pause;
+
     public void LoadNextScene(string sceneIndex)
     {
         StartCoroutine(LoadAsynchronously(sceneIndex));
@@ -23,6 +25,8 @@ public class loading : MonoBehaviour
 
         otherUI.SetActive(false);
         LoadingScreen.SetActive(true);
+
+        pause.SetActive(false);
 
         yield return new WaitForSeconds(6f);
 
