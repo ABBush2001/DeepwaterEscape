@@ -190,7 +190,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             // This is to increase the gravity of the player 
             if (SceneManager.GetActiveScene().name == "5. JellyfishJump") // Set scene to activate the effect
             {
-                if (Input.GetKey(KeyCode.Mouse2))
+                if (Input.GetKey(KeyCode.Mouse1))
                 {
                     gravity = IncreaseGravity;
                     isJumping = false;
