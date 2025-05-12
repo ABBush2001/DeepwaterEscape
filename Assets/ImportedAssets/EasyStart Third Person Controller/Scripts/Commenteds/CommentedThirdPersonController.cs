@@ -48,7 +48,7 @@ public class CommentedThirdPersonController : MonoBehaviour
     public float jumpElapsedTime = 0;
 
     private AudioSource audioSource;
-    public AudioClip footStepClip; // private bool isFootstep = false;
+    //public AudioClip footStepClip; // private bool isFootstep = false;
     public AudioClip jumpSound;
     
 
@@ -328,7 +328,7 @@ public class CommentedThirdPersonController : MonoBehaviour
             {
                 if (Time.time - lastFootstep >= footStep)
                 {
-                    audioSource.PlayOneShot(footStepClip);
+                    //audioSource.PlayOneShot(footStepClip);
                     lastFootstep = Time.time;
                 }
             }
