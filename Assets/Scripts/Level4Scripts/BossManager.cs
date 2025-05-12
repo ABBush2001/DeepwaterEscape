@@ -39,6 +39,8 @@ public class BossManager : MonoBehaviour
 
     public GameObject waveNode;
 
+    [SerializeReference] private ParticleSystem waveBubbleSpawner;
+
     public int[] attackQueue = new int[5];
     //private bool attackInProcess;
 
@@ -51,8 +53,9 @@ public class BossManager : MonoBehaviour
     //initialize the attack queue and start the boss fight coroutine 
     void Start()
     {
-        //initialize attackQueue to all 0's
+        //waveBubbleSpawner = enemy.GetComponentInChildren<ParticleSystem>();
 
+        //initialize attackQueue to all 0's
         for (int i = 0; i < 5; i++)
         {
             attackQueue[i] = 0;
@@ -88,6 +91,8 @@ public class BossManager : MonoBehaviour
     //method to start waves for each wave cylinder
     void StartWave()
     {
+        waveBubbleSpawner.Play();
+
         WaveAround(wave, new Vector3(0, 0, 90));
         WaveAround(wave1, new Vector3(0, 90, 90));
         WaveAround(wave2, new Vector3(0, 90, 90));
@@ -100,8 +105,6 @@ public class BossManager : MonoBehaviour
         // the bottom wave 
         WaveAround(wave6, new Vector3(0, -45, 90));
         WaveAround(wave7, new Vector3(0, 45, 90));
-
-
     }
 
     //coroutine to move the boss into position to start the wave
