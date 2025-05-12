@@ -25,9 +25,24 @@ public class LavaDamage : MonoBehaviour
     //reload the level
     IEnumerator reloadScene()
     {
-        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true;
-        //mainCamera.transform.SetParent(null, true);
+        // Temporarily disable camera collision adjustments
+        CommentedCameraController cameraController = mainCamera.GetComponentInParent<CommentedCameraController>();
+        if (cameraController != null)
+        {
+            cameraController.enabled = false; // Disable camera movement and collision logic
+        }
+
+        mainCamera.transform.SetParent(null, true); // Detach the camera from the player
+
+        mainCamera.GetComponent<CameraFadeOut>().fadeOut = true; // Trigger the fade-out
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the scene
+
+        if (cameraController != null)
+        {
+            cameraController.enabled = true; // Re-enable camera movement and collision logic
+        }
     }
+
 }
