@@ -18,15 +18,15 @@ RenderSettings:
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogStart: 300
+  m_LinearFogEnd: 1000
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 0}
-  m_SkyboxMaterial: {fileID: 2100000, guid: d5f7433dd10249e4ab54a2fcdbb00914, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 0bd1799eb0b8de44a8cc92b090d42872, type: 2}
   m_HaloStrength: 1
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.022812638, g: 0.086862125, b: 0.33548415, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2396,6 +2397,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 883597397e2f5b047969266deeb58388, type: 3}
+--- !u!1 &176547418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7964849089828498863, guid: 70abc2a251aad9e49b1ce63b3618b455,
+    type: 3}
+  m_PrefabInstance: {fileID: 1174271304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &183184462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18955,6 +18962,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6ad36f73710af4ceb86a80016ce7da63, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 6e409726f20f841599b0be66bdd2583a,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 5513294016970373767, guid: 124b605eb8ab85b40b8936aa85ea647c,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 6e409726f20f841599b0be66bdd2583a,
         type: 3}
       propertyPath: m_Name
@@ -34324,6 +34337,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 146866810206738719, guid: 822a0d1fa341e9544b63166e0a4d5fef,
         type: 3}
+      propertyPath: pause
+      value: 
+      objectReference: {fileID: 176547418}
+    - target: {fileID: 146866810206738719, guid: 822a0d1fa341e9544b63166e0a4d5fef,
+        type: 3}
       propertyPath: slider
       value: 
       objectReference: {fileID: 2100211665}
@@ -39440,6 +39458,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 8.550004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242154941681551783, guid: f680b11ba37d4493f8915401935cc0b1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2472949899913092534, guid: f680b11ba37d4493f8915401935cc0b1,
         type: 3}
@@ -47248,12 +47271,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!81 &1948598040
 AudioListener:
   m_ObjectHideFlags: 0

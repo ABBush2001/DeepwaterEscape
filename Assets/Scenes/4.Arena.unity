@@ -4742,7 +4742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304932286}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.115193285, y: -0.2984216, z: 0.06520994, w: -0.9452104}
+  m_LocalRotation: {x: 0.115193285, y: -0.29842162, z: 0.06520994, w: -0.9452105}
   m_LocalPosition: {x: 1963.8474, y: 323.66733, z: 1619.3708}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -10199,10 +10199,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3199871534493594944, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+    - target: {fileID: 2380938177868170841, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
-      propertyPath: m_TagString
-      value: Gun
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3499710061235314908, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
@@ -10219,6 +10219,11 @@ PrefabInstance:
       propertyPath: reloadText
       value: 
       objectReference: {fileID: 1331533984}
+    - target: {fileID: 3824490553994860249, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4040660478949901043, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10271,37 +10276,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5626028469397833538, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
-      propertyPath: Healtext
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5626028469397833538, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-        type: 3}
       propertyPath: Healthbar
       value: 
       objectReference: {fileID: 1331533982}
     - target: {fileID: 5626028469397833538, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
-      propertyPath: sceneToLoad
-      value: 4.Arena
-      objectReference: {fileID: 0}
-    - target: {fileID: 5626028469397833538, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-        type: 3}
       propertyPath: damageScreen
       value: 
       objectReference: {fileID: 1331533981}
-    - target: {fileID: 6945263260116173475, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1034781066}
     - target: {fileID: 7100662072719934047, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: m_Name
       value: Player Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6654042507496306698, guid: 9148c6cd325d64a6bbefa41c31cb2755, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9148c6cd325d64a6bbefa41c31cb2755, type: 3}
@@ -12529,6 +12518,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 146866810206738719, guid: 822a0d1fa341e9544b63166e0a4d5fef,
+        type: 3}
+      propertyPath: pause
+      value: 
+      objectReference: {fileID: 1400064216}
     - target: {fileID: 146866810206738719, guid: 822a0d1fa341e9544b63166e0a4d5fef,
         type: 3}
       propertyPath: slider
@@ -14907,12 +14901,6 @@ Transform:
   - {fileID: 2032033414}
   m_Father: {fileID: 50858921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1034781066 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3225259685786912149, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-    type: 3}
-  m_PrefabInstance: {fileID: 716005004}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1034858838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20026,6 +20014,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70abc2a251aad9e49b1ce63b3618b455, type: 3}
+--- !u!1 &1400064216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7964849089828498863, guid: 70abc2a251aad9e49b1ce63b3618b455,
+    type: 3}
+  m_PrefabInstance: {fileID: 1400064215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1410649457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21095,6 +21089,9 @@ MonoBehaviour:
   canZoom: 1
   sensitivity: 5
   cameraLimit: {x: -10, y: 50}
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1462552668
 MonoBehaviour:
   m_ObjectHideFlags: 0
