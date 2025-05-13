@@ -51,10 +51,10 @@ public class Boss_health : MonoBehaviour
         if (BossHealth <= 0)
         {
             //SceneManager.LoadScene(sceneToLoad);
-            cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
+            //cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
             //Defeat();
 
-            //cutscene2.GetComponent<BossDeath_Script>().TriggerBossDeath();
+            cutscene2.GetComponent<BossDeath_Script>().TriggerBossDeath();
             Defeat();
         }
     }
@@ -63,7 +63,7 @@ public class Boss_health : MonoBehaviour
     public void Defeat()
     {
         GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated = true;
-        Destroy(enemyParentObj); // kill the whole thing
+        //Destroy(enemyParentObj); // kill the whole thing
         Destroy(flashImage);
         //Destroy(gameObject);
     }
