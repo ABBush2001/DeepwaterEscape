@@ -10199,6 +10199,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 524984640767553191, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: Healthbar
+      value: 
+      objectReference: {fileID: 1331533982}
+    - target: {fileID: 524984640767553191, guid: 9148c6cd325d64a6bbefa41c31cb2755,
+        type: 3}
+      propertyPath: damageScreen
+      value: 
+      objectReference: {fileID: 1331533981}
     - target: {fileID: 2380938177868170841, guid: 9148c6cd325d64a6bbefa41c31cb2755,
         type: 3}
       propertyPath: m_IsActive
@@ -22519,6 +22529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1530668169}
   - component: {fileID: 1530668170}
+  - component: {fileID: 1530668171}
   m_Layer: 0
   m_Name: CutsceneSystem2
   m_TagString: Untagged
@@ -22566,6 +22577,20 @@ MonoBehaviour:
   inkJson: {fileID: 4900000, guid: 90502d5910f9f4da490f6612e3af6c57, type: 3}
   healthBarUI: {fileID: 767428160}
   bossTitle: {fileID: 410934547}
+--- !u!114 &1530668171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530668168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3752e083a99cc41d5a06a3d5fe23cdf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossAnimator: {fileID: 1342201241}
+  cutscene2: {fileID: 1530668168}
 --- !u!1 &1542258768 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6258159055057880874, guid: a0c409174bdebde4593dbb93405e5807,
