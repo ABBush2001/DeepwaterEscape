@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +27,13 @@ public class loading : MonoBehaviour
         otherUI.SetActive(false);
         LoadingScreen.SetActive(true);
 
-        pause.SetActive(false);
+        try
+        {
+            pause.SetActive(false);
+        }catch(Exception e)
+        {
+            Debug.Log("No Loading Screen!");
+        }
 
         yield return new WaitForSeconds(6f);
 

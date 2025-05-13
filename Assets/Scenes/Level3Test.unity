@@ -270,6 +270,11 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0.08235294
       objectReference: {fileID: 0}
+    - target: {fileID: 800265177447694303, guid: 0090731b51e488b43a6a7307adf4cfef,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1151
+      objectReference: {fileID: 0}
     - target: {fileID: 1011312494259777056, guid: 0090731b51e488b43a6a7307adf4cfef,
         type: 3}
       propertyPath: m_Name
@@ -18195,7 +18200,7 @@ MonoBehaviour:
   cameraLimit: {x: -45, y: 40}
   collisionLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
 --- !u!1001 &892269055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41554,7 +41559,7 @@ GameObject:
   - component: {fileID: 1856708687}
   - component: {fileID: 1856708688}
   - component: {fileID: 1856708689}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41571,10 +41576,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
