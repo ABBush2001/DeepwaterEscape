@@ -67,6 +67,8 @@ public class CommentedCameraController : MonoBehaviour
 
         float targetYRotation = 0;
 
+        HandleCamera();
+
         try
         {
             targetYRotation = Camera.main.transform.eulerAngles.y;
@@ -91,7 +93,6 @@ public class CommentedCameraController : MonoBehaviour
         //    // Disabled since it's not useful
         //}
 
-        HandleCamera();
 
         // If the option to move camera with button is enabled
         if (clickToMoveCamera == true)
