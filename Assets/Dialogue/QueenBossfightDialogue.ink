@@ -1,6 +1,6 @@
 #<color=red>Queen Anglerfish</color>
 "WITNESS ME, MY MINIONS!!" #
-#<color=yellow>Queen Anglerfish</color> 
+#<color=red>Queen Anglerfish</color> 
 "It is I- the great QUEEN ANGLERFISH!"
 #<color=red>Queen Anglerfish</color>
 "Look upon me and weep, for I-"
