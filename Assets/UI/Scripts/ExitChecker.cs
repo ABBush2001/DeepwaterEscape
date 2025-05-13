@@ -7,7 +7,6 @@ public class ExitChecker : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetInt("HasJellied", 1);
-        progressionCheck.hasJellied = true;
+        
     }
 }
