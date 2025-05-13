@@ -35,6 +35,7 @@ public class BossDeath_Script : MonoBehaviour
 
     private IEnumerator ActivateAnimation()
     {
+        Debug.Log(bossAnimator.GetCurrentAnimatorStateInfo(0).length);
         yield return new WaitForSeconds(bossAnimator.GetCurrentAnimatorStateInfo(0).length);
 
         deathCamera.enabled = false;
