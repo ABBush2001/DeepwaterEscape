@@ -25,6 +25,7 @@ public class BossDeath_Script : MonoBehaviour
         //deathCamera.enabled = true;
 
         bossAnimator.SetTrigger("Death");
+        bossAnimator.Play("AFDeath_AMN");
         //deathCameraAnimator.SetTrigger("Activate");
 
         //healthBarUI.SetActive(false);
@@ -35,11 +36,12 @@ public class BossDeath_Script : MonoBehaviour
 
     private IEnumerator ActivateAnimation()
     {
+        //bossAnimator.Play("AFDeath_AMN");
         yield return new WaitForSeconds(bossAnimator.GetCurrentAnimatorStateInfo(0).length);
 
        // deathCamera.enabled = false;
        // mainCamera.enabled = true;
 
-        cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
+        //cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
     }
 }
