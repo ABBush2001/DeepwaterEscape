@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5419,12 +5418,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9640d968914a3f14699a029a0f9b7b75, type: 3}
---- !u!1 &165447451 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6654042507496306698, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-    type: 3}
-  m_PrefabInstance: {fileID: 2033211993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &166674852 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9b9fc3af5e97c4482854543ace2152f7,
@@ -5708,12 +5701,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9640d968914a3f14699a029a0f9b7b75, type: 3}
---- !u!20 &182914669 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6432287940206684661, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-    type: 3}
-  m_PrefabInstance: {fileID: 2033211993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &183816239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19405,7 +19392,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetCamera
       value: 
-      objectReference: {fileID: 182914669}
+      objectReference: {fileID: 0}
     - target: {fileID: 8266709168360532327, guid: c69aac8431ac85d4abe22814b485823c,
         type: 3}
       propertyPath: m_Name
@@ -29344,6 +29331,7 @@ Terrain:
   m_DetailObjectDensity: 1
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
+  m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
   m_ShadowCastingMode: 2
   m_DrawHeightmap: 1
@@ -31043,12 +31031,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971195108}
   m_Mesh: {fileID: -951608786083511892, guid: 623c094883c024ec5b408475eeab3854, type: 3}
---- !u!1 &980557008 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4479424705171813693, guid: 9148c6cd325d64a6bbefa41c31cb2755,
-    type: 3}
-  m_PrefabInstance: {fileID: 2033211993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &983571971 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2212735807668997618, guid: 40b80388723865644973918403192f65,
@@ -36202,12 +36184,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &1150846351
 Camera:
   m_ObjectHideFlags: 0
@@ -44090,7 +44072,7 @@ PrefabInstance:
         type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 165447451}
+      objectReference: {fileID: 0}
     - target: {fileID: 722942388625376254, guid: 70abc2a251aad9e49b1ce63b3618b455,
         type: 3}
       propertyPath: otherUI
@@ -52232,12 +52214,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &1464390165
 Camera:
   m_ObjectHideFlags: 0
@@ -52496,7 +52478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed398f29ea112d14eb77c7b9a1ef23ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 980557008}
+  mainCamera: {fileID: 0}
 --- !u!65 &1465186787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -60943,7 +60925,7 @@ MonoBehaviour:
   camera1: {fileID: 1809324630}
   camera2: {fileID: 1150846351}
   camera3: {fileID: 1464390165}
-  mainCamera: {fileID: 182914669}
+  mainCamera: {fileID: 0}
   camNode1: {fileID: 1290119652}
   camNode2: {fileID: 1802258006}
   camNode3: {fileID: 915115935}
@@ -63138,12 +63120,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &1809324630
 Camera:
   m_ObjectHideFlags: 0
@@ -78112,7 +78094,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 980557008}
+      objectReference: {fileID: 0}
     - target: {fileID: 7213002314114469487, guid: 970fe4b8ca562754f85cb9c26626b54a,
         type: 3}
       propertyPath: m_Name
