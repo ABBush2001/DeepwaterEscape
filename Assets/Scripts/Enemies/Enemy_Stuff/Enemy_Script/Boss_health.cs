@@ -24,6 +24,7 @@ public class Boss_health : MonoBehaviour
     public Image fill;
 
     public GameObject cutscene2;
+    
 
     public GameObject enemyParentObj;
     public GameObject flashImage;
@@ -59,11 +60,13 @@ public class Boss_health : MonoBehaviour
         }
     }
 
+
+
     //destroy enemy when defeated
     public void Defeat()
     {
         GameObject.Find("BossManager").GetComponent<BossManager>().bossDefeated = true;
-        //Destroy(enemyParentObj); // kill the whole thing
+        Destroy(enemyParentObj); // kill the whole thing
         Destroy(flashImage);
         //Destroy(gameObject);
     }

@@ -4,44 +4,39 @@ using UnityEngine;
 
 public class BossDeath_Script : MonoBehaviour
 {
-    // Main Camera and the death camera
-    //public Camera mainCamera;
-    //public Camera deathCamera;
-
-    // Disable health and title
-    //public GameObject healthBarUI;
-    //public GameObject bossTitle;
-
-    // Animator components
     public Animator bossAnimator;
-    //public Animator deathCameraAnimator;
-
-
     public GameObject cutscene2;
 
     public void TriggerBossDeath()
     {
-        //mainCamera.enabled = false;
-        //deathCamera.enabled = true;
+        if (bossAnimator != null)
+        {
+            bossAnimator.SetTrigger("Death"); // Trigger the death animation
+        }
 
-        bossAnimator.SetTrigger("Death");
-        bossAnimator.Play("AFDeath_AMN");
-        //deathCameraAnimator.SetTrigger("Activate");
-
-        //healthBarUI.SetActive(false);
-        //bossTitle.SetActive(false);
-
-        StartCoroutine(ActivateAnimation());
+        // Optionally start a coroutine if additional timing logic is needed
+        StartCoroutine(HandleDeathAnimation());
     }
 
-    private IEnumerator ActivateAnimation()
+    private IEnumerator HandleDeathAnimation()
     {
-        //bossAnimator.Play("AFDeath_AMN");
-        yield return new WaitForSeconds(bossAnimator.GetCurrentAnimatorStateInfo(0).length);
+        // Wait until the death animation completes
+        if (bossAnimator != null)
+        {
+            AnimatorStateInfo stateInfo = bossAnimator.GetCurrentAnimatorStateInfo(0);
 
-       // deathCamera.enabled = false;
-       // mainCamera.enabled = true;
+            // Wait until the death animation finishes
+            while (stateInfo.IsName("AFDeath_AMN") && stateInfo.normalizedTime < 1.0f)
+            {
+                yield return null;
+                stateInfo = bossAnimator.GetCurrentAnimatorStateInfo(0);
+            }
+        }
 
-        //cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
+        // Trigger the next cutscene or action
+        if (cutscene2 != null)
+        {
+            cutscene2.GetComponent<ClosingBossCutscene>().BeginCutscene();
+        }
     }
 }
