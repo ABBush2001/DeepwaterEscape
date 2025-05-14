@@ -34,6 +34,8 @@ public class OpeningBossCutscene : MonoBehaviour
     public AudioSource mainAudio;
     public AudioSource cutsceneAudio;
 
+    public GameObject platforms;
+
     [SerializeField] private TextAsset inkJson;
 
     bool canTrigger = true;
@@ -118,5 +120,6 @@ public class OpeningBossCutscene : MonoBehaviour
         }
 
         DialogueManager.GetComponent<DialogueManager>().EnterDialogueMode(inkJson);
+        platforms.SetActive(false);
     }
 }

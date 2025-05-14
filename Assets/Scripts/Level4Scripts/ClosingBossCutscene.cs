@@ -24,6 +24,7 @@ public class ClosingBossCutscene : MonoBehaviour
 
     public GameObject healthBarUI;
     public GameObject bossTitle;
+    public GameObject playerUI;
 
     public void BeginCutscene()
     {
@@ -33,6 +34,7 @@ public class ClosingBossCutscene : MonoBehaviour
         bossTitle.SetActive(false);
         mainCamera.enabled = false;
         otherCamera.enabled = true;
+        playerUI.SetActive(false);
         StartCoroutine(playCutscene());
     }
 
