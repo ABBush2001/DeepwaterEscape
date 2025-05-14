@@ -15,10 +15,6 @@ public class BossDeath_Script : MonoBehaviour
     // Animator components
     public Animator bossAnimator;
     public Animator deathCameraAnimator;
-
-public class BossDeath_Script : MonoBehaviour
-{
-    public Animator bossAnimator;
     public GameObject cutscene2;
 
     public void TriggerBossDeath()
