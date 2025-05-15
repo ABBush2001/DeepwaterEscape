@@ -40,6 +40,7 @@ public class BossManager : MonoBehaviour
     public GameObject waveNode;
 
     [SerializeReference] private ParticleSystem waveBubbleSpawner;
+    public LerpBossMovement lerpBossScript;
 
     public int[] attackQueue = new int[5];
     //private bool attackInProcess;

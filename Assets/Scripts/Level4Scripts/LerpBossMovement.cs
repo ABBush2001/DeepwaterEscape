@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LerpBossMovement : MonoBehaviour
@@ -11,11 +12,16 @@ public class LerpBossMovement : MonoBehaviour
         if (enemy == null) {
             Debug.LogAssertion("Enemy gameobj not hooked up to LerpBossMovement", gameObject);
         }
+        else { StartCoroutine(Lerp()); }
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    IEnumerator Lerp()
     {
-        transform.SetPositionAndRotation(enemy.position, Quaternion.Slerp(transform.rotation, enemy.rotation, rotationSpeed * Time.deltaTime));
+        while (true)
+        {
+            transform.SetPositionAndRotation(enemy.position, Quaternion.Slerp(transform.rotation, enemy.rotation, rotationSpeed * Time.deltaTime));
+            yield return null;
+        }
     }
 }
